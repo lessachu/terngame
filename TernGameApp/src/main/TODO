@@ -1,0 +1,48 @@
+* Add custom style for the button/fix disable state
+* Add a custom font
+* hitting back to go to the start activity is a little wonky
+* session should read in the password file and check against it
+* set up a local git repository that backs up to dropbox
+* investigate actually putting the login info as account info in Android
+* team name display field shrinks if content exceeds line?
+* make the instruction view open up a new display on tap
+* style your chronometer
+* padding around the logo icon is fucked up
+* figure out the deal with a tweet button
+* Save file has to include a hash of the team name
+* If we've already solved or skipped a puzzle, entering the start code should show "Solved or Skipped Puzzle view"
+* Serialize Dates to JSON
+* patch up last updated logic
+* Deal better with malformed JSON
+* Add json support for puzzle button
+* Add json support for Hints
+* Fix issue for the double start code issue - either block it if you've already started a puzzle
+  - or disable the start code window
+* do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
+* package directions with each Puzzle and have a look up for which puzzle is next
+* Dupe view needs styling
+* Get rid of extra stuff on Guess view unless the puzzle is solved
+* Hook up AnswerLog UX
+
+DONE:
+* Make the start layout auto-adjust to different screen sizes
+* Style for event title
+* get rid of that top bar
+* Add padding to the logo image
+* textedits should only be one line
+* Serialize guesses to JSON, properly quote it
+* Read in event information
+* Read in password file
+* Save file doesn't seem to work at all
+* Read of data files should be off the UI thread
+* Read in current puzzle data in TeamSTatus
+* Convert the rest of the data files to be read off the UI thread
+* Util function to strip out answer codes
+* Save should be done off the UI thread
+* Get the GuessActivity UI up.
+* Add json path for specifying the wrong answer text dynamically
+* Read in puzzle data files
+* dedupe guesses
+* Add in different UX for dupes? - maybe just add a line like, "you've already guessed that" to explain why answer log doesn't update
+* fully hook up check for correctness
+

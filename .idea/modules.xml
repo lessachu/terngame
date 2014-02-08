@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TernGameApp/TernGameApp.iml" filepath="$PROJECT_DIR$/TernGameApp/TernGameApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TernGameAppProject.iml" filepath="$PROJECT_DIR$/TernGameAppProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/terngame.iml" filepath="$PROJECT_DIR$/terngame.iml" />
+    </modules>
+  </component>
+</project>
+

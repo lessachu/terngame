@@ -1,0 +1,13 @@
+{
+  "version" : 1,
+  "teams" : [
+     {
+       "name" : "jantest",
+       "password" : "janpass"
+     },
+     {
+       "name" : "team2",
+       "password" : "team2"
+     }
+   ]
+}

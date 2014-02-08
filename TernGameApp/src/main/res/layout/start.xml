@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    tools:context=".StartActivity"
+    android:orientation="vertical">
+
+
+    <TextView
+            style="@style/eventTitleTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/event_name"
+            android:id="@+id/textView"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_field"
+            android:id="@+id/textView3"
+            android:textColor="@color/event_title_color"
+            android:textStyle="bold"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            style="@style/textHeadingTheme"
+            android:layout_gravity="left|center_vertical"/>
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/team_name_edit"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            style="@style/textEditTheme"
+            android:singleLine="true"
+            android:layout_gravity="center"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_field"
+            android:id="@+id/textView2"
+            android:textColor="@color/event_title_color"
+            android:textStyle="bold"
+            android:paddingLeft="12dp"
+            style="@style/textHeadingTheme"
+            android:layout_gravity="left|center_vertical"/>
+
+    <EditText
+            style="@style/textEditTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/password_edit"
+            android:singleLine="true"
+            android:password="true"
+            android:layout_gravity="left|center_vertical"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in_button"
+            android:id="@+id/sign_in"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+
+    <ImageView
+            android:layout_width="372dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageView"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/terngame_logo"
+            android:layout_marginTop="11dp"
+            android:layout_weight="1"
+            android:contentDescription="terngame logo"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginBottom="11dp"/>
+
+</LinearLayout>

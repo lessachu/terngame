@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">#terngame</string>
+    <string name="event_name">#terngame 2014</string>
+    <string name="name_field">TEAM NAME</string>
+    <string name="password_field">PASSWORD</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="start_code">START CODE</string>
+    <string name="start_code_button">GO!</string>
+    <string name="instruction_header">CURRENT INSTRUCTIONS</string>
+    <string name="title_activity_puzzle">PuzzleActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="puzzle_title">CURRENT PUZZLE</string>
+    <string name="time_title">TIME SPENT</string>
+    <string name="answer_title">SUBMIT AN ANSWER</string>
+    <string name="answer_button">Submit</string>
+    <string name="hint_button">Hints</string>
+    <string name="answer_log_button_text">Answer Log</string>
+    <string name="title_activity_guess">GuessActivity</string>
+    <string name="guess_label">YOU GUESSED</string><string name="tweet_prompt">Throw fear into the hearts of your competitors! Tweet your status!</string>
+
+</resources>

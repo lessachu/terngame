@@ -1,0 +1,16 @@
+{
+  "version" : 1,
+  "start_codes" : [
+     {
+       "id" : "puzzle1",
+       "name" : "orienteering",
+       "answer_file" : "puzzle1_answers.json"
+
+     },
+     {
+       "id" : "wombat",
+       "name" : "God save the wombats",
+       "answer_file" : "wombat_answers.json"
+     }
+   ]
+}
