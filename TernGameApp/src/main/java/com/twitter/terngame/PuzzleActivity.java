@@ -1,11 +1,10 @@
 package com.twitter.terngame;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +13,8 @@ import android.widget.Toast;
 
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.util.AnswerChecker;
+
+import java.util.ArrayList;
 
 public class PuzzleActivity extends Activity
     implements View.OnClickListener{
@@ -33,8 +34,8 @@ public class PuzzleActivity extends Activity
         mPuzzleButton = (Button) findViewById(R.id.do_puzzle_button);
         mPuzzleButton.setOnClickListener(this);
 
-        final Button answerLogButton = (Button) findViewById(R.id.answer_log_button);
-        answerLogButton.setOnClickListener(this);
+        final Button guessLogButton = (Button) findViewById(R.id.guess_log_button);
+        guessLogButton.setOnClickListener(this);
 
         final Button hintButton = (Button) findViewById(R.id.hint_button);
         hintButton.setOnClickListener(this);
@@ -108,18 +109,21 @@ public class PuzzleActivity extends Activity
                     "Yay! You hit the hint button!",
                     Toast.LENGTH_SHORT);
             toast.show();
-        } else if (id == R.id.answer_log_button) {
+        } else if (id == R.id.guess_log_button) {
 
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Yay! You hit the answer log button!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-         /*   if(Session.getInstance(this).login(mTeamEditText.getText().toString(),
-                    mPassEditText.getText().toString())) {
-                startActivity(new Intent(this, MainActivity.class)
-                        .putExtra(Intent.EXTRA_INTENT,
-                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
-                                */
+            ArrayList<String> guesses = s.getGuesses();
+
+            if (guesses != null) {
+                Intent i = new Intent(this, GuessLogActivity.class);
+                i.putExtra("guesses", guesses);
+                startActivity(i);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "You haven't made any guesses yet!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
         } else if (id == R.id.do_puzzle_button) {
             // session will tell us what activity to launch
                     /*   if(Session.getInstance(this).login(mTeamEditText.getText().toString(),

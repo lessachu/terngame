@@ -17,8 +17,11 @@
     <string name="answer_title">SUBMIT AN ANSWER</string>
     <string name="answer_button">Submit</string>
     <string name="hint_button">Hints</string>
-    <string name="answer_log_button_text">Answer Log</string>
+    <string name="guess_log_button_text">Guess Log</string>
     <string name="title_activity_guess">GuessActivity</string>
-    <string name="guess_label">YOU GUESSED</string><string name="tweet_prompt">Throw fear into the hearts of your competitors! Tweet your status!</string>
-
+    <string name="guess_label">YOU GUESSED</string>
+    <string name="tweet_prompt">Throw fear into the hearts of your competitors! Tweet your status!</string>
+    <string name="title_activity_answer_log">AnswerLogActivity</string>
+    <string name="guess_log_title">Previous Guesses</string>
+    <string name="no_guesses">You haven\'t made any guesses yet.</string>
 </resources>

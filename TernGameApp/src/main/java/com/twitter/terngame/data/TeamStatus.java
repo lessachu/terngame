@@ -17,14 +17,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Vector;
 
 /**
  * Meant to hold all the team data that should be saved
@@ -76,11 +73,11 @@ public class TeamStatus implements JSONFileResultHandler {
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
         mData = jo;
-        if(mData != null) {
+        if (mData != null) {
             try {
 
                 // should probably validate the info is for this team
-                assert(mData.getString(s_teamName).equals(mTeamName));
+                assert (mData.getString(s_teamName).equals(mTeamName));
 
                 // populate fields based on the data
                 mCurrentPuzzle = mData.getString(s_currentPuzzle);
@@ -90,7 +87,7 @@ public class TeamStatus implements JSONFileResultHandler {
                 JSONArray ja = mData.getJSONArray(s_puzzles);
                 int len = ja.length();
 
-                for(int i = 0; i < len; i++ ) {
+                for (int i = 0; i < len; i++) {
                     JSONObject po = (JSONObject) ja.get(i);
                     PuzzleStatus ps = new PuzzleStatus();
                     ps.mID = po.getString(s_puzzleID);
@@ -102,7 +99,7 @@ public class TeamStatus implements JSONFileResultHandler {
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
                     ps.mGuesses = new ArrayList<String>();
                     int guesslen = guessArray.length();
-                    for(int j = 0; j < guesslen; j++) {
+                    for (int j = 0; j < guesslen; j++) {
                         ps.mGuesses.add(guessArray.getString(j));
                     }
 
@@ -121,7 +118,7 @@ public class TeamStatus implements JSONFileResultHandler {
     public void initializeTeam(Context context, String teamName) {
         mTeamName = teamName;
         mContext = context;
-           // if there is a savefile present, load from that
+        // if there is a savefile present, load from that
         try {
             File f = new File(context.getFilesDir(), s_saveFile);
             InputStream in = new BufferedInputStream(new FileInputStream(f));
@@ -135,18 +132,10 @@ public class TeamStatus implements JSONFileResultHandler {
             toast.show();
             Log.e("jan", "No save file");
 
-        } catch (IOException e) {
-
-            Toast toast = Toast.makeText(mContext,
-                    "IOException!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-            Log.e("jan", "IOException in teamstatus initialization");
-
         }
     }
 
-    public void save(){
+    public void save() {
 
         if (!updateJSONData()) {
             Toast toast = Toast.makeText(mContext,
@@ -167,30 +156,29 @@ public class TeamStatus implements JSONFileResultHandler {
 
         JSONArray puzzleArray = new JSONArray();
 
-        for( String puzzleID : mPuzzles.keySet() )
-        {
+        for (String puzzleID : mPuzzles.keySet()) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             JSONObject jo = new JSONObject();
             try {
                 jo.put(s_puzzleID, ps.mID);
                 //     jo.put(s_puzzStart, ps.mStartTime);   // TODO
                 //     jo.put(s_puzzEnd, ps.mEndTime);       // TODO
-                jo.put(s_puzzSolved, ps.mSolved );
+                jo.put(s_puzzSolved, ps.mSolved);
                 jo.put(s_puzzSkipped, ps.mSkipped);
 
                 JSONArray guessArray = new JSONArray();
-                for( String guess : ps.mGuesses ) {
+                for (String guess : ps.mGuesses) {
                     guessArray.put(guess);
                 }
                 jo.put(s_puzzGuesses, guessArray);
                 puzzleArray.put(jo);
 
             } catch (JSONException e) {
-                  return false;
+                return false;
             }
         }
 
-        if( mData == null ) {
+        if (mData == null) {
             Log.e("terngame", "Hrm, the save file is corrupted.  Starting anew");
             mData = new JSONObject();
         }
@@ -214,7 +202,7 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
     public String getCurrentPuzzle() {
-         return mCurrentPuzzle;
+        return mCurrentPuzzle;
     }
 
     public int getNumSolved() {
@@ -223,6 +211,16 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public int getNumSkipped() {
         return mNumSkipped;
+    }
+
+    public ArrayList<String> getGuesses() {
+        if (mCurrentPuzzle != null) {
+            PuzzleStatus ps = mPuzzles.get(mCurrentPuzzle);
+            if (ps != null) {
+                return ps.mGuesses;
+            }
+        }
+        return null;
     }
 
     public void startNewPuzzle(String puzzleID) {
@@ -240,15 +238,14 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public boolean addGuess(String puzzleID, String guess)
-    {
+    public boolean addGuess(String puzzleID, String guess) {
         // hash into hash map, add the guess
         PuzzleStatus ps = mPuzzles.get(puzzleID);
         guess = JSONObject.quote(guess);
         boolean isDupe = false;
         if (ps != null && !ps.mSolved && !ps.mSkipped) {
             isDupe = isDuplicate(guess, ps.mGuesses);
-            if(!isDupe) {
+            if (!isDupe) {
                 ps.mGuesses.add(guess);
                 updateTimeStamp();
                 save();
@@ -259,8 +256,7 @@ public class TeamStatus implements JSONFileResultHandler {
         return isDupe;
     }
 
-    public void solvePuzzle(String puzzleID)
-    {
+    public void solvePuzzle(String puzzleID) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
@@ -278,11 +274,10 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void skipPuzzle(String puzzleID)
-    {
+    public void skipPuzzle(String puzzleID) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
-            if( ps != null && !ps.mSolved && !ps.mSkipped) {
+            if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mSkipped = true;
                 ps.mEndTime = new Date();
                 mNumSkipped++;
@@ -299,13 +294,12 @@ public class TeamStatus implements JSONFileResultHandler {
         skipPuzzle(mCurrentPuzzle);
     }
 
-    private void updateTimeStamp()
-    {
-       mLastUpdate = new Date();
+    private void updateTimeStamp() {
+        mLastUpdate = new Date();
     }
 
     private boolean isDuplicate(String guess, ArrayList<String> al) {
-        for(String s : al) {
+        for (String s : al) {
             Log.d("terngame", "Comparing " + s + " to " + guess);
             if (s.equals(guess)) {
                 Log.d("terngame", "Dupe!");
@@ -317,7 +311,7 @@ public class TeamStatus implements JSONFileResultHandler {
 
 
     // for some reason I can't seem to pass mData as an object
-   public class TeamDataSaverTask extends AsyncTask<JSONObject, Void, Boolean> {
+    public class TeamDataSaverTask extends AsyncTask<JSONObject, Void, Boolean> {
 
         protected Boolean doInBackground(JSONObject... params) {
             try {
@@ -329,27 +323,27 @@ public class TeamStatus implements JSONFileResultHandler {
 
                 Log.d("terngame", "Information saved: " + jo.toString());
             } catch (FileNotFoundException fnf) {
-               return false;
+                return false;
             } catch (IOException io) {
-               return false;
+                return false;
             }
             return true;
         }
 
-       protected void onPostExecute(Boolean success) {
-           if(!success) {
-               Toast toast = Toast.makeText(mContext,
-                       "I couldn't save your team progress. Continue at your own risk.",
-                       Toast.LENGTH_SHORT);
-               toast.show();
-           } else {
-               Toast toast = Toast.makeText(mContext,
-                       "Progress saved.",
-                       Toast.LENGTH_SHORT);
-               toast.show();
-           }
-       }
+        protected void onPostExecute(Boolean success) {
+            if (!success) {
+                Toast toast = Toast.makeText(mContext,
+                        "I couldn't save your team progress. Continue at your own risk.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(mContext,
+                        "Progress saved.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
 
-   }
+    }
 
 }

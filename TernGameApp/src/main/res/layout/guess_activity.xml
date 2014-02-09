@@ -38,7 +38,8 @@
                 android:text="lorem ipsum wombats rule blabbity blabbity blah"
                 android:id="@+id/guess_result_text"
                 style="@style/instructionTheme"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:padding="12dp"/>
     </ScrollView>
 
     <LinearLayout
@@ -48,7 +49,8 @@
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tweet_button"/>
+                android:id="@+id/tweet_button"
+                android:padding="10dp"/>
 
         <TextView
                 android:layout_width="wrap_content"

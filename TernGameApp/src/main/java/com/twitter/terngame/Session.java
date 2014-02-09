@@ -10,6 +10,8 @@ import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
 import com.twitter.terngame.util.AnswerChecker;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by jchong on 1/11/14.
@@ -41,7 +43,7 @@ public class Session implements EventInfo.EventInfoListener {
 
     public static Session getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new Session (context.getApplicationContext());
+            sInstance = new Session(context.getApplicationContext());
         }
         return sInstance;
     }
@@ -76,7 +78,7 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public String getPuzzleName() {
-        if( mCurrentPuzzle.mName == null) {
+        if (mCurrentPuzzle.mName == null) {
             return "";
         }
         return mCurrentPuzzle.mName;
@@ -98,6 +100,10 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getNumSkipped();
     }
 
+    public ArrayList<String> getGuesses() {
+        return mTeamStatus.getGuesses();
+    }
+
     public boolean login(String teamName, String password) {
         mLoggedIn = true;
 
@@ -110,16 +116,15 @@ public class Session implements EventInfo.EventInfoListener {
         return false;
     }
 
-    public boolean isValidStartCode(String start_code)
-    {
+    public boolean isValidStartCode(String start_code) {
         start_code = AnswerChecker.stripAnswer(start_code);
         PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(start_code);
 
-        if(pi != null) {
+        if (pi != null) {
             mTeamStatus.startNewPuzzle(start_code);
 
             // test code
-            if(start_code.contentEquals("battle")) {
+            if (start_code.contentEquals("battle")) {
                 mPuzzleButton = true;
             } else {
                 mPuzzleButton = false;
@@ -142,7 +147,7 @@ public class Session implements EventInfo.EventInfoListener {
         String puzzleId = mTeamStatus.getCurrentPuzzle();
         boolean isDupe = mTeamStatus.addGuess(puzzleId, answer);
 
-        if(ai == null) {
+        if (ai == null) {
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
@@ -150,7 +155,7 @@ public class Session implements EventInfo.EventInfoListener {
 
         ai.mDuplicate = isDupe;
 
-        if( ai.mCorrect ) {
+        if (ai.mCorrect) {
             mTeamStatus.solvePuzzle(puzzleId);
         }
         return ai;
@@ -161,8 +166,8 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public void onEventInfoLoadComplete() {
-        mLoginInfo.initialize(mContext,mEventInfo.getTeamFileName());
-        mStartCodeInfo.initialize(mContext,mEventInfo.getStartCodeFileName());
+        mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
+        mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
     }
 
 }
