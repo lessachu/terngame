@@ -310,7 +310,6 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
 
-    // for some reason I can't seem to pass mData as an object
     public class TeamDataSaverTask extends AsyncTask<JSONObject, Void, Boolean> {
 
         protected Boolean doInBackground(JSONObject... params) {

@@ -21,6 +21,10 @@
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
 * Get rid of extra stuff on Guess view unless the puzzle is solved
+* Support share intent
+* Admin mode
+* hook up the timer
+* need a better share icon
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes

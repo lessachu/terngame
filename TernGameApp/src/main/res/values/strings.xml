@@ -24,4 +24,5 @@
     <string name="title_activity_answer_log">AnswerLogActivity</string>
     <string name="guess_log_title">Previous Guesses</string>
     <string name="no_guesses">You haven\'t made any guesses yet.</string>
+    <string name="share_chooser_title">Share via...</string>
 </resources>

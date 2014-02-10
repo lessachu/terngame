@@ -46,18 +46,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tweet_button"
-                android:padding="10dp"/>
-
-        <TextView
-                android:layout_width="wrap_content"
+        <Button
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tweet_prompt"
-                android:id="@+id/tweet_text"
-                android:phoneNumber="false"/>
+                android:id="@id/share_button"
+                android:drawableLeft="@android:drawable/ic_menu_share"
+                android:drawablePadding="12dp"
+                android:singleLine="false"
+                android:gravity="left"
+                />
     </LinearLayout>
 
 </LinearLayout>
