@@ -20,11 +20,10 @@
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
-* Get rid of extra stuff on Guess view unless the puzzle is solved
-* Support share intent
 * Admin mode
 * hook up the timer
 * need a better share icon
+* crash on solve:             at com.twitter.terngame.data.TeamStatus$TeamDataSaverTask.doInBackground(TeamStatus.java:320)
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -49,4 +48,6 @@ DONE:
 * fully hook up check for correctness
 * set up a local git repository that backs up to dropbox
 * Hook up AnswerLog UX
+* Get rid of extra stuff on Guess view unless the puzzle is solved
+* Support share intent
 

@@ -75,12 +75,12 @@ public class TeamStatus implements JSONFileResultHandler {
         mData = jo;
         if (mData != null) {
             try {
-
                 // should probably validate the info is for this team
                 assert (mData.getString(s_teamName).equals(mTeamName));
-
                 // populate fields based on the data
-                mCurrentPuzzle = mData.getString(s_currentPuzzle);
+                if (mData.has(s_currentPuzzle)) {
+                    mCurrentPuzzle = mData.getString(s_currentPuzzle);
+                }
                 mNumSolved = mData.getInt(s_numSolved);
                 mNumSkipped = mData.getInt(s_numSkipped);
 
@@ -111,15 +111,12 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    // init logic should be as follows
-    // if there's a save file load from that
-    // all updates save to file
-
     public void initializeTeam(Context context, String teamName) {
         mTeamName = teamName;
         mContext = context;
         // if there is a savefile present, load from that
         try {
+            Log.d("terngame", "reading in team status");
             File f = new File(context.getFilesDir(), s_saveFile);
             InputStream in = new BufferedInputStream(new FileInputStream(f));
             JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
