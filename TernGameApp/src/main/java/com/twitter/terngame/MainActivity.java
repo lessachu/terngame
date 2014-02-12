@@ -21,6 +21,8 @@ public class MainActivity extends Activity
     private EditText mStartCodeEditText;
     private Button mCurPuzzleButton;
 
+    private static String s_admin_mode = "start admin mode";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,13 +86,15 @@ public class MainActivity extends Activity
         Session s = Session.getInstance(this);
 
         if (id == R.id.go_button) {
+            final String startcode = mStartCodeEditText.getText().toString();
 
-            if(s.isValidStartCode(mStartCodeEditText.getText().toString())) {
+            if (startcode.equalsIgnoreCase(s_admin_mode)) {
+                startActivity(new Intent(this, AdminActivity.class));
+            } else if (s.isValidStartCode(startcode)) {
                 startActivity(new Intent(this, PuzzleActivity.class)
                         .putExtra(Intent.EXTRA_INTENT,
                                 getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
             } else {
-                // show an error message toast
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "That's not the start code that you're looking for.",
                         Toast.LENGTH_SHORT);

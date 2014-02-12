@@ -25,4 +25,9 @@
     <string name="guess_log_title">Previous Guesses</string>
     <string name="no_guesses">You haven\'t made any guesses yet.</string>
     <string name="share_chooser_title">Share via...</string>
+    <string name="admin_clear_button">Clear All Data</string>
+    <string name="admin_mode_title">Admin Mode (Use at your own risk):</string>
+    <string name="current_puzzle_text">Current Puzzle:</string>
+    <string name="num_solved_text">Puzzles Solved:</string>
+    <string name="num_skipped_text">Puzzles Skipped</string>
 </resources>

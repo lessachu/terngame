@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@id/current_puzzle_spinner">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_mode_title"
+            android:id="@+id/textView"
+            android:layout_gravity="left|center_vertical"
+            android:autoText="true"
+            style="@style/textHeadingTheme"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_clear_button"
+            android:id="@+id/admin_clear_all_button"
+            android:layout_gravity="left|center_vertical"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_puzzle_text"
+            android:id="@+id/textView2"
+            android:layout_gravity="left|center_vertical"
+            style="@style/textHeadingTheme"/>
+
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/current_puzzle_spinner"
+            android:layout_gravity="left|center_vertical"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/num_solved_text"
+                    android:id="@+id/textView3"
+                    android:layout_gravity="center_vertical|right"
+                    style="@style/textHeadingTheme"/>
+
+            <NumberPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberPicker"
+                    android:layout_gravity="center_vertical|right"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/num_skipped_text"
+                    android:id="@+id/textView4"
+                    style="@style/textHeadingTheme"/>
+
+            <NumberPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberPicker2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

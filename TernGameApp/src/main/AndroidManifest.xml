@@ -40,6 +40,10 @@
                 android:name="com.twitter.terngame.GuessLogActivity"
                 android:screenOrientation="portrait">
         </activity>
+        <activity
+                android:name="com.twitter.terngame.AdminActivity"
+                android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

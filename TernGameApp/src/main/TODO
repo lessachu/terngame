@@ -23,7 +23,8 @@
 * Admin mode
 * hook up the timer
 * need a better share icon
-* crash on solve:             at com.twitter.terngame.data.TeamStatus$TeamDataSaverTask.doInBackground(TeamStatus.java:320)
+* hook up skip logic
+* should probably obscure admin mode even more, like add some icon taps required to access
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -50,4 +51,6 @@ DONE:
 * Hook up AnswerLog UX
 * Get rid of extra stuff on Guess view unless the puzzle is solved
 * Support share intent
+* crash on solve:             at com.twitter.terngame.data.TeamStatus$TeamDataSaverTask.doInBackground(TeamStatus.java:320)
+
 
