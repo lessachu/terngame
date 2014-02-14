@@ -70,6 +70,20 @@ public class TeamStatus implements JSONFileResultHandler {
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
+    public void clearCurrentPuzzle() {
+        mCurrentPuzzle = null;
+        save();
+    }
+
+    public void clearData() {
+        mCurrentPuzzle = null;
+        mNumSolved = 0;
+        mNumSkipped = 0;
+        mPuzzles.clear();
+        updateTimeStamp();
+        save();
+    }
+
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
         mData = jo;

@@ -7,7 +7,6 @@
 * make the instruction view open up a new display on tap
 * style your chronometer
 * padding around the logo icon is fucked up
-* figure out the deal with a tweet button
 * Save file has to include a hash of the team name
 * If we've already solved or skipped a puzzle, entering the start code should show "Solved or Skipped Puzzle view"
 * Serialize Dates to JSON
@@ -20,11 +19,12 @@
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
-* Admin mode
 * hook up the timer
-* need a better share icon
 * hook up skip logic
 * should probably obscure admin mode even more, like add some icon taps required to access
+* hrm, the use of isValidStart code to set the current puzzle is... problematic.
+* WTF number selector??
+* Admin mode puzzle data editor
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -52,5 +52,5 @@ DONE:
 * Get rid of extra stuff on Guess view unless the puzzle is solved
 * Support share intent
 * crash on solve:             at com.twitter.terngame.data.TeamStatus$TeamDataSaverTask.doInBackground(TeamStatus.java:320)
-
+* Clear All Data works
 

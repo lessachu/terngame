@@ -84,10 +84,6 @@ public class Session implements EventInfo.EventInfoListener {
         return mCurrentPuzzle.mName;
     }
 
-    public String getWrongAnswerString() {
-        return mEventInfo.getWrongAnswerString();
-    }
-
     public String getDuplicateAnswerString() {
         return mEventInfo.getDuplicateAnswerString();
     }
@@ -100,8 +96,16 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getNumSkipped();
     }
 
+    public String getCurrentPuzzleID() {
+        return mTeamStatus.getCurrentPuzzle();
+    }
+
     public ArrayList<String> getGuesses() {
         return mTeamStatus.getGuesses();
+    }
+
+    public ArrayList<String> getPuzzleList() {
+        return mStartCodeInfo.getPuzzleList();
     }
 
     public boolean login(String teamName, String password) {
@@ -170,4 +174,11 @@ public class Session implements EventInfo.EventInfoListener {
         mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
     }
 
+    public void clearCurrentPuzzle() {
+        mTeamStatus.clearCurrentPuzzle();
+    }
+
+    public void clearTeamData() {
+        mTeamStatus.clearData();
+    }
 }

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -31,24 +32,24 @@ public class StartCodeInfo implements JSONFileResultHandler {
 
     private Context mContext;
     private int mVersion;
-    private HashMap<String,PuzzleInfo> mStartCodes;
+    private HashMap<String, PuzzleInfo> mStartCodes;
 
     public StartCodeInfo(Context context) {
         mContext = context;
-        mStartCodes = new HashMap<String,PuzzleInfo>();
+        mStartCodes = new HashMap<String, PuzzleInfo>();
     }
 
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
         mData = jo;
 
-        if(mData != null) {
+        if (mData != null) {
             try {
                 mVersion = mData.getInt(s_version);
                 JSONArray ja = mData.getJSONArray(s_startCodeArray);
                 int len = ja.length();
 
-                for( int i = 0; i < len; i++) {
+                for (int i = 0; i < len; i++) {
                     JSONObject po = (JSONObject) ja.get(i);
                     PuzzleInfo pi = new PuzzleInfo();
                     pi.mName = po.getString(s_puzzleName);
@@ -59,7 +60,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     Log.d("terngame", "pID: " + code + pi.mName + pi.mAnswerFile);
 
                     mStartCodes.put(po.getString(s_startCode), pi);
-                 }
+                }
 
                 Log.d("terngame", "Version: " + Integer.toString(mVersion));
                 initializeAnswers();
@@ -99,11 +100,15 @@ public class StartCodeInfo implements JSONFileResultHandler {
     }
 
     public void initializeAnswers() {
-        for(String code : mStartCodes.keySet()) {
+        for (String code : mStartCodes.keySet()) {
             // walk through the array and pull in the answer set
             PuzzleInfo pi = mStartCodes.get(code);
             pi.initialize(mContext);
         }
+    }
+
+    public ArrayList<String> getPuzzleList() {
+        return new ArrayList<String>(mStartCodes.keySet());
     }
 
 }
