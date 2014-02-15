@@ -99,6 +99,14 @@ public class StartCodeInfo implements JSONFileResultHandler {
         return mStartCodes.get(startCode);
     }
 
+    public String getPuzzleName(String startCode) {
+        PuzzleInfo pi = mStartCodes.get(startCode);
+        if (pi != null) {
+            return pi.mName;
+        }
+        return "";
+    }
+
     public void initializeAnswers() {
         for (String code : mStartCodes.keySet()) {
             // walk through the array and pull in the answer set

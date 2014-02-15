@@ -31,4 +31,6 @@
     <string name="num_solved_text">Puzzles Solved:</string>
     <string name="num_skipped_text">Puzzles Skipped</string>
     <string name="None">None</string>
+    <string name="solved_text">SOLVED</string>
+    <string name="skipped_text">SKIPPED</string>
 </resources>

@@ -23,6 +23,14 @@
             android:layout_gravity="center"
             style="@style/eventTitleTheme"/>
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/status_text"
+            style="@style/textHeadingTheme"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"/>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"

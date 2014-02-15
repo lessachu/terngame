@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ public class PuzzleActivity extends Activity
 
     private EditText mAnswerEditText;
     private Button mPuzzleButton;
+    private TextView mStatusTextView;
+    private String mPuzzleID;
 
     // this really shouldn't go here
     private static String s_SKIP = "skip";
@@ -30,6 +33,13 @@ public class PuzzleActivity extends Activity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.puzzle_activity);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mPuzzleID = extras.getString("puzzleID");
+        }
+
+        Log.d("terngame", "puzzleID: " + mPuzzleID);
 
         mPuzzleButton = (Button) findViewById(R.id.do_puzzle_button);
         mPuzzleButton.setOnClickListener(this);
@@ -60,17 +70,16 @@ public class PuzzleActivity extends Activity
             }
         });
 
-
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
 
         // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
         final TextView puzzleName = (TextView) findViewById(R.id.puzzle_name_text);
-        puzzleName.setText(s.getPuzzleName());
+        puzzleName.setText(s.getPuzzleName(mPuzzleID));
 
         // only enable the puzzle button if the puzzle has one
         if (s.showPuzzleButton()) {
@@ -80,6 +89,18 @@ public class PuzzleActivity extends Activity
         } else {
             mPuzzleButton.setVisibility(View.GONE);
         }
+
+        mStatusTextView = (TextView) findViewById(R.id.status_text);
+        if (s.puzzleSkipped(mPuzzleID)) {
+            mStatusTextView.setText(getString(R.string.skipped_text));
+            mStatusTextView.setVisibility(View.VISIBLE);
+        } else if (s.puzzleSolved(mPuzzleID)) {
+            mStatusTextView.setText(getString(R.string.solved_text));
+            mStatusTextView.setVisibility(View.VISIBLE);
+        } else {
+            mStatusTextView.setVisibility(View.GONE);
+        }
+
     }
 
     public void onClick(View view) {
@@ -110,8 +131,7 @@ public class PuzzleActivity extends Activity
                     Toast.LENGTH_SHORT);
             toast.show();
         } else if (id == R.id.guess_log_button) {
-
-            ArrayList<String> guesses = s.getGuesses();
+            ArrayList<String> guesses = s.getGuesses(mPuzzleID);
 
             if (guesses != null) {
                 Intent i = new Intent(this, GuessLogActivity.class);
@@ -125,13 +145,6 @@ public class PuzzleActivity extends Activity
             }
 
         } else if (id == R.id.do_puzzle_button) {
-            // session will tell us what activity to launch
-                    /*   if(Session.getInstance(this).login(mTeamEditText.getText().toString(),
-                    mPassEditText.getText().toString())) {
-                startActivity(new Intent(this, MainActivity.class)
-                        .putExtra(Intent.EXTRA_INTENT,
-                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
-                                */
             // for now show a toast
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Woot! Prepare for battle!",

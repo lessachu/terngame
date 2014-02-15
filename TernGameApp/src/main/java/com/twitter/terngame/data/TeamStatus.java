@@ -224,14 +224,34 @@ public class TeamStatus implements JSONFileResultHandler {
         return mNumSkipped;
     }
 
-    public ArrayList<String> getGuesses() {
-        if (mCurrentPuzzle != null) {
-            PuzzleStatus ps = mPuzzles.get(mCurrentPuzzle);
+    public ArrayList<String> getGuesses(String puzzleID) {
+        if (puzzleID != null) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null) {
                 return ps.mGuesses;
             }
         }
         return null;
+    }
+
+    public boolean isPuzzleSolved(String puzzleID) {
+        if (puzzleID != null) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null) {
+                return ps.mSolved;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPuzzleSkipped(String puzzleID) {
+        if (puzzleID != null) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null) {
+                return ps.mSkipped;
+            }
+        }
+        return false;
     }
 
     public void startNewPuzzle(String puzzleID) {

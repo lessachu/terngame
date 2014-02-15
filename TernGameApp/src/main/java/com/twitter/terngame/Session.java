@@ -60,6 +60,14 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getCurrentPuzzle() != null;
     }
 
+    public boolean puzzleSolved(String puzzleID) {
+        return mTeamStatus.isPuzzleSolved(puzzleID);
+    }
+
+    public boolean puzzleSkipped(String puzzleID) {
+        return mTeamStatus.isPuzzleSkipped(puzzleID);
+    }
+
     public boolean showPuzzleButton() {
         return mPuzzleButton;  // temp
     }
@@ -77,11 +85,8 @@ public class Session implements EventInfo.EventInfoListener {
         }
     }
 
-    public String getPuzzleName() {
-        if (mCurrentPuzzle.mName == null) {
-            return "";
-        }
-        return mCurrentPuzzle.mName;
+    public String getPuzzleName(String puzzleID) {
+        return mStartCodeInfo.getPuzzleName(puzzleID);
     }
 
     public String getDuplicateAnswerString() {
@@ -100,8 +105,8 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getCurrentPuzzle();
     }
 
-    public ArrayList<String> getGuesses() {
-        return mTeamStatus.getGuesses();
+    public ArrayList<String> getGuesses(String puzzleID) {
+        return mTeamStatus.getGuesses(puzzleID);
     }
 
     public ArrayList<String> getPuzzleList() {
@@ -128,7 +133,7 @@ public class Session implements EventInfo.EventInfoListener {
             mTeamStatus.startNewPuzzle(start_code);
 
             // test code
-            if (start_code.contentEquals("battle")) {
+            if (start_code.equals("battle")) {
                 mPuzzleButton = true;
             } else {
                 mPuzzleButton = false;

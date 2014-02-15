@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.twitter.terngame.util.AnswerChecker;
+
 /**
  * Created by jchong on 1/12/14.
  */
@@ -65,15 +67,15 @@ public class MainActivity extends Activity
     }
 
     @Override
-    public void onStart(){
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         Session s = Session.getInstance(this);
 
         // TODO: either update the event name here or register a listener
 
         if (s.puzzleStarted()) {
             // put the current puzzle name in there
-            mCurPuzzleButton.setText(s.getPuzzleName());
+            mCurPuzzleButton.setText(s.getPuzzleName(s.getCurrentPuzzleID()));
             mCurPuzzleButton.setVisibility(View.VISIBLE);
         } else {
             mCurPuzzleButton.setVisibility(View.GONE);
@@ -91,9 +93,9 @@ public class MainActivity extends Activity
             if (startcode.equalsIgnoreCase(s_admin_mode)) {
                 startActivity(new Intent(this, AdminActivity.class));
             } else if (s.isValidStartCode(startcode)) {
-                startActivity(new Intent(this, PuzzleActivity.class)
-                        .putExtra(Intent.EXTRA_INTENT,
-                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
+                Intent i = new Intent(this, PuzzleActivity.class);
+                i.putExtra("puzzleID", AnswerChecker.stripAnswer(startcode));
+                startActivity(i);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "That's not the start code that you're looking for.",
@@ -102,9 +104,7 @@ public class MainActivity extends Activity
             }
         } else if (id == R.id.current_puzzle_button) {
             if (s.puzzleStarted()) {
-                startActivity(new Intent(this, PuzzleActivity.class)
-                        .putExtra(Intent.EXTRA_INTENT,
-                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
+                startActivity(new Intent(this, PuzzleActivity.class));
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Hrm... you should not have been able to click this button. Odd",
