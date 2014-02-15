@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by jchong on 1/11/14.
  */
 
-public class Session implements EventInfo.EventInfoListener {
+public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStatusListener {
 
     private static Session sInstance = null;
     private Context mContext;
@@ -25,6 +25,7 @@ public class Session implements EventInfo.EventInfoListener {
     private boolean mPuzzleStarted;
     private boolean mPuzzleButton;   // does this puzzle need a button
     private PuzzleInfo mCurrentPuzzle;
+    private String mCurrentInstruction;
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
@@ -35,7 +36,8 @@ public class Session implements EventInfo.EventInfoListener {
     private Session(Context context) {
         mContext = context;
         mCurrentPuzzle = new PuzzleInfo();
-        mTeamStatus = new TeamStatus();
+        mCurrentInstruction = context.getString(R.string.default_instructions);
+        mTeamStatus = new TeamStatus(this);
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
         mStartCodeInfo = new StartCodeInfo(context);
@@ -105,6 +107,10 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getCurrentPuzzle();
     }
 
+    public String getCurrentInstruction() {
+        return mCurrentInstruction;
+    }
+
     public ArrayList<String> getGuesses(String puzzleID) {
         return mTeamStatus.getGuesses(puzzleID);
     }
@@ -147,7 +153,8 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public void skipPuzzle() {
-        mTeamStatus.skipCurrentPuzzle();
+        // TODO: replace with a response.
+        mTeamStatus.skipCurrentPuzzle("haven't done this yet");
     }
 
     public AnswerInfo guessAnswer(String answer) {
@@ -165,7 +172,8 @@ public class Session implements EventInfo.EventInfoListener {
         ai.mDuplicate = isDupe;
 
         if (ai.mCorrect) {
-            mTeamStatus.solvePuzzle(puzzleId);
+            mTeamStatus.solvePuzzle(puzzleId, ai.mResponse);
+            mCurrentInstruction = ai.mResponse;
         }
         return ai;
     }
@@ -177,6 +185,11 @@ public class Session implements EventInfo.EventInfoListener {
     public void onEventInfoLoadComplete() {
         mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
         mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
+    }
+
+    public void onTeamStatusLoadComplete() {
+        // look up the last instruction, if there was any
+        mCurrentInstruction = mTeamStatus.getLastInstruction();
     }
 
     public void clearCurrentPuzzle() {

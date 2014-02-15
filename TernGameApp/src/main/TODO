@@ -14,8 +14,6 @@
 * Deal better with malformed JSON
 * Add json support for puzzle button
 * Add json support for Hints
-* Fix issue for the double start code issue - either block it if you've already started a puzzle
-  - or disable the start code window
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
@@ -25,6 +23,9 @@
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
 * WTF number selector??
 * Admin mode puzzle data editor
+* Add puzzle status page
+* Add skip UX
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -53,4 +54,7 @@ DONE:
 * Support share intent
 * crash on solve:             at com.twitter.terngame.data.TeamStatus$TeamDataSaverTask.doInBackground(TeamStatus.java:320)
 * Clear All Data works
+* Fix issue for the double start code issue - either block it if you've already started a puzzle
+  - or disable the start code window
+  * Hide the start button and associated accoutrements if the puzzle is solved
 

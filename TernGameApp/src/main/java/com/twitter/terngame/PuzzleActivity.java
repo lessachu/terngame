@@ -21,6 +21,8 @@ public class PuzzleActivity extends Activity
     implements View.OnClickListener{
 
     private EditText mAnswerEditText;
+    private TextView mAnswerTitleTextView;
+    private Button mAnswerButton;
     private Button mPuzzleButton;
     private TextView mStatusTextView;
     private String mPuzzleID;
@@ -50,15 +52,17 @@ public class PuzzleActivity extends Activity
         final Button hintButton = (Button) findViewById(R.id.hint_button);
         hintButton.setOnClickListener(this);
 
-        final Button answerButton = (Button) findViewById(R.id.answer_button);
-        answerButton.setOnClickListener(this);
-        answerButton.setEnabled(false);
+        mAnswerTitleTextView = (TextView) findViewById(R.id.answer_title_text);
+
+        mAnswerButton = (Button) findViewById(R.id.answer_button);
+        mAnswerButton.setOnClickListener(this);
+        mAnswerButton.setEnabled(false);
 
         mAnswerEditText = (EditText) findViewById(R.id.answer_text);
         mAnswerEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable text) {
-                answerButton.setEnabled(text.length() > 0);
+                mAnswerButton.setEnabled(text.length() > 0);
             }
 
             @Override
@@ -94,14 +98,25 @@ public class PuzzleActivity extends Activity
         if (s.puzzleSkipped(mPuzzleID)) {
             mStatusTextView.setText(getString(R.string.skipped_text));
             mStatusTextView.setVisibility(View.VISIBLE);
+            setAnswerUIVisibility(View.GONE);
         } else if (s.puzzleSolved(mPuzzleID)) {
             mStatusTextView.setText(getString(R.string.solved_text));
             mStatusTextView.setVisibility(View.VISIBLE);
+            setAnswerUIVisibility(View.GONE);
         } else {
             mStatusTextView.setVisibility(View.GONE);
+            setAnswerUIVisibility(View.VISIBLE);
         }
 
     }
+
+    // hrm, should I be hiding the layout instead?
+    public void setAnswerUIVisibility(int visibility) {
+        mAnswerButton.setVisibility(visibility);
+        mAnswerTitleTextView.setVisibility(visibility);
+        mAnswerEditText.setVisibility(visibility);
+    }
+
 
     public void onClick(View view) {
         final int id = view.getId();

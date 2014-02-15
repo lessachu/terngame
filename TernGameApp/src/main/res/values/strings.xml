@@ -33,4 +33,5 @@
     <string name="None">None</string>
     <string name="solved_text">SOLVED</string>
     <string name="skipped_text">SKIPPED</string>
+    <string name="default_instructions">Solve puzzles. Earn glory.</string>
 </resources>

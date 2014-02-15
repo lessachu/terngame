@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.twitter.terngame.util.FullFileReader;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
 
@@ -38,15 +37,15 @@ public class LoginInfo implements JSONFileResultHandler {
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
         mData = jo;
-        if(mData != null) {
+        if (mData != null) {
             try {
                 mVersion = mData.getInt(s_version);
 
                 JSONArray ja = mData.getJSONArray(s_teamList);
                 int len = ja.length();
-                for(int i = 0; i < len; i++) {
+                for (int i = 0; i < len; i++) {
                     JSONObject teamObj = ja.getJSONObject(i);
-                    String teamName= teamObj.getString(s_teamName);
+                    String teamName = teamObj.getString(s_teamName);
                     String password = teamObj.getString(s_teamPass);
                     mLoginInfo.put(teamName, password);
                 }
@@ -91,7 +90,7 @@ public class LoginInfo implements JSONFileResultHandler {
     }
 
     public boolean isValidLogin(String teamName, String password) {
-        final String teamPass =  mLoginInfo.get(teamName);
+        final String teamPass = mLoginInfo.get(teamName);
         return teamPass != null && teamPass.equals(password);
     }
 

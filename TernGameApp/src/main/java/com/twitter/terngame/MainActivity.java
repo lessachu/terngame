@@ -22,6 +22,8 @@ public class MainActivity extends Activity
     private TextView mEventNameText;
     private EditText mStartCodeEditText;
     private Button mCurPuzzleButton;
+    private Button mSolvedStatusButton;
+    private TextView mInstructionText;
 
     private static String s_admin_mode = "start admin mode";
 
@@ -35,7 +37,7 @@ public class MainActivity extends Activity
 
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
         final String eventName = s.getEventName();
-        if( eventName != null ) {
+        if (eventName != null) {
             mEventNameText.setText(eventName);
         }
 
@@ -46,8 +48,13 @@ public class MainActivity extends Activity
         goButton.setOnClickListener(this);
         goButton.setEnabled(false);
 
+        mInstructionText = (TextView) findViewById(R.id.instruction_text);
+
         mCurPuzzleButton = (Button) findViewById(R.id.current_puzzle_button);
         mCurPuzzleButton.setOnClickListener(this);
+
+        mSolvedStatusButton = (Button) findViewById(R.id.event_status_button);
+        mSolvedStatusButton.setOnClickListener(this);
 
         mStartCodeEditText = (EditText) findViewById(R.id.start_code_edit);
         mStartCodeEditText.addTextChangedListener(new TextWatcher() {
@@ -71,7 +78,11 @@ public class MainActivity extends Activity
         super.onResume();
         Session s = Session.getInstance(this);
 
-        // TODO: either update the event name here or register a listener
+        mInstructionText.setText(s.getCurrentInstruction());
+
+        int numSolved = s.getPuzzlesSolved();
+        mSolvedStatusButton.setText(Integer.toString(numSolved) + " puzzle" +
+                (numSolved == 1 ? "" : "s") + " solved");
 
         if (s.puzzleStarted()) {
             // put the current puzzle name in there
@@ -111,6 +122,11 @@ public class MainActivity extends Activity
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
+        } else if (id == R.id.event_status_button) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "yay!  You clicked the solved status button!",
+                    Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 

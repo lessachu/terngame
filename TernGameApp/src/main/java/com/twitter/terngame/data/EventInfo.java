@@ -4,20 +4,15 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.twitter.terngame.util.FullFileReader;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.InputMismatchException;
 
 /**
  * Created by jchong on 1/25/14.
@@ -56,7 +51,7 @@ public class EventInfo implements JSONFileResultHandler {
     public void saveResult(JSONObject jo) {
         mData = jo;
 
-        if(mData != null) {
+        if (mData != null) {
             try {
                 mVersion = mData.getInt(s_version);
                 mEventName = mData.getString(s_eventName);
@@ -65,11 +60,12 @@ public class EventInfo implements JSONFileResultHandler {
                 mWrongAnswerStr = mData.getString(s_wrongStr);
                 mDuplicateAnswerStr = mData.getString(s_dupeStr);
 
-                mEIL.onEventInfoLoadComplete();
-
+                if (mEIL != null) {
+                    mEIL.onEventInfoLoadComplete();
+                }
             } catch (JSONException e) {
                 Log.e("jan", "JsonException loading eventdata");
-           }
+            }
         }
     }
 

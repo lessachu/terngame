@@ -30,12 +30,18 @@ import java.util.HashMap;
 public class TeamStatus implements JSONFileResultHandler {
     // TODO: savefile should incorporate a hash of the team name
     // else you'll overwrite another team's progress just by logging into their app
+
+    public interface TeamStatusListener {
+        public void onTeamStatusLoadComplete();
+    }
+
     public static String s_saveFile = "teamStatus.json";
     private static String s_teamName = "teamName";
     private static String s_numSolved = "numSolved";
     private static String s_numSkipped = "numSkipped";
     private static String s_puzzles = "puzzles";
     private static String s_currentPuzzle = "curPuzzle";
+    private static String s_lastInstruction = "lastInstruction";
     private static String s_eventName = "eventName";
     private static String s_lastUpdate = "lastUpdate";
     private static String s_puzzleID = "id";
@@ -47,10 +53,12 @@ public class TeamStatus implements JSONFileResultHandler {
 
     private Context mContext;
     private JSONObject mData;
+    private TeamStatusListener mTSL;
 
     // data fields
     public String mTeamName;
     public String mCurrentPuzzle;
+    public String mLastInstruction;
     public int mNumSolved;
     public int mNumSkipped;
     public HashMap<String, PuzzleStatus> mPuzzles;
@@ -65,8 +73,9 @@ public class TeamStatus implements JSONFileResultHandler {
         public ArrayList<String> mGuesses;
     }
 
-    public TeamStatus() {
+    public TeamStatus(TeamStatusListener tsl) {
         mData = new JSONObject();
+        mTSL = tsl;
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
@@ -77,6 +86,7 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public void clearData() {
         mCurrentPuzzle = null;
+        mLastInstruction = null;
         mNumSolved = 0;
         mNumSkipped = 0;
         mPuzzles.clear();
@@ -94,6 +104,9 @@ public class TeamStatus implements JSONFileResultHandler {
                 // populate fields based on the data
                 if (mData.has(s_currentPuzzle)) {
                     mCurrentPuzzle = mData.getString(s_currentPuzzle);
+                }
+                if (mData.has(s_lastInstruction)) {
+                    mLastInstruction = mData.getString(s_lastInstruction);
                 }
                 mNumSolved = mData.getInt(s_numSolved);
                 mNumSkipped = mData.getInt(s_numSkipped);
@@ -122,6 +135,9 @@ public class TeamStatus implements JSONFileResultHandler {
             } catch (JSONException e) {
                 Log.e("terngame", "JSONException reading in team status");
             }
+        }
+        if (mTSL != null) {
+            mTSL.onTeamStatusLoadComplete();
         }
     }
 
@@ -200,6 +216,7 @@ public class TeamStatus implements JSONFileResultHandler {
             mData.put(s_numSolved, mNumSolved);
             mData.put(s_numSkipped, mNumSkipped);
             mData.put(s_currentPuzzle, mCurrentPuzzle);
+            mData.put(s_lastInstruction, mLastInstruction);
 
         } catch (JSONException e) {
             return false;
@@ -214,6 +231,10 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public String getCurrentPuzzle() {
         return mCurrentPuzzle;
+    }
+
+    public String getLastInstruction() {
+        return mLastInstruction;
     }
 
     public int getNumSolved() {
@@ -287,13 +308,14 @@ public class TeamStatus implements JSONFileResultHandler {
         return isDupe;
     }
 
-    public void solvePuzzle(String puzzleID) {
+    public void solvePuzzle(String puzzleID, String lastInstruction) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mSolved = true;
                 ps.mEndTime = new Date();
                 mNumSolved++;
+                mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;
                 updateTimeStamp();
                 save();
@@ -305,13 +327,14 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void skipPuzzle(String puzzleID) {
+    public void skipPuzzle(String puzzleID, String lastInstruction) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mSkipped = true;
                 ps.mEndTime = new Date();
                 mNumSkipped++;
+                mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;
                 updateTimeStamp();
                 save();
@@ -321,8 +344,8 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void skipCurrentPuzzle() {
-        skipPuzzle(mCurrentPuzzle);
+    public void skipCurrentPuzzle(String lastInstruction) {
+        skipPuzzle(mCurrentPuzzle, lastInstruction);
     }
 
     private void updateTimeStamp() {
