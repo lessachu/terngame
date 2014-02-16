@@ -8,7 +8,8 @@ event.json
    "team_file" : "terngame_teams.json",
    "code_file" : "terngame_start_codes.json",
    "wrong_str" : "That phrase is meaningless to me.",
-   "dupe_str"  : "You've already guessed this."
+   "dupe_str"  : "You've already guessed this.",
+   "skip_code" : "I'm not having fun anymore."
  }
 
  terngame_teams.json - username and pass - probably should be replaced by a server call

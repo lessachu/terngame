@@ -56,6 +56,10 @@ public class Session implements EventInfo.EventInfoListener {
         return mEventInfo.getEventName();
     }
 
+    public String getSkipCode() {
+        return mEventInfo.getSkipCode();
+    }
+
     public boolean puzzleStarted() {
         return mTeamStatus.getCurrentPuzzle() != null;
     }

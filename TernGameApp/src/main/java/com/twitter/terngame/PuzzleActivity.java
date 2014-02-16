@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -22,6 +21,9 @@ import java.util.ArrayList;
 public class PuzzleActivity extends Activity
         implements View.OnClickListener {
 
+    // Intent keys
+    public static String s_puzzleID = "puzzleID";
+
     private EditText mAnswerEditText;
     private TextView mAnswerTitleTextView;
     private Button mAnswerButton;
@@ -29,9 +31,6 @@ public class PuzzleActivity extends Activity
     private TextView mStatusTextView;
     private Chronometer mPuzzleTimer;
     private String mPuzzleID;
-
-    // TODO: this really shouldn't go here
-    private static String s_SKIP = "skip";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +40,8 @@ public class PuzzleActivity extends Activity
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            mPuzzleID = extras.getString("puzzleID");
+            mPuzzleID = extras.getString(s_puzzleID);
         }
-
-        Log.d("terngame", "puzzleID: " + mPuzzleID);
 
         mPuzzleButton = (Button) findViewById(R.id.do_puzzle_button);
         mPuzzleButton.setOnClickListener(this);
@@ -144,7 +141,7 @@ public class PuzzleActivity extends Activity
         Session s = Session.getInstance(this);
         if (id == R.id.answer_button) {
             String guess = mAnswerEditText.getText().toString();
-            if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s_SKIP)) {
+            if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s.getSkipCode())) {
                 String answer = s.getCorrectAnswer(mPuzzleID);
                 String response = s.skipPuzzle(mPuzzleID, answer);
                 mPuzzleTimer.stop();

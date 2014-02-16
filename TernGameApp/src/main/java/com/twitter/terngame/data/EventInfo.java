@@ -31,6 +31,7 @@ public class EventInfo implements JSONFileResultHandler {
     public static String s_codeFile = "code_file";
     public static String s_wrongStr = "wrong_str";
     public static String s_dupeStr = "dupe_str";
+    public static String s_skipCode = "skip_code";
 
     private JSONObject mData;
     private EventInfoListener mEIL;
@@ -42,6 +43,7 @@ public class EventInfo implements JSONFileResultHandler {
     public String mStartCodeFileName;
     public String mWrongAnswerStr;
     public String mDuplicateAnswerStr;
+    public String mSkipCode;
 
     public EventInfo(EventInfoListener eil) {
         mEIL = eil;
@@ -59,6 +61,7 @@ public class EventInfo implements JSONFileResultHandler {
                 mStartCodeFileName = mData.getString(s_codeFile);
                 mWrongAnswerStr = mData.getString(s_wrongStr);
                 mDuplicateAnswerStr = mData.getString(s_dupeStr);
+                mSkipCode = mData.getString(s_skipCode);
 
                 if (mEIL != null) {
                     mEIL.onEventInfoLoadComplete();
@@ -116,5 +119,9 @@ public class EventInfo implements JSONFileResultHandler {
 
     public String getDuplicateAnswerString() {
         return mDuplicateAnswerStr;
+    }
+
+    public String getSkipCode() {
+        return mSkipCode;
     }
 }

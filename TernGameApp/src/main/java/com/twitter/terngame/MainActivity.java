@@ -105,7 +105,7 @@ public class MainActivity extends Activity
                 startActivity(new Intent(this, AdminActivity.class));
             } else if (s.isValidStartCode(startcode)) {
                 Intent i = new Intent(this, PuzzleActivity.class);
-                i.putExtra("puzzleID", AnswerChecker.stripAnswer(startcode));
+                i.putExtra(PuzzleActivity.s_puzzleID, AnswerChecker.stripAnswer(startcode));
                 startActivity(i);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
@@ -116,7 +116,7 @@ public class MainActivity extends Activity
         } else if (id == R.id.current_puzzle_button) {
             if (s.puzzleStarted()) {
                 Intent i = new Intent(this, PuzzleActivity.class);
-                i.putExtra("puzzleID", s.getCurrentPuzzleID());
+                i.putExtra(PuzzleActivity.s_puzzleID, s.getCurrentPuzzleID());
                 startActivity(i);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),

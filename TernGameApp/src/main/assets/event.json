@@ -4,5 +4,6 @@
    "team_file" : "terngame_teams.json",
    "code_file" : "terngame_start_codes.json",
    "wrong_str" : "That phrase is meaningless to me.",
-   "dupe_str"  : "You've already guessed this."
+   "dupe_str"  : "You've already guessed this.",
+   "skip_code" : "skip"
  }

@@ -20,7 +20,6 @@
 * Add puzzle status page
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 
-
 DONE:
 * Make the start layout auto-adjust to different screen sizes
 * Style for event title
