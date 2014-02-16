@@ -20,6 +20,7 @@
     <string name="guess_log_button_text">Guess Log</string>
     <string name="title_activity_guess">GuessActivity</string>
     <string name="guess_label">YOU GUESSED</string>
+    <string name="skip_label">CORRECT ANSWER IS</string>
     <string name="tweet_prompt">Throw fear into the hearts of your competitors! Tweet your status!</string>
     <string name="title_activity_answer_log">AnswerLogActivity</string>
     <string name="guess_log_title">Previous Guesses</string>

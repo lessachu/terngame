@@ -1,0 +1,95 @@
+// Json API for the terngame application
+// The data here is an example, but the field names are correct
+
+event.json
+{
+   "version" : 1,
+   "name" : "#terngame 2014",
+   "team_file" : "terngame_teams.json",
+   "code_file" : "terngame_start_codes.json",
+   "wrong_str" : "That phrase is meaningless to me.",
+   "dupe_str"  : "You've already guessed this."
+ }
+
+ terngame_teams.json - username and pass - probably should be replaced by a server call
+{
+   "version" : 1,
+   "teams" : [
+      {
+        "name" : "jantest",
+        "password" : "janpass"
+      },
+      {
+        "name" : "team2",
+        "password" : "team2"
+      }
+    ]
+ }
+
+ // TODO - move the instructions to the next puzzle into this file
+ terngame_start_codes.json
+ {
+   "version" : 1,
+   "start_codes" : [
+      {
+        "id" : "puzzle1",
+        "name" : "orienteering",
+        "answer_file" : "puzzle1_answers.json"
+
+      },
+      {
+        "id" : "wombat",
+        "name" : "God save the wombats",
+        "answer_file" : "wombat_answers.json"
+      }
+    ]
+ }
+
+ wombat_answers.json
+ {
+  "version" : 1,
+  "answer_list" : [
+      { "answer" : "wombat",
+      "response" : "Great guess!  But not a correct one."
+       },
+      {
+       "answer" : "wombatwombat",
+       "response" : "Now you're really cooking... keep going..."
+       } ,
+     {
+    "answer" : "wombatwombatwombat",
+    "response" :"It's like you read my mind! Head to the ice cream shop on 501 Octavia Street, hand the woman your \
+     monopoly money (that's $500 mono-bucks, yo!) and see what you get in return.",
+     "correct" : true,       // you can mark multiple answers correct
+     "canonical" : true      // but this is considered the "right" answer
+     }
+     ]
+ }
+
+team_data.json
+{
+    "teamName":"jantest",
+    "numSolved":0,
+    "numSkipped":1,
+    "lastInstruction":"See what you can find in SF-8 Bluebird.",
+    "curPuzzle":"puzzle1",
+    "puzzles":
+        [
+        {
+        "id":"wombat",
+        "startTime":2096873743,
+        "endTime":2096878151
+        "guesses":["\"wombat\"", \""wombatwombat\""],
+        "skipped":true,
+        "solved":false
+        },
+           {
+           "id":"puzzle1",
+           "startTime":2096873743,
+           "endTime":2096878151
+           "guesses":["\"echolocation\"", \""panama\""],
+           "skipped":false,
+           "solved":false
+           },
+        ]
+}

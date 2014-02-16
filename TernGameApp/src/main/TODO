@@ -13,14 +13,11 @@
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
-* hook up skip logic
 * should probably obscure admin mode even more, like add some icon taps required to access
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
 * WTF number selector??
 * Admin mode puzzle data editor
 * Add puzzle status page
-* Add skip UX
-* document json format somewhere
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 
 
@@ -60,5 +57,8 @@ DONE:
 * If we've already solved or skipped a puzzle, entering the start code should show "Solved or Skipped Puzzle view"
 * hitting back to go to the start activity is a little wonky
 * we don't save on startcode only -
+* document json format somewhere
+* Add skip UX
+* hook up skip logic
 
 

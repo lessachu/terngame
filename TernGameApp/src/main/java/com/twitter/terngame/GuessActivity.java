@@ -12,6 +12,14 @@ import com.twitter.terngame.util.ShareStatus;
 public class GuessActivity extends Activity
         implements View.OnClickListener {
 
+    // intent keys
+    public static String s_is_skip = "is_skip";
+    public static String s_guess_word = "guess_phrase";
+    public static String s_response = "response_phrase";
+    public static String s_duplicate = "duplicate_phrase";
+    public static String s_correct = "correctness";
+
+    private TextView mGuessLabelText;
     private TextView mGuessText;
     private TextView mResponseText;
     private TextView mDuplicateText;
@@ -22,6 +30,7 @@ public class GuessActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guess_activity);
 
+        mGuessLabelText = (TextView) findViewById(R.id.guess_activity_label);
         mGuessText = (TextView) findViewById(R.id.guess_word_text);
         mResponseText = (TextView) findViewById(R.id.guess_result_text);
         mDuplicateText = (TextView) findViewById(R.id.duplicate_text);
@@ -30,15 +39,21 @@ public class GuessActivity extends Activity
         mShareButton.setOnClickListener(this);
 
         Bundle extras = getIntent().getExtras();
+        boolean skip = false;
         String value = null;
         String response = null;
         String duplicate = null;
         boolean guess_correct = false;
         if(extras != null) {
-            value = extras.getString("guess_phrase");
-            response = extras.getString("response_phrase");
-            duplicate = extras.getString("duplicate_phrase");
-            guess_correct = extras.getBoolean("correctness");
+            skip = extras.getBoolean(s_is_skip);
+            value = extras.getString(s_guess_word);
+            response = extras.getString(s_response);
+            duplicate = extras.getString(s_duplicate);
+            guess_correct = extras.getBoolean(s_correct);
+        }
+
+        if (skip) {
+            mGuessLabelText.setText(getString(R.string.skip_label));
         }
 
         if(value != null) {

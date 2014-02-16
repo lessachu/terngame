@@ -162,9 +162,16 @@ public class Session implements EventInfo.EventInfoListener {
         return false;
     }
 
-    public void skipPuzzle() {
-        // TODO: replace with a response.
-        mTeamStatus.skipCurrentPuzzle("haven't done this yet");
+    public String getCorrectAnswer(String puzzleID) {
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
+        return pi.getCorrectAnswer();
+    }
+
+    public String skipPuzzle(String puzzleID, String answer) {
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
+        AnswerInfo ai = pi.getAnswerInfo(answer);
+        mTeamStatus.skipPuzzle(puzzleID, ai.mResponse);
+        return ai.mResponse;
     }
 
     public AnswerInfo guessAnswer(String answer) {

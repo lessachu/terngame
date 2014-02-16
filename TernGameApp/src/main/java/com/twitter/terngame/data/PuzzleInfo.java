@@ -26,40 +26,46 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public static String s_answer = "answer";
     public static String s_response = "response";
     public static String s_correct = "correct";
+    public static String s_canonical = "canonical";
 
     private JSONObject mData;
 
     public String mName;
     public String mAnswerFile;
     public int mAnswerFileVersion;
+    public String mCanonicalAnswer;
     public HashMap<String, AnswerInfo> mAnswers;
 
     public PuzzleInfo() {
-        mAnswers = new HashMap<String,AnswerInfo>();
+        mAnswers = new HashMap<String, AnswerInfo>();
     }
 
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
         mData = jo;
 
-        if(mData != null) {
+        if (mData != null) {
             try {
                 mAnswerFileVersion = mData.getInt(s_version);
                 JSONArray ja = mData.getJSONArray(s_answerArray);
                 int len = ja.length();
 
-                for( int i = 0; i < len; i++) {
+                for (int i = 0; i < len; i++) {
                     JSONObject ao = (JSONObject) ja.get(i);
                     AnswerInfo ai = new AnswerInfo();
                     ai.mResponse = ao.getString(s_response);
-                    if(ao.has(s_correct)) {
+                    if (ao.has(s_correct)) {
                         ai.mCorrect = ao.getBoolean(s_correct);
                     }
 
                     String answer = ao.getString(s_answer);
 
+                    if (ao.has(s_canonical)) {
+                        mCanonicalAnswer = answer;
+                    }
+
                     Log.d("terngame", "answer: " + answer + ai.mResponse);
-                    mAnswers.put(ao.getString(s_answer), ai);
+                    mAnswers.put(answer, ai);
                 }
             } catch (JSONException e) {
                 Log.e("jan", "JsonException loading answerdata");
@@ -94,6 +100,10 @@ public class PuzzleInfo implements JSONFileResultHandler {
 
     public AnswerInfo getAnswerInfo(String answer) {
         return mAnswers.get(answer);
+    }
+
+    public String getCorrectAnswer() {
+        return mCanonicalAnswer;
     }
 
 }

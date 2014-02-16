@@ -12,7 +12,8 @@
    "answer" : "wombatwombatwombat",
    "response" :"It's like you read my mind! Head to the ice cream shop on 501 Octavia Street, hand the woman your \
     monopoly money (that's $500 mono-bucks, yo!) and see what you get in return.",
-    "correct" : true
+    "correct" : true,
+    "canonical" : true
     }
     ]
 }

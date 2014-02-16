@@ -145,19 +145,27 @@ public class PuzzleActivity extends Activity
         if (id == R.id.answer_button) {
             String guess = mAnswerEditText.getText().toString();
             if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s_SKIP)) {
-                s.skipPuzzle();
+                String answer = s.getCorrectAnswer(mPuzzleID);
+                String response = s.skipPuzzle(mPuzzleID, answer);
                 mPuzzleTimer.stop();
-                // launch into Answer Screen, but with skipped text
+
+                Intent i = new Intent(this, GuessActivity.class);
+                i.putExtra(GuessActivity.s_is_skip, true);
+                i.putExtra(GuessActivity.s_guess_word, answer);
+                i.putExtra(GuessActivity.s_response, response);
+                i.putExtra(GuessActivity.s_correct, false);
+                startActivity(i);
+
             } else {
                 // register a guess
                 AnswerInfo ai = s.guessAnswer(guess);
                 Intent i = new Intent(this, GuessActivity.class);
-                i.putExtra("guess_phrase", guess);
-                i.putExtra("response_phrase", ai.mResponse);
+                i.putExtra(GuessActivity.s_guess_word, guess);
+                i.putExtra(GuessActivity.s_response, ai.mResponse);
                 if (ai.mDuplicate) {
-                    i.putExtra("duplicate_phrase", s.getDuplicateAnswerString());
+                    i.putExtra(GuessActivity.s_duplicate, s.getDuplicateAnswerString());
                 }
-                i.putExtra("correctness", ai.mCorrect);
+                i.putExtra(GuessActivity.s_correct, ai.mCorrect);
 
                 if (ai.mCorrect) {
                     mPuzzleTimer.stop();

@@ -356,10 +356,6 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void skipCurrentPuzzle(String lastInstruction) {
-        skipPuzzle(mCurrentPuzzle, lastInstruction);
-    }
-
     private void updateTimeStamp() {
         mLastUpdate = new Date();
     }
