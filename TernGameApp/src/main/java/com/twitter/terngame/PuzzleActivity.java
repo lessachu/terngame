@@ -20,7 +20,7 @@ import com.twitter.terngame.util.AnswerChecker;
 import java.util.ArrayList;
 
 public class PuzzleActivity extends Activity
-    implements View.OnClickListener{
+        implements View.OnClickListener {
 
     private EditText mAnswerEditText;
     private TextView mAnswerTitleTextView;
@@ -127,7 +127,6 @@ public class PuzzleActivity extends Activity
         mStatusTextView.setVisibility(View.VISIBLE);
         setAnswerUIVisibility(View.GONE);
 
-        // set the Timer status
         long timeElapsed = s.getPuzzleEndTime(mPuzzleID) - s.getPuzzleStartTime(mPuzzleID);
         mPuzzleTimer.setBase(SystemClock.elapsedRealtime() - timeElapsed);
     }
@@ -155,10 +154,10 @@ public class PuzzleActivity extends Activity
                 Intent i = new Intent(this, GuessActivity.class);
                 i.putExtra("guess_phrase", guess);
                 i.putExtra("response_phrase", ai.mResponse);
-                if(ai.mDuplicate) {
+                if (ai.mDuplicate) {
                     i.putExtra("duplicate_phrase", s.getDuplicateAnswerString());
                 }
-                i.putExtra("correctness",ai.mCorrect);
+                i.putExtra("correctness", ai.mCorrect);
 
                 if (ai.mCorrect) {
                     mPuzzleTimer.stop();

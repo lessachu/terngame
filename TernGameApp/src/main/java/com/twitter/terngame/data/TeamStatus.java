@@ -32,10 +32,6 @@ public class TeamStatus implements JSONFileResultHandler {
     // TODO: savefile should incorporate a hash of the team name
     // else you'll overwrite another team's progress just by logging into their app
 
-    public interface TeamStatusListener {
-        public void onTeamStatusLoadComplete();
-    }
-
     public static String s_saveFile = "teamStatus.json";
     private static String s_teamName = "teamName";
     private static String s_numSolved = "numSolved";
@@ -54,7 +50,6 @@ public class TeamStatus implements JSONFileResultHandler {
 
     private Context mContext;
     private JSONObject mData;
-    private TeamStatusListener mTSL;
 
     // data fields
     public String mTeamName;
@@ -74,9 +69,8 @@ public class TeamStatus implements JSONFileResultHandler {
         public ArrayList<String> mGuesses;
     }
 
-    public TeamStatus(TeamStatusListener tsl) {
+    public TeamStatus() {
         mData = new JSONObject();
-        mTSL = tsl;
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
@@ -112,6 +106,8 @@ public class TeamStatus implements JSONFileResultHandler {
                 mNumSolved = mData.getInt(s_numSolved);
                 mNumSkipped = mData.getInt(s_numSkipped);
 
+                Log.d("terngame", "mNumSkipped read");
+
                 JSONArray ja = mData.getJSONArray(s_puzzles);
                 int len = ja.length();
 
@@ -122,7 +118,9 @@ public class TeamStatus implements JSONFileResultHandler {
                     ps.mSolved = po.getBoolean(s_puzzSolved);
                     ps.mSkipped = po.getBoolean(s_puzzSkipped);
                     ps.mStartTime = po.getLong(s_puzzStart);
-                    ps.mEndTime = po.getLong(s_puzzEnd);
+                    if (po.has(s_puzzEnd)) {
+                        ps.mEndTime = po.getLong(s_puzzEnd);
+                    }
 
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
                     ps.mGuesses = new ArrayList<String>();
@@ -136,9 +134,6 @@ public class TeamStatus implements JSONFileResultHandler {
             } catch (JSONException e) {
                 Log.e("terngame", "JSONException reading in team status");
             }
-        }
-        if (mTSL != null) {
-            mTSL.onTeamStatusLoadComplete();
         }
     }
 
@@ -172,12 +167,9 @@ public class TeamStatus implements JSONFileResultHandler {
             toast.show();
             return;
         }
-
         Log.d("terngame", mData.toString());
-
         TeamDataSaverTask saverTask = new TeamDataSaverTask();
         saverTask.execute(mData);
-        Log.d("terngame", "after: " + mData.toString());
     }
 
     private boolean updateJSONData() {
@@ -306,8 +298,7 @@ public class TeamStatus implements JSONFileResultHandler {
             mPuzzles.put(puzzleID, ps);
             mCurrentPuzzle = puzzleID;
             updateTimeStamp();
-        } else {
-            Log.d("terngame", "Um, we're trying to start " + puzzleID + ", we already started.");
+            save();
         }
     }
 

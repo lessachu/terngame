@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by jchong on 1/11/14.
  */
 
-public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStatusListener {
+public class Session implements EventInfo.EventInfoListener {
 
     private static Session sInstance = null;
     private Context mContext;
@@ -25,7 +25,6 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
     private boolean mPuzzleStarted;
     private boolean mPuzzleButton;   // does this puzzle need a button
     private PuzzleInfo mCurrentPuzzle;
-    private String mCurrentInstruction;
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
@@ -36,8 +35,7 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
     private Session(Context context) {
         mContext = context;
         mCurrentPuzzle = new PuzzleInfo();
-        mCurrentInstruction = context.getString(R.string.default_instructions);
-        mTeamStatus = new TeamStatus(this);
+        mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
         mStartCodeInfo = new StartCodeInfo(context);
@@ -108,7 +106,11 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
     }
 
     public String getCurrentInstruction() {
-        return mCurrentInstruction;
+        String instruction = mTeamStatus.getLastInstruction();
+        if (instruction == null) {
+            instruction = mContext.getString(R.string.default_instructions);
+        }
+        return instruction;
     }
 
     public ArrayList<String> getGuesses(String puzzleID) {
@@ -181,7 +183,6 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
 
         if (ai.mCorrect) {
             mTeamStatus.solvePuzzle(puzzleId, ai.mResponse);
-            mCurrentInstruction = ai.mResponse;
         }
         return ai;
     }
@@ -193,11 +194,6 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
     public void onEventInfoLoadComplete() {
         mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
         mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
-    }
-
-    public void onTeamStatusLoadComplete() {
-        // look up the last instruction, if there was any
-        mCurrentInstruction = mTeamStatus.getLastInstruction();
     }
 
     public void clearCurrentPuzzle() {
