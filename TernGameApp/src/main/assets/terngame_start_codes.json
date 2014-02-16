@@ -1,16 +1,25 @@
 {
   "version" : 1,
+  "order":  [ "wombat", "andorra", "banana"],
+  "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
-       "id" : "puzzle1",
+       "id" : "andorra",
        "name" : "orienteering",
-       "answer_file" : "puzzle1_answers.json"
-
+       "answer_file" : "andorra_answers.json",
+       "instruction" : "Head up to SF-8 Bunting and see what you can find."
      },
      {
        "id" : "wombat",
        "name" : "God save the wombats",
-       "answer_file" : "wombat_answers.json"
+       "answer_file" : "wombat_answers.json",
+       "instruction" : "It's like you read my mind! Head to the ice cream shop on 501 Octavia Street, hand the woman your \
+                            monopoly money (that's $500 mono-bucks, yo!) and see what you get in return."
+     },
+     { "id" : "banana",
+       "name" : "There's money in the banana stand.",
+       "answer_file" : "banana_answers.json",
+       "instruction" : "Oooh, I think you may find something interesting at the West entrance to the San Francisco Symphony Hall."
      }
    ]
 }

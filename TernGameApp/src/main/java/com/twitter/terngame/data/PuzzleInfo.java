@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
 
@@ -34,6 +35,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public String mAnswerFile;
     public int mAnswerFileVersion;
     public String mCanonicalAnswer;
+    public String mInstruction;
     public HashMap<String, AnswerInfo> mAnswers;
 
     public PuzzleInfo() {
@@ -53,18 +55,18 @@ public class PuzzleInfo implements JSONFileResultHandler {
                 for (int i = 0; i < len; i++) {
                     JSONObject ao = (JSONObject) ja.get(i);
                     AnswerInfo ai = new AnswerInfo();
-                    ai.mResponse = ao.getString(s_response);
+                    if (ao.has(s_response)) {
+                        ai.mResponse = ao.getString(s_response);
+                    }
                     if (ao.has(s_correct)) {
                         ai.mCorrect = ao.getBoolean(s_correct);
                     }
-
                     String answer = ao.getString(s_answer);
-
                     if (ao.has(s_canonical)) {
                         mCanonicalAnswer = answer;
                     }
-
                     Log.d("terngame", "answer: " + answer + ai.mResponse);
+                    answer = AnswerChecker.stripAnswer(answer);
                     mAnswers.put(answer, ai);
                 }
             } catch (JSONException e) {

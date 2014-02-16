@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
 
@@ -27,16 +28,21 @@ public class StartCodeInfo implements JSONFileResultHandler {
     public static String s_startCode = "id";
     public static String s_puzzleName = "name";
     public static String s_answerFile = "answer_file";
+    public static String s_instruction = "instruction";
+    public static String s_end_party = "end_party";
+    public static String s_order = "order";
 
     private JSONObject mData;
 
     private Context mContext;
     private int mVersion;
     private HashMap<String, PuzzleInfo> mStartCodes;
+    private HashMap<String, String> mNextInstruction;  // essentially the puzzle order mapping
 
     public StartCodeInfo(Context context) {
         mContext = context;
         mStartCodes = new HashMap<String, PuzzleInfo>();
+        mNextInstruction = new HashMap<String, String>();
     }
 
     // called by JSONFileReaderTask
@@ -46,6 +52,8 @@ public class StartCodeInfo implements JSONFileResultHandler {
         if (mData != null) {
             try {
                 mVersion = mData.getInt(s_version);
+                final String endPartyLocation = mData.getString(s_end_party);
+
                 JSONArray ja = mData.getJSONArray(s_startCodeArray);
                 int len = ja.length();
 
@@ -54,18 +62,31 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     PuzzleInfo pi = new PuzzleInfo();
                     pi.mName = po.getString(s_puzzleName);
                     pi.mAnswerFile = po.getString(s_answerFile);
-
+                    pi.mInstruction = po.getString(s_instruction);
                     String code = po.getString(s_startCode);
-
-                    Log.d("terngame", "pID: " + code + pi.mName + pi.mAnswerFile);
-
-                    mStartCodes.put(po.getString(s_startCode), pi);
+                    code = AnswerChecker.stripAnswer(code);
+                    mStartCodes.put(code, pi);
                 }
 
-                Log.d("terngame", "Version: " + Integer.toString(mVersion));
+                final JSONArray puzzleOrder = mData.getJSONArray(s_order);
+                len = puzzleOrder.length();
+                for (int i = 0; i < len - 1; i++) {
+                    String puzzleID = (String) puzzleOrder.getString(i);
+                    String next = (String) puzzleOrder.getString(i + 1);
+                    PuzzleInfo pi = mStartCodes.get(next);
+                    if (pi != null) {
+                        mNextInstruction.put(puzzleID, pi.mInstruction);
+                    } else {
+                        Log.e("terngame", "Invalid puzzleID " + next + " in event order array.");
+                    }
+                }
+
+                mNextInstruction.put(puzzleOrder.getString(len - 1), endPartyLocation);
+                Log.d("terngame", "NextInstruction: " + mNextInstruction.toString());
                 initializeAnswers();
+
             } catch (JSONException e) {
-                Log.e("jan", "JsonException loading eventdata");
+                Log.e("jan", "JsonException loading start code data");
             }
         }
     }
@@ -93,6 +114,10 @@ public class StartCodeInfo implements JSONFileResultHandler {
             Log.e("jan", "IOException");
 
         }
+    }
+
+    public String getNextInstruction(String startCode) {
+        return mNextInstruction.get(startCode);
     }
 
     public PuzzleInfo getPuzzleInfo(String startCode) {

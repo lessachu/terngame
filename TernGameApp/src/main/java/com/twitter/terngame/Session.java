@@ -1,6 +1,7 @@
 package com.twitter.terngame;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
@@ -172,19 +173,21 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public String skipPuzzle(String puzzleID, String answer) {
-        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
-        AnswerInfo ai = pi.getAnswerInfo(answer);
-        mTeamStatus.skipPuzzle(puzzleID, ai.mResponse);
-        return ai.mResponse;
+        String response = mStartCodeInfo.getNextInstruction(puzzleID);
+        mTeamStatus.skipPuzzle(puzzleID, response);
+        return response;
     }
 
     public AnswerInfo guessAnswer(String answer) {
         answer = AnswerChecker.stripAnswer(answer);
+
+        Log.d("terngame", "Guessing : " + answer);
         AnswerInfo ai = mCurrentPuzzle.getAnswerInfo(answer);
-        String puzzleId = mTeamStatus.getCurrentPuzzle();
-        boolean isDupe = mTeamStatus.addGuess(puzzleId, answer);
+        String puzzleID = mTeamStatus.getCurrentPuzzle();
+        boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
 
         if (ai == null) {
+            Log.d("terngame", "ai is null");
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
@@ -193,7 +196,8 @@ public class Session implements EventInfo.EventInfoListener {
         ai.mDuplicate = isDupe;
 
         if (ai.mCorrect) {
-            mTeamStatus.solvePuzzle(puzzleId, ai.mResponse);
+            ai.mResponse = mStartCodeInfo.getNextInstruction(puzzleID);
+            mTeamStatus.solvePuzzle(puzzleID, ai.mResponse);
         }
         return ai;
     }

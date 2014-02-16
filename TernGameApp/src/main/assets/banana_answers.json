@@ -1,0 +1,17 @@
+{
+ "version" : 1,
+ "answer_list" : [
+     { "answer" : "george",
+     "response" : "Which one?  There are so many."
+      },
+     {
+      "answer" : "george michael",
+      "response" : "You've got to have faith the faith the faith."
+      } ,
+    {
+   "answer" : "george michael bluth",
+    "correct" : true,
+    "canonical" : true
+    }
+    ]
+}
