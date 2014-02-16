@@ -2,6 +2,7 @@ package com.twitter.terngame.data;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -66,8 +67,8 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public class PuzzleStatus {
         public String mID;
-        public Date mStartTime;
-        public Date mEndTime;
+        public long mStartTime;
+        public long mEndTime;
         public boolean mSolved;
         public boolean mSkipped;
         public ArrayList<String> mGuesses;
@@ -120,8 +121,8 @@ public class TeamStatus implements JSONFileResultHandler {
                     ps.mID = po.getString(s_puzzleID);
                     ps.mSolved = po.getBoolean(s_puzzSolved);
                     ps.mSkipped = po.getBoolean(s_puzzSkipped);
-                    // ps.mStartTime =
-                    // ps.mEndTime =
+                    ps.mStartTime = po.getLong(s_puzzStart);
+                    ps.mEndTime = po.getLong(s_puzzEnd);
 
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
                     ps.mGuesses = new ArrayList<String>();
@@ -188,8 +189,8 @@ public class TeamStatus implements JSONFileResultHandler {
             JSONObject jo = new JSONObject();
             try {
                 jo.put(s_puzzleID, ps.mID);
-                //     jo.put(s_puzzStart, ps.mStartTime);   // TODO
-                //     jo.put(s_puzzEnd, ps.mEndTime);       // TODO
+                jo.put(s_puzzStart, ps.mStartTime);
+                jo.put(s_puzzEnd, ps.mEndTime);
                 jo.put(s_puzzSolved, ps.mSolved);
                 jo.put(s_puzzSkipped, ps.mSkipped);
 
@@ -231,6 +232,26 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public String getCurrentPuzzle() {
         return mCurrentPuzzle;
+    }
+
+    public long getStartTime(String puzzleID) {
+        if (puzzleID != null) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null) {
+                return ps.mStartTime;
+            }
+        }
+        return 0;
+    }
+
+    public long getEndTime(String puzzleID) {
+        if (puzzleID != null) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null) {
+                return ps.mEndTime;
+            }
+        }
+        return 0;
     }
 
     public String getLastInstruction() {
@@ -279,7 +300,7 @@ public class TeamStatus implements JSONFileResultHandler {
         if (!mPuzzles.containsKey(puzzleID)) {
             PuzzleStatus ps = new PuzzleStatus();
             ps.mID = puzzleID;
-            ps.mStartTime = new Date();
+            ps.mStartTime = SystemClock.elapsedRealtime();
             ps.mGuesses = new ArrayList<String>();
 
             mPuzzles.put(puzzleID, ps);
@@ -313,7 +334,7 @@ public class TeamStatus implements JSONFileResultHandler {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mSolved = true;
-                ps.mEndTime = new Date();
+                ps.mEndTime = SystemClock.elapsedRealtime();
                 mNumSolved++;
                 mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;
@@ -332,7 +353,7 @@ public class TeamStatus implements JSONFileResultHandler {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mSkipped = true;
-                ps.mEndTime = new Date();
+                ps.mEndTime = SystemClock.elapsedRealtime();
                 mNumSkipped++;
                 mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;

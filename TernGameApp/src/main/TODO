@@ -25,6 +25,9 @@
 * Admin mode puzzle data editor
 * Add puzzle status page
 * Add skip UX
+* document json format somewhere
+* we don't save on startcode only -
+* mainactivity doesn't always restart with the right state on # puzzles solved - race condition?
 
 
 DONE:

@@ -115,6 +115,14 @@ public class Session implements EventInfo.EventInfoListener, TeamStatus.TeamStat
         return mTeamStatus.getGuesses(puzzleID);
     }
 
+    public long getPuzzleStartTime(String puzzleID) {
+        return mTeamStatus.getStartTime(puzzleID);
+    }
+
+    public long getPuzzleEndTime(String puzzleID) {
+        return mTeamStatus.getEndTime(puzzleID);
+    }
+
     public ArrayList<String> getPuzzleList() {
         return mStartCodeInfo.getPuzzleList();
     }

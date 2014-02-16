@@ -115,7 +115,9 @@ public class MainActivity extends Activity
             }
         } else if (id == R.id.current_puzzle_button) {
             if (s.puzzleStarted()) {
-                startActivity(new Intent(this, PuzzleActivity.class));
+                Intent i = new Intent(this, PuzzleActivity.class);
+                i.putExtra("puzzleID", s.getCurrentPuzzleID());
+                startActivity(i);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Hrm... you should not have been able to click this button. Odd",

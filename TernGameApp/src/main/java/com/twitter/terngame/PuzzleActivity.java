@@ -3,11 +3,13 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +27,10 @@ public class PuzzleActivity extends Activity
     private Button mAnswerButton;
     private Button mPuzzleButton;
     private TextView mStatusTextView;
+    private Chronometer mPuzzleTimer;
     private String mPuzzleID;
 
-    // this really shouldn't go here
+    // TODO: this really shouldn't go here
     private static String s_SKIP = "skip";
 
     @Override
@@ -53,6 +56,7 @@ public class PuzzleActivity extends Activity
         hintButton.setOnClickListener(this);
 
         mAnswerTitleTextView = (TextView) findViewById(R.id.answer_title_text);
+        mPuzzleTimer = (Chronometer) findViewById(R.id.puzzle_chronometer);
 
         mAnswerButton = (Button) findViewById(R.id.answer_button);
         mAnswerButton.setOnClickListener(this);
@@ -96,18 +100,36 @@ public class PuzzleActivity extends Activity
 
         mStatusTextView = (TextView) findViewById(R.id.status_text);
         if (s.puzzleSkipped(mPuzzleID)) {
-            mStatusTextView.setText(getString(R.string.skipped_text));
-            mStatusTextView.setVisibility(View.VISIBLE);
-            setAnswerUIVisibility(View.GONE);
+            setCompletedPuzzleUI(getString(R.string.skipped_text));
         } else if (s.puzzleSolved(mPuzzleID)) {
-            mStatusTextView.setText(getString(R.string.solved_text));
-            mStatusTextView.setVisibility(View.VISIBLE);
-            setAnswerUIVisibility(View.GONE);
+            setCompletedPuzzleUI(getString(R.string.solved_text));
         } else {
             mStatusTextView.setVisibility(View.GONE);
             setAnswerUIVisibility(View.VISIBLE);
+            mPuzzleTimer.setBase(s.getPuzzleStartTime(mPuzzleID));
+            mPuzzleTimer.start();
         }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Session s = Session.getInstance(this);
+        if (!s.puzzleSkipped(mPuzzleID) && !s.puzzleSolved(mPuzzleID)) {
+            mPuzzleTimer.stop();
+        }
+    }
+
+    public void setCompletedPuzzleUI(String status_text) {
+        Session s = Session.getInstance(this);
+        mStatusTextView.setText(status_text);
+        mStatusTextView.setVisibility(View.VISIBLE);
+        setAnswerUIVisibility(View.GONE);
+
+        // set the Timer status
+        long timeElapsed = s.getPuzzleEndTime(mPuzzleID) - s.getPuzzleStartTime(mPuzzleID);
+        mPuzzleTimer.setBase(SystemClock.elapsedRealtime() - timeElapsed);
     }
 
     // hrm, should I be hiding the layout instead?
@@ -117,7 +139,6 @@ public class PuzzleActivity extends Activity
         mAnswerEditText.setVisibility(visibility);
     }
 
-
     public void onClick(View view) {
         final int id = view.getId();
 
@@ -126,6 +147,7 @@ public class PuzzleActivity extends Activity
             String guess = mAnswerEditText.getText().toString();
             if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s_SKIP)) {
                 s.skipPuzzle();
+                mPuzzleTimer.stop();
                 // launch into Answer Screen, but with skipped text
             } else {
                 // register a guess
@@ -137,6 +159,10 @@ public class PuzzleActivity extends Activity
                     i.putExtra("duplicate_phrase", s.getDuplicateAnswerString());
                 }
                 i.putExtra("correctness",ai.mCorrect);
+
+                if (ai.mCorrect) {
+                    mPuzzleTimer.stop();
+                }
                 startActivity(i);
             }
 
