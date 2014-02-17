@@ -105,6 +105,10 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getNumSkipped();
     }
 
+    public TeamStatus.PuzzleStatus getPuzzleStatus(String puzzleID) {
+        return mTeamStatus.getPuzzleStatus(puzzleID);
+    }
+
     public String getCurrentPuzzleID() {
         return mTeamStatus.getCurrentPuzzle();
     }

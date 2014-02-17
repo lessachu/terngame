@@ -258,6 +258,10 @@ public class TeamStatus implements JSONFileResultHandler {
         return mNumSkipped;
     }
 
+    public PuzzleStatus getPuzzleStatus(String puzzleID) {
+        return mPuzzles.get(puzzleID);
+    }
+
     public ArrayList<String> getGuesses(String puzzleID) {
         if (puzzleID != null) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);

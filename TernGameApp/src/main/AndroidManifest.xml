@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.twitter.terngame"
-    android:versionCode="1"
-    android:versionName="1.0" >
+          package="com.twitter.terngame"
+          android:versionCode="1"
+          android:versionName="1.0">
 
     <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="19" />
+            android:minSdkVersion="9"
+            android:targetSdkVersion="19"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.twitter.terngame.StartActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:theme="@style/AppTheme">
+        <activity
+                android:name="com.twitter.terngame.StartActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name="com.twitter.terngame.MainActivity"
-            android:screenOrientation="portrait" >
+                android:name="com.twitter.terngame.MainActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.twitter.terngame.PuzzleActivity"
-            android:screenOrientation="portrait">
+                android:name="com.twitter.terngame.PuzzleActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name="com.twitter.terngame.GuessActivity"
@@ -42,6 +42,10 @@
         </activity>
         <activity
                 android:name="com.twitter.terngame.AdminActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name="com.twitter.terngame.StatusActivity"
                 android:screenOrientation="portrait">
         </activity>
     </application>

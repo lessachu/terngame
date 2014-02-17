@@ -34,5 +34,12 @@
     <string name="None">None</string>
     <string name="solved_text">SOLVED</string>
     <string name="skipped_text">SKIPPED</string>
+    <string name="in_progress_text">IN PROGRESS</string>
     <string name="default_instructions">Solve puzzles. Earn glory.</string>
+    <string name="no_puzzles">You haven\'t started any puzzles yet.</string>
+    <string name="answer">ANSWER</string>
+    <string name="num_guesses">#GUESSES</string>
+    <string name="num_hints">#HINTS</string>
+    <string name="status">STATUS</string>
+    <string name="status_title_text">Puzzle Stats</string>
 </resources>

@@ -40,12 +40,14 @@ public class StartCodeInfo implements JSONFileResultHandler {
     private Context mContext;
     private int mVersion;
     private HashMap<String, PuzzleInfo> mStartCodes;
-    private HashMap<String, String> mNextInstruction;  // essentially the puzzle order mapping
+    private HashMap<String, String> mNextInstruction;
+    private ArrayList<String> mPuzzleOrder;
 
     public StartCodeInfo(Context context) {
         mContext = context;
         mStartCodes = new HashMap<String, PuzzleInfo>();
         mNextInstruction = new HashMap<String, String>();
+        mPuzzleOrder = new ArrayList<String>();
     }
 
     // called by JSONFileReaderTask
@@ -80,6 +82,8 @@ public class StartCodeInfo implements JSONFileResultHandler {
                 len = puzzleOrder.length();
                 for (int i = 0; i < len - 1; i++) {
                     String puzzleID = puzzleOrder.getString(i);
+                    mPuzzleOrder.add(AnswerChecker.stripAnswer(puzzleID));
+
                     String next = puzzleOrder.getString(i + 1);
                     PuzzleInfo pi = mStartCodes.get(next);
                     if (pi != null) {
@@ -89,7 +93,9 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     }
                 }
 
-                mNextInstruction.put(puzzleOrder.getString(len - 1), endPartyLocation);
+                String lastPuzzle = puzzleOrder.getString(len - 1);
+                mPuzzleOrder.add(AnswerChecker.stripAnswer(lastPuzzle));
+                mNextInstruction.put(lastPuzzle, endPartyLocation);
                 Log.d("terngame", "NextInstruction: " + mNextInstruction.toString());
                 initializeAnswers();
 
@@ -163,7 +169,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
     }
 
     public ArrayList<String> getPuzzleList() {
-        return new ArrayList<String>(mStartCodes.keySet());
+        return (ArrayList<String>) mPuzzleOrder.clone();
     }
 
 }

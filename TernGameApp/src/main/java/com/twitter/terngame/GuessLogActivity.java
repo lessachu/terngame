@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class GuessLogActivity extends ListActivity {
 
+    public static String s_guess_key = "guesses";
+
     private ListView mGuessList;
 
     @Override
@@ -23,7 +25,7 @@ public class GuessLogActivity extends ListActivity {
         Bundle extras = getIntent().getExtras();
         ArrayList<String> guessArray = new ArrayList<String>();
         if (extras != null) {
-            guessArray = extras.getStringArrayList("guesses");
+            guessArray = extras.getStringArrayList(s_guess_key);
         }
 
         if (guessArray != null) { // should really never be the case

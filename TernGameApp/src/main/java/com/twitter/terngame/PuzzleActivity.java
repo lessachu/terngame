@@ -178,15 +178,9 @@ public class PuzzleActivity extends Activity
 
             if (guesses != null) {
                 Intent i = new Intent(this, GuessLogActivity.class);
-                i.putExtra("guesses", guesses);
+                i.putExtra(GuessLogActivity.s_guess_key, guesses);
                 startActivity(i);
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "You haven't made any guesses yet!",
-                        Toast.LENGTH_SHORT);
-                toast.show();
             }
-
         } else if (id == R.id.do_puzzle_button) {
             // for now show a toast
             Toast toast = Toast.makeText(getApplicationContext(),

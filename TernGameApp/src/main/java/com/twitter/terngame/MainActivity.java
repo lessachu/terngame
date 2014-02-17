@@ -131,10 +131,9 @@ public class MainActivity extends Activity
                 toast.show();
             }
         } else if (id == R.id.event_status_button) {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "yay!  You clicked the solved status button!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            Intent i = new Intent(this, StatusActivity.class);
+            // construct a list of puzzle items
+            startActivity(i);
         }
     }
 

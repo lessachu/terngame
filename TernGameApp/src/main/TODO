@@ -15,9 +15,10 @@
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
 * WTF number selector??
 * Admin mode puzzle data editor
-* Add puzzle status page
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 * Write NFC puzzle support
+* add support for view recycling
+* Style the puzzle status rows
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -61,6 +62,7 @@ DONE:
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Add json support for puzzle button
 * Add X puzzles skipped support to status button
+* Add puzzle status page
 
 
 
