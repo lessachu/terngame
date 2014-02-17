@@ -81,8 +81,14 @@ public class MainActivity extends Activity
         mInstructionText.setText(s.getCurrentInstruction());
 
         int numSolved = s.getPuzzlesSolved();
-        mSolvedStatusButton.setText(Integer.toString(numSolved) + " puzzle" +
-                (numSolved == 1 ? "" : "s") + " solved");
+        int numSkipped = s.getPuzzlesSkipped();
+        String statusString = Integer.toString(numSolved) + " puzzle" +
+                (numSolved == 1 ? "" : "s") + " solved";
+        if (numSkipped > 0) {
+            statusString += "\n" + Integer.toString(numSkipped) + " puzzle" +
+                    (numSkipped == 1 ? "" : "s") + " skipped";
+        }
+        mSolvedStatusButton.setText(statusString);
 
         if (s.puzzleStarted()) {
             // put the current puzzle name in there

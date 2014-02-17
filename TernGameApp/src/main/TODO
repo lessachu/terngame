@@ -60,6 +60,7 @@ DONE:
 * hook up skip logic
 * package directions with each Puzzle and have a look up for which puzzle is next
 * Add json support for puzzle button
+* Add X puzzles skipped support to status button
 
 
 
