@@ -34,6 +34,8 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public String mName;
     public String mAnswerFile;
     public int mAnswerFileVersion;
+    public boolean mPuzzleButton;
+    public String mPuzzleButtonText;
     public String mCanonicalAnswer;
     public String mInstruction;
     public HashMap<String, AnswerInfo> mAnswers;

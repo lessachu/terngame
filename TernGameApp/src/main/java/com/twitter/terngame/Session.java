@@ -24,7 +24,6 @@ public class Session implements EventInfo.EventInfoListener {
     private Context mContext;
     private boolean mLoggedIn;
     private boolean mPuzzleStarted;
-    private boolean mPuzzleButton;   // does this puzzle need a button
     private PuzzleInfo mCurrentPuzzle;
 
     private TeamStatus mTeamStatus;   // static?
@@ -73,12 +72,12 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.isPuzzleSkipped(puzzleID);
     }
 
-    public boolean showPuzzleButton() {
-        return mPuzzleButton;  // temp
+    public boolean showPuzzleButton(String puzzleID) {
+        return mStartCodeInfo.showPuzzleButton(puzzleID);
     }
 
-    public String getPuzzleButtonText() {
-        return "Battle!";
+    public String getPuzzleButtonText(String puzzleID) {
+        return mStartCodeInfo.getPuzzleButtonText(puzzleID);
     }
 
     public String getTeamName() {
@@ -153,13 +152,6 @@ public class Session implements EventInfo.EventInfoListener {
         if (pi != null) {
             mTeamStatus.startNewPuzzle(start_code);
 
-            // test code
-            if (start_code.equals("battle")) {
-                mPuzzleButton = true;
-            } else {
-                mPuzzleButton = false;
-            }
-
             mPuzzleStarted = true;
             mCurrentPuzzle = pi;
             return true;
@@ -172,7 +164,7 @@ public class Session implements EventInfo.EventInfoListener {
         return pi.getCorrectAnswer();
     }
 
-    public String skipPuzzle(String puzzleID, String answer) {
+    public String skipPuzzle(String puzzleID) {
         String response = mStartCodeInfo.getNextInstruction(puzzleID);
         mTeamStatus.skipPuzzle(puzzleID, response);
         return response;

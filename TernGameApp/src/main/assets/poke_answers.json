@@ -1,0 +1,17 @@
+{
+ "version" : 1,
+ "answer_list" : [
+     { "answer" : "ash",
+     "response" : "Now you're just making stuff up."
+      },
+     {
+      "answer" : "sparrow",
+      "response" : "That's a creature, not an answer."
+      } ,
+    {
+   "answer" : "turducken stew",
+    "correct" : true,
+    "canonical" : true
+    }
+    ]
+}

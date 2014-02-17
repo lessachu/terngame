@@ -8,10 +8,8 @@
 * Save file has to include a hash of the team name
 * patch up last updated logic
 * Deal better with malformed JSON
-* Add json support for puzzle button
 * Add json support for Hints
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
-* package directions with each Puzzle and have a look up for which puzzle is next
 * Dupe view needs styling
 * should probably obscure admin mode even more, like add some icon taps required to access
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
@@ -19,6 +17,7 @@
 * Admin mode puzzle data editor
 * Add puzzle status page
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
+* Write NFC puzzle support
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -59,5 +58,8 @@ DONE:
 * document json format somewhere
 * Add skip UX
 * hook up skip logic
+* package directions with each Puzzle and have a look up for which puzzle is next
+* Add json support for puzzle button
+
 
 

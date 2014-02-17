@@ -86,10 +86,8 @@ public class PuzzleActivity extends Activity
         final TextView puzzleName = (TextView) findViewById(R.id.puzzle_name_text);
         puzzleName.setText(s.getPuzzleName(mPuzzleID));
 
-        // only enable the puzzle button if the puzzle has one
-        if (s.showPuzzleButton()) {
-            // put the current puzzle name in there
-            mPuzzleButton.setText(s.getPuzzleButtonText());
+        if (s.showPuzzleButton(mPuzzleID)) {
+            mPuzzleButton.setText(s.getPuzzleButtonText(mPuzzleID));
             mPuzzleButton.setVisibility(View.VISIBLE);
         } else {
             mPuzzleButton.setVisibility(View.GONE);
@@ -143,7 +141,7 @@ public class PuzzleActivity extends Activity
             String guess = mAnswerEditText.getText().toString();
             if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s.getSkipCode())) {
                 String answer = s.getCorrectAnswer(mPuzzleID);
-                String response = s.skipPuzzle(mPuzzleID, answer);
+                String response = s.skipPuzzle(mPuzzleID);
                 mPuzzleTimer.stop();
 
                 Intent i = new Intent(this, GuessActivity.class);

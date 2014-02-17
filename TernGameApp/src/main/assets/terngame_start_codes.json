@@ -1,6 +1,6 @@
 {
   "version" : 1,
-  "order":  [ "wombat", "andorra", "banana"],
+  "order":  [ "wombat", "banana", "twittermon", "andorra"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
@@ -20,6 +20,15 @@
        "name" : "There's money in the banana stand.",
        "answer_file" : "banana_answers.json",
        "instruction" : "Oooh, I think you may find something interesting at the West entrance to the San Francisco Symphony Hall."
-     }
+     },
+     {
+       "id" : "twittermon",
+      "name" : "Gotta catch 'em all!",
+      "answer_file" : "poke_answers.json",
+      "puzzle_button" : {
+            "button_text" : "Play!",
+            "button_mode": "battle" },
+      "instruction" : "Head to the commons and grab a map from the GC member there."
+      }
    ]
 }

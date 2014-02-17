@@ -31,6 +31,9 @@ public class StartCodeInfo implements JSONFileResultHandler {
     public static String s_instruction = "instruction";
     public static String s_end_party = "end_party";
     public static String s_order = "order";
+    public static String s_puzzleButton = "puzzle_button";
+    public static String s_puzzleButtonText = "button_text";
+    public static String s_puzzleButtonMode = "button_mode";
 
     private JSONObject mData;
 
@@ -63,6 +66,11 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     pi.mName = po.getString(s_puzzleName);
                     pi.mAnswerFile = po.getString(s_answerFile);
                     pi.mInstruction = po.getString(s_instruction);
+                    if (po.has(s_puzzleButton)) {
+                        JSONObject puzzleButton = po.getJSONObject(s_puzzleButton);
+                        pi.mPuzzleButtonText = puzzleButton.getString(s_puzzleButtonText);
+                        pi.mPuzzleButton = true;  // TODO: support multiple modes
+                    }
                     String code = po.getString(s_startCode);
                     code = AnswerChecker.stripAnswer(code);
                     mStartCodes.put(code, pi);
@@ -71,8 +79,8 @@ public class StartCodeInfo implements JSONFileResultHandler {
                 final JSONArray puzzleOrder = mData.getJSONArray(s_order);
                 len = puzzleOrder.length();
                 for (int i = 0; i < len - 1; i++) {
-                    String puzzleID = (String) puzzleOrder.getString(i);
-                    String next = (String) puzzleOrder.getString(i + 1);
+                    String puzzleID = puzzleOrder.getString(i);
+                    String next = puzzleOrder.getString(i + 1);
                     PuzzleInfo pi = mStartCodes.get(next);
                     if (pi != null) {
                         mNextInstruction.put(puzzleID, pi.mInstruction);
@@ -87,6 +95,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
 
             } catch (JSONException e) {
                 Log.e("jan", "JsonException loading start code data");
+                e.printStackTrace();
             }
         }
     }
@@ -128,6 +137,19 @@ public class StartCodeInfo implements JSONFileResultHandler {
         PuzzleInfo pi = mStartCodes.get(startCode);
         if (pi != null) {
             return pi.mName;
+        }
+        return "";
+    }
+
+    public boolean showPuzzleButton(String startCode) {
+        PuzzleInfo pi = mStartCodes.get(startCode);
+        return (pi != null && pi.mPuzzleButton);
+    }
+
+    public String getPuzzleButtonText(String startCode) {
+        PuzzleInfo pi = mStartCodes.get(startCode);
+        if (pi != null) {
+            return pi.mPuzzleButtonText;
         }
         return "";
     }
