@@ -3,12 +3,10 @@
 * investigate actually putting the login info as account info in Android
 * team name display field shrinks if content exceeds line?
 * make the instruction view open up a new display on tap
-* style your chronometer
 * padding around the logo icon is fucked up
 * Save file has to include a hash of the team name
 * patch up last updated logic
 * Deal better with malformed JSON
-* Add json support for Hints
 * do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * Dupe view needs styling
 * should probably obscure admin mode even more, like add some icon taps required to access
@@ -18,7 +16,8 @@
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 * Write NFC puzzle support
 * add support for view recycling
-* Style the puzzle status rows
+* Add json support for Hints
+* Add hint support
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -63,6 +62,7 @@ DONE:
 * Add json support for puzzle button
 * Add X puzzles skipped support to status button
 * Add puzzle status page
+* Style puzzle status rows
 
 
 

@@ -1,9 +1,7 @@
 package com.twitter.terngame.util;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +37,7 @@ public class JSONFileReaderTask extends AsyncTask<InputStream, Void, JSONObject 
         } catch (IOException e) {
             Log.e("terngame", "IOException trying to read in a JSON File");
         } catch (JSONException e) {
-            Log.e("terngame", "JsonException trying to read in a JSON File");
+            e.printStackTrace();
         }
         return null;
     }

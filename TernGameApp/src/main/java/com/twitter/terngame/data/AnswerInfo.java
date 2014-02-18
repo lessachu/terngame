@@ -7,4 +7,5 @@ public class AnswerInfo {
     public String mResponse;
     public boolean mCorrect;
     public boolean mDuplicate;
+    public String mHintUnlock;
 }

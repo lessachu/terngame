@@ -28,6 +28,13 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public static String s_response = "response";
     public static String s_correct = "correct";
     public static String s_canonical = "canonical";
+    public static String s_hintUnlock = "hint_unlock";
+    public static String s_hintArray = "hints";
+    public static String s_hintTime = "time";
+    public static String s_hintID = "id";
+    public static String s_hintText = "text";
+    public static String s_hintCost = "cost";
+
 
     private JSONObject mData;
 
@@ -39,9 +46,11 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public String mCanonicalAnswer;
     public String mInstruction;
     public HashMap<String, AnswerInfo> mAnswers;
+    public HashMap<String, HintInfo> mHints;
 
     public PuzzleInfo() {
         mAnswers = new HashMap<String, AnswerInfo>();
+        mHints = new HashMap<String, HintInfo>();
     }
 
     // called by JSONFileReaderTask
@@ -63,6 +72,9 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     if (ao.has(s_correct)) {
                         ai.mCorrect = ao.getBoolean(s_correct);
                     }
+                    if (ao.has(s_hintUnlock)) {
+                        ai.mHintUnlock = ao.getString(s_hintUnlock);
+                    }
                     String answer = ao.getString(s_answer);
                     if (ao.has(s_canonical)) {
                         mCanonicalAnswer = answer;
@@ -71,8 +83,25 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     answer = AnswerChecker.stripAnswer(answer);
                     mAnswers.put(answer, ai);
                 }
+
+                if (mData.has(s_hintArray)) {
+                    JSONArray hintArray = mData.getJSONArray(s_hintArray);
+                    len = hintArray.length();
+
+                    for (int i = 0; i < len; i++) {
+                        JSONObject ho = (JSONObject) hintArray.get(i);
+                        HintInfo hi = new HintInfo();
+                        hi.mTimeSecs = ho.getLong(s_hintTime);
+                        hi.mID = ho.getString(s_hintID);
+                        hi.mText = ho.getString(s_hintText);
+                        if (ho.has(s_hintCost)) {
+                            hi.mCost = ho.getInt(s_hintCost);
+                        }
+                        mHints.put(hi.mID, hi);
+                    }
+                }
             } catch (JSONException e) {
-                Log.e("jan", "JsonException loading answerdata");
+                e.printStackTrace();
             }
         }
     }
