@@ -9,25 +9,24 @@ import java.util.ArrayList;
 
 
 public class HintActivity extends ListActivity {
+    public static String s_puzzleID = "puzzleID";  // intent key
+
+    private String mPuzzleID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hint_activity);
 
-        Session s = Session.getInstance(this);
-/*        ArrayList<String> puzzleIDArray = s.getPuzzleList();
-        // construct the array based on the puzzle order
-        ArrayList<TeamStatus.PuzzleStatus> puzzleArray = new ArrayList<TeamStatus.PuzzleStatus>();
-
-        for (String puzzleID : puzzleIDArray) {
-            TeamStatus.PuzzleStatus ps = s.getPuzzleStatus(puzzleID);
-            if (ps != null) {
-                puzzleArray.add(ps);
-            }
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mPuzzleID = extras.getString(s_puzzleID);
         }
-*/
-        final HintArrayAdapter adapter = new HintArrayAdapter(this, new ArrayList<HintInfo>());
+
+        Session s = Session.getInstance(this);
+        ArrayList<HintInfo> hintArray = s.getHintStatus(mPuzzleID);
+
+        final HintArrayAdapter adapter = new HintArrayAdapter(this, hintArray);
         setListAdapter(adapter);
     }
 

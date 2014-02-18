@@ -172,6 +172,7 @@ public class PuzzleActivity extends Activity
 
         } else if (id == R.id.hint_button) {
             Intent i = new Intent(this, HintActivity.class);
+            i.putExtra(HintActivity.s_puzzleID, mPuzzleID);
             startActivity(i);
         } else if (id == R.id.guess_log_button) {
             ArrayList<String> guesses = s.getGuesses(mPuzzleID);

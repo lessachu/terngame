@@ -172,4 +172,8 @@ public class StartCodeInfo implements JSONFileResultHandler {
         return (ArrayList<String>) mPuzzleOrder.clone();
     }
 
+    public ArrayList<HintInfo> getHintList(String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+        return pi.getHintCopy();
+    }
 }

@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -46,11 +47,11 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public String mCanonicalAnswer;
     public String mInstruction;
     public HashMap<String, AnswerInfo> mAnswers;
-    public HashMap<String, HintInfo> mHints;
+    public ArrayList<HintInfo> mHints;
 
     public PuzzleInfo() {
         mAnswers = new HashMap<String, AnswerInfo>();
-        mHints = new HashMap<String, HintInfo>();
+        mHints = new ArrayList<HintInfo>();
     }
 
     // called by JSONFileReaderTask
@@ -97,7 +98,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
                         if (ho.has(s_hintCost)) {
                             hi.mCost = ho.getInt(s_hintCost);
                         }
-                        mHints.put(hi.mID, hi);
+                        addToHintsInOrder(hi);
                     }
                 }
             } catch (JSONException e) {
@@ -137,6 +138,23 @@ public class PuzzleInfo implements JSONFileResultHandler {
 
     public String getCorrectAnswer() {
         return mCanonicalAnswer;
+    }
+
+    public ArrayList<HintInfo> getHintCopy() {
+        return (ArrayList<HintInfo>) mHints.clone();
+    }
+
+    // sorting is for pussies.
+    private void addToHintsInOrder(HintInfo newHi) {
+        int size = mHints.size();
+        for (int i = 0; i < size; i++) {
+            HintInfo hi = mHints.get(i);
+            if (hi.mTimeSecs > newHi.mTimeSecs) {
+                mHints.add(i, newHi);
+                return;
+            }
+        }
+        mHints.add(newHi);
     }
 
 }

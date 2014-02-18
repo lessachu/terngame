@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
+import com.twitter.terngame.data.HintInfo;
 import com.twitter.terngame.data.LoginInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
@@ -103,6 +104,15 @@ public class Session implements EventInfo.EventInfoListener {
 
     public int getPuzzlesSkipped() {
         return mTeamStatus.getNumSkipped();
+    }
+
+    public ArrayList<HintInfo> getHintStatus(String puzzleID) {
+        ArrayList<HintInfo> hiArray = mStartCodeInfo.getHintList(puzzleID);
+
+        // TODO: get hint status from teamStatus and set the mUsed field
+        // accordingly
+
+        return hiArray;
     }
 
     public TeamStatus.PuzzleStatus getPuzzleStatus(String puzzleID) {

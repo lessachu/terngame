@@ -7,14 +7,15 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         >
 
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hint_button"/>
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/hint_title_text"
-            style="@style/hintTitleTheme"/>
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/hint_button"/>
+            android:id="@+id/hint_cost_text"
+            style="@style/hintTitleTheme"
+            android:layout_gravity="center"/>
 </LinearLayout>
