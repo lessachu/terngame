@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -101,6 +102,7 @@ public class PuzzleActivity extends Activity
         } else {
             mStatusTextView.setVisibility(View.GONE);
             setAnswerUIVisibility(View.VISIBLE);
+            Log.d("terngame", "Start time as int: " + Integer.toString((int) s.getPuzzleStartTime(mPuzzleID)));
             mPuzzleTimer.setBase(s.getPuzzleStartTime(mPuzzleID));
             mPuzzleTimer.start();
         }
@@ -169,10 +171,8 @@ public class PuzzleActivity extends Activity
             }
 
         } else if (id == R.id.hint_button) {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Yay! You hit the hint button!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            Intent i = new Intent(this, HintActivity.class);
+            startActivity(i);
         } else if (id == R.id.guess_log_button) {
             ArrayList<String> guesses = s.getGuesses(mPuzzleID);
 

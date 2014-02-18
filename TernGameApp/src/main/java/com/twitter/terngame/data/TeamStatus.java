@@ -47,6 +47,7 @@ public class TeamStatus implements JSONFileResultHandler {
     private static String s_puzzSolved = "solved";
     private static String s_puzzSkipped = "skipped";
     private static String s_puzzGuesses = "guesses";
+    private static String s_hintsTaken = "hintsTaken";
 
     private Context mContext;
     private JSONObject mData;
@@ -67,6 +68,7 @@ public class TeamStatus implements JSONFileResultHandler {
         public boolean mSolved;
         public boolean mSkipped;
         public ArrayList<String> mGuesses;
+        public ArrayList<String> mHintsTaken;
     }
 
     public TeamStatus() {
@@ -127,6 +129,15 @@ public class TeamStatus implements JSONFileResultHandler {
                     int guesslen = guessArray.length();
                     for (int j = 0; j < guesslen; j++) {
                         ps.mGuesses.add(guessArray.getString(j));
+                    }
+
+                    if (po.has(s_hintsTaken)) {
+                        JSONArray hintArray = po.getJSONArray(s_hintsTaken);
+                        ps.mHintsTaken = new ArrayList<String>();
+                        int hintlen = hintArray.length();
+                        for (int k = 0; k < hintlen; k++) {
+                            ps.mHintsTaken.add(hintArray.getString(k));
+                        }
                     }
 
                     mPuzzles.put(ps.mID, ps);
@@ -191,6 +202,13 @@ public class TeamStatus implements JSONFileResultHandler {
                     guessArray.put(guess);
                 }
                 jo.put(s_puzzGuesses, guessArray);
+
+                JSONArray hintArray = new JSONArray();
+                for (String hint : ps.mHintsTaken) {
+                    hintArray.put(hint);
+                }
+                jo.put(s_hintsTaken, hintArray);
+
                 puzzleArray.put(jo);
 
             } catch (JSONException e) {
@@ -230,6 +248,7 @@ public class TeamStatus implements JSONFileResultHandler {
         if (puzzleID != null) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null) {
+                Log.d("terngame", "StartTime: " + Long.toString(ps.mStartTime));
                 return ps.mStartTime;
             }
         }

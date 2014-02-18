@@ -42,4 +42,6 @@
     <string name="num_hints">#HINTS</string>
     <string name="status">STATUS</string>
     <string name="status_title_text">Puzzle Stats</string>
+    <string name="hint_title_text">Hints</string>
+    <string name="no_hints">There are no hints available for this puzzle.</string>
 </resources>

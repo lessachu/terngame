@@ -79,7 +79,26 @@ event.json
      "correct" : true,       // you can mark multiple answers correct
      "canonical" : true      // but this is considered the "right" answer
      }
-     ]
+     ],
+        "hints" : [
+         {
+          "time" :  10,
+          "id" : "wombat1",
+          "text" : "hrm, I hear Jan likes marsupials.",
+          "cost" : 10
+         },
+         {
+          "time" :  20,
+          "id" : "wombat2",
+          "text" : "Repetition is the key to success."
+         },
+         {
+          "time" :  60,
+          "id" : "wombat3",
+          "text" : "No seriously.  By repetition, I mena 3.",
+          "cost" : 10
+         }
+         ]
  }
 
 team_data.json
@@ -96,6 +115,7 @@ team_data.json
         "startTime":2096873743,
         "endTime":2096878151
         "guesses":["\"wombat\"", \""wombatwombat\""],
+        "hintsTaken" : ["wombat1"],
         "skipped":true,
         "solved":false
         },

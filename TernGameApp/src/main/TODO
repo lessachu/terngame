@@ -16,8 +16,9 @@
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 * Write NFC puzzle support
 * add support for view recycling
-* Add json support for Hints
 * Add hint support
+* Team status needs to save which hints are used
+* Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -63,6 +64,8 @@ DONE:
 * Add X puzzles skipped support to status button
 * Add puzzle status page
 * Style puzzle status rows
+* Add json support for Hints
+
 
 
 

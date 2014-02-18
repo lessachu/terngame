@@ -18,6 +18,10 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="hintTitleTheme">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="statusRowTheme">
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
