@@ -1,33 +1,48 @@
 package com.twitter.terngame;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-import com.twitter.terngame.data.HintInfo;
+public class HintActivity extends Activity {
 
-import java.util.ArrayList;
+    // intent keys
+    public static String s_hint_title = "hint_title";
+    public static String s_puzzle_title = "puzzle_title";
+    public static String s_hint_text = "hint_text";
 
-
-public class HintActivity extends ListActivity {
-    public static String s_puzzleID = "puzzleID";  // intent key
-
-    private String mPuzzleID;
+    private TextView mHintTitleText;
+    private TextView mPuzzleTitleText;
+    private TextView mHintText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hint_activity);
 
+        mHintTitleText = (TextView) findViewById(R.id.hint_activity_label);
+        mPuzzleTitleText = (TextView) findViewById(R.id.hint_puzzle_text);
+        mHintText = (TextView) findViewById(R.id.hint_text);
+
         Bundle extras = getIntent().getExtras();
+        String hintTitle = null;
+        String puzzleTitle = null;
+        String hintText = null;
         if (extras != null) {
-            mPuzzleID = extras.getString(s_puzzleID);
+            hintTitle = extras.getString(s_hint_title);
+            puzzleTitle = extras.getString(s_puzzle_title);
+            hintText = extras.getString(s_hint_text);
         }
 
-        Session s = Session.getInstance(this);
-        ArrayList<HintInfo> hintArray = s.getHintStatus(mPuzzleID);
-
-        final HintArrayAdapter adapter = new HintArrayAdapter(this, hintArray);
-        setListAdapter(adapter);
+        if (hintTitle != null) {
+            mHintTitleText.setText(hintTitle);
+        }
+        if (puzzleTitle != null) {
+            mPuzzleTitleText.setText(puzzleTitle);
+        }
+        if (hintText != null) {
+            mHintText.setText(hintText);
+        }
     }
 
 }

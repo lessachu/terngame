@@ -49,6 +49,10 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
+                android:name="com.twitter.terngame.HintListActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
                 android:name="com.twitter.terngame.HintActivity"
                 android:screenOrientation="portrait">
         </activity>

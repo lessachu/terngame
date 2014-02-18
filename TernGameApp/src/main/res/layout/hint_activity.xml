@@ -1,33 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              tools:context=".StatusActivity"
-              android:orientation="vertical">
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hint_activity_label"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            style="@style/textHeadingTheme"
+            android:singleLine="true"/>
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/hint_title_text"
-            android:layout_gravity="left|center_vertical"
-            style="@style/textHeadingTheme"/>
+            android:id="@+id/hint_puzzle_text"
+            style="@style/eventTitleTheme"/>
 
-    <ListView
+    <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@android:id/list"
-            android:layout_gravity="right|center_vertical"/>
+            android:id="@+id/scrollView"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/no_hints"
-            android:id="@android:id/empty"
-            android:layout_gravity="left|center_vertical"
-            style="@style/instructionTheme"
-            android:padding="12dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum wombats rule blabbity blabbity blah"
+                android:id="@+id/hint_text"
+                style="@style/instructionTheme"
+                android:gravity="center_vertical"
+                android:padding="12dp"/>
+    </ScrollView>
 
 </LinearLayout>

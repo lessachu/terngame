@@ -17,8 +17,12 @@
 * Write NFC puzzle support
 * add support for view recycling
 * Add hint support
-* Team status needs to save which hints are used
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
+* ARGH HINTS ARE COMPLICATED
+* add a confirmation dialog
+* looking at a hint registers it as taken.
+* use system alarm to determine when a hint is available
+* hook hints up to a local notification
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -65,6 +69,8 @@ DONE:
 * Add puzzle status page
 * Style puzzle status rows
 * Add json support for Hints
+* Team status needs to save which hints are used
+* make hint buttons display hints
 
 
 
