@@ -23,17 +23,17 @@ import java.util.HashMap;
  */
 public class StartCodeInfo implements JSONFileResultHandler {
 
-    public static String s_version = "version";
-    public static String s_startCodeArray = "start_codes";
-    public static String s_startCode = "id";
-    public static String s_puzzleName = "name";
-    public static String s_answerFile = "answer_file";
-    public static String s_instruction = "instruction";
-    public static String s_end_party = "end_party";
-    public static String s_order = "order";
-    public static String s_puzzleButton = "puzzle_button";
-    public static String s_puzzleButtonText = "button_text";
-    public static String s_puzzleButtonMode = "button_mode";
+    public static final String s_version = "version";
+    public static final String s_startCodeArray = "start_codes";
+    public static final String s_startCode = "id";
+    public static final String s_puzzleName = "name";
+    public static final String s_answerFile = "answer_file";
+    public static final String s_instruction = "instruction";
+    public static final String s_end_party = "end_party";
+    public static final String s_order = "order";
+    public static final String s_puzzleButton = "puzzle_button";
+    public static final String s_puzzleButtonText = "button_text";
+    public static final String s_puzzleButtonMode = "button_mode";
 
     private JSONObject mData;
 

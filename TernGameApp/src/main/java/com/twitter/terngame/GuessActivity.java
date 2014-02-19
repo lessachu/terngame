@@ -13,11 +13,11 @@ public class GuessActivity extends Activity
         implements View.OnClickListener {
 
     // intent keys
-    public static String s_is_skip = "is_skip";
-    public static String s_guess_word = "guess_phrase";
-    public static String s_response = "response_phrase";
-    public static String s_duplicate = "duplicate_phrase";
-    public static String s_correct = "correctness";
+    public static final String s_is_skip = "is_skip";
+    public static final String s_guess_word = "guess_phrase";
+    public static final String s_response = "response_phrase";
+    public static final String s_duplicate = "duplicate_phrase";
+    public static final String s_correct = "correctness";
 
     private TextView mGuessLabelText;
     private TextView mGuessText;
@@ -44,7 +44,7 @@ public class GuessActivity extends Activity
         String response = null;
         String duplicate = null;
         boolean guess_correct = false;
-        if(extras != null) {
+        if (extras != null) {
             skip = extras.getBoolean(s_is_skip);
             value = extras.getString(s_guess_word);
             response = extras.getString(s_response);
@@ -56,11 +56,11 @@ public class GuessActivity extends Activity
             mGuessLabelText.setText(getString(R.string.skip_label));
         }
 
-        if(value != null) {
+        if (value != null) {
             mGuessText.setText(value);
             mResponseText.setText(response);
 
-            if(duplicate != null) {
+            if (duplicate != null) {
                 mDuplicateText.setText(duplicate);
             }
         }

@@ -32,22 +32,22 @@ public class TeamStatus implements JSONFileResultHandler {
     // TODO: savefile should incorporate a hash of the team name
     // else you'll overwrite another team's progress just by logging into their app
 
-    public static String s_saveFile = "teamStatus.json";
-    private static String s_teamName = "teamName";
-    private static String s_numSolved = "numSolved";
-    private static String s_numSkipped = "numSkipped";
-    private static String s_puzzles = "puzzles";
-    private static String s_currentPuzzle = "curPuzzle";
-    private static String s_lastInstruction = "lastInstruction";
-    private static String s_eventName = "eventName";
-    private static String s_lastUpdate = "lastUpdate";
-    private static String s_puzzleID = "id";
-    private static String s_puzzStart = "startTime";
-    private static String s_puzzEnd = "endTime";
-    private static String s_puzzSolved = "solved";
-    private static String s_puzzSkipped = "skipped";
-    private static String s_puzzGuesses = "guesses";
-    private static String s_hintsTaken = "hintsTaken";
+    public static final String s_saveFile = "teamStatus.json";
+    private static final String s_teamName = "teamName";
+    private static final String s_numSolved = "numSolved";
+    private static final String s_numSkipped = "numSkipped";
+    private static final String s_puzzles = "puzzles";
+    private static final String s_currentPuzzle = "curPuzzle";
+    private static final String s_lastInstruction = "lastInstruction";
+    private static final String s_eventName = "eventName";
+    private static final String s_lastUpdate = "lastUpdate";
+    private static final String s_puzzleID = "id";
+    private static final String s_puzzStart = "startTime";
+    private static final String s_puzzEnd = "endTime";
+    private static final String s_puzzSolved = "solved";
+    private static final String s_puzzSkipped = "skipped";
+    private static final String s_puzzGuesses = "guesses";
+    private static final String s_hintsTaken = "hintsTaken";
 
     private Context mContext;
     private JSONObject mData;

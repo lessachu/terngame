@@ -7,9 +7,9 @@ import android.widget.TextView;
 public class HintActivity extends Activity {
 
     // intent keys
-    public static String s_hint_title = "hint_title";
-    public static String s_puzzle_title = "puzzle_title";
-    public static String s_hint_text = "hint_text";
+    public static final String s_hint_title = "hint_title";
+    public static final String s_puzzle_title = "puzzle_title";
+    public static final String s_hint_text = "hint_text";
 
     private TextView mHintTitleText;
     private TextView mPuzzleTitleText;

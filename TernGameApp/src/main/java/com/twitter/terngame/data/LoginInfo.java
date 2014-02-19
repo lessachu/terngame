@@ -21,10 +21,10 @@ import java.util.HashMap;
  */
 public class LoginInfo implements JSONFileResultHandler {
 
-    public static String s_version = "version";
-    public static String s_teamList = "teams";
-    public static String s_teamName = "name";
-    public static String s_teamPass = "password";
+    public static final String s_version = "version";
+    public static final String s_teamList = "teams";
+    public static final String s_teamName = "name";
+    public static final String s_teamPass = "password";
 
     private JSONObject mData;
     public int mVersion;

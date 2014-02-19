@@ -90,7 +90,13 @@ public class AdminActivity extends Activity
             toast.show();
 
         } else if (id == R.id.test_notification_button) {
-            HintNotification.fireHintNotification(this, "wombat", "God Save the Wombats", 1);
+            //   HintNotification.fireHintNotification(this, "wombat", "God Save the Wombats", 1);
+            HintNotification.setAlarm(this, "wombat", 1, 5);
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Launching hint notification in 5 seconds.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+
         }
     }
 }

@@ -13,6 +13,14 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
+        <receiver
+                android:name=".util.HintNotification"
+                android:enabled="true">
+            <intent-filter>
+                <action android:name="com.twitter.terngame.SEND_HINT"/>
+            </intent-filter>
+        </receiver>
+
         <activity
                 android:name="com.twitter.terngame.StartActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"

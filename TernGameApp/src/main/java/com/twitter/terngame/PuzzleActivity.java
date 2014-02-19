@@ -23,8 +23,8 @@ public class PuzzleActivity extends Activity
         implements View.OnClickListener {
 
     // Intent keys
-    public static String s_puzzleID = "puzzleID";
-    public static String s_hintPrompt = "hintPrompt";
+    public static final String s_puzzleID = "puzzleID";
+    public static final String s_hintPrompt = "hintPrompt";
 
     private EditText mAnswerEditText;
     private TextView mAnswerTitleTextView;

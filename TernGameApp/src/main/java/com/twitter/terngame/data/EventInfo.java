@@ -23,15 +23,15 @@ public class EventInfo implements JSONFileResultHandler {
         public void onEventInfoLoadComplete();
     }
 
-    public static String s_eventFile = "event.json";
+    public static final String s_eventFile = "event.json";
 
-    public static String s_version = "version";
-    public static String s_eventName = "name";
-    public static String s_teamFile = "team_file";
-    public static String s_codeFile = "code_file";
-    public static String s_wrongStr = "wrong_str";
-    public static String s_dupeStr = "dupe_str";
-    public static String s_skipCode = "skip_code";
+    public static final String s_version = "version";
+    public static final String s_eventName = "name";
+    public static final String s_teamFile = "team_file";
+    public static final String s_codeFile = "code_file";
+    public static final String s_wrongStr = "wrong_str";
+    public static final String s_dupeStr = "dupe_str";
+    public static final String s_skipCode = "skip_code";
 
     private JSONObject mData;
     private EventInfoListener mEIL;

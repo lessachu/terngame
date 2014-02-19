@@ -73,6 +73,7 @@ DONE:
 * Team status needs to save which hints are used
 * make hint buttons display hints
 * hints as a local notification
+* hints as a local notification triggered by an alarm
 
 
 

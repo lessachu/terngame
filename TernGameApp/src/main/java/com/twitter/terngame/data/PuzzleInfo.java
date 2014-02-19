@@ -23,18 +23,18 @@ import java.util.HashMap;
  */
 public class PuzzleInfo implements JSONFileResultHandler {
 
-    public static String s_version = "version";
-    public static String s_answerArray = "answer_list";
-    public static String s_answer = "answer";
-    public static String s_response = "response";
-    public static String s_correct = "correct";
-    public static String s_canonical = "canonical";
-    public static String s_hintUnlock = "hint_unlock";
-    public static String s_hintArray = "hints";
-    public static String s_hintTime = "time";
-    public static String s_hintID = "id";
-    public static String s_hintText = "text";
-    public static String s_hintCost = "cost";
+    public static final String s_version = "version";
+    public static final String s_answerArray = "answer_list";
+    public static final String s_answer = "answer";
+    public static final String s_response = "response";
+    public static final String s_correct = "correct";
+    public static final String s_canonical = "canonical";
+    public static final String s_hintUnlock = "hint_unlock";
+    public static final String s_hintArray = "hints";
+    public static final String s_hintTime = "time";
+    public static final String s_hintID = "id";
+    public static final String s_hintText = "text";
+    public static final String s_hintCost = "cost";
 
 
     private JSONObject mData;
