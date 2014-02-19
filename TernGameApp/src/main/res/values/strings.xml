@@ -44,4 +44,6 @@
     <string name="status_title_text">Puzzle Stats</string>
     <string name="hint_title_text">Available Hints</string>
     <string name="no_hints">There are no hints available for this puzzle.</string>
+    <string name="hint_prompt">NEW HINT AVAILABLE</string>
+    <string name="notif_hint_title">New Hint Available</string>
 </resources>

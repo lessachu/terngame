@@ -24,7 +24,6 @@ public class Session implements EventInfo.EventInfoListener {
     private static Session sInstance = null;
     private Context mContext;
     private boolean mLoggedIn;
-    private boolean mPuzzleStarted;
     private PuzzleInfo mCurrentPuzzle;
 
     private TeamStatus mTeamStatus;   // static?
@@ -165,8 +164,6 @@ public class Session implements EventInfo.EventInfoListener {
 
         if (pi != null) {
             mTeamStatus.startNewPuzzle(start_code);
-
-            mPuzzleStarted = true;
             mCurrentPuzzle = pi;
             return true;
         }

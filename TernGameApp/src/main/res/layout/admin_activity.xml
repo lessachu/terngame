@@ -84,4 +84,10 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test a Hint Notification"
+            android:id="@+id/test_notification_button"/>
+
 </LinearLayout>

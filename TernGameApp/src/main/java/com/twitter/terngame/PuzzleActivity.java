@@ -24,6 +24,7 @@ public class PuzzleActivity extends Activity
 
     // Intent keys
     public static String s_puzzleID = "puzzleID";
+    public static String s_hintPrompt = "hintPrompt";
 
     private EditText mAnswerEditText;
     private TextView mAnswerTitleTextView;
@@ -32,6 +33,7 @@ public class PuzzleActivity extends Activity
     private TextView mStatusTextView;
     private Chronometer mPuzzleTimer;
     private String mPuzzleID;
+    private boolean mHintPrompt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,14 @@ public class PuzzleActivity extends Activity
 
         setContentView(R.layout.puzzle_activity);
 
-        Bundle extras = getIntent().getExtras();
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
+        mHintPrompt = false;
         if (extras != null) {
             mPuzzleID = extras.getString(s_puzzleID);
+            if (i.hasExtra(s_hintPrompt)) {
+                mHintPrompt = extras.getBoolean(s_hintPrompt);
+            }
         }
 
         mPuzzleButton = (Button) findViewById(R.id.do_puzzle_button);
@@ -100,7 +107,9 @@ public class PuzzleActivity extends Activity
         } else if (s.puzzleSolved(mPuzzleID)) {
             setCompletedPuzzleUI(getString(R.string.solved_text));
         } else {
-            mStatusTextView.setVisibility(View.GONE);
+            if (mHintPrompt) {
+                mStatusTextView.setText(getString(R.string.hint_prompt));
+            }
             setAnswerUIVisibility(View.VISIBLE);
             Log.d("terngame", "Start time as int: " + Integer.toString((int) s.getPuzzleStartTime(mPuzzleID)));
             mPuzzleTimer.setBase(s.getPuzzleStartTime(mPuzzleID));
@@ -121,7 +130,6 @@ public class PuzzleActivity extends Activity
     public void setCompletedPuzzleUI(String status_text) {
         Session s = Session.getInstance(this);
         mStatusTextView.setText(status_text);
-        mStatusTextView.setVisibility(View.VISIBLE);
         setAnswerUIVisibility(View.GONE);
 
         long timeElapsed = s.getPuzzleEndTime(mPuzzleID) - s.getPuzzleStartTime(mPuzzleID);

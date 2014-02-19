@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.twitter.terngame.util.HintNotification;
+
 import java.util.ArrayList;
 
 /**
@@ -27,6 +29,9 @@ public class AdminActivity extends Activity
 
         Button clearAllButton = (Button) findViewById(R.id.admin_clear_all_button);
         clearAllButton.setOnClickListener(this);
+
+        Button testNotificationButton = (Button) findViewById(R.id.test_notification_button);
+        testNotificationButton.setOnClickListener(this);
 
         Spinner spinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         ArrayList<String> puzzles = s.getPuzzleList();
@@ -84,6 +89,8 @@ public class AdminActivity extends Activity
                     Toast.LENGTH_SHORT);
             toast.show();
 
+        } else if (id == R.id.test_notification_button) {
+            HintNotification.fireHintNotification(this, "wombat", "God Save the Wombats", 1);
         }
     }
 }

@@ -22,7 +22,8 @@
 * add a confirmation dialog
 * looking at a hint registers it as taken.
 * use system alarm to determine when a hint is available
-* hook hints up to a local notification
+* hints not available until the proper time elapses
+* correctly handling of the backstack from a hint notification
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -71,7 +72,7 @@ DONE:
 * Add json support for Hints
 * Team status needs to save which hints are used
 * make hint buttons display hints
-
+* hints as a local notification
 
 
 
