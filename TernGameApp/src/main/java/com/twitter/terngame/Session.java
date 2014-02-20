@@ -11,6 +11,7 @@ import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
 import com.twitter.terngame.util.AnswerChecker;
+import com.twitter.terngame.util.HintNotification;
 
 import java.util.ArrayList;
 
@@ -163,8 +164,19 @@ public class Session implements EventInfo.EventInfoListener {
         PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(start_code);
 
         if (pi != null) {
-            mTeamStatus.startNewPuzzle(start_code);
-            mCurrentPuzzle = pi;
+            if (mTeamStatus.startNewPuzzle(start_code)) {
+                mCurrentPuzzle = pi;
+
+                ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
+                int len = hintList.size();
+                for (int i = 0; i < len; i++) {
+                    HintInfo hi = hintList.get(i);
+                    HintNotification.scheduleHint(mContext, start_code, i + 1,
+                            hi.mTimeSecs);
+
+                    // TODO: if we're returning to a puzzle, account for time passed
+                }
+            }
             return true;
         }
         return false;
@@ -177,7 +189,9 @@ public class Session implements EventInfo.EventInfoListener {
 
     public String skipPuzzle(String puzzleID) {
         String response = mStartCodeInfo.getNextInstruction(puzzleID);
-        mTeamStatus.skipPuzzle(puzzleID, response);
+        if (mTeamStatus.skipPuzzle(puzzleID, response)) {
+            HintNotification.cancelHintAlarms(mContext);
+        }
         return response;
     }
 
@@ -190,7 +204,6 @@ public class Session implements EventInfo.EventInfoListener {
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
 
         if (ai == null) {
-            Log.d("terngame", "ai is null");
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
@@ -200,7 +213,9 @@ public class Session implements EventInfo.EventInfoListener {
 
         if (ai.mCorrect) {
             ai.mResponse = mStartCodeInfo.getNextInstruction(puzzleID);
-            mTeamStatus.solvePuzzle(puzzleID, ai.mResponse);
+            if (mTeamStatus.solvePuzzle(puzzleID, ai.mResponse)) {
+                HintNotification.cancelHintAlarms(mContext);
+            }
         }
         return ai;
     }

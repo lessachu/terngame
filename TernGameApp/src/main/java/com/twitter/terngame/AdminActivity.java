@@ -33,6 +33,9 @@ public class AdminActivity extends Activity
         Button testNotificationButton = (Button) findViewById(R.id.test_notification_button);
         testNotificationButton.setOnClickListener(this);
 
+        Button cancelNotificationButton = (Button) findViewById(R.id.cancel_hints_button);
+        cancelNotificationButton.setOnClickListener(this);
+
         Spinner spinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         ArrayList<String> puzzles = s.getPuzzleList();
         final String none = getString(R.string.None);
@@ -91,12 +94,14 @@ public class AdminActivity extends Activity
 
         } else if (id == R.id.test_notification_button) {
             //   HintNotification.fireHintNotification(this, "wombat", "God Save the Wombats", 1);
-            HintNotification.setAlarm(this, "wombat", 1, 5);
+            HintNotification.scheduleHint(this, "wombat", 1, 15);
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Launching hint notification in 5 seconds.",
+                    "Launching hint notification in 15 seconds.",
                     Toast.LENGTH_SHORT);
             toast.show();
 
+        } else if (id == R.id.cancel_hints_button) {
+            HintNotification.cancelHintAlarms(this);
         }
     }
 }

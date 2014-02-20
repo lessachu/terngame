@@ -30,7 +30,7 @@ public class HintNotification extends BroadcastReceiver {
         Intent intent = new Intent(context, PuzzleActivity.class);
         intent.putExtra(PuzzleActivity.s_puzzleID, puzzleID);
         intent.putExtra(PuzzleActivity.s_hintPrompt, true);
-        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(context, hintNum + 1, intent, 0);
 
         // TODO: correct handling of the backstack seems annoying
 
@@ -51,7 +51,6 @@ public class HintNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         String puzzleID = null;
         int hintNumber = 0;
 
@@ -64,23 +63,34 @@ public class HintNotification extends BroadcastReceiver {
 
         if (puzzleID != null && hintNumber != 0) {
             fireHintNotification(context, puzzleID, s.getPuzzleName(puzzleID), hintNumber);
+
+            // TODO: also needs to notify session that the hint should now be available
         } else {
             Log.d("terngame", "Invalid puzzleID/hint number specified");
         }
     }
 
-    public static void setAlarm(Context context, String puzzleID, int hintNumber, long timeSecs) {
+    public static void scheduleHint(Context context, String puzzleID, int hintNumber,
+            long timeSecs) {
         Intent intent = new Intent(HINT_INTENT);
         intent.putExtra(s_puzzleID, puzzleID);
         intent.putExtra(s_hintNum, hintNumber);
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(context, hintNumber, intent, 0);
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
+        am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
                 timeSecs * 1000, pi);
 
-        Log.d("terngame", "alarm set for hint " + Integer.toString(hintNumber) + " for " + puzzleID);
+        Log.d("terngame", "alarm set for hint " + Integer.toString(hintNumber) + " for " + puzzleID +
+                " at " + Long.toString(timeSecs) + " secs");
+    }
 
+    public static void cancelHintAlarms(Context context) {
+/*        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Log.d("terngame", "cancelling all pending hint alarms");
+        for(PendingIntent pi : sPendingIntents) {
+            am.cancel(pi);
+        }*/
     }
 }

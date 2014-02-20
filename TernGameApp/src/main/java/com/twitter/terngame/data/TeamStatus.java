@@ -203,11 +203,13 @@ public class TeamStatus implements JSONFileResultHandler {
                 }
                 jo.put(s_puzzGuesses, guessArray);
 
-                JSONArray hintArray = new JSONArray();
-                for (String hint : ps.mHintsTaken) {
-                    hintArray.put(hint);
+                if (ps.mHintsTaken != null) {
+                    JSONArray hintArray = new JSONArray();
+                    for (String hint : ps.mHintsTaken) {
+                        hintArray.put(hint);
+                    }
+                    jo.put(s_hintsTaken, hintArray);
                 }
-                jo.put(s_hintsTaken, hintArray);
 
                 puzzleArray.put(jo);
 
@@ -311,7 +313,7 @@ public class TeamStatus implements JSONFileResultHandler {
         return false;
     }
 
-    public void startNewPuzzle(String puzzleID) {
+    public boolean startNewPuzzle(String puzzleID) {
         if (!mPuzzles.containsKey(puzzleID)) {
             PuzzleStatus ps = new PuzzleStatus();
             ps.mID = puzzleID;
@@ -322,7 +324,9 @@ public class TeamStatus implements JSONFileResultHandler {
             mCurrentPuzzle = puzzleID;
             updateTimeStamp();
             save();
+            return true;
         }
+        return false; // we didn't actually start the puzzle.
     }
 
     public boolean addGuess(String puzzleID, String guess) {
@@ -343,7 +347,7 @@ public class TeamStatus implements JSONFileResultHandler {
         return isDupe;
     }
 
-    public void solvePuzzle(String puzzleID, String lastInstruction) {
+    public boolean solvePuzzle(String puzzleID, String lastInstruction) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
@@ -354,15 +358,17 @@ public class TeamStatus implements JSONFileResultHandler {
                 mCurrentPuzzle = null;
                 updateTimeStamp();
                 save();
+                return true;
             } else {
                 Log.d("terngame", "Invalid solve for " + puzzleID);
             }
         } else {
             Log.d("terngame", "Trying to solve non-current puzzle " + puzzleID);
         }
+        return false;  // we didn't really solve the puzzle
     }
 
-    public void skipPuzzle(String puzzleID, String lastInstruction) {
+    public boolean skipPuzzle(String puzzleID, String lastInstruction) {
         if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
@@ -373,10 +379,12 @@ public class TeamStatus implements JSONFileResultHandler {
                 mCurrentPuzzle = null;
                 updateTimeStamp();
                 save();
+                return true;
             }
         } else {
             Log.d("terngame", "Trying to skip non-current puzzle " + puzzleID);
         }
+        return false;
     }
 
     private void updateTimeStamp() {
