@@ -1,5 +1,6 @@
 package com.twitter.terngame;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.util.Log;
 
@@ -26,6 +27,7 @@ public class Session implements EventInfo.EventInfoListener {
     private Context mContext;
     private boolean mLoggedIn;
     private PuzzleInfo mCurrentPuzzle;
+    private ArrayList<PendingIntent> mPendingHints;
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
@@ -40,6 +42,7 @@ public class Session implements EventInfo.EventInfoListener {
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
         mStartCodeInfo = new StartCodeInfo(context);
+        mPendingHints = new ArrayList<PendingIntent>();
     }
 
     public static Session getInstance(Context context) {
@@ -171,8 +174,8 @@ public class Session implements EventInfo.EventInfoListener {
                 int len = hintList.size();
                 for (int i = 0; i < len; i++) {
                     HintInfo hi = hintList.get(i);
-                    HintNotification.scheduleHint(mContext, start_code, i + 1,
-                            hi.mTimeSecs);
+                    mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, i + 1,
+                            hi.mID, hi.mTimeSecs));
 
                     // TODO: if we're returning to a puzzle, account for time passed
                 }
@@ -190,7 +193,9 @@ public class Session implements EventInfo.EventInfoListener {
     public String skipPuzzle(String puzzleID) {
         String response = mStartCodeInfo.getNextInstruction(puzzleID);
         if (mTeamStatus.skipPuzzle(puzzleID, response)) {
-            HintNotification.cancelHintAlarms(mContext);
+            for (PendingIntent pi : mPendingHints) {
+                HintNotification.cancelHintAlarms(mContext, pi);
+            }
         }
         return response;
     }
@@ -214,10 +219,20 @@ public class Session implements EventInfo.EventInfoListener {
         if (ai.mCorrect) {
             ai.mResponse = mStartCodeInfo.getNextInstruction(puzzleID);
             if (mTeamStatus.solvePuzzle(puzzleID, ai.mResponse)) {
-                HintNotification.cancelHintAlarms(mContext);
+                for (PendingIntent pi : mPendingHints) {
+                    HintNotification.cancelHintAlarms(mContext, pi);
+                }
             }
         }
         return ai;
+    }
+
+    public void hintReady(String puzzleID, String hintID) {
+        // remove event from pending intent array
+    }
+
+    public void hintTaken(String puzzleID, String hintID) {
+        mTeamStatus.markHintTaken(puzzleID, hintID);
     }
 
     public void loadEventInformation() {

@@ -20,10 +20,13 @@
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * ARGH HINTS ARE COMPLICATED
 * add a confirmation dialog
-* looking at a hint registers it as taken.
 * use system alarm to determine when a hint is available
 * hints not available until the proper time elapses
 * correctly handling of the backstack from a hint notification
+* why don't the hints fire consistently? :(
+* Hint list should register a listener for new hints with the Session
+* hints info should display in the status page
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -74,6 +77,7 @@ DONE:
 * make hint buttons display hints
 * hints as a local notification
 * hints as a local notification triggered by an alarm
+* looking at a hint registers it as taken.
 
 
 

@@ -23,6 +23,7 @@ public class HintNotification extends BroadcastReceiver {
     private static int mID = 0;
     public static final String s_puzzleID = "puzzleID";
     public static final String s_hintNum = "hintNum";
+    public static final String s_hintID = "hintID";
     public static final String HINT_INTENT = "com.twitter.terngame.SEND_HINT";
 
     public static void fireHintNotification(Context context, String puzzleID, String puzzleName,
@@ -53,28 +54,30 @@ public class HintNotification extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String puzzleID = null;
         int hintNumber = 0;
+        String hintID = null;
 
         Session s = Session.getInstance(context);
         Bundle extras = intent.getExtras();
         if (extras != null) {
             puzzleID = extras.getString(s_puzzleID);
             hintNumber = extras.getInt(s_hintNum);
+            hintID = extras.getString(s_hintID);
         }
 
         if (puzzleID != null && hintNumber != 0) {
             fireHintNotification(context, puzzleID, s.getPuzzleName(puzzleID), hintNumber);
-
-            // TODO: also needs to notify session that the hint should now be available
+            s.hintReady(puzzleID, hintID);
         } else {
             Log.d("terngame", "Invalid puzzleID/hint number specified");
         }
     }
 
-    public static void scheduleHint(Context context, String puzzleID, int hintNumber,
-            long timeSecs) {
+    public static PendingIntent scheduleHint(Context context, String puzzleID, int hintNumber,
+            String hintID, long timeSecs) {
         Intent intent = new Intent(HINT_INTENT);
         intent.putExtra(s_puzzleID, puzzleID);
         intent.putExtra(s_hintNum, hintNumber);
+        intent.putExtra(s_hintID, hintID);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, hintNumber, intent, 0);
 
@@ -84,13 +87,13 @@ public class HintNotification extends BroadcastReceiver {
 
         Log.d("terngame", "alarm set for hint " + Integer.toString(hintNumber) + " for " + puzzleID +
                 " at " + Long.toString(timeSecs) + " secs");
+        return pi;
     }
 
-    public static void cancelHintAlarms(Context context) {
-/*        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Log.d("terngame", "cancelling all pending hint alarms");
-        for(PendingIntent pi : sPendingIntents) {
+    public static void cancelHintAlarms(Context context, PendingIntent pi) {
+        if (pi != null) {
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             am.cancel(pi);
-        }*/
+        }
     }
 }

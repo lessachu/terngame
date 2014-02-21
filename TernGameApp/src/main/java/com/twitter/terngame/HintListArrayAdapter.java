@@ -2,6 +2,8 @@ package com.twitter.terngame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,12 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
         hintButton.setTag(R.id.hint_info_key, hi);
         hintButton.setTag(R.id.hint_num_key, position + 1);
 
+        // only enable the hintButton if the elapsed time is greater than the hintTime
+        hintButton.setEnabled(mSession.puzzleSolved(mPuzzleID) ||
+                mSession.puzzleSkipped(mPuzzleID) ||
+                SystemClock.elapsedRealtime() >
+                        mSession.getPuzzleStartTime(mPuzzleID) + (hi.mTimeSecs * 1000));
+
         return rowView;
     }
 
@@ -62,6 +70,8 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
         Integer position = (Integer) view.getTag(R.id.hint_num_key);
 
         // TODO: register the hint as taken
+        Log.d("terngame", "Taking hint " + hi.mID + " for puzzle: " + mPuzzleID);
+        mSession.hintTaken(mPuzzleID, hi.mID);
 
         Intent i = new Intent(mContext, HintActivity.class);
         i.putExtra(HintActivity.s_hint_title, "Hint " + position.toString() + ":");

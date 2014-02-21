@@ -1,6 +1,7 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  */
 public class AdminActivity extends Activity
         implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
+    public PendingIntent mPI;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,15 +96,14 @@ public class AdminActivity extends Activity
             toast.show();
 
         } else if (id == R.id.test_notification_button) {
-            //   HintNotification.fireHintNotification(this, "wombat", "God Save the Wombats", 1);
-            HintNotification.scheduleHint(this, "wombat", 1, 15);
+            mPI = HintNotification.scheduleHint(this, "wombat", 1, "hintID", 15);
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Launching hint notification in 15 seconds.",
                     Toast.LENGTH_SHORT);
             toast.show();
 
         } else if (id == R.id.cancel_hints_button) {
-            HintNotification.cancelHintAlarms(this);
+            HintNotification.cancelHintAlarms(this, mPI);
         }
     }
 }

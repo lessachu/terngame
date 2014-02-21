@@ -131,9 +131,9 @@ public class TeamStatus implements JSONFileResultHandler {
                         ps.mGuesses.add(guessArray.getString(j));
                     }
 
+                    ps.mHintsTaken = new ArrayList<String>();
                     if (po.has(s_hintsTaken)) {
                         JSONArray hintArray = po.getJSONArray(s_hintsTaken);
-                        ps.mHintsTaken = new ArrayList<String>();
                         int hintlen = hintArray.length();
                         for (int k = 0; k < hintlen; k++) {
                             ps.mHintsTaken.add(hintArray.getString(k));
@@ -319,6 +319,7 @@ public class TeamStatus implements JSONFileResultHandler {
             ps.mID = puzzleID;
             ps.mStartTime = SystemClock.elapsedRealtime();
             ps.mGuesses = new ArrayList<String>();
+            ps.mHintsTaken = new ArrayList<String>();
 
             mPuzzles.put(puzzleID, ps);
             mCurrentPuzzle = puzzleID;
@@ -385,6 +386,19 @@ public class TeamStatus implements JSONFileResultHandler {
             Log.d("terngame", "Trying to skip non-current puzzle " + puzzleID);
         }
         return false;
+    }
+
+    public void markHintTaken(String puzzleID, String hintID) {
+        if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null && !ps.mSolved && !ps.mSkipped) {
+                if (!ps.mHintsTaken.contains(hintID)) {
+                    ps.mHintsTaken.add(hintID);
+                    updateTimeStamp();
+                    save();
+                }
+            }
+        }
     }
 
     private void updateTimeStamp() {
