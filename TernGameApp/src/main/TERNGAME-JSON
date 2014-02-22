@@ -102,7 +102,7 @@ event.json
  }
 
 team_data.json
-{
+  {
     "teamName":"jantest",
     "numSolved":0,
     "numSkipped":1,
@@ -113,8 +113,8 @@ team_data.json
         {
         "id":"wombat",
         "startTime":2096873743,
-        "endTime":2096878151
-        "guesses":["\"wombat\"", \""wombatwombat\""],
+        "endTime":2096878151,
+        "guesses":["wombat", "wombatwombat"],
         "hintsTaken" : ["wombat1"],
         "skipped":true,
         "solved":false
@@ -122,10 +122,10 @@ team_data.json
            {
            "id":"puzzle1",
            "startTime":2096873743,
-           "endTime":2096878151
-           "guesses":["\"echolocation\"", \""panama\""],
+           "endTime":2096878151,
+           "guesses":["echolocation", "panama"],
            "skipped":false,
            "solved":false
-           },
+           }
         ]
 }
