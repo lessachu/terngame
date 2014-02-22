@@ -74,7 +74,10 @@ public class StatusArrayAdapter extends ArrayAdapter<TeamStatus.PuzzleStatus> {
         guessText.setText(Integer.toString(ps.mGuesses.size()));
 
         final TextView hintText = (TextView) rowView.findViewById(R.id.hint_text);
-        hintText.setText("0 of 0");  // TODO: change when hints are hooked up
+        Integer totalHints = mSession.getHintStatus(ps.mID).size();
+        Integer takenHints = ps.mHintsTaken.size();
+        String hintStr = takenHints.toString() + " of " + totalHints.toString();
+        hintText.setText(hintStr);
 
         return rowView;
     }

@@ -8,10 +8,13 @@ import com.twitter.terngame.data.HintInfo;
 import java.util.ArrayList;
 
 
-public class HintListActivity extends ListActivity {
+public class HintListActivity extends ListActivity
+        implements Session.HintListener {
     public static String s_puzzleID = "puzzleID";  // intent key
 
     private String mPuzzleID;
+    private HintListArrayAdapter mAdapter;
+    private Session mSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +26,23 @@ public class HintListActivity extends ListActivity {
             mPuzzleID = extras.getString(s_puzzleID);
         }
 
-        Session s = Session.getInstance(this);
-        ArrayList<HintInfo> hintArray = s.getHintStatus(mPuzzleID);
+        mSession = Session.getInstance(this);
+        ArrayList<HintInfo> hintArray = mSession.getHintStatus(mPuzzleID);
 
-        final HintListArrayAdapter adapter = new HintListArrayAdapter(this, mPuzzleID, hintArray);
-        setListAdapter(adapter);
+        mAdapter = new HintListArrayAdapter(this, mPuzzleID, hintArray);
+        setListAdapter(mAdapter);
+
+        mSession.registerHintListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSession.unregisterHintListener(this);
+    }
+
+    public void onHintReady(String puzzleID, String hintID) {
+        mAdapter.notifyDataSetChanged();
     }
 
 }

@@ -69,7 +69,6 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
         HintInfo hi = (HintInfo) view.getTag(R.id.hint_info_key);
         Integer position = (Integer) view.getTag(R.id.hint_num_key);
 
-        // TODO: register the hint as taken
         Log.d("terngame", "Taking hint " + hi.mID + " for puzzle: " + mPuzzleID);
         mSession.hintTaken(mPuzzleID, hi.mID);
 

@@ -20,7 +20,7 @@ import com.twitter.terngame.util.AnswerChecker;
 import java.util.ArrayList;
 
 public class PuzzleActivity extends Activity
-        implements View.OnClickListener {
+        implements View.OnClickListener, Session.HintListener {
 
     // Intent keys
     public static final String s_puzzleID = "puzzleID";
@@ -115,6 +115,8 @@ public class PuzzleActivity extends Activity
             mPuzzleTimer.setBase(s.getPuzzleStartTime(mPuzzleID));
             mPuzzleTimer.start();
         }
+
+        s.registerHintListener(this);
     }
 
     @Override
@@ -125,6 +127,12 @@ public class PuzzleActivity extends Activity
         if (!s.puzzleSkipped(mPuzzleID) && !s.puzzleSolved(mPuzzleID)) {
             mPuzzleTimer.stop();
         }
+        s.unregisterHintListener(this);
+    }
+
+    public void onHintReady(String puzzleID, String hintID) {
+        // TODO: consider when this should go away
+        mStatusTextView.setText(getString(R.string.hint_prompt));
     }
 
     public void setCompletedPuzzleUI(String status_text) {

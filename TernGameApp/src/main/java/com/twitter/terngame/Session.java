@@ -23,11 +23,16 @@ import java.util.ArrayList;
 
 public class Session implements EventInfo.EventInfoListener {
 
+    public interface HintListener {
+        public void onHintReady(String puzzleID, String hintID);
+    }
+
     private static Session sInstance = null;
     private Context mContext;
     private boolean mLoggedIn;
     private PuzzleInfo mCurrentPuzzle;
     private ArrayList<PendingIntent> mPendingHints;
+    private ArrayList<HintListener> mHintListeners;
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
@@ -43,6 +48,7 @@ public class Session implements EventInfo.EventInfoListener {
         mLoginInfo = new LoginInfo();
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
+        mHintListeners = new ArrayList<HintListener>();
     }
 
     public static Session getInstance(Context context) {
@@ -110,12 +116,7 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public ArrayList<HintInfo> getHintStatus(String puzzleID) {
-        ArrayList<HintInfo> hiArray = mStartCodeInfo.getHintList(puzzleID);
-
-        // TODO: get hint status from teamStatus and set the mUsed field
-        // accordingly
-
-        return hiArray;
+        return mStartCodeInfo.getHintList(puzzleID);
     }
 
     public TeamStatus.PuzzleStatus getPuzzleStatus(String puzzleID) {
@@ -196,6 +197,7 @@ public class Session implements EventInfo.EventInfoListener {
             for (PendingIntent pi : mPendingHints) {
                 HintNotification.cancelHintAlarms(mContext, pi);
             }
+            mPendingHints.clear();
         }
         return response;
     }
@@ -222,13 +224,28 @@ public class Session implements EventInfo.EventInfoListener {
                 for (PendingIntent pi : mPendingHints) {
                     HintNotification.cancelHintAlarms(mContext, pi);
                 }
+                mPendingHints.clear();
             }
         }
         return ai;
     }
 
+    // TODO: consider how to make this thread safe
+    public void registerHintListener(HintListener hl) {
+        mHintListeners.add(hl);
+    }
+
+    public void unregisterHintListener(HintListener hl) {
+        mHintListeners.remove(hl);
+    }
+
     public void hintReady(String puzzleID, String hintID) {
         // remove event from pending intent array
+        for (HintListener hl : mHintListeners) {
+            if (hl != null) {
+                hl.onHintReady(puzzleID, hintID);
+            }
+        }
     }
 
     public void hintTaken(String puzzleID, String hintID) {
