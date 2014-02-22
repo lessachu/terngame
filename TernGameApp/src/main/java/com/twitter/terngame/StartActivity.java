@@ -1,19 +1,13 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.twitter.terngame.Session;
-import com.twitter.terngame.AppController;
-import com.twitter.terngame.MainActivity;
 import com.twitter.terngame.util.EditTextWatcher;
 
 public class StartActivity extends Activity
@@ -27,36 +21,11 @@ public class StartActivity extends Activity
     private EditTextWatcher mTeamTextWatcher;
     private EditTextWatcher mPassTextWatcher;
 
-    /**
-     * Go to the signed-out screen
-     *
-     * @param activity The current activity
-     */
-    public static void toStart(Activity activity) {
-        activity.startActivity(new Intent(activity, StartActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        activity.finish();
-    }
-
-    /**
-     * Go to the signed-out screen
-     *
-     * @param activity The current activity
-     * @param activityIntent The intent which started the activity
-     */
-    public static void toStart(Activity activity, Intent activityIntent) {
-        activity.startActivity(new Intent(activity, StartActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(Intent.EXTRA_INTENT, activityIntent));
-        activity.finish();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final AppController appController = AppController.getInstance(this);
-        mAppController = appController;
+        mAppController = AppController.getInstance(this);
 
         if (Session.getInstance(this).isLoggedIn()) {
             goHome();
@@ -89,7 +58,6 @@ public class StartActivity extends Activity
 
         if (Session.getInstance(this).isLoggedIn()) {
             goHome();
-            return;
         }
 
     }

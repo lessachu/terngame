@@ -87,8 +87,6 @@ public class AdminActivity extends Activity
         Session s = Session.getInstance(this);
         if (id == R.id.admin_clear_all_button) {
             // TODO: show an "are you sure? prompt?
-            // TODO: session should clear all data
-
             s.clearTeamData();
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Team data wiped.",
