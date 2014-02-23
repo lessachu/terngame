@@ -1,0 +1,35 @@
+<h2>Team Status</h2>
+
+<form action="http://www.ternga.me/wombat/teamstatus.json" method=post>
+  <input type=submit>
+  <input type=hidden name=wombatpassword value=firefox>
+  <textarea name="mystatus" style="width: 100%; height: 30em;">
+  {
+    "teamName":"jantest",
+    "numSolved":0,
+    "numSkipped":1,
+    "lastInstruction":"See what you can find in SF-8 Bluebird.",
+    "curPuzzle":"puzzle1",
+    "puzzles":
+        [
+        {
+        "id":"wombat",
+        "startTime":2096873743,
+        "endTime":2096878151,
+        "guesses":["wombat", "wombatwombat"],
+        "hintsTaken" : ["wombat1"],
+        "skipped":true,
+        "solved":false
+        },
+           {
+           "id":"puzzle1",
+           "startTime":2096873743,
+           "endTime":2096878151,
+           "guesses":["echolocation", "panama"],
+           "skipped":false,
+           "solved":false
+           }
+        ]
+}
+  </textarea>
+</form>

@@ -66,6 +66,7 @@ func init() {
 	if WOMBAT_ENABLE == true {
 		http.HandleFunc("/wombat/act.json", wombatact)
 		http.HandleFunc("/wombat/arc.json", wombatarc)
+		http.HandleFunc("/wombat/teamstatus.json", wombatteamstatus)
 	}
 }
 
@@ -167,6 +168,7 @@ func scrunch(s string) string {
 
 // Given an interface, JSON it perhaps wrapped in a callback function
 func spewjsonp(w http.ResponseWriter, r *http.Request, v interface{}) {
+	w.Header().Add("Content-Type", "application/json")
 	j, _ := json.MarshalIndent(v, " ", "  ")
 	js := string(j)
 	if r.FormValue("callback") != "" {
