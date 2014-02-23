@@ -194,10 +194,7 @@ public class Session implements EventInfo.EventInfoListener {
     public String skipPuzzle(String puzzleID) {
         String response = mStartCodeInfo.getNextInstruction(puzzleID);
         if (mTeamStatus.skipPuzzle(puzzleID, response)) {
-            for (PendingIntent pi : mPendingHints) {
-                HintNotification.cancelHintAlarms(mContext, pi);
-            }
-            mPendingHints.clear();
+            clearHintNotifications();
         }
         return response;
     }
@@ -221,10 +218,7 @@ public class Session implements EventInfo.EventInfoListener {
         if (ai.mCorrect) {
             ai.mResponse = mStartCodeInfo.getNextInstruction(puzzleID);
             if (mTeamStatus.solvePuzzle(puzzleID, ai.mResponse)) {
-                for (PendingIntent pi : mPendingHints) {
-                    HintNotification.cancelHintAlarms(mContext, pi);
-                }
-                mPendingHints.clear();
+                clearHintNotifications();
             }
         }
         return ai;
@@ -267,5 +261,13 @@ public class Session implements EventInfo.EventInfoListener {
 
     public void clearTeamData() {
         mTeamStatus.clearData();
+        clearHintNotifications();
+    }
+
+    public void clearHintNotifications() {
+        for (PendingIntent pi : mPendingHints) {
+            HintNotification.cancelHintAlarms(mContext, pi);
+        }
+        mPendingHints.clear();
     }
 }

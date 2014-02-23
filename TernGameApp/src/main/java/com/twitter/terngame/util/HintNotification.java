@@ -4,11 +4,13 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.twitter.terngame.PuzzleActivity;
@@ -31,14 +33,17 @@ public class HintNotification extends BroadcastReceiver {
         Intent intent = new Intent(context, PuzzleActivity.class);
         intent.putExtra(PuzzleActivity.s_puzzleID, puzzleID);
         intent.putExtra(PuzzleActivity.s_hintPrompt, true);
-        PendingIntent pIntent = PendingIntent.getActivity(context, hintNum + 1, intent, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        // TODO: correct handling of the backstack seems annoying
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(PuzzleActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pIntent = stackBuilder.getPendingIntent(hintNum + 1, 0);
 
         String subject = "Hint " + Integer.toString(hintNum) + " for " + puzzleName +
                 " is now available.";
 
-        Notification n = new Notification.Builder(context)
+        Notification n = new NotificationCompat.Builder(context)
                 .setContentTitle(context.getString(R.string.notif_hint_title))
                 .setContentText(subject).setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pIntent).build();

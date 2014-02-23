@@ -16,13 +16,12 @@
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 * Write NFC puzzle support
 * add support for view recycling
-* Add hint support
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * ARGH HINTS ARE COMPLICATED
 * add a confirmation dialog
-* correctly handling of the backstack from a hint notification
-* why don't the hints fire consistently? :(
-
+* clearing all data should clear all hints too
+* sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
+* Should coming back from a hint always land you on a "new hint" puzzle page, even if you've already  looked at them?
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -78,5 +77,6 @@ DONE:
 * Hint list should register a listener for new hints with the Session
 * use system alarm to determine when a hint is available
 * hints not available until the proper time elapses
+* correctly handling of the backstack from a hint notification
 
 
