@@ -47,7 +47,8 @@ public class TeamStatus implements JSONFileResultHandler {
     private static final String s_puzzSolved = "solved";
     private static final String s_puzzSkipped = "skipped";
     private static final String s_puzzGuesses = "guesses";
-    private static final String s_hintsTaken = "hintsTaken";
+    private static final String s_puzzHints = "hintsTaken";
+    private static final String s_puzzExtra = "extra";
 
     private Context mContext;
     private JSONObject mData;
@@ -67,6 +68,7 @@ public class TeamStatus implements JSONFileResultHandler {
         public long mEndTime;
         public boolean mSolved;
         public boolean mSkipped;
+        public JSONObject mExtra;
         public ArrayList<String> mGuesses;
         public ArrayList<String> mHintsTaken;
     }
@@ -124,6 +126,10 @@ public class TeamStatus implements JSONFileResultHandler {
                         ps.mEndTime = po.getLong(s_puzzEnd);
                     }
 
+                    if (po.has(s_puzzExtra)) {
+                        ps.mExtra = po.getJSONObject(s_puzzExtra);
+                    }
+
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
                     ps.mGuesses = new ArrayList<String>();
                     int guesslen = guessArray.length();
@@ -132,8 +138,8 @@ public class TeamStatus implements JSONFileResultHandler {
                     }
 
                     ps.mHintsTaken = new ArrayList<String>();
-                    if (po.has(s_hintsTaken)) {
-                        JSONArray hintArray = po.getJSONArray(s_hintsTaken);
+                    if (po.has(s_puzzHints)) {
+                        JSONArray hintArray = po.getJSONArray(s_puzzHints);
                         int hintlen = hintArray.length();
                         for (int k = 0; k < hintlen; k++) {
                             ps.mHintsTaken.add(hintArray.getString(k));
@@ -208,7 +214,11 @@ public class TeamStatus implements JSONFileResultHandler {
                     for (String hint : ps.mHintsTaken) {
                         hintArray.put(hint);
                     }
-                    jo.put(s_hintsTaken, hintArray);
+                    jo.put(s_puzzHints, hintArray);
+                }
+
+                if (ps.mExtra != null) {
+                    jo.put(s_puzzExtra, ps.mExtra);
                 }
 
                 puzzleArray.put(jo);

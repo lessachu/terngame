@@ -14,6 +14,8 @@ import com.twitter.terngame.data.TeamStatus;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -137,6 +139,10 @@ public class Session implements EventInfo.EventInfoListener {
 
     public ArrayList<String> getGuesses(String puzzleID) {
         return mTeamStatus.getGuesses(puzzleID);
+    }
+
+    public JSONObject getExtra(String puzzleID) {
+        return mStartCodeInfo.getExtra(puzzleID);
     }
 
     public long getPuzzleStartTime(String puzzleID) {

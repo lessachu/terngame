@@ -67,6 +67,11 @@
                 android:name="com.twitter.terngame.HintActivity"
                 android:screenOrientation="portrait">
         </activity>
+        <activity
+                android:name="com.twitter.terngame.TwittermonActivity"
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop">
+        </activity>
     </application>
 
 </manifest>

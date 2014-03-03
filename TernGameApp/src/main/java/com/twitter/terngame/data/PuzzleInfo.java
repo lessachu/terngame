@@ -42,8 +42,9 @@ public class PuzzleInfo implements JSONFileResultHandler {
     public String mName;
     public String mAnswerFile;
     public int mAnswerFileVersion;
-    public boolean mPuzzleButton;
+    public String mPuzzleButton;
     public String mPuzzleButtonText;
+    public JSONObject mPuzzleButtonExtra;
     public String mCanonicalAnswer;
     public String mInstruction;
     public HashMap<String, AnswerInfo> mAnswers;
@@ -142,6 +143,10 @@ public class PuzzleInfo implements JSONFileResultHandler {
 
     public ArrayList<HintInfo> getHintCopy() {
         return (ArrayList<HintInfo>) mHints.clone();
+    }
+
+    public JSONObject getExtra() {
+        return mPuzzleButtonExtra;
     }
 
     // sorting is for pussies.

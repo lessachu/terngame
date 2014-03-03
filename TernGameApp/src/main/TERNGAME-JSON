@@ -57,7 +57,9 @@ event.json
        "answer_file" : "poke_answers.json",
        "puzzle_button" : {
            "button_text" : "Play!",
-           "button_mode": "battle" },
+           "button_mode": "battle",
+           "button_extra" : { json_object of variable type with puzzle specific data }
+            },
        "instruction" : "Head to the commons and grab a map from the GC member there."
      }
    ]
@@ -117,7 +119,8 @@ team_data.json
         "guesses":["wombat", "wombatwombat"],
         "hintsTaken" : ["wombat1"],
         "skipped":true,
-        "solved":false
+        "solved":false,
+        "extra" : { json_object of variable format representing custom puzzle save data }
         },
            {
            "id":"puzzle1",

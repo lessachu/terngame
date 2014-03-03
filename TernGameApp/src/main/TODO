@@ -17,10 +17,10 @@
 * Write NFC puzzle support
 * add support for view recycling
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
-* ARGH HINTS ARE COMPLICATED
-* add a confirmation dialog
+* add a confirmation dialog before you take a hint?
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
+* Extra passed to TwittermonActivity is a huge hack right now
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes

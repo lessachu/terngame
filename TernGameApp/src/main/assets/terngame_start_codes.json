@@ -27,7 +27,8 @@
       "answer_file" : "poke_answers.json",
       "puzzle_button" : {
             "button_text" : "Play!",
-            "button_mode": "battle" },
+            "button_mode": "twittermon"
+            },
       "instruction" : "Head to the commons and grab a map from the GC member there."
       }
    ]

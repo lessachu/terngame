@@ -34,6 +34,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
     public static final String s_puzzleButton = "puzzle_button";
     public static final String s_puzzleButtonText = "button_text";
     public static final String s_puzzleButtonMode = "button_mode";
+    public static final String s_puzzleButtonExtra = "button_extra";
 
     private JSONObject mData;
 
@@ -71,7 +72,10 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     if (po.has(s_puzzleButton)) {
                         JSONObject puzzleButton = po.getJSONObject(s_puzzleButton);
                         pi.mPuzzleButtonText = puzzleButton.getString(s_puzzleButtonText);
-                        pi.mPuzzleButton = true;  // TODO: support multiple modes
+                        pi.mPuzzleButton = puzzleButton.getString(s_puzzleButtonMode);
+                        if (puzzleButton.has(s_puzzleButtonExtra)) {
+                            pi.mPuzzleButtonExtra = puzzleButton.getJSONObject(s_puzzleButtonExtra);
+                        }
                     }
                     String code = po.getString(s_startCode);
                     code = AnswerChecker.stripAnswer(code);
@@ -149,7 +153,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
 
     public boolean showPuzzleButton(String startCode) {
         PuzzleInfo pi = mStartCodes.get(startCode);
-        return (pi != null && pi.mPuzzleButton);
+        return (pi != null && pi.mPuzzleButton != null);
     }
 
     public String getPuzzleButtonText(String startCode) {
@@ -174,6 +178,17 @@ public class StartCodeInfo implements JSONFileResultHandler {
 
     public ArrayList<HintInfo> getHintList(String puzzleID) {
         PuzzleInfo pi = mStartCodes.get(puzzleID);
-        return pi.getHintCopy();
+        if (pi != null) {
+            return pi.getHintCopy();
+        }
+        return null;
+    }
+
+    public JSONObject getExtra(String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+        if (pi != null) {
+            return pi.getExtra();
+        }
+        return null;
     }
 }
