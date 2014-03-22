@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/twitter_collection_title"
+            android:id="@+id/twittermon_collection_title_text"
+            style="@style/statusTheme"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fail"
+            android:id="@+id/test_button"/>
+
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView">
+
+        <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+        </TableLayout>
+    </ScrollView>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/no_twittermon_layout">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/no_twittermon_yet"
+                android:id="@+id/no_twittermon_text"
+                android:longClickable="false"
+                style="@style/statusTheme"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/no_twittermon_hint"
+                android:id="@+id/no_twittermon_hunt_text"
+                style="@style/instructionTheme"/>
+    </LinearLayout>
+
+</FrameLayout>

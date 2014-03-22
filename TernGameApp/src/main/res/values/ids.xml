@@ -2,4 +2,5 @@
 <resources>
     <item name="hint_info_key" type="id"/>
     <item name="hint_num_key" type="id"/>
+    <item name="goto_collection_button" type="id"/>
 </resources>

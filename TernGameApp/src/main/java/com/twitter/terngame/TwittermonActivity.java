@@ -4,21 +4,35 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class TwittermonActivity extends Activity
         implements View.OnClickListener {
 
     // Intent keys
-//    public static final String s_puzzleID = "puzzleID";
     public static final String s_collected = "collected";
 
     private String mCollected;
+    private ArrayList<String> mTwittermon;
+
+    private LinearLayout mNoTwittermonLayout;
+    private TextView mTitle;
+
+    // debug - just to test failing
+    private Button mFailButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.puzzle_activity);
+        setContentView(R.layout.twittermon_activity);
+
+        mTwittermon = new ArrayList<String>();
+        mTwittermon.add("rockdove"); // debug
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();
@@ -26,36 +40,42 @@ public class TwittermonActivity extends Activity
 
             if (i.hasExtra(s_collected)) {
                 mCollected = extras.getString(s_collected);
+
+                // TODO: convert mCollected to mTwittermon
+
             }
         }
 
+        mNoTwittermonLayout = (LinearLayout) findViewById(R.id.no_twittermon_layout);
+        mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
+
+        //debug
+        mFailButton = (Button) findViewById(R.id.test_button);
+        mFailButton.setOnClickListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
 
+        if (mTwittermon.isEmpty()) {
+            mNoTwittermonLayout.setVisibility(View.VISIBLE);
+            mTitle.setVisibility(View.GONE);
+        } else {
+            mNoTwittermonLayout.setVisibility(View.GONE);
+            mTitle.setVisibility(View.VISIBLE);
+        }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Session s = Session.getInstance(this);
-    }
 
     public void onClick(View view) {
         final int id = view.getId();
 
-/*        Session s = Session.getInstance(this);
-        if (id == R.id.hint_button) {
-            Intent i = new Intent(this, HintListActivity.class);
-            i.putExtra(HintListActivity.s_puzzleID, mPuzzleID);
+        if (id == R.id.test_button) {
+            Intent i = new Intent(this, TwittermonCollectFailActivity.class);
             startActivity(i);
         }
-*/
+
     }
 }
