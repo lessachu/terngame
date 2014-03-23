@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical">
 
     <TextView
             android:layout_width="fill_parent"
@@ -17,7 +18,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fail"
-            android:id="@+id/test_button"/>
+            android:id="@+id/fail_button"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dupe"
+            android:id="@+id/dupe_button"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Succeed"
+            android:id="@+id/succeed_button"/>
 
     <ScrollView
             android:layout_width="wrap_content"
@@ -54,4 +67,4 @@
                 style="@style/instructionTheme"/>
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

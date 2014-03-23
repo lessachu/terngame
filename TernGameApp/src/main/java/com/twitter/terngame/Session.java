@@ -11,6 +11,7 @@ import com.twitter.terngame.data.LoginInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
+import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
 
@@ -40,6 +41,7 @@ public class Session implements EventInfo.EventInfoListener {
     private EventInfo mEventInfo;
     private LoginInfo mLoginInfo;
     private StartCodeInfo mStartCodeInfo;
+    private TwittermonInfo mTwittermonInfo;
 
 
     private Session(Context context) {
@@ -48,6 +50,7 @@ public class Session implements EventInfo.EventInfoListener {
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
+        mTwittermonInfo = new TwittermonInfo();
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
@@ -275,5 +278,10 @@ public class Session implements EventInfo.EventInfoListener {
             HintNotification.cancelHintAlarms(mContext, pi);
         }
         mPendingHints.clear();
+    }
+
+    // Twittermon stuff
+    public int getTwittermonImage(String creature) {
+        return mTwittermonInfo.getResourceId(creature);
     }
 }

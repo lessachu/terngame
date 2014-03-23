@@ -20,6 +20,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/collection_button_text"
-            android:id="@+id/no_twittermon_hunt_text"
+            android:id="@+id/goto_collection_button"
             android:clickable="false"/>
 </LinearLayout>

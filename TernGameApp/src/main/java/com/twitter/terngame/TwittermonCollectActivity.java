@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TwittermonActivity extends Activity
+public class TwittermonCollectActivity extends Activity
         implements View.OnClickListener {
 
     // Intent keys
@@ -25,11 +25,11 @@ public class TwittermonActivity extends Activity
     // debug - just to test failing
     private Button mFailButton;
     private Button mDupeButton;
-    private Button mSucceedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.twittermon_activity);
 
@@ -57,9 +57,6 @@ public class TwittermonActivity extends Activity
 
         mDupeButton = (Button) findViewById(R.id.dupe_button);
         mDupeButton.setOnClickListener(this);
-
-        mSucceedButton = (Button) findViewById(R.id.succeed_button);
-        mSucceedButton.setOnClickListener(this);
     }
 
     @Override
@@ -86,10 +83,6 @@ public class TwittermonActivity extends Activity
         } else if (id == R.id.dupe_button) {
             Intent i = new Intent(this, TwittermonCollectDupeActivity.class);
             i.putExtra(TwittermonCollectDupeActivity.s_creature, "rockdove");
-            startActivity(i);
-        } else if (id == R.id.succeed_button) {
-            Intent i = new Intent(this, TwittermonCollectSucceedActivity.class);
-            i.putExtra(TwittermonCollectSucceedActivity.s_creature, "rockdove");
             startActivity(i);
         }
 
