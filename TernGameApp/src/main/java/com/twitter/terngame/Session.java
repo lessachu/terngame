@@ -284,4 +284,8 @@ public class Session implements EventInfo.EventInfoListener {
     public int getTwittermonImage(String creature) {
         return mTwittermonInfo.getResourceId(creature);
     }
+
+    public boolean hasTwittermon(String creature) {
+        return mTwittermonInfo.hasCreature(creature);
+    }
 }

@@ -43,7 +43,7 @@ public class TwittermonActivity extends Activity
             if (i.hasExtra(s_collected)) {
                 mCollected = extras.getString(s_collected);
 
-                // TODO: convert mCollected to mTwittermon
+                // TODO: this should actually be read in from the Twittermon struct
 
             }
         }

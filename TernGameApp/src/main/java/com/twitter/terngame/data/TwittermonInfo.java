@@ -29,5 +29,8 @@ public class TwittermonInfo {
         mMenagerie.add(creature);
     }
 
+    public boolean hasCreature(String creature) {
+        return mMenagerie.contains(creature);
+    }
 
 }
