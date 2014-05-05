@@ -34,7 +34,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     private ArrayList<String> mCollected;
     private HashMap<String, CreatureInfo> mCreatureDict;
-    private Session mSession;
     private Context mContext;
     private JSONObject mData;
 
@@ -48,7 +47,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mContext = context;
         mCollected = new ArrayList<String>();
         mCreatureDict = new HashMap<String, CreatureInfo>();
-        mSession = Session.getInstance(context);
         mData = new JSONObject();
     }
 
@@ -163,7 +161,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public void addNewCreature(String creature) {
         mCollected.add(creature);
         updateJSONData();
-        mSession.updateExtra("twittermon", mData);
+        Session.getInstance(mContext).updateExtra("twittermon", mData);
     }
 
     public boolean hasCreature(String creature) {
