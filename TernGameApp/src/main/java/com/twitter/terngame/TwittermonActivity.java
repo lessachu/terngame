@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.twitter.terngame.data.PuzzleExtraInfo;
+import com.twitter.terngame.data.TwittermonInfo;
+
 import java.util.ArrayList;
 
 public class TwittermonActivity extends Activity
         implements View.OnClickListener {
-
-    // Intent keys
-    public static final String s_collected = "collected";
 
     private String mCollected;
     private ArrayList<String> mTwittermon;
@@ -32,21 +32,6 @@ public class TwittermonActivity extends Activity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.twittermon_activity);
-
-        mTwittermon = new ArrayList<String>();
-        mTwittermon.add("rockdove"); // debug
-
-        Intent i = getIntent();
-        Bundle extras = i.getExtras();
-        if (extras != null) {
-
-            if (i.hasExtra(s_collected)) {
-                mCollected = extras.getString(s_collected);
-
-                // TODO: this should actually be read in from the Twittermon struct
-
-            }
-        }
 
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.no_twittermon_layout);
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
@@ -66,6 +51,11 @@ public class TwittermonActivity extends Activity
     protected void onResume() {
         super.onResume();
         Session s = Session.getInstance(this);
+        PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
+        TwittermonInfo ti = pei.getTwittermonInfo();
+
+        mTwittermon = ti.getCollectedList();
+        mTwittermon.add("rockdove"); // debug
 
         if (mTwittermon.isEmpty()) {
             mNoTwittermonLayout.setVisibility(View.VISIBLE);

@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.twitter.terngame.Session;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
 
@@ -127,7 +128,10 @@ public class TeamStatus implements JSONFileResultHandler {
                     }
 
                     if (po.has(s_puzzExtra)) {
+                        Session s = Session.getInstance(mContext);
+                        PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
                         ps.mExtra = po.getJSONObject(s_puzzExtra);
+                        pei.initializePuzzleStatus(ps.mID, ps.mExtra);
                     }
 
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
@@ -408,6 +412,19 @@ public class TeamStatus implements JSONFileResultHandler {
                     save();
                 }
             }
+        }
+    }
+
+    public void updateExtra(String puzzleID, JSONObject newExtra) {
+        if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            if (ps != null && !ps.mSolved && !ps.mSkipped) {
+                ps.mExtra = newExtra;
+                updateTimeStamp();
+                save();
+            }
+        } else {
+            Log.d("terngame", "Trying to update extra for non-current puzzle");
         }
     }
 

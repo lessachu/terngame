@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.twitter.terngame.Session;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.JSONFileReaderTask;
 import com.twitter.terngame.util.JSONFileResultHandler;
@@ -74,7 +75,8 @@ public class StartCodeInfo implements JSONFileResultHandler {
                         pi.mPuzzleButtonText = puzzleButton.getString(s_puzzleButtonText);
                         pi.mPuzzleButton = puzzleButton.getString(s_puzzleButtonMode);
                         if (puzzleButton.has(s_puzzleButtonExtra)) {
-                            pi.mPuzzleButtonExtra = puzzleButton.getJSONObject(s_puzzleButtonExtra);
+                            Session s = Session.getInstance(mContext);
+                            s.initializePuzzleExtra(pi.mName, puzzleButton.getJSONObject(s_puzzleButtonExtra));
                         }
                     }
                     String code = po.getString(s_startCode);

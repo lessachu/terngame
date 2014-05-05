@@ -64,6 +64,22 @@ event.json
      }
    ]
 }
+button_extra
+{
+    "twittermon_file" : "twittermon.json",
+}
+
+twittermon.json  // contents of the button_extra field
+{
+"creature_info" : [
+      {
+        "name" : "rockdove",
+         "code" : "caraway",
+         "type" :  1,
+         "image" : "rockdove.png"
+      }
+ ]
+}
 
  wombat_answers.json
  {
@@ -131,4 +147,9 @@ team_data.json
            "solved":false
            }
         ]
+}
+
+//twittermon extra
+{
+  "collected" : ["rockdove", "sparrow"]
 }

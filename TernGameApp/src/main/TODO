@@ -79,6 +79,6 @@ DONE:
 * correctly handling of the backstack from a hint notification
 * clearing all data should clear all hints too
 * Should coming back from a hint always land you on a "new hint" puzzle page, even if you've already  looked at them?
-
+* NFC reading works
 
 

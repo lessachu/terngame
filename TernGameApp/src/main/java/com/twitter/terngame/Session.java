@@ -8,10 +8,10 @@ import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
 import com.twitter.terngame.data.HintInfo;
 import com.twitter.terngame.data.LoginInfo;
+import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
-import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
 
@@ -41,7 +41,7 @@ public class Session implements EventInfo.EventInfoListener {
     private EventInfo mEventInfo;
     private LoginInfo mLoginInfo;
     private StartCodeInfo mStartCodeInfo;
-    private TwittermonInfo mTwittermonInfo;
+    private PuzzleExtraInfo mPuzzleExtraInfo;
 
 
     private Session(Context context) {
@@ -50,7 +50,7 @@ public class Session implements EventInfo.EventInfoListener {
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
-        mTwittermonInfo = new TwittermonInfo();
+        mPuzzleExtraInfo = new PuzzleExtraInfo(context);
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
@@ -144,8 +144,8 @@ public class Session implements EventInfo.EventInfoListener {
         return mTeamStatus.getGuesses(puzzleID);
     }
 
-    public JSONObject getExtra(String puzzleID) {
-        return mStartCodeInfo.getExtra(puzzleID);
+    public PuzzleExtraInfo getPuzzleExtraInfo() {
+        return mPuzzleExtraInfo;
     }
 
     public long getPuzzleStartTime(String puzzleID) {
@@ -233,6 +233,10 @@ public class Session implements EventInfo.EventInfoListener {
         return ai;
     }
 
+    public void updateExtra(String puzzleID, JSONObject newExtra) {
+        mTeamStatus.updateExtra(puzzleID, newExtra);
+    }
+
     // TODO: consider how to make this thread safe
     public void registerHintListener(HintListener hl) {
         mHintListeners.add(hl);
@@ -264,6 +268,10 @@ public class Session implements EventInfo.EventInfoListener {
         mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
     }
 
+    public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
+        mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
+    }
+
     public void clearCurrentPuzzle() {
         mTeamStatus.clearCurrentPuzzle();
     }
@@ -282,10 +290,10 @@ public class Session implements EventInfo.EventInfoListener {
 
     // Twittermon stuff
     public int getTwittermonImage(String creature) {
-        return mTwittermonInfo.getResourceId(creature);
+        return mPuzzleExtraInfo.getTwittermonInfo().getResourceId(creature);
     }
 
     public boolean hasTwittermon(String creature) {
-        return mTwittermonInfo.hasCreature(creature);
+        return mPuzzleExtraInfo.getTwittermonInfo().hasCreature(creature);
     }
 }

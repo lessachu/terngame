@@ -27,7 +27,10 @@
       "answer_file" : "poke_answers.json",
       "puzzle_button" : {
             "button_text" : "Play!",
-            "button_mode": "twittermon"
+            "button_mode": "twittermon",
+            "button_extra" : { "twittermon_file" : "twittermon.json",
+                                "collected" : []
+                              }
             },
       "instruction" : "Head to the commons and grab a map from the GC member there."
       }

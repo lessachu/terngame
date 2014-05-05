@@ -16,8 +16,6 @@ import android.widget.TextView;
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.util.AnswerChecker;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class PuzzleActivity extends Activity
@@ -201,15 +199,7 @@ public class PuzzleActivity extends Activity
             }
         } else if (id == R.id.do_puzzle_button) {
             // TODO: switch on mode
-
-            // TODO: find a better way to deal with the JSONObject extra
             Intent i = new Intent(this, TwittermonActivity.class);
-
-            JSONObject extra = s.getExtra(mPuzzleID);
-            if (extra != null) {
-                String extra_str = extra.toString();
-                i.putExtra(TwittermonActivity.s_collected, extra_str);
-            }
             startActivity(i);
         }
 

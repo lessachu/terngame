@@ -1,0 +1,21 @@
+{
+"creature_info" : [
+      {
+        "name" : "rockdove",
+         "code" : "caraway",
+         "type" :  1,
+         "image" : "rockdove.png"
+      },
+      { "name" : "sparrow",
+        "code" : "peanut",
+        "type" : 2,
+        "image" : "sparrow.png"
+       },
+       {
+         "name" : "kookaburra",
+         "code" : "vegemite",
+         "type" : 3,
+         "image" : "kookaburra.png"
+        }
+ ]
+}
