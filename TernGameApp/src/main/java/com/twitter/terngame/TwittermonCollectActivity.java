@@ -18,7 +18,6 @@ public class TwittermonCollectActivity extends Activity
         implements View.OnClickListener {
 
     private String mTwittermonName;
-    private String mTwittermonCode;
 
     private EditText mTrapCodeEdit;
     private Button mEnterButton;
@@ -54,9 +53,6 @@ public class TwittermonCollectActivity extends Activity
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-
-        // DEBUG
-        mTwittermonCode = "bowser";
     }
 
     @Override
@@ -76,7 +72,8 @@ public class TwittermonCollectActivity extends Activity
         final int id = view.getId();
 
         if (id == R.id.collect_button) {
-            if (mTrapCodeEdit.getText().toString().toLowerCase().equals(mTwittermonCode)) {
+            if (mSession.verifyTwittermonTrapCode(mTwittermonName,
+                    mTrapCodeEdit.getText().toString())) {
 
                 if (mSession.hasTwittermon(mTwittermonName)) {
                     Intent i = new Intent(this, TwittermonCollectDupeActivity.class);

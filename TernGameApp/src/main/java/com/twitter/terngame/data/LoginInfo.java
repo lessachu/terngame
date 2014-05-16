@@ -52,7 +52,7 @@ public class LoginInfo implements JSONFileResultHandler {
 
                 Log.d("terngame", mLoginInfo.toString());
             } catch (JSONException e) {
-                Log.e("jan", "JsonException loading teamdata");
+                Log.e("terngame", "JsonException loading teamdata");
             }
         }
 
@@ -72,7 +72,7 @@ public class LoginInfo implements JSONFileResultHandler {
                     "No team info file exists!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "No event info file");
+            Log.e("terngame", "No event info file");
 
         } catch (IOException e) {
 
@@ -80,7 +80,7 @@ public class LoginInfo implements JSONFileResultHandler {
                     "IOException!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "IOException");
+            Log.e("terngame", "IOException");
 
         }
     }

@@ -120,7 +120,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     "No answer file exists!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "No answer file (" + mAnswerFile + ") exists!");
+            Log.e("terngame", "No answer file (" + mAnswerFile + ") exists!");
 
         } catch (IOException e) {
 
@@ -128,7 +128,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     "IOException!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "IOException");
+            Log.e("terngame", "IOException");
 
         }
     }

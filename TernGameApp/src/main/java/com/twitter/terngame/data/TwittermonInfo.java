@@ -98,7 +98,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
                         "No Twittermon file exists!",
                         Toast.LENGTH_SHORT);
                 toast.show();
-                Log.e("jan", "No Twittermon file (" + filename + ") exists!");
+                Log.e("terngame", "No Twittermon file (" + filename + ") exists!");
 
             } catch (IOException e) {
 
@@ -106,7 +106,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
                         "IOException!",
                         Toast.LENGTH_SHORT);
                 toast.show();
-                Log.e("jan", "IOException");
+                Log.e("terngame", "IOException");
             }
         }
     }
@@ -162,6 +162,14 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mCollected.add(creature);
         updateJSONData();
         Session.getInstance(mContext).updateExtra("twittermon", mData);
+    }
+
+    public boolean verifyTrapCode(String creature, String code) {
+        if (mCreatureDict.containsKey(creature)) {
+//            Log.d("terngame", "real code is: " + mCreatureDict.get(creature).mCode);
+            return mCreatureDict.get(creature).mCode.equalsIgnoreCase(code);
+        }
+        return false;
     }
 
     public boolean hasCreature(String creature) {

@@ -67,7 +67,7 @@ public class EventInfo implements JSONFileResultHandler {
                     mEIL.onEventInfoLoadComplete();
                 }
             } catch (JSONException e) {
-                Log.e("jan", "JsonException loading eventdata");
+                Log.e("terngame", "JsonException loading eventdata");
             }
         }
     }
@@ -84,7 +84,7 @@ public class EventInfo implements JSONFileResultHandler {
                     "No event info file exists!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "No event info file");
+            Log.e("terngame", "No event info file");
 
         } catch (IOException e) {
 
@@ -92,7 +92,7 @@ public class EventInfo implements JSONFileResultHandler {
                     "IOException!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "IOException");
+            Log.e("terngame", "IOException");
 
         }
     }

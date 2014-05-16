@@ -70,17 +70,20 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     pi.mName = po.getString(s_puzzleName);
                     pi.mAnswerFile = po.getString(s_answerFile);
                     pi.mInstruction = po.getString(s_instruction);
+
+                    String code = po.getString(s_startCode);
+                    code = AnswerChecker.stripAnswer(code);
+
                     if (po.has(s_puzzleButton)) {
                         JSONObject puzzleButton = po.getJSONObject(s_puzzleButton);
                         pi.mPuzzleButtonText = puzzleButton.getString(s_puzzleButtonText);
                         pi.mPuzzleButton = puzzleButton.getString(s_puzzleButtonMode);
                         if (puzzleButton.has(s_puzzleButtonExtra)) {
                             Session s = Session.getInstance(mContext);
-                            s.initializePuzzleExtra(pi.mName, puzzleButton.getJSONObject(s_puzzleButtonExtra));
+                            s.initializePuzzleExtra(code, puzzleButton.getJSONObject(s_puzzleButtonExtra));
                         }
                     }
-                    String code = po.getString(s_startCode);
-                    code = AnswerChecker.stripAnswer(code);
+
                     mStartCodes.put(code, pi);
                 }
 
@@ -106,7 +109,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
                 initializeAnswers();
 
             } catch (JSONException e) {
-                Log.e("jan", "JsonException loading start code data");
+                Log.e("terngame", "JsonException loading start code data");
                 e.printStackTrace();
             }
         }
@@ -124,7 +127,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     "No start code info file exists!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "No event info file");
+            Log.e("terngame", "No event info file");
 
         } catch (IOException e) {
 
@@ -132,7 +135,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
                     "IOException in initializePuzzleData!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "IOException");
+            Log.e("terngame", "IOException");
 
         }
     }
