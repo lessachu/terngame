@@ -269,7 +269,6 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
-        Log.d("terngame", "INITIALIZING PUZZLE EXTRA");
         mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
     }
 
@@ -300,5 +299,9 @@ public class Session implements EventInfo.EventInfoListener {
 
     public boolean verifyTwittermonTrapCode(String creature, String code) {
         return mPuzzleExtraInfo.getTwittermonInfo().verifyTrapCode(creature, code);
+    }
+
+    public void collectTwittermon(String creature) {
+        mPuzzleExtraInfo.getTwittermonInfo().addNewCreature(creature);
     }
 }

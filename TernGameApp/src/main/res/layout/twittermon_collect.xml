@@ -5,28 +5,52 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/collect_title"
-            android:id="@+id/collect_title"/>
+            android:layout_height="fill_parent"
+            android:id="@+id/collect_layout"
+            android:focusable="false">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/trap_code_title"
-            android:id="@+id/textView"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/collect_title"
+                android:id="@+id/collect_title"/>
 
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/trap_code_edit"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/trap_code_title"
+                android:id="@+id/textView"/>
 
-    <Button
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/trap_code_edit"/>
+
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/collect_button"
+                android:id="@+id/collect_button"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/collect_button"
-            android:id="@+id/collect_button"/>
+            android:layout_height="fill_parent"
+            android:id="@+id/not_started_layout">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/twittermon_not_started"
+                android:id="@+id/nope_text"
+                android:singleLine="false"
+                android:layout_gravity="center"/>
+    </LinearLayout>
 </LinearLayout>

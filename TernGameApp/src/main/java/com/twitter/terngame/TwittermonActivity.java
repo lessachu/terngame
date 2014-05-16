@@ -1,10 +1,8 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,11 +20,6 @@ public class TwittermonActivity extends Activity
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
 
-    // debug - just to test failing
-    private Button mFailButton;
-    private Button mDupeButton;
-    private Button mSucceedButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +29,6 @@ public class TwittermonActivity extends Activity
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.no_twittermon_layout);
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
 
-        //debug
-        mFailButton = (Button) findViewById(R.id.fail_button);
-        mFailButton.setOnClickListener(this);
-
-        mDupeButton = (Button) findViewById(R.id.dupe_button);
-        mDupeButton.setOnClickListener(this);
-
-        mSucceedButton = (Button) findViewById(R.id.succeed_button);
-        mSucceedButton.setOnClickListener(this);
     }
 
     @Override
@@ -68,20 +52,7 @@ public class TwittermonActivity extends Activity
 
 
     public void onClick(View view) {
-        final int id = view.getId();
 
-        if (id == R.id.fail_button) {
-            Intent i = new Intent(this, TwittermonCollectFailActivity.class);
-            startActivity(i);
-        } else if (id == R.id.dupe_button) {
-            Intent i = new Intent(this, TwittermonCollectDupeActivity.class);
-            i.putExtra(TwittermonCollectDupeActivity.s_creature, "rockdove");
-            startActivity(i);
-        } else if (id == R.id.succeed_button) {
-            Intent i = new Intent(this, TwittermonCollectSucceedActivity.class);
-            i.putExtra(TwittermonCollectSucceedActivity.s_creature, "rockdove");
-            startActivity(i);
-        }
 
     }
 }

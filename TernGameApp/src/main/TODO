@@ -20,7 +20,12 @@
 * add a confirmation dialog before you take a hint?
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* Extra passed to TwittermonActivity is a huge hack right now
+* Throw up a different layout if the puzzle start code hasn't been entered (twittermon)
+* list view for collection activity
+* Phone to phone transfer
+* hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
+* should probably encode the names on the RFC tag
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -80,5 +85,4 @@ DONE:
 * clearing all data should clear all hints too
 * Should coming back from a hint always land you on a "new hint" puzzle page, even if you've already  looked at them?
 * NFC reading works
-
-
+* Extra passed to TwittermonActivity is no longer a huge hack

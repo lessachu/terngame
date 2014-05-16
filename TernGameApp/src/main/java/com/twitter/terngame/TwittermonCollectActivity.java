@@ -13,11 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import com.twitter.terngame.data.PuzzleExtraInfo;
 
 public class TwittermonCollectActivity extends Activity
         implements View.OnClickListener {
 
     private String mTwittermonName;
+
+    private LinearLayout mCollectLayout;
+    private LinearLayout mNotStartedLayout;
 
     private EditText mTrapCodeEdit;
     private Button mEnterButton;
@@ -33,6 +39,9 @@ public class TwittermonCollectActivity extends Activity
         setContentView(R.layout.twittermon_collect);
 
         mSession = Session.getInstance(this);
+
+        mCollectLayout = (LinearLayout) findViewById(R.id.collect_layout);
+        mNotStartedLayout = (LinearLayout) findViewById(R.id.not_started_layout);
 
         mTrapCodeEdit = (EditText) findViewById(R.id.trap_code_edit);
         mEnterButton = (Button) findViewById(R.id.collect_button);
@@ -60,6 +69,17 @@ public class TwittermonCollectActivity extends Activity
         super.onResume();
         Session s = Session.getInstance(this);
 
+        String curPuzzle = s.getCurrentPuzzleID();
+
+        if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
+
+            mCollectLayout.setVisibility(View.VISIBLE);
+            mNotStartedLayout.setVisibility(View.GONE);
+        } else {
+            mCollectLayout.setVisibility(View.GONE);
+            mNotStartedLayout.setVisibility(View.VISIBLE);
+        }
+
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             NdefMessage[] messages = getNdefMessages(getIntent());
             byte[] payload = messages[0].getRecords()[0].getPayload();
@@ -80,6 +100,9 @@ public class TwittermonCollectActivity extends Activity
                     i.putExtra(TwittermonCollectDupeActivity.s_creature, mTwittermonName);
                     startActivity(i);
                 } else {
+                    // TODO: enable this after we have display fixed
+                    //                  mSession.collectTwittermon(mTwittermonName);
+
                     Intent i = new Intent(this, TwittermonCollectSucceedActivity.class);
                     i.putExtra(TwittermonCollectSucceedActivity.s_creature, mTwittermonName);
                     startActivity(i);

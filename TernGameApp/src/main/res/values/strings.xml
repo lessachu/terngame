@@ -57,4 +57,5 @@
     <string name="trap_code_title">Enter trap code:</string>
     <string name="collect_button">Catch \'em!</string>
     <string name="no_twittermon_hint">You might want to look around and see if you can spot any.</string>
+    <string name="twittermon_not_started">Woah there tiger, you haven\'t started this puzzle yet.</string>
 </resources>
