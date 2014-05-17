@@ -20,7 +20,6 @@
 * add a confirmation dialog before you take a hint?
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* Throw up a different layout if the puzzle start code hasn't been entered (twittermon)
 * list view for collection activity
 * Phone to phone transfer
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
@@ -86,3 +85,5 @@ DONE:
 * Should coming back from a hint always land you on a "new hint" puzzle page, even if you've already  looked at them?
 * NFC reading works
 * Extra passed to TwittermonActivity is no longer a huge hack
+* Throw up a different layout if the puzzle start code hasn't been entered (twittermon)
+

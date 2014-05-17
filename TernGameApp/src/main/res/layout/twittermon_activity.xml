@@ -14,44 +14,21 @@
             android:id="@+id/twittermon_collection_title_text"
             style="@style/statusTheme"/>
 
-    <Button
-            android:layout_width="wrap_content"
+    <ListView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fail"
-            android:id="@+id/fail_button"/>
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dupe"
-            android:id="@+id/dupe_button"/>
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Succeed"
-            android:id="@+id/succeed_button"/>
-
-    <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView">
-
-        <TableLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-        </TableLayout>
-    </ScrollView>
+            android:id="@android:id/list"/>
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/no_twittermon_layout">
+            android:id="@android:id/empty"
+            android:focusableInTouchMode="false">
 
         <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/no_twittermon_yet"
                 android:id="@+id/no_twittermon_text"

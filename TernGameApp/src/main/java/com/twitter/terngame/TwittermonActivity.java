@@ -1,6 +1,6 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,11 +11,12 @@ import com.twitter.terngame.data.TwittermonInfo;
 
 import java.util.ArrayList;
 
-public class TwittermonActivity extends Activity
-        implements View.OnClickListener {
+public class TwittermonActivity extends ListActivity
+implements View.OnClickListener {
 
-    private String mCollected;
     private ArrayList<String> mTwittermon;
+
+    private TwittermonArrayAdapter mAdapter;
 
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
@@ -26,7 +27,15 @@ public class TwittermonActivity extends Activity
 
         setContentView(R.layout.twittermon_activity);
 
-        mNoTwittermonLayout = (LinearLayout) findViewById(R.id.no_twittermon_layout);
+        Session s = Session.getInstance(this);
+        PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
+        TwittermonInfo ti = pei.getTwittermonInfo();
+
+        mTwittermon = ti.getCollectedList();
+
+        mAdapter = new TwittermonArrayAdapter(this, mTwittermon);
+        setListAdapter(mAdapter);
+
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
 
     }
@@ -34,22 +43,20 @@ public class TwittermonActivity extends Activity
     @Override
     protected void onResume() {
         super.onResume();
-        Session s = Session.getInstance(this);
-        PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
-        TwittermonInfo ti = pei.getTwittermonInfo();
-
-        mTwittermon = ti.getCollectedList();
-        mTwittermon.add("rockdove"); // debug
-
+/*
         if (mTwittermon.isEmpty()) {
             mNoTwittermonLayout.setVisibility(View.VISIBLE);
             mTitle.setVisibility(View.GONE);
         } else {
             mNoTwittermonLayout.setVisibility(View.GONE);
             mTitle.setVisibility(View.VISIBLE);
-        }
+        }*/
     }
 
+
+    public void onTwittermonCollected() {
+        mAdapter.notifyDataSetChanged();
+    }
 
     public void onClick(View view) {
 

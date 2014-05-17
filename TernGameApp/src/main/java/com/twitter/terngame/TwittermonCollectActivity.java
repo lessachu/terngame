@@ -100,9 +100,7 @@ public class TwittermonCollectActivity extends Activity
                     i.putExtra(TwittermonCollectDupeActivity.s_creature, mTwittermonName);
                     startActivity(i);
                 } else {
-                    // TODO: enable this after we have display fixed
-                    //                  mSession.collectTwittermon(mTwittermonName);
-
+                    mSession.collectTwittermon(mTwittermonName);
                     Intent i = new Intent(this, TwittermonCollectSucceedActivity.class);
                     i.putExtra(TwittermonCollectSucceedActivity.s_creature, mTwittermonName);
                     startActivity(i);
