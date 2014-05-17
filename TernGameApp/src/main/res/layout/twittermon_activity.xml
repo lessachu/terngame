@@ -14,16 +14,16 @@
             android:id="@+id/twittermon_collection_title_text"
             style="@style/statusTheme"/>
 
-    <ListView
+    <GridView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@android:id/list"/>
+            android:id="@+id/twittermon_grid"/>
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@android:id/empty"
+            android:id="@+id/empty_view"
             android:focusableInTouchMode="false">
 
         <TextView

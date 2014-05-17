@@ -1,8 +1,9 @@
 package com.twitter.terngame;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,12 +12,13 @@ import com.twitter.terngame.data.TwittermonInfo;
 
 import java.util.ArrayList;
 
-public class TwittermonActivity extends ListActivity
-implements View.OnClickListener {
+public class TwittermonActivity extends Activity
+        implements View.OnClickListener {
 
     private ArrayList<String> mTwittermon;
 
     private TwittermonArrayAdapter mAdapter;
+    private GridView mGridView;
 
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
@@ -32,11 +34,13 @@ implements View.OnClickListener {
         TwittermonInfo ti = pei.getTwittermonInfo();
 
         mTwittermon = ti.getCollectedList();
-
         mAdapter = new TwittermonArrayAdapter(this, mTwittermon);
-        setListAdapter(mAdapter);
+
+        mGridView = (GridView) findViewById(R.id.twittermon_grid);
+        mGridView.setAdapter(mAdapter);
 
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
+        mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
 
     }
 
@@ -46,11 +50,14 @@ implements View.OnClickListener {
 /*
         if (mTwittermon.isEmpty()) {
             mNoTwittermonLayout.setVisibility(View.VISIBLE);
+            mGridView.setVisibility(View.GONE);
             mTitle.setVisibility(View.GONE);
         } else {
             mNoTwittermonLayout.setVisibility(View.GONE);
+            mGridView.setVisibility(View.VISIBLE);
             mTitle.setVisibility(View.VISIBLE);
-        }*/
+        }
+        */
     }
 
 

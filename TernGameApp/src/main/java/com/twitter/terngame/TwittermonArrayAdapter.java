@@ -1,10 +1,12 @@
 package com.twitter.terngame;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
     private final ArrayList<String> mValues;
 
     public TwittermonArrayAdapter(Context context, ArrayList<String> values) {
-        super(context, R.layout.twittermon_row, values);
+        super(context, R.layout.twittermon_grid_single, values);
         mContext = context;
         mSession = Session.getInstance(context);
         mValues = values;
@@ -29,14 +31,18 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.twittermon_row, parent, false);
+        View gridView = inflater.inflate(R.layout.twittermon_grid_single, parent, false);
 
         String name = mValues.get(position);
 
-        final TextView nameText = (TextView) rowView.findViewById(R.id.twittermon_text);
+        final TextView nameText = (TextView) gridView.findViewById(R.id.twittermon_text);
         nameText.setText(name);
 
-        return rowView;
+        final ImageView image = (ImageView) gridView.findViewById(R.id.twittermon_image);
+        Drawable creatureImage = mContext.getResources().getDrawable(mSession.getTwittermonImage(name));
+        image.setImageDrawable(creatureImage);
+
+        return gridView;
     }
 
     @Override
