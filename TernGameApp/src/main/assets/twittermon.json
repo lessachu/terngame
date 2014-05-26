@@ -4,18 +4,18 @@
         "name" : "rockdove",
          "code" : "caraway",
          "type" :  1,
-         "image" : "rockdove.png"
+         "image" : "rockdove"
       },
       { "name" : "sparrow",
         "code" : "peanut",
         "type" : 2,
-        "image" : "sparrow.png"
+        "image" : "rockdove"
        },
        {
          "name" : "kookaburra",
          "code" : "vegemite",
          "type" : 3,
-         "image" : "kookaburra.png"
+         "image" : "rockdove"
         }
  ]
 }

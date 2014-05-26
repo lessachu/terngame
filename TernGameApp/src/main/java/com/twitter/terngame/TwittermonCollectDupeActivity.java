@@ -31,8 +31,7 @@ public class TwittermonCollectDupeActivity extends Activity
         Session s = Session.getInstance(this);
 
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
-        int creatureID = s.getTwittermonImage(mCreature);
-        Drawable creatureImage = this.getResources().getDrawable(creatureID);
+        Drawable creatureImage = this.getResources().getDrawable(R.drawable.collect_fail);
         mImageView.setImageDrawable(creatureImage);
         mCollectionButton = (Button) findViewById(R.id.goto_collection_button);
         mCollectionButton.setOnClickListener(this);

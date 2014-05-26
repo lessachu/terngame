@@ -2,6 +2,7 @@ package com.twitter.terngame;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.twitter.terngame.data.AnswerInfo;
@@ -278,6 +279,7 @@ public class Session implements EventInfo.EventInfoListener {
 
     public void clearTeamData() {
         mTeamStatus.clearData();
+        mPuzzleExtraInfo.clearPuzzleExtraInfo();
         clearHintNotifications();
     }
 
@@ -289,8 +291,8 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     // Twittermon stuff
-    public int getTwittermonImage(String creature) {
-        return mPuzzleExtraInfo.getTwittermonInfo().getResourceId(creature);
+    public Drawable getTwittermonImage(String creature) {
+        return mPuzzleExtraInfo.getTwittermonInfo().getCreatureDrawable(creature);
     }
 
     public boolean hasTwittermon(String creature) {

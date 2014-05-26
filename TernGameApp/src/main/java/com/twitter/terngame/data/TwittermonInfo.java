@@ -1,6 +1,7 @@
 package com.twitter.terngame.data;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,11 +37,12 @@ public class TwittermonInfo implements JSONFileResultHandler {
     private HashMap<String, CreatureInfo> mCreatureDict;
     private Context mContext;
     private JSONObject mData;
+    private Drawable mDefaultPict;
 
     public class CreatureInfo {
         public String mCode;
         public int mType;
-        public String mPict;
+        public Drawable mPict;
     }
 
     public TwittermonInfo(Context context) {
@@ -48,6 +50,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mCollected = new ArrayList<String>();
         mCreatureDict = new HashMap<String, CreatureInfo>();
         mData = new JSONObject();
+        mDefaultPict = mContext.getResources().getDrawable(R.drawable.rockdove);
     }
 
     public void saveResult(JSONObject jo) {
@@ -61,8 +64,11 @@ public class TwittermonInfo implements JSONFileResultHandler {
                     CreatureInfo ci = new CreatureInfo();
                     ci.mCode = co.getString(s_creatureCode);
                     ci.mType = co.getInt(s_creatureType);
-                    ci.mPict = co.getString(s_creaturePict);
 
+                    String drawableFileName = co.getString(s_creaturePict);
+                    int resourceID = mContext.getResources().getIdentifier(drawableFileName, "drawable",
+                            mContext.getPackageName());
+                    ci.mPict = mContext.getResources().getDrawable(resourceID);
                     mCreatureDict.put(co.getString(s_creatureName), ci);
 
                     Log.d("terngame", "Adding entry for " + co.getString(s_creatureName) + " : " +
@@ -153,9 +159,14 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
 
     // better to return a drawable?  doesn't matter?
-    public int getResourceId(String creature) {
-//        return R.drawable.twittermon_default;
-        return R.drawable.collect_fail;
+    public Drawable getCreatureDrawable(String creature) {
+     /*   if (mCreatureDict.containsKey(creature)) {
+            Log.d("terngame", "looking up image for " + creature);
+            return mCreatureDict.get(creature).mPict;
+        } else {
+            return mDefaultPict;
+        }*/
+        return mDefaultPict;
     }
 
     public void addNewCreature(String creature) {
@@ -178,5 +189,9 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public ArrayList<String> getCollectedList() {
         return mCollected;
+    }
+
+    public void clearSavedData() {
+        mCollected.clear();
     }
 }

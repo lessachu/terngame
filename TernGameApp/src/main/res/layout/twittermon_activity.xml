@@ -15,9 +15,27 @@
             style="@style/statusTheme"/>
 
     <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/twittermon_grid"/>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/twittermon_grid"
+            android:columnWidth="90dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:stackFromBottom="false"/>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/battle_bar">
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/battle_button_text"
+                android:id="@+id/battle_history"/>
+    </FrameLayout>
 
     <LinearLayout
             android:orientation="vertical"
@@ -41,7 +59,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/no_twittermon_hint"
                 android:id="@+id/no_twittermon_hunt_text"
-                style="@style/instructionTheme"/>
+                style="@style/instructionTheme"
+                android:padding="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

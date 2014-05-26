@@ -30,6 +30,10 @@ public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
         }
     }
 
+    public void clearPuzzleExtraInfo() {
+        mTwittermonInfo.clearSavedData();
+    }
+
     public TwittermonInfo getTwittermonInfo() {
         return mTwittermonInfo;
     }

@@ -24,6 +24,7 @@
 * Phone to phone transfer
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * should probably encode the names on the RFC tag
+* make the empty view work aggin
 
 
 DONE:

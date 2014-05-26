@@ -31,11 +31,8 @@ public class TwittermonCollectSucceedActivity extends Activity
         }
         Session s = Session.getInstance(this);
 
-
-        int creatureID = s.getTwittermonImage(mCreature);
-
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
-        Drawable creatureImage = this.getResources().getDrawable(creatureID);
+        Drawable creatureImage = this.getResources().getDrawable(R.drawable.collect_fail);
         mImageView.setImageDrawable(creatureImage);
         mCollectionButton = (Button) findViewById(R.id.goto_collection_button);
         mCollectionButton.setOnClickListener(this);
