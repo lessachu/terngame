@@ -3,10 +3,8 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.content.Intent;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
+import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonCollectActivity extends Activity
         implements View.OnClickListener {
@@ -33,8 +32,6 @@ public class TwittermonCollectActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // TODO: if the puzzle hasn't been started yet, use another layout
 
         setContentView(R.layout.twittermon_collect);
 
@@ -81,7 +78,13 @@ public class TwittermonCollectActivity extends Activity
         }
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            NdefMessage[] messages = getNdefMessages(getIntent());
+            NdefMessage[] messages = NdefMessageParser.getNdefMessages(getIntent());
+
+            if (messages == null) {
+                Log.d("terngame", "TwittermonCollectActivity: Unknown Intent");
+                finish();
+            }
+
             byte[] payload = messages[0].getRecords()[0].getPayload();
             mTwittermonName = new String(payload); // TODO: actually parse this
             setIntent(new Intent());
@@ -112,7 +115,7 @@ public class TwittermonCollectActivity extends Activity
         }
     }
 
-    NdefMessage[] getNdefMessages(Intent intent) {
+/*    NdefMessage[] getNdefMessages(Intent intent) {
         // Parse the intent
         NdefMessage[] msgs = null;
         String action = intent.getAction();
@@ -141,5 +144,5 @@ public class TwittermonCollectActivity extends Activity
         }
         return msgs;
     }
-
+*/
 }

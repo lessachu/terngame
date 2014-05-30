@@ -1,25 +1,26 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.TwittermonInfo;
+import com.twitter.terngame.util.NdefMessageParser;
 
-import java.nio.charset.Charset;
-
-public class TwittermonBattleActivity extends Activity {
+public class TwittermonBattleResultActivity extends Activity {
 
     public static String s_creature = "creature";
 
     private Session mSession;
     private String mCreature;
+    private String mOpponentCreature;
     private TextView mTextView;
     private ImageView mImageView;
     private NfcAdapter mNfcAdapter;
@@ -47,6 +48,8 @@ public class TwittermonBattleActivity extends Activity {
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
+        Log.d("terngame", "TwittermonBattleResult onCreate");
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
             Toast toast = Toast.makeText(getApplicationContext(),
@@ -57,20 +60,38 @@ public class TwittermonBattleActivity extends Activity {
             return;
         }
 
-        // Add a URI to for filtering purposes
-        NdefRecord uriRecord = NdefRecord.createUri("http://terngame");
-
-        // Record to launch Play Store if app is not installed
-        NdefRecord appRecord = NdefRecord.createApplicationRecord(getPackageName());
-
-        // Record with actual data we care about
-        NdefRecord dataRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
-                new String("application/" + getPackageName()).getBytes(Charset.forName("US-ASCII")),
-                null, mCreature.getBytes());
-
-        NdefMessage ndefMessage = new NdefMessage(new NdefRecord[]{uriRecord, appRecord, dataRecord});
-        mNfcAdapter.setNdefPushMessage(ndefMessage, this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Session s = Session.getInstance(this);
+
+        String curPuzzle = s.getCurrentPuzzleID();
+
+        Log.d("terngame", "TwittermonBattleResultActivity onResume");
+/*
+        if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
+
+            mCollectLayout.setVisibility(View.VISIBLE);
+            mNotStartedLayout.setVisibility(View.GONE);
+        } else {
+            mCollectLayout.setVisibility(View.GONE);
+            mNotStartedLayout.setVisibility(View.VISIBLE);
+        } */
+
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            NdefMessage[] messages = NdefMessageParser.getNdefMessages(getIntent());
+
+            if (messages == null) {
+                Log.d("terngame", "TwittermonBattleResult: Unknown intent.");
+                finish();
+            }
+
+            byte[] payload = messages[0].getRecords()[3].getPayload();
+            mOpponentCreature = new String(payload); // TODO: actually parse this
+            setIntent(new Intent());
+        }
+    }
 
 }
