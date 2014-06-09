@@ -45,7 +45,6 @@ public class TwittermonActivity extends Activity {
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
 
-
     }
 
     @Override

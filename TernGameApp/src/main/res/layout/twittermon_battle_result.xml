@@ -8,8 +8,7 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/battle_title"
-            android:id="@+id/battle_title"
+            android:id="@+id/battle_result"
             style="textHeadingTheme"/>
 
     <TextView
@@ -30,12 +29,5 @@
             android:text="@string/battle_instructions"
             android:id="@+id/battle_instruction"
             style="@style/instructionTheme"/>
-
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/battle_button"
-            android:id="@+id/battle_button"
-            style="@style/ButtonTheme"/>
 
 </LinearLayout>

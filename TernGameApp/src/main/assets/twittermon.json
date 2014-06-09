@@ -2,20 +2,30 @@
 "creature_info" : [
       {
         "name" : "rockdove",
-         "code" : "caraway",
+         "code" : "geodata",
          "type" :  1,
          "image" : "rockdove"
       },
-      { "name" : "sparrow",
-        "code" : "peanut",
+      { "name" : "bluebird",
+        "code" : "meeting",
         "type" : 2,
         "image" : "rockdove"
        },
+     { "name" : "egret",
+       "code" : "interview",
+       "type" : 2,
+       "image" : "rockdove"
+      },
        {
          "name" : "kookaburra",
-         "code" : "vegemite",
+         "code" : "worddoc",
          "type" : 3,
          "image" : "rockdove"
-        }
- ]
+        },
+       {
+         "name" : "drake",
+         "code" : "pdffile",
+         "type" : 3,
+         "image" : "rockdove"
+        },
 }

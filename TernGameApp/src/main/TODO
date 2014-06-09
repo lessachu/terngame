@@ -21,10 +21,15 @@
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
 * list view for collection activity
-* Phone to phone transfer
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * should probably encode the names on the RFC tag
 * make the empty view work aggin
+* add the check for NFC capability early in the app
+* add battle royale view
+* add local battle mode
+* add grid view selector fragment
+* create battle result log
+* figure out best way to represent data
 
 
 DONE:

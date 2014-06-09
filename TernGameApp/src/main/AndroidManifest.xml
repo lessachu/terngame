@@ -110,15 +110,6 @@
                 android:name="com.twitter.terngame.TwittermonBattleResultActivity"
                 android:screenOrientation="portrait"
                 android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <data android:mimeType="application/com.twitter.terngame"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data
-                        android:scheme="http"
-                        android:host="terngame"
-                        android:pathPrefix=""/>
-            </intent-filter>
         </activity>
     </application>
 
