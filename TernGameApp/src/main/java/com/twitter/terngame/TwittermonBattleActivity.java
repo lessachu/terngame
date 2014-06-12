@@ -20,7 +20,7 @@ import com.twitter.terngame.util.NdefMessageParser;
 public class TwittermonBattleActivity extends Activity
         implements View.OnClickListener {
 
-    public static String s_creature = "creature";
+    public static final String s_creature = "creature";
 
     private Session mSession;
     private String mCreature;

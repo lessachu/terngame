@@ -151,5 +151,6 @@ team_data.json
 
 //twittermon extra
 {
-  "collected" : ["rockdove", "sparrow"]
+  "collected" : ["rockdove", "sparrow"],
+  "history" : [ [ "rockdove", "sparrow", 1], ["anchovy", "pinata", 2] ]
 }

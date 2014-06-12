@@ -306,4 +306,13 @@ public class Session implements EventInfo.EventInfoListener {
     public void collectTwittermon(String creature) {
         mPuzzleExtraInfo.getTwittermonInfo().addNewCreature(creature);
     }
+
+    // returns s_win, s_lose or s_tie
+    public int battleTwittermon(String us, String them) {
+        return mPuzzleExtraInfo.getTwittermonInfo().battle(us, them);
+    }
+
+    public void logTwittermonBattle(String us, String them, int result) {
+        mPuzzleExtraInfo.getTwittermonInfo().logBattle(us, them, result);
+    }
 }

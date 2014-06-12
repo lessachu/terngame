@@ -3,16 +3,19 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.TwittermonInfo;
 
-public class TwittermonBattleResultActivity extends Activity {
+public class TwittermonBattleResultActivity extends Activity
+        implements View.OnClickListener {
 
-    public static String s_creature = "creature";
-    public static String s_oppCreature = "oppCreature";
+    public static final String s_creature = "creature";
+    public static final String s_oppCreature = "oppCreature";
 
     private Session mSession;
     private String mCreature;
@@ -20,6 +23,9 @@ public class TwittermonBattleResultActivity extends Activity {
     private TextView mTextView;
     private ImageView mImageView;
     private TextView mNameView;
+    private ImageView mOppImageView;
+    private TextView mOppNameView;
+    private Button mHistory;
 
 
     @Override
@@ -28,7 +34,7 @@ public class TwittermonBattleResultActivity extends Activity {
 
         setContentView(R.layout.twittermon_battle_result);
 
-        Log.d("terngame", "In BattleREsultActivity");
+        Log.d("terngame", "In BattleResultActivity");
 
         mSession = Session.getInstance(this);
         PuzzleExtraInfo pei = mSession.getPuzzleExtraInfo();
@@ -41,16 +47,28 @@ public class TwittermonBattleResultActivity extends Activity {
         } else {
             mCreature = "error";
             mOpponentCreature = "error";
+            Log.e("terngame", "BattleResults called with no extras");
+            finish();
         }
+
+        Log.d("terngame", "BattleResultActivity between: " + mCreature + " and " + mOpponentCreature);
 
         mTextView = (TextView) findViewById(R.id.battle_result);
 
-        if (mCreature.equals(mOpponentCreature)) {
-            mTextView.setText("It's a tie!");
-        } else {
-            // TODO: fix this;
-            mTextView.setText("You win!");
+        int result = mSession.battleTwittermon(mCreature, mOpponentCreature);
+        switch (result) {
+            case TwittermonInfo.s_win:
+                mTextView.setText("You win!");
+                break;
+            case TwittermonInfo.s_tie:
+                mTextView.setText("It's a tie!");
+                break;
+            case TwittermonInfo.s_lose:
+                mTextView.setText("You lose!");
+                break;
         }
+
+        mSession.logTwittermonBattle(mCreature, mOpponentCreature, result);
 
         mNameView = (TextView) findViewById(R.id.name_title);
         mNameView.setText(mCreature);
@@ -58,27 +76,26 @@ public class TwittermonBattleResultActivity extends Activity {
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
+
+        mOppNameView = (TextView) findViewById(R.id.opponent_title);
+        mOppNameView.setText(mOpponentCreature);
+
+        mOppImageView = (ImageView) findViewById(R.id.opponent_image);
+        mOppImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
+
+        mHistory = (Button) findViewById(R.id.battle_history);
+        mHistory.setOnClickListener(this);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Session s = Session.getInstance(this);
 
-        String curPuzzle = s.getCurrentPuzzleID();
+    public void onClick(View view) {
+        final int id = view.getId();
 
-        Log.d("terngame", "TwittermonBattleResultActivity onResume");
-/*
-        if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
+        if (id == R.id.battle_history) {
+            // launch the history intent
 
-            mCollectLayout.setVisibility(View.VISIBLE);
-            mNotStartedLayout.setVisibility(View.GONE);
-        } else {
-            mCollectLayout.setVisibility(View.GONE);
-            mNotStartedLayout.setVisibility(View.VISIBLE);
-        } */
-
-
+        }
     }
 
 }

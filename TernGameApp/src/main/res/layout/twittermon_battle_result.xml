@@ -11,23 +11,67 @@
             android:id="@+id/battle_result"
             style="textHeadingTheme"/>
 
-    <TextView
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/battle_bar_layout">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/creature_layout"
+                android:layout_gravity="left">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/twittermon_image"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name_title"
+                    android:singleLine="false"
+                    style="statusTheme"/>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vs_text"
+                android:text="@string/versus"
+                android:singleLine="false"
+                style="statusTheme"
+                android:layout_gravity="center"/>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/opponent_layout"
+                android:layout_gravity="right">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/opponent_image"
+                    />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/opponent_title"
+                    android:singleLine="false"
+                    style="statusTheme"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/name_title"
-            android:singleLine="false"
-            style="statusTheme"/>
-
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/twittermon_image"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/battle_instructions"
-            android:id="@+id/battle_instruction"
-            style="@style/instructionTheme"/>
+            android:text="@string/battle_button_text"
+            android:id="@id/battle_history"
+            style="@style/ButtonTheme"/>
 
 </LinearLayout>

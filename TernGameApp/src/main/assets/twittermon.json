@@ -3,29 +3,30 @@
       {
         "name" : "rockdove",
          "code" : "geodata",
-         "type" :  1,
+         "type" :  3,
          "image" : "rockdove"
       },
       { "name" : "bluebird",
         "code" : "meeting",
-        "type" : 2,
+        "type" : 1,
         "image" : "rockdove"
        },
-     { "name" : "egret",
+     { "name" : "duckling",
        "code" : "interview",
-       "type" : 2,
+       "type" : 1,
        "image" : "rockdove"
       },
        {
          "name" : "kookaburra",
          "code" : "worddoc",
-         "type" : 3,
+         "type" : 2,
          "image" : "rockdove"
         },
        {
          "name" : "drake",
          "code" : "pdffile",
-         "type" : 3,
+         "type" : 2,
          "image" : "rockdove"
-        },
+        }
+        ]
 }

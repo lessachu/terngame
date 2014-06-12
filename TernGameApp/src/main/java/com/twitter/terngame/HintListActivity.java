@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class HintListActivity extends ListActivity
         implements Session.HintListener {
-    public static String s_puzzleID = "puzzleID";  // intent key
+    public static final String s_puzzleID = "puzzleID";  // intent key
 
     private String mPuzzleID;
     private HintListArrayAdapter mAdapter;

@@ -62,4 +62,5 @@
     <string name="battle_button">Battle a Twittermon You\'ve Already Collected</string>
     <string name="battle_title">You\'ve chosen</string>
     <string name="battle_instructions">Tap an opponent\'s tag to fight.</string>
+    <string name="versus">vs.</string>
 </resources>

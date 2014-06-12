@@ -13,7 +13,7 @@ import android.widget.ImageView;
 public class TwittermonCollectDupeActivity extends Activity
         implements View.OnClickListener {
 
-    static public String s_creature = "creature";
+    static public final String s_creature = "creature";
 
     private String mCreature;
     private ImageView mImageView;
