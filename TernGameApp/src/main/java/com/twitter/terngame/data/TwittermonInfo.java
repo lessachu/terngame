@@ -87,7 +87,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
                 JSONArray ja = jo.getJSONArray(s_creatureInfo);
                 int len = ja.length();
                 for (int i = 0; i < len; i++) {
-                    JSONObject co = (JSONObject) ja.getJSONObject(i);
+                    JSONObject co = ja.getJSONObject(i);
 
                     CreatureInfo ci = new CreatureInfo();
                     ci.mCode = co.getString(s_creatureCode);
@@ -260,7 +260,12 @@ public class TwittermonInfo implements JSONFileResultHandler {
         return mCollected;
     }
 
+    public ArrayList<BattleInfo> getBattleList() {
+        return mHistory;
+    }
+
     public void clearSavedData() {
         mCollected.clear();
+        mHistory.clear();
     }
 }

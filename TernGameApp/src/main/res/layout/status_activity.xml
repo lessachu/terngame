@@ -12,7 +12,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/status_title_text"
             android:layout_gravity="left|center_vertical"
-            style="@style/textHeadingTheme"/>
+            style="@style/textHeadingTheme"
+            android:id="@+id/status_title"/>
 
     <ListView
             android:layout_width="fill_parent"

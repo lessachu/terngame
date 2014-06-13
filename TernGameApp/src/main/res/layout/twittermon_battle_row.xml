@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:stretchColumns="1">
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/battle_text"
+            android:text="rockdove vs. kookaburra"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:gravity="left"/>
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/battle_result_text"
+            android:text="win"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:gravity="right"/>
+    s
+</LinearLayout>

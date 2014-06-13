@@ -1,6 +1,7 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +39,6 @@ public class TwittermonBattleResultActivity extends Activity
 
         mSession = Session.getInstance(this);
         PuzzleExtraInfo pei = mSession.getPuzzleExtraInfo();
-        TwittermonInfo ti = pei.getTwittermonInfo();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -93,8 +93,8 @@ public class TwittermonBattleResultActivity extends Activity
         final int id = view.getId();
 
         if (id == R.id.battle_history) {
-            // launch the history intent
-
+            Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
+            startActivity(i);
         }
     }
 

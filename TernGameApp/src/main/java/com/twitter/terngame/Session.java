@@ -13,6 +13,7 @@ import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
+import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
 
@@ -314,5 +315,9 @@ public class Session implements EventInfo.EventInfoListener {
 
     public void logTwittermonBattle(String us, String them, int result) {
         mPuzzleExtraInfo.getTwittermonInfo().logBattle(us, them, result);
+    }
+
+    public ArrayList<TwittermonInfo.BattleInfo> getBattleList() {
+        return mPuzzleExtraInfo.getTwittermonInfo().getBattleList();
     }
 }

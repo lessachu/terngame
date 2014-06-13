@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.twitter.terngame.data.PuzzleExtraInfo;
-import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonBattleActivity extends Activity
@@ -39,8 +37,6 @@ public class TwittermonBattleActivity extends Activity
         setContentView(R.layout.twittermon_battle);
 
         mSession = Session.getInstance(this);
-        PuzzleExtraInfo pei = mSession.getPuzzleExtraInfo();
-        TwittermonInfo ti = pei.getTwittermonInfo();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
