@@ -254,6 +254,8 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public void logBattle(String creature1, String creature2, int result) {
         BattleInfo bi = new BattleInfo(creature1, creature2, result);
         mHistory.add(bi);
+        updateJSONData();
+        Session.getInstance(mContext).updateExtra("twittermon", mData);
     }
 
     public ArrayList<String> getCollectedList() {

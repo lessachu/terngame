@@ -14,7 +14,6 @@
 * WTF number selector??
 * Admin mode puzzle data editor
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
-* Write NFC puzzle support
 * add support for view recycling
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * add a confirmation dialog before you take a hint?
@@ -28,9 +27,9 @@
 * add battle royale view
 * add local battle mode
 * add grid view selector fragment
-* create battle result log
 * figure out best way to represent data
-
+* battle history does not save
+* better formatting on battle result log
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
