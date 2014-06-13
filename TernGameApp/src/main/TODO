@@ -27,8 +27,6 @@
 * add battle royale view
 * add local battle mode
 * add grid view selector fragment
-* figure out best way to represent data
-* battle history does not save
 * better formatting on battle result log
 
 DONE:

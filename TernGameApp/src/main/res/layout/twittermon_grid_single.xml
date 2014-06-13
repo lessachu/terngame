@@ -4,7 +4,9 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_gravity="center"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center">
 
     <ImageView
             android:layout_width="wrap_content"
@@ -15,6 +17,9 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/twittermon_text"/>
+            android:id="@+id/twittermon_text"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="test"/>
 
 </LinearLayout>

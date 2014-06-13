@@ -1,10 +1,16 @@
 {
 "creature_info" : [
       {
-        "name" : "rockdove",
+        "name" : "geoduck",
          "code" : "geodata",
          "type" :  3,
          "image" : "rockdove"
+      },
+      {
+          "name" : "gizmoduck",
+           "code" : "userids",
+           "type" :  3,
+           "image" : "rockdove"
       },
       { "name" : "bluebird",
         "code" : "meeting",

@@ -1,8 +1,10 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -13,7 +15,8 @@ import com.twitter.terngame.data.TwittermonInfo;
 
 import java.util.ArrayList;
 
-public class TwittermonActivity extends Activity {
+public class TwittermonActivity extends Activity
+        implements View.OnClickListener {
 
     private ArrayList<String> mTwittermon;
 
@@ -23,6 +26,7 @@ public class TwittermonActivity extends Activity {
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
     private FrameLayout mBattleBar;
+    private Button mHistoryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class TwittermonActivity extends Activity {
         mGridView.setAdapter(mAdapter);
 
         mBattleBar = (FrameLayout) findViewById(R.id.battle_bar);
+        mHistoryButton = (Button) findViewById(R.id.battle_history);
+        mHistoryButton.setOnClickListener(this);
 
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
@@ -68,4 +74,13 @@ public class TwittermonActivity extends Activity {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onClick(View view) {
+        final int id = view.getId();
+
+        if (id == R.id.battle_history) {
+            Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
+            startActivity(i);
+        }
+    }
 }
