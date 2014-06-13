@@ -67,6 +67,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Creature has been added to your collection!"
+            android:id="@+id/collect_message_text"
+            android:textAlignment="center"/>
+
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

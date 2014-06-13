@@ -85,6 +85,17 @@ public class TwittermonBattleResultActivity extends Activity
 
         mHistory = (Button) findViewById(R.id.battle_history);
         mHistory.setOnClickListener(this);
+
+        TextView collectMsgView = (TextView) findViewById(R.id.collect_message_text);
+
+        // if it's a win, collect the twittermon
+        if (result == TwittermonInfo.s_win && !mSession.hasTwittermon(mOpponentCreature)) {
+            mSession.collectTwittermon(mOpponentCreature);
+
+            collectMsgView.setText(mOpponentCreature + " has been added to your collection!");
+        } else {
+            collectMsgView.setVisibility(View.GONE);
+        }
     }
 
     @Override

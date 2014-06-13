@@ -27,7 +27,7 @@
 * add battle royale view
 * add local battle mode
 * add grid view selector fragment
-* better formatting on battle result log
+* hints don't work on pre-kitkat
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -89,4 +89,5 @@ DONE:
 * NFC reading works
 * Extra passed to TwittermonActivity is no longer a huge hack
 * Throw up a different layout if the puzzle start code hasn't been entered (twittermon)
-
+* if you win, you collect the pokemon!
+* battlehistory button should stay on screen.

@@ -67,12 +67,10 @@ public class TwittermonActivity extends Activity
             mGridView.setVisibility(View.VISIBLE);
             mTitle.setVisibility(View.VISIBLE);
             mBattleBar.setVisibility(View.VISIBLE);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
-    public void onTwittermonCollected() {
-        mAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onClick(View view) {

@@ -12,6 +12,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/twitter_collection_title"
             android:id="@+id/twittermon_collection_title_text"
+            android:layout_weight="0"
             style="@style/statusTheme"/>
 
     <GridView
@@ -22,11 +23,14 @@
             android:verticalSpacing="10dp"
             android:stretchMode="columnWidth"
             android:gravity="center"
+            android:layout_weight="1"
             android:stackFromBottom="false"/>
 
     <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="0"
             android:id="@+id/battle_bar">
 
         <Button

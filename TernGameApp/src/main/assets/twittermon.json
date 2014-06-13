@@ -1,38 +1,40 @@
 {
 "creature_info" : [
       {
-        "name" : "geoduck",
+         "name" : "geoduck",
          "code" : "geodata",
          "type" :  3,
          "image" : "rockdove"
       },
       {
-          "name" : "gizmoduck",
-           "code" : "userids",
-           "type" :  3,
-           "image" : "rockdove"
+         "name" : "gizmoduck",
+         "code" : "userids",
+         "type" :  3,
+         "image" : "rockdove"
       },
-      { "name" : "bluebird",
-        "code" : "meeting",
-        "type" : 1,
-        "image" : "rockdove"
-       },
-     { "name" : "duckling",
-       "code" : "interview",
-       "type" : 1,
-       "image" : "rockdove"
+      {
+         "name" : "bluebird",
+         "code" : "meeting",
+         "type" : 1,
+         "image" : "rockdove"
       },
-       {
+      {
+         "name" : "duckling",
+         "code" : "interview",
+         "type" : 1,
+         "image" : "rockdove"
+      },
+      {
          "name" : "kookaburra",
          "code" : "worddoc",
          "type" : 2,
          "image" : "rockdove"
-        },
-       {
+      },
+      {
          "name" : "drake",
          "code" : "pdffile",
          "type" : 2,
          "image" : "rockdove"
-        }
-        ]
+      }
+    ]
 }
