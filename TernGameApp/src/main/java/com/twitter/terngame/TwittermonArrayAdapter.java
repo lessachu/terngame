@@ -1,7 +1,7 @@
 package com.twitter.terngame;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +18,7 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
     private final Context mContext;
     private final Session mSession;
     private final ArrayList<String> mValues;
+    private View.OnClickListener mClickListener;
 
     private static final int s_name = 1;
 
@@ -44,17 +45,11 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
         final ImageView image = (ImageView) gridView.findViewById(R.id.twittermon_image);
         image.setImageDrawable(mSession.getTwittermonImage(name));
 
-        gridView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(mContext, TwittermonBattleActivity.class);
-                i.putExtra(TwittermonBattleActivity.s_creature, (String) v.getTag(R.id.grid_name));
-                mContext.startActivity(i);
-            }
+        if (mClickListener != null) {
+            gridView.setOnClickListener(mClickListener);
+        } else {
+            Log.d("terngame", "mClickListener is null here");
         }
-        );
-
         return gridView;
     }
 
@@ -62,4 +57,9 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
     public boolean isEnabled(int position) {
         return false;
     }
+
+    public void setClickListener(View.OnClickListener clickListener) {
+        mClickListener = clickListener;
+    }
+
 }

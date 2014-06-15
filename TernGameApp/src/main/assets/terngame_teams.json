@@ -3,7 +3,7 @@
    "teams" : [
       {
         "name" : "jantest",
-        "password" : "janpass"
+        "password" : "p"
       },
       {
         "name" : "team2",

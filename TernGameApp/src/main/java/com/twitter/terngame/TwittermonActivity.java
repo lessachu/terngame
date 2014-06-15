@@ -1,12 +1,14 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +23,8 @@ public class TwittermonActivity extends Activity
     private ArrayList<String> mTwittermon;
 
     private TwittermonArrayAdapter mAdapter;
-    private GridView mGridView;
+    private FragmentManager mFragmentManager;
+    private TwittermonGridFragment mGridFragment;
 
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
@@ -38,11 +41,23 @@ public class TwittermonActivity extends Activity
         PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
         TwittermonInfo ti = pei.getTwittermonInfo();
 
+        final Context context = this;
+
         mTwittermon = ti.getCollectedList();
         mAdapter = new TwittermonArrayAdapter(this, mTwittermon);
 
-        mGridView = (GridView) findViewById(R.id.twittermon_grid);
-        mGridView.setAdapter(mAdapter);
+        View.OnClickListener clickListener = new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent i = new Intent(context, TwittermonBattleActivity.class);
+                i.putExtra(TwittermonBattleActivity.s_creature, (String) v.getTag(R.id.grid_name));
+                context.startActivity(i);
+            }
+        };
+
+        mFragmentManager = getFragmentManager();
+        mGridFragment = (TwittermonGridFragment) mFragmentManager.findFragmentById(R.id.twittermon_grid);
+        mGridFragment.setClickListener(clickListener);
 
         mBattleBar = (FrameLayout) findViewById(R.id.battle_bar);
         mHistoryButton = (Button) findViewById(R.id.battle_history);
@@ -57,18 +72,21 @@ public class TwittermonActivity extends Activity
     protected void onResume() {
         super.onResume();
 
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+
         if (mTwittermon.isEmpty()) {
             mNoTwittermonLayout.setVisibility(View.VISIBLE);
-            mGridView.setVisibility(View.GONE);
+            ft.hide(mGridFragment);
             mTitle.setVisibility(View.GONE);
             mBattleBar.setVisibility(View.GONE);
         } else {
             mNoTwittermonLayout.setVisibility(View.GONE);
-            mGridView.setVisibility(View.VISIBLE);
+            ft.show(mGridFragment);
             mTitle.setVisibility(View.VISIBLE);
             mBattleBar.setVisibility(View.VISIBLE);
             mAdapter.notifyDataSetChanged();
         }
+        ft.commit();
     }
 
 

@@ -15,16 +15,15 @@
             android:layout_weight="0"
             style="@style/statusTheme"/>
 
-    <GridView
+    <fragment
+            android:name="com.twitter.terngame.TwittermonGridFragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/twittermon_grid"
-            android:numColumns="2"
-            android:verticalSpacing="10dp"
-            android:stretchMode="columnWidth"
             android:gravity="center"
             android:layout_weight="1"
-            android:stackFromBottom="false"/>
+            android:stackFromBottom="false"
+            />
 
     <FrameLayout
             android:layout_width="fill_parent"
