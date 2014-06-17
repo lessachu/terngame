@@ -25,8 +25,10 @@
 * make the empty view work aggin
 * add the check for NFC capability early in the app
 * add battle royale view
-* add local battle mode
-* add grid view selector fragment
+* style the grid view
+* add art
+* add a default unknown opponent placeholder
+* style the battle bar
 * hints don't work on pre-kitkat
 
 DONE:
@@ -91,3 +93,6 @@ DONE:
 * Throw up a different layout if the puzzle start code hasn't been entered (twittermon)
 * if you win, you collect the pokemon!
 * battlehistory button should stay on screen.
+* make the grid a fragment
+* add local battle mode
+* refactor battle_bar to be a shared layout
