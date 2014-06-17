@@ -28,6 +28,7 @@ public class TwittermonBattleActivity extends Activity
     private TextView mOpponentTextView;
     private ImageView mOpponentImageView;
     private Button mSelectButton;
+    private Button mFightButton;
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
@@ -51,24 +52,17 @@ public class TwittermonBattleActivity extends Activity
         mTextView = (TextView) findViewById(R.id.name_title);
         mTextView.setText(mCreature);
 
-        mOpponentTextView = (TextView) findViewById(R.id.opponent_title);
-        mOpponentImageView = (ImageView) findViewById(R.id.opponent_image);
-
-        if (mOpponentCreature != null) {
-            mOpponentTextView.setText(mOpponentCreature);
-            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
-        } else {
-            mOpponentTextView.setText("???");
-            // TODO: have a ???? image
-//            mOpponentImageView.setImageDrawable();
-        }
-
-
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
-        mSelectButton = (Button) findViewById(R.id.battle_button);
+        mSelectButton = (Button) findViewById(R.id.select_button);
         mSelectButton.setOnClickListener(this);
+
+        mFightButton = (Button) findViewById(R.id.fight_button);
+        mFightButton.setOnClickListener(this);
+
+        mOpponentTextView = (TextView) findViewById(R.id.opponent_title);
+        mOpponentImageView = (ImageView) findViewById(R.id.opponent_image);
 
         mAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -99,15 +93,34 @@ public class TwittermonBattleActivity extends Activity
             Log.d("terngame", "Enable Foreground Dispatch");
             mAdapter.enableForegroundDispatch(this, mPendingIntent, mIntentFilters, null);
         }
+
+        if (mOpponentCreature != null) {
+            mOpponentTextView.setText(mOpponentCreature);
+            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
+            mFightButton.setVisibility(View.VISIBLE);
+        } else {
+            mOpponentTextView.setText("???");
+            // TODO: have a ???? image
+//            mOpponentImageView.setImageDrawable();
+            mFightButton.setVisibility(View.GONE);
+        }
+
     }
 
     public void onClick(View view) {
         final int id = view.getId();
 
-        if (id == R.id.battle_button) {
+        if (id == R.id.select_button) {
             mFragment = TwittermonDialogGridFragment.newInstance();
             mFragment.show(getFragmentManager(), "dialog");
             mFragment.setSelectionListener(this);
+        } else if (id == R.id.fight_button) {
+            if (mCreature != null && mOpponentCreature != null) {
+                Intent i = new Intent(this, TwittermonBattleResultActivity.class);
+                i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
+                i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
+                startActivity(i);
+            }
         }
     }
 
@@ -140,6 +153,8 @@ public class TwittermonBattleActivity extends Activity
         mOpponentCreature = creature;
         mOpponentTextView.setText(creature);
         mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(creature));
+
+        mFightButton.setVisibility(View.VISIBLE);
 
         if (mFragment != null) {
             mFragment.dismiss();

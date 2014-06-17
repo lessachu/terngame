@@ -78,8 +78,17 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/battle_button"
-            android:id="@+id/battle_button"
+            android:text="@string/select_button"
+            android:id="@+id/select_button"
             style="@style/ButtonTheme"/>
+
+    <Button
+            style="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fight_button_text"
+            android:id="@+id/fight_button"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"/>
 
 </LinearLayout>

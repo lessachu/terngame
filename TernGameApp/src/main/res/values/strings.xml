@@ -59,10 +59,11 @@
     <string name="no_twittermon_hint">You might want to look around and see if you can spot any.</string>
     <string name="twittermon_not_started">Woah there tiger, you haven\'t started this puzzle yet.</string>
     <string name="battle_button_text">Battle History</string>
-    <string name="battle_button">Battle a Twittermon You\'ve Already Collected</string>
+    <string name="select_button">Battle a Twittermon You\'ve Already Collected</string>
     <string name="battle_title">You\'ve chosen</string>
     <string name="battle_instructions">Tap an opponent\'s tag to fight.</string>
     <string name="versus">vs.</string>
     <string name="battle_history">Past Twittermon Battles</string>
     <string name="opponent_grid_title">Pick an opponent</string>
+    <string name="fight_button_text">Fight!</string>
 </resources>
