@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonBattleActivity extends Activity
-        implements View.OnClickListener {
+        implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_creature = "creature";
 
@@ -25,10 +25,13 @@ public class TwittermonBattleActivity extends Activity
     private String mOpponentCreature;
     private TextView mTextView;
     private ImageView mImageView;
+    private TextView mOpponentTextView;
+    private ImageView mOpponentImageView;
     private Button mSelectButton;
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
+    private TwittermonDialogGridFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,19 @@ public class TwittermonBattleActivity extends Activity
 
         mTextView = (TextView) findViewById(R.id.name_title);
         mTextView.setText(mCreature);
+
+        mOpponentTextView = (TextView) findViewById(R.id.opponent_title);
+        mOpponentImageView = (ImageView) findViewById(R.id.opponent_image);
+
+        if (mOpponentCreature != null) {
+            mOpponentTextView.setText(mOpponentCreature);
+            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
+        } else {
+            mOpponentTextView.setText("???");
+            // TODO: have a ???? image
+//            mOpponentImageView.setImageDrawable();
+        }
+
 
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
@@ -67,7 +83,6 @@ public class TwittermonBattleActivity extends Activity
             throw new RuntimeException("fail", e);
         }
         mIntentFilters = new IntentFilter[]{ndef};
-
     }
 
     public void onPause() {
@@ -90,17 +105,15 @@ public class TwittermonBattleActivity extends Activity
         final int id = view.getId();
 
         if (id == R.id.battle_button) {
-            // bring up the selector grid
+            mFragment = TwittermonDialogGridFragment.newInstance();
+            mFragment.show(getFragmentManager(), "dialog");
+            mFragment.setSelectionListener(this);
         }
     }
 
     public void onNewIntent(Intent intent) {
 
-        Log.d("terngame", "in onNewIntent");
-//        Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        //do something with tagFromIntent
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            Log.d("terngame", "ACTION_NDEF_DISCOVERED");
             NdefMessage[] messages = NdefMessageParser.getNdefMessages(intent);
 
             if (messages == null) {
@@ -121,9 +134,17 @@ public class TwittermonBattleActivity extends Activity
         } else {
             Log.d("terngame", "action: " + intent.getAction());
         }
-
-
     }
 
+    public void onTwittermonGridSelection(String creature) {
+        mOpponentCreature = creature;
+        mOpponentTextView.setText(creature);
+        mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(creature));
+
+        if (mFragment != null) {
+            mFragment.dismiss();
+            mFragment = null;
+        }
+    }
 }
 

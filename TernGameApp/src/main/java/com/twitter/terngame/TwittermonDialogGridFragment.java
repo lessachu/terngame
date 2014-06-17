@@ -1,7 +1,8 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +16,21 @@ import com.twitter.terngame.data.TwittermonInfo;
 
 import java.util.ArrayList;
 
-public class TwittermonGridFragment extends Fragment {
+public class TwittermonDialogGridFragment extends DialogFragment {
 
     private ArrayList<String> mTwittermon;
 
     private TwittermonArrayAdapter mAdapter;
     private GridView mGridView;
+    private TwittermonGridSelectionListener mListener;
+
+    public interface TwittermonGridSelectionListener {
+        public void onTwittermonGridSelection(String creature);
+    }
+
+    static TwittermonDialogGridFragment newInstance() {
+        return new TwittermonDialogGridFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +46,14 @@ public class TwittermonGridFragment extends Fragment {
 
             mTwittermon = ti.getCollectedList();
             mAdapter = new TwittermonArrayAdapter(activity, mTwittermon);
+            mAdapter.setClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (TwittermonDialogGridFragment.this.mListener != null) {
+                        TwittermonDialogGridFragment.this.mListener.onTwittermonGridSelection((String) v.getTag(R.id.grid_name));
+                    }
+                }
+            });
 
             mGridView = (GridView) view.findViewById(R.id.twittermon_grid);
             mGridView.setAdapter(mAdapter);
@@ -46,7 +64,14 @@ public class TwittermonGridFragment extends Fragment {
         return view;
     }
 
-    public void setClickListener(View.OnClickListener clickListener) {
-        mAdapter.setClickListener(clickListener);
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setTitle(R.string.opponent_grid_title);
+        return dialog;
+    }
+
+    public void setSelectionListener(TwittermonGridSelectionListener selectionListener) {
+        mListener = selectionListener;
     }
 }

@@ -16,7 +16,7 @@
             style="@style/statusTheme"/>
 
     <fragment
-            android:name="com.twitter.terngame.TwittermonGridFragment"
+            android:name="com.twitter.terngame.TwittermonDialogGridFragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/twittermon_grid"

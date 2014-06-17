@@ -18,13 +18,13 @@ import com.twitter.terngame.data.TwittermonInfo;
 import java.util.ArrayList;
 
 public class TwittermonActivity extends Activity
-        implements View.OnClickListener {
+        implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     private ArrayList<String> mTwittermon;
 
     private TwittermonArrayAdapter mAdapter;
     private FragmentManager mFragmentManager;
-    private TwittermonGridFragment mGridFragment;
+    private TwittermonDialogGridFragment mGridFragment;
 
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
@@ -46,18 +46,9 @@ public class TwittermonActivity extends Activity
         mTwittermon = ti.getCollectedList();
         mAdapter = new TwittermonArrayAdapter(this, mTwittermon);
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent i = new Intent(context, TwittermonBattleActivity.class);
-                i.putExtra(TwittermonBattleActivity.s_creature, (String) v.getTag(R.id.grid_name));
-                context.startActivity(i);
-            }
-        };
-
         mFragmentManager = getFragmentManager();
-        mGridFragment = (TwittermonGridFragment) mFragmentManager.findFragmentById(R.id.twittermon_grid);
-        mGridFragment.setClickListener(clickListener);
+        mGridFragment = (TwittermonDialogGridFragment) mFragmentManager.findFragmentById(R.id.twittermon_grid);
+        mGridFragment.setSelectionListener(this);
 
         mBattleBar = (FrameLayout) findViewById(R.id.battle_bar);
         mHistoryButton = (Button) findViewById(R.id.battle_history);
@@ -98,5 +89,11 @@ public class TwittermonActivity extends Activity
             Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
             startActivity(i);
         }
+    }
+
+    public void onTwittermonGridSelection(String creature) {
+        Intent i = new Intent(this, TwittermonBattleActivity.class);
+        i.putExtra(TwittermonBattleActivity.s_creature, creature);
+        startActivity(i);
     }
 }

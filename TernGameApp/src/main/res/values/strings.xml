@@ -64,4 +64,5 @@
     <string name="battle_instructions">Tap an opponent\'s tag to fight.</string>
     <string name="versus">vs.</string>
     <string name="battle_history">Past Twittermon Battles</string>
+    <string name="opponent_grid_title">Pick an opponent</string>
 </resources>
