@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,8 +27,9 @@ public class TwittermonActivity extends Activity
 
     private LinearLayout mNoTwittermonLayout;
     private TextView mTitle;
-    private FrameLayout mBattleBar;
+    private LinearLayout mBattleButtons;
     private Button mHistoryButton;
+    private Button mFinaleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,12 @@ public class TwittermonActivity extends Activity
         mGridFragment = (TwittermonDialogGridFragment) mFragmentManager.findFragmentById(R.id.twittermon_grid);
         mGridFragment.setSelectionListener(this);
 
-        mBattleBar = (FrameLayout) findViewById(R.id.battle_bar);
+        mBattleButtons = (LinearLayout) findViewById(R.id.battle_buttons);
         mHistoryButton = (Button) findViewById(R.id.battle_history);
         mHistoryButton.setOnClickListener(this);
+
+        mFinaleButton = (Button) findViewById(R.id.battle_finale);
+        mFinaleButton.setOnClickListener(this);
 
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
@@ -69,12 +72,12 @@ public class TwittermonActivity extends Activity
             mNoTwittermonLayout.setVisibility(View.VISIBLE);
             ft.hide(mGridFragment);
             mTitle.setVisibility(View.GONE);
-            mBattleBar.setVisibility(View.GONE);
+            mBattleButtons.setVisibility(View.GONE);
         } else {
             mNoTwittermonLayout.setVisibility(View.GONE);
             ft.show(mGridFragment);
             mTitle.setVisibility(View.VISIBLE);
-            mBattleBar.setVisibility(View.VISIBLE);
+            mBattleButtons.setVisibility(View.VISIBLE);
             mAdapter.notifyDataSetChanged();
         }
         ft.commit();
@@ -87,6 +90,9 @@ public class TwittermonActivity extends Activity
 
         if (id == R.id.battle_history) {
             Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
+            startActivity(i);
+        } else if (id == R.id.battle_finale) {
+            Intent i = new Intent(this, TwittermonBattleRoyaleStartActivity.class);
             startActivity(i);
         }
     }

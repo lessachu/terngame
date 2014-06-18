@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/battle_royale_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/finale_start_title"
+            style="statusTheme"
+            android:gravity="center_horizontal"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/finale_instructions"
+            android:id="@+id/battle_royale_instructions"
+            android:textAlignment="center"
+            style="@style/instructionTheme"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/finale_start_button_text"
+            android:id="@+id/start_finale"
+            style="@style/ButtonTheme"/>
+
+</LinearLayout>

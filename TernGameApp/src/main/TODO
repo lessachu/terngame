@@ -30,6 +30,7 @@
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
+* add battle royale functionality
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -96,3 +97,4 @@ DONE:
 * make the grid a fragment
 * add local battle mode
 * refactor battle_bar to be a shared layout
+* battle royale start screen

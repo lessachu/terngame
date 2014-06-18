@@ -25,19 +25,26 @@
             android:stackFromBottom="false"
             />
 
-    <FrameLayout
+    <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="0"
-            android:id="@+id/battle_bar">
+            android:id="@+id/battle_buttons"
+            android:orientation="vertical">
 
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/battle_button_text"
                 android:id="@+id/battle_history"/>
-    </FrameLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finale_button_text"
+                android:id="@+id/battle_finale"/>
+    </LinearLayout>
 
     <LinearLayout
             android:orientation="vertical"

@@ -66,4 +66,8 @@
     <string name="battle_history">Past Twittermon Battles</string>
     <string name="opponent_grid_title">Pick an opponent</string>
     <string name="fight_button_text">Fight!</string>
+    <string name="finale_button_text">Battle Royale</string>
+    <string name="finale_start_button_text">Start!</string>
+    <string name="finale_start_title">Battle Royale</string>
+    <string name="finale_instructions">Predict the outcome of ten (or more) Twittermon battles in 60 seconds.</string>
 </resources>
