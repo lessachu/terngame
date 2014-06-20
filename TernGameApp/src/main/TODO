@@ -30,13 +30,12 @@
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
-* add battle royale functionality
 * answer page
 * collect pokemon after any fight
 * ID the pokemon on collect
 * get the timer working
-* add parcelable to battle royale
 * add a stronger hint on the main page about what to do
+* add a pause to penalize wrong answers
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -104,3 +103,5 @@ DONE:
 * add local battle mode
 * refactor battle_bar to be a shared layout
 * battle royale start screen
+* add battle royale functionality
+* add parcelable to battle royale

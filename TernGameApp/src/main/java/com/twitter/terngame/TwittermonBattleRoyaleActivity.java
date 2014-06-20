@@ -19,6 +19,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
     public static final String s_helper = "helper";
 
+
     private Session mSession;
     private TextView mTextView;
     private ImageView mImageView;
@@ -39,22 +40,18 @@ public class TwittermonBattleRoyaleActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.twittermon_battle_royale);
+        setContentView(R.layout.twittermon_royale);
         mSession = Session.getInstance(this);
-        mRoyaleHelper = new TwittermonBattleRoyalHelper(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
-
-        // TODO: HACKY
-        int num_correct = 0;
         Intent i = getIntent();
         Bundle extras = i.getExtras();
-        if (extras != null) {
-            if (i.hasExtra(s_helper)) {
-                num_correct = extras.getInt(s_helper);
-            }
+        if (extras != null && i.hasExtra(s_helper)) {
+            mRoyaleHelper = extras.getParcelable(s_helper);
+        } else {
+            mRoyaleHelper = new TwittermonBattleRoyalHelper();
         }
 
-        mRoyaleHelper.setCorrect(num_correct);
+        mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
         mTextView = (TextView) findViewById(R.id.royale_title);
         mNameView = (TextView) findViewById(R.id.name_title);
@@ -102,11 +99,14 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
         switch (id) {
             case R.id.restart_royale_button:
+                restartRoyale();
+                break;
             case R.id.win_button:
                 logResult(mBattle.mResult == TwittermonInfo.s_win);
                 gotoNextBattle();
                 break;
             case R.id.lose_button:
+                logResult(mBattle.mResult == TwittermonInfo.s_lose);
                 gotoNextBattle();
                 break;
             case R.id.tie_button:
@@ -135,14 +135,24 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
     private void gotoNextBattle() {
         finish();
-        if (mRoyaleHelper.getCorrect() == TwittermonBattleRoyalHelper.s_total) {
-
+        final int numCorrect = mRoyaleHelper.getCorrect();
+        if (numCorrect == TwittermonBattleRoyalHelper.s_total) {
+            Intent i = new Intent(this, TwittermonBattleRoyaleWinActivity.class);
+            i.putExtra(TwittermonBattleRoyaleWinActivity.s_correct, numCorrect);
+            i.putExtra(TwittermonBattleRoyaleWinActivity.s_total, mRoyaleHelper.getTotal());
+            startActivity(i);
         } else {
             Intent i = getIntent();
-            // temp hack
-            i.putExtra(s_helper, mRoyaleHelper.getCorrect());
-            //        i.putExtra(s_helper, mRoyaleHelper);
+            i.putExtra(s_helper, mRoyaleHelper);
             startActivity(i);
         }
     }
+
+    private void restartRoyale() {
+        mRoyaleHelper.clearData();
+        // TODO restart timer
+        // Toast messaging
+        gotoNextBattle();
+    }
+
 }

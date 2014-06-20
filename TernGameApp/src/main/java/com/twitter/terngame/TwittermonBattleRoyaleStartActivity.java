@@ -15,7 +15,7 @@ public class TwittermonBattleRoyaleStartActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.twittermon_battle_royale_start);
+        setContentView(R.layout.twittermon_royale_start);
 
         mStart = (Button) findViewById(R.id.start_finale);
         mStart.setOnClickListener(this);

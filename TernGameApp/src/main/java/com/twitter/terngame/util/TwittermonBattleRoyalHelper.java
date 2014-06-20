@@ -1,5 +1,7 @@
 package com.twitter.terngame.util;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.twitter.terngame.data.TwittermonInfo;
@@ -9,18 +11,23 @@ import java.util.HashSet;
 /**
  * Created by jchong on 3/22/14.
  */
-public class TwittermonBattleRoyalHelper {
+public class TwittermonBattleRoyalHelper implements Parcelable {
 
     public final static int s_total = 10;
+    public final static int s_total_time = 90;
 
     private HashSet<String> mBattles;
     private int mCorrect;
     private TwittermonInfo mTwittermonInfo;
 
-    public TwittermonBattleRoyalHelper(TwittermonInfo ti) {
-        mTwittermonInfo = ti;
+    public TwittermonBattleRoyalHelper() {
         mBattles = new HashSet<String>();
         mCorrect = 0;
+        mTwittermonInfo = null;
+    }
+
+    public void setTwittermonInfo(TwittermonInfo ti) {
+        mTwittermonInfo = ti;
     }
 
     public TwittermonInfo.BattleInfo getMatchup() {
@@ -73,13 +80,50 @@ public class TwittermonBattleRoyalHelper {
         return mCorrect;
     }
 
-    // TODO: HACKY MCHACKS ALOT
-    public void setCorrect(int correct) {
-        mCorrect = correct;
+    public int getTotal() {
+        return mBattles.size();
     }
 
     public void clearData() {
         mBattles.clear();
         mCorrect = 0;
     }
+
+    // Parcelable
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(mCorrect);
+        out.writeInt(mBattles.size());
+        for (String ba : mBattles) {
+            out.writeString(ba);
+        }
+    }
+
+    public static final Parcelable.Creator<TwittermonBattleRoyalHelper> CREATOR
+            = new Parcelable.Creator<TwittermonBattleRoyalHelper>() {
+        public TwittermonBattleRoyalHelper createFromParcel(Parcel in) {
+            return new TwittermonBattleRoyalHelper(in);
+        }
+
+        public TwittermonBattleRoyalHelper[] newArray(int size) {
+            return new TwittermonBattleRoyalHelper[size];
+        }
+    };
+
+    private TwittermonBattleRoyalHelper(Parcel in) {
+        mCorrect = in.readInt();
+        final int numBattles = in.readInt();
+        mBattles = new HashSet<String>();
+
+        for (int i = 0; i < numBattles; i++) {
+            String ba = in.readString();
+            mBattles.add(ba);
+        }
+
+        mTwittermonInfo = null;
+    }
+
 }

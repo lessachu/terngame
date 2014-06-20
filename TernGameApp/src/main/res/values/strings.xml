@@ -76,4 +76,5 @@
     <string name="finale_instructions">Predict the outcome of ten (or more) Twittermon battles in 60 seconds.</string>
     <string name="royale_title_text">Battle Royale</string>
     <string name="battle_royale_time_title">TIME REMAINING</string>
+    <string name="royale_win_text">YOU WIN!</string>
 </resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/royale_win_text"
+            android:id="@+id/royale_win_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            style="@style/statusTheme"/>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/twittermon_image"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Great job!  The answer to this puzzle is:"
+            android:id="@+id/answer_prompt"
+            style="@style/textHeadingTheme"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="turducken stew"
+            android:id="@+id/answer_text"
+            style="@style/puzzleStatusTheme"/>
+</LinearLayout>
