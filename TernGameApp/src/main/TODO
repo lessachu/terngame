@@ -31,11 +31,11 @@
 * style the battle bar
 * hints don't work on pre-kitkat
 * answer page
-* collect pokemon after any fight
 * ID the pokemon on collect
 * get the timer working
 * add a stronger hint on the main page about what to do
 * add a pause to penalize wrong answers
+* fix win logic to account for the timer
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -105,3 +105,4 @@ DONE:
 * battle royale start screen
 * add battle royale functionality
 * add parcelable to battle royale
+* collect pokemon after any fight

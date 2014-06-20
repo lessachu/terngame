@@ -19,7 +19,6 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
     public static final String s_helper = "helper";
 
-
     private Session mSession;
     private TextView mTextView;
     private ImageView mImageView;
@@ -27,6 +26,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private ImageView mOppImageView;
     private TextView mOppNameView;
     private TextView mPromptView;
+    private TextView mMatchView;
     private Button mTryAgain;
     private Button mWin;
     private Button mLose;
@@ -34,7 +34,6 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private Chronometer mBattleTimer;
     private TwittermonBattleRoyalHelper mRoyaleHelper;
     private TwittermonInfo.BattleInfo mBattle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mOppImageView = (ImageView) findViewById(R.id.opponent_image);
 
         mPromptView = (TextView) findViewById(R.id.prompt_text);
+        mMatchView = (TextView) findViewById(R.id.match_counter_text);
 
         mTryAgain = (Button) findViewById(R.id.restart_royale_button);
         mTryAgain.setOnClickListener(this);
@@ -90,6 +90,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mOppNameView.setText(mBattle.mOpponent);
         mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
 
+        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getTotal()));
         mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
     }
 

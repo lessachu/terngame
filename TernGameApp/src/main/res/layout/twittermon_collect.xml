@@ -19,12 +19,27 @@
                 android:text="@string/collect_title"
                 android:id="@+id/collect_title"/>
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/creature_image"
+                android:layout_gravity="center_horizontal"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Creature Name"
+                android:id="@+id/creature_name"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/trap_code_title"
-                android:id="@+id/textView"/>
+                android:id="@+id/textView"
+                />
 
         <EditText
                 android:layout_width="match_parent"

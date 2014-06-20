@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.util.NdefMessageParser;
@@ -24,6 +26,8 @@ public class TwittermonCollectActivity extends Activity
     private LinearLayout mCollectLayout;
     private LinearLayout mNotStartedLayout;
 
+    private ImageView mCreatureImage;
+    private TextView mCreatureName;
     private EditText mTrapCodeEdit;
     private Button mEnterButton;
 
@@ -39,6 +43,9 @@ public class TwittermonCollectActivity extends Activity
 
         mCollectLayout = (LinearLayout) findViewById(R.id.collect_layout);
         mNotStartedLayout = (LinearLayout) findViewById(R.id.not_started_layout);
+
+        mCreatureImage = (ImageView) findViewById(R.id.creature_image);
+        mCreatureName = (TextView) findViewById(R.id.creature_name);
 
         mTrapCodeEdit = (EditText) findViewById(R.id.trap_code_edit);
         mEnterButton = (Button) findViewById(R.id.collect_button);
@@ -88,6 +95,8 @@ public class TwittermonCollectActivity extends Activity
             byte[] payload = messages[0].getRecords()[0].getPayload();
             mTwittermonName = new String(payload); // TODO: actually parse this
             setIntent(new Intent());
+            mCreatureName.setText(mTwittermonName);
+            mCreatureImage.setImageDrawable(mSession.getTwittermonImage(mTwittermonName));
         }
     }
 

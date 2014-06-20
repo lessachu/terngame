@@ -53,7 +53,7 @@
     <string name="twittermon_fail_title">WRONG! Looks like this Twittermon has flown the coop!</string>
     <string name="collect_try_again_text">Try again?</string>
     <string name="collect_success">New Twittermon collected!</string>
-    <string name="collect_title">Unknown Twittermon species detected!</string>
+    <string name="collect_title">Wild Twittermon species detected!</string>
     <string name="trap_code_title">Enter trap code:</string>
     <string name="collect_button">Catch \'em!</string>
     <string name="no_twittermon_hint">You might want to look around and see if you can spot any.</string>
