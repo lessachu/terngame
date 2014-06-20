@@ -47,6 +47,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     private ArrayList<String> mCollected;
     private ArrayList<BattleInfo> mHistory;
+    private ArrayList<String> mCreatureList;
     private HashMap<String, CreatureInfo> mCreatureDict;
     private Context mContext;
     private JSONObject mData;
@@ -77,6 +78,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mCollected = new ArrayList<String>();
         mHistory = new ArrayList<BattleInfo>();
         mCreatureDict = new HashMap<String, CreatureInfo>();
+        mCreatureList = new ArrayList<String>();
         mData = new JSONObject();
         mDefaultPict = mContext.getResources().getDrawable(R.drawable.rockdove);
     }
@@ -98,6 +100,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
                             mContext.getPackageName());
                     ci.mPict = mContext.getResources().getDrawable(resourceID);
                     mCreatureDict.put(co.getString(s_creatureName), ci);
+                    mCreatureList.add(co.getString(s_creatureName));
 
                     Log.d("terngame", "Adding entry for " + co.getString(s_creatureName) + " : " +
                             ci.mCode);
@@ -232,6 +235,26 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public boolean hasCreature(String creature) {
         return mCollected.contains(creature);
+    }
+
+    public String getRandomCreature() {
+        if (mCreatureList.size() > 0) {
+
+            final int min = 0;
+            final int max = mCreatureList.size() - 1;
+            final int rand = min + (int) (Math.random() * ((max - min) + 1));
+
+            return mCreatureList.get(rand);
+        }
+        return null;
+    }
+
+    public BattleInfo getRandomMatchup() {
+        BattleInfo bi = new BattleInfo(getRandomCreature(),
+                getRandomCreature(),
+                0);
+        bi.mResult = battle(bi.mCreature, bi.mOpponent);
+        return bi;
     }
 
     public int battle(String creature1, String creature2) {

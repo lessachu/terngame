@@ -4,37 +4,109 @@
          "name" : "geoduck",
          "code" : "geodata",
          "type" :  3,
-         "image" : "rockdove"
+         "image" : "geoduck"
       },
       {
          "name" : "gizmoduck",
          "code" : "userids",
          "type" :  3,
-         "image" : "rockdove"
+         "image" : "gizmoduck"
       },
       {
          "name" : "bluebird",
          "code" : "meeting",
          "type" : 1,
-         "image" : "rockdove"
+         "image" : "bluebird"
       },
       {
          "name" : "duckling",
          "code" : "interview",
          "type" : 1,
-         "image" : "rockdove"
+         "image" : "duckling"
       },
       {
          "name" : "kookaburra",
-         "code" : "worddoc",
+         "code" : "toner",
          "type" : 2,
-         "image" : "rockdove"
+         "image" : "kookaburra"
       },
       {
          "name" : "drake",
          "code" : "pdffile",
          "type" : 2,
-         "image" : "rockdove"
-      }
+         "image" : "drake"
+      },
+      {
+         "name" : "harrier",
+         "code" : "pdffile",
+         "type" : 1,
+         "image" : "twittermondefault"
+      },
+        {
+           "name" : "albatross",
+           "code" : "pdffile",
+           "type" : 1,
+           "image" : "twittermondefault"
+        },
+    {
+       "name" : "condor",
+       "code" : "pdffile",
+       "type" : 1,
+       "image" : "twittermondefault"
+    },
+    {
+       "name" : "turkey",
+       "code" : "pdffile",
+       "type" : 1,
+       "image" : "twittermondefault"
+    },
+    {
+       "name" : "lapwing",
+       "code" : "pdffile",
+       "type" : 1,
+       "image" : "twittermondefault"
+    },
+    {
+       "name" : "anis",
+       "code" : "pdffile",
+       "type" : 1,
+       "image" : "twittermondefault"
+    },
+     {
+         "name" : "bananaquit",
+         "code" : "userids",
+         "type" :  3,
+         "image" : "twittermondefault"
+      },
+       {
+           "name" : "ibis",
+           "code" : "notifications",
+           "type" :  3,
+           "image" : "twittermondefault"
+        },
+     {
+         "name" : "clusterduck",
+         "code" : "notifications",
+         "type" :  3,
+         "image" : "twittermondefault"
+      },
+   {
+         "name" : "tweetypie",
+         "code" : "notifications",
+         "type" :  3,
+         "image" : "twittermondefault"
+      },
+   {
+         "name" : "hosebird",
+         "code" : "notifications",
+         "type" :  3,
+         "image" : "twittermondefault"
+      },
+            {
+               "name" : "fulmar",
+               "code" : "pdffile",
+               "type" : 2,
+               "image" : "twittermondefault"
+            },
     ]
 }

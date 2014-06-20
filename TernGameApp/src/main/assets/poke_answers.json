@@ -13,5 +13,24 @@
     "correct" : true,
     "canonical" : true
     }
-    ]
+    ],
+          "hints" : [
+              {
+               "time" :  120,
+               "id" : "twittermon1",
+               "text" : "These animals only eat peanuts and crackerjack.",
+               "cost" : 10
+              },
+              {
+               "time" :  240,
+               "id" : "twittermon2",
+               "text" : "The oriole lives in Baltimore."
+              },
+              {
+               "time" : 600,
+               "id" : "twittermon3",
+               "text" : "They're baseball teams.  Find the home city.",
+               "cost" : 10
+              }
+              ]
 }

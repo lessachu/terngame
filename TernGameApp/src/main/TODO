@@ -31,6 +31,12 @@
 * style the battle bar
 * hints don't work on pre-kitkat
 * add battle royale functionality
+* answer page
+* collect pokemon after any fight
+* ID the pokemon on collect
+* get the timer working
+* add parcelable to battle royale
+* add a stronger hint on the main page about what to do
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes

@@ -1,6 +1,7 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,8 @@ public class TwittermonBattleRoyaleStartActivity extends Activity
         final int id = view.getId();
 
         if (id == R.id.start_finale) {
-//            Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
-            //           startActivity(i);
+            Intent i = new Intent(this, TwittermonBattleRoyaleActivity.class);
+            startActivity(i);
         }
     }
 

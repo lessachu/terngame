@@ -69,5 +69,11 @@
     <string name="finale_button_text">Battle Royale</string>
     <string name="finale_start_button_text">Start!</string>
     <string name="finale_start_title">Battle Royale</string>
+    <string name="win_button_text">Win</string>
+    <string name="lose_button_text">Lose</string>
+    <string name="tie_button_text">Tie</string>
+    <string name="try_again_text">Try Again</string>
     <string name="finale_instructions">Predict the outcome of ten (or more) Twittermon battles in 60 seconds.</string>
+    <string name="royale_title_text">Battle Royale</string>
+    <string name="battle_royale_time_title">TIME REMAINING</string>
 </resources>

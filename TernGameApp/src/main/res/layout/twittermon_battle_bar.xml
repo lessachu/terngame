@@ -15,7 +15,7 @@
             android:gravity="left">
 
         <ImageView
-                android:layout_width="50dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/twittermon_image"/>
 
@@ -47,7 +47,7 @@
             android:layout_gravity="right">
 
         <ImageView
-                android:layout_width="50dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/opponent_image"
                 />
