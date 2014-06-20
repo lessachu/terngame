@@ -82,15 +82,15 @@
                 android:textSize="30dp"
                 />
 
-        <Chronometer
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/puzzle_chronometer"
+                android:id="@+id/puzzle_timer"
                 android:layout_gravity="center"
                 android:textSize="70sp"
                 android:layout_weight="0"
-                android:password="false"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="30:00"/>
 
     </LinearLayout>
 

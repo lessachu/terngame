@@ -24,18 +24,15 @@
 * should probably encode the names on the RFC tag
 * make the empty view work aggin
 * add the check for NFC capability early in the app
-* add battle royale view
 * style the grid view
 * add art
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
-* answer page
-* ID the pokemon on collect
-* get the timer working
 * add a stronger hint on the main page about what to do
 * add a pause to penalize wrong answers
-* fix win logic to account for the timer
+* add a visual count of the score in royale
+* add a prompt on the win page
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -106,3 +103,5 @@ DONE:
 * add battle royale functionality
 * add parcelable to battle royale
 * collect pokemon after any fight
+* ID the pokemon on collect
+* get the timer working

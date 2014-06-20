@@ -3,10 +3,10 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +31,8 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private Button mWin;
     private Button mLose;
     private Button mTie;
-    private Chronometer mBattleTimer;
+    private TextView mTimerText;
+    private CountDownTimer mTimer;
     private TwittermonBattleRoyalHelper mRoyaleHelper;
     private TwittermonInfo.BattleInfo mBattle;
 
@@ -42,14 +43,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
         setContentView(R.layout.twittermon_royale);
         mSession = Session.getInstance(this);
 
-        Intent i = getIntent();
-        Bundle extras = i.getExtras();
-        if (extras != null && i.hasExtra(s_helper)) {
-            mRoyaleHelper = extras.getParcelable(s_helper);
-        } else {
-            mRoyaleHelper = new TwittermonBattleRoyalHelper();
-        }
-
+        mRoyaleHelper = new TwittermonBattleRoyalHelper();
         mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
         mTextView = (TextView) findViewById(R.id.royale_title);
@@ -74,24 +68,10 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mTie = (Button) findViewById(R.id.tie_button);
         mTie.setOnClickListener(this);
 
-        mBattleTimer = (Chronometer) findViewById(R.id.puzzle_chronometer);
-    }
+        mTimerText = (TextView) findViewById(R.id.puzzle_timer);
+        initializeTimer();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mBattle = mRoyaleHelper.getMatchup();
-        Log.d("terngame", "BattleRoyaleActivity between: " + mBattle.mCreature + " and " + mBattle.mOpponent);
-
-        mNameView.setText(mBattle.mCreature);
-        mImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mCreature));
-
-        mOppNameView.setText(mBattle.mOpponent);
-        mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
-
-        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getTotal()));
-        mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
+        gotoNextBattle();
     }
 
     @Override
@@ -121,8 +101,13 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private void logResult(boolean correct) {
         if (correct) {
             mRoyaleHelper.logCorrect();
+            final int numCorrect = mRoyaleHelper.getCorrect();
+            String yay = "Correct!";
+            if (numCorrect < mRoyaleHelper.s_total) {
+                yay += " " + Integer.toString(mRoyaleHelper.s_total - numCorrect) + " to go!";
+            }
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Correct! " + Integer.toString(mRoyaleHelper.s_total - mRoyaleHelper.getCorrect()) + " to go!",
+                    yay,
                     Toast.LENGTH_SHORT);
             toast.show();
         } else {
@@ -133,27 +118,49 @@ public class TwittermonBattleRoyaleActivity extends Activity
         }
     }
 
+    private void initializeTimer() {
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+
+        mTimer = new CountDownTimer(TwittermonBattleRoyalHelper.s_total_time * 1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                mTimerText.setText(Long.toString(millisUntilFinished / 1000));
+            }
+
+            public void onFinish() {
+                mTimerText.setText("Time's Up!");
+                if (mRoyaleHelper.getCorrect() >= TwittermonBattleRoyalHelper.s_total) {
+                    Intent i = new Intent(TwittermonBattleRoyaleActivity.this, TwittermonBattleRoyaleWinActivity.class);
+                    i.putExtra(TwittermonBattleRoyaleWinActivity.s_correct, mRoyaleHelper.getCorrect());
+                    i.putExtra(TwittermonBattleRoyaleWinActivity.s_total, mRoyaleHelper.getTotal());
+                    startActivity(i);
+                } else {
+                    // put up a "not good enough message"
+                }
+            }
+        }.start();
+    }
 
     private void gotoNextBattle() {
-        finish();
-        final int numCorrect = mRoyaleHelper.getCorrect();
-        if (numCorrect == TwittermonBattleRoyalHelper.s_total) {
-            Intent i = new Intent(this, TwittermonBattleRoyaleWinActivity.class);
-            i.putExtra(TwittermonBattleRoyaleWinActivity.s_correct, numCorrect);
-            i.putExtra(TwittermonBattleRoyaleWinActivity.s_total, mRoyaleHelper.getTotal());
-            startActivity(i);
-        } else {
-            Intent i = getIntent();
-            i.putExtra(s_helper, mRoyaleHelper);
-            startActivity(i);
-        }
+        mBattle = mRoyaleHelper.getMatchup();
+        Log.d("terngame", "BattleRoyaleActivity between: " + mBattle.mCreature + " and " + mBattle.mOpponent);
+
+        mNameView.setText(mBattle.mCreature);
+        mImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mCreature));
+
+        mOppNameView.setText(mBattle.mOpponent);
+        mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
+
+        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getTotal()));
+        mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
     }
 
     private void restartRoyale() {
         mRoyaleHelper.clearData();
-        // TODO restart timer
+        initializeTimer();
         // Toast messaging
         gotoNextBattle();
     }
-
 }
