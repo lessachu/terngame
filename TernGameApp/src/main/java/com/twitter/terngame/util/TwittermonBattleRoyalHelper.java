@@ -13,7 +13,7 @@ import java.util.HashSet;
  */
 public class TwittermonBattleRoyalHelper implements Parcelable {
 
-    public final static int s_total = 10;
+    public final static int s_total = 5;
     public final static int s_total_time = 90;
 
     private HashSet<String> mBattles;

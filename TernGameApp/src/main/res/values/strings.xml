@@ -73,9 +73,9 @@
     <string name="lose_button_text">Lose</string>
     <string name="tie_button_text">Tie</string>
     <string name="try_again_text">Try Again</string>
-    <string name="finale_instructions">Predict the outcome of ten (or more) Twittermon battles in 60 seconds.</string>
+    <string name="finale_instructions">Correctly predict the outcome of five Twittermon battles in a row to get your final answer.</string>
     <string name="royale_title_text">Battle Royale</string>
-    <string name="battle_royale_time_title">TIME REMAINING</string>
     <string name="royale_win_text">YOU WIN!</string>
     <string name="twittermon_collect_prompt">Earn more Twittermon through head-to-head battles.</string>
+    <string name="battle_royale_time_title">TIME REMAINING</string>
 </resources>

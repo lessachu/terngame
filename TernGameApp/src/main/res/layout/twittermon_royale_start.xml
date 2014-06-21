@@ -16,6 +16,13 @@
             android:gravity="center_horizontal"/>
 
     <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sorry, better luck next time."
+            android:id="@+id/battle_royale_result"
+            style="@style/statusTheme"/>
+
+    <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/finale_instructions"
