@@ -152,8 +152,9 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
         mOppNameView.setText(mBattle.mOpponent);
         mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
+        mMatchView.setText(Integer.toString(mRoyaleHelper.getCorrect()) + " OF " +
+                Integer.toString(mRoyaleHelper.getTotal()) + " CORRECT");
 
-        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getTotal()));
         mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
     }
 

@@ -29,9 +29,8 @@
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
-* add a stronger hint on the main page about what to do
 * add a pause to penalize wrong answers
-* add a visual count of the score in royale
+
 
 
 DONE:
@@ -106,3 +105,5 @@ DONE:
 * ID the pokemon on collect
 * get the timer working
 * add a prompt on the win page
+* add a stronger hint on the main page about what to do
+* add a visual count of the score in royale
