@@ -26,6 +26,7 @@ public class TwittermonActivity extends Activity
     private TwittermonDialogGridFragment mGridFragment;
 
     private LinearLayout mNoTwittermonLayout;
+    private TextView mCollectPrompt;
     private TextView mTitle;
     private LinearLayout mBattleButtons;
     private Button mHistoryButton;
@@ -58,6 +59,7 @@ public class TwittermonActivity extends Activity
         mFinaleButton.setOnClickListener(this);
 
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
+        mCollectPrompt = (TextView) findViewById(R.id.collect_prompt);
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
 
     }
@@ -72,11 +74,13 @@ public class TwittermonActivity extends Activity
             mNoTwittermonLayout.setVisibility(View.VISIBLE);
             ft.hide(mGridFragment);
             mTitle.setVisibility(View.GONE);
+            mCollectPrompt.setVisibility(View.GONE);
             mBattleButtons.setVisibility(View.GONE);
         } else {
             mNoTwittermonLayout.setVisibility(View.GONE);
             ft.show(mGridFragment);
             mTitle.setVisibility(View.VISIBLE);
+            mCollectPrompt.setVisibility(View.VISIBLE);
             mBattleButtons.setVisibility(View.VISIBLE);
             mAdapter.notifyDataSetChanged();
         }

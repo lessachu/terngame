@@ -46,7 +46,7 @@
     <string name="no_hints">There are no hints available for this puzzle.</string>
     <string name="hint_prompt">NEW HINT AVAILABLE</string>
     <string name="notif_hint_title">New Hint Available</string>
-    <string name="twitter_collection_title">Select a Twittermon</string>
+    <string name="twitter_collection_title">Select a Twittermon to Fight</string>
     <string name="no_twittermon_yet">You don\'t have any Twittermon to fight with.</string>
     <string name="twittermon_dupe_title">You\'ve already collected this Twittermon.</string>
     <string name="collection_button_text">See your collection</string>
@@ -56,7 +56,7 @@
     <string name="collect_title">Wild Twittermon species detected!</string>
     <string name="trap_code_title">Enter trap code:</string>
     <string name="collect_button">Catch \'em!</string>
-    <string name="no_twittermon_hint">You might want to look around and see if you can spot any.</string>
+    <string name="no_twittermon_hint">Tap on a tag to try and trap one.</string>
     <string name="twittermon_not_started">Woah there tiger, you haven\'t started this puzzle yet.</string>
     <string name="battle_button_text">Battle History</string>
     <string name="select_button">Battle a Twittermon You\'ve Already Collected</string>
@@ -77,4 +77,5 @@
     <string name="royale_title_text">Battle Royale</string>
     <string name="battle_royale_time_title">TIME REMAINING</string>
     <string name="royale_win_text">YOU WIN!</string>
+    <string name="twittermon_collect_prompt">Earn more Twittermon through head-to-head battles.</string>
 </resources>

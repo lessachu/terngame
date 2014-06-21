@@ -7,12 +7,11 @@
               android:gravity="center_horizontal">
 
     <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/creature_layout"
-            android:layout_gravity="left"
-            android:gravity="left">
+            android:layout_gravity="left">
 
         <ImageView
                 android:layout_width="100dp"
@@ -26,7 +25,7 @@
                 android:singleLine="false"
                 android:text="test"
                 style="statusTheme"
-                android:gravity="left"/>
+                android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <TextView
@@ -41,6 +40,7 @@
             android:layout_marginRight="10dp"/>
 
     <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/opponent_layout"
@@ -58,6 +58,7 @@
                 android:id="@+id/opponent_title"
                 android:singleLine="false"
                 android:text="test"
+                android:gravity="center_horizontal"
                 style="statusTheme"/>
     </LinearLayout>
 </LinearLayout>

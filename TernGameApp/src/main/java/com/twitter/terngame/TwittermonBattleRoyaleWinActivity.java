@@ -41,7 +41,7 @@ public class TwittermonBattleRoyaleWinActivity extends Activity {
         mAnswerPrompt.setText("Great job! You correctly predicted the outcome of  " + Integer.toString(numWins) +
                 " of " + Integer.toString(numBattles) + " battles " +
                 Integer.toString(TwittermonBattleRoyalHelper.s_total_time) +
-                " seconds!");
+                " seconds!\n\nThe answer to this puzzle is:");
     }
 
 }

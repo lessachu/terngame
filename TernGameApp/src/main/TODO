@@ -32,7 +32,7 @@
 * add a stronger hint on the main page about what to do
 * add a pause to penalize wrong answers
 * add a visual count of the score in royale
-* add a prompt on the win page
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -105,3 +105,4 @@ DONE:
 * collect pokemon after any fight
 * ID the pokemon on collect
 * get the timer working
+* add a prompt on the win page
