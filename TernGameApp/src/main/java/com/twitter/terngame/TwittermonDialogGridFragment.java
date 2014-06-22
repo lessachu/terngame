@@ -76,4 +76,8 @@ public class TwittermonDialogGridFragment extends DialogFragment {
     public void setSelectionListener(TwittermonGridSelectionListener selectionListener) {
         mListener = selectionListener;
     }
+
+    public void refreshFragment() {
+        mAdapter.notifyDataSetChanged();
+    }
 }

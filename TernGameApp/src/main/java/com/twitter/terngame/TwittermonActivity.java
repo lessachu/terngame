@@ -6,12 +6,10 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.TwittermonInfo;
@@ -25,7 +23,6 @@ public class TwittermonActivity extends Activity
 
     private ArrayList<String> mTwittermon;
 
-    private TwittermonArrayAdapter mAdapter;
     private FragmentManager mFragmentManager;
     private TwittermonDialogGridFragment mGridFragment;
 
@@ -49,7 +46,6 @@ public class TwittermonActivity extends Activity
         final Context context = this;
 
         mTwittermon = ti.getCollectedList();
-        mAdapter = new TwittermonArrayAdapter(this, mTwittermon);
 
         mFragmentManager = getFragmentManager();
         mGridFragment = (TwittermonDialogGridFragment) mFragmentManager.findFragmentById(R.id.twittermon_grid);
@@ -86,10 +82,6 @@ public class TwittermonActivity extends Activity
             mTitle.setVisibility(View.VISIBLE);
             mCollectPrompt.setVisibility(View.VISIBLE);
             mBattleButtons.setVisibility(View.VISIBLE);
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "in onResume, force a resume here?",
-                    Toast.LENGTH_SHORT);
-            toast.show();
         }
         ft.commit();
     }
@@ -116,21 +108,11 @@ public class TwittermonActivity extends Activity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("terngame", "onActivityResult in TwittermonActivity RQ:" + Integer.toString(requestCode) +
-                " RC " + Integer.toString(resultCode));
         if (requestCode == TwittermonBattleActivity.NEW_CREATURE_REQUEST_CODE &&
                 resultCode == RESULT_OK && data != null) {
-            Log.d("terngame", "twittermonActivity RQ is correct");
             Boolean fNewCreature = data.getBooleanExtra(s_new_creature, false);
             if (fNewCreature) {
-                Log.d("terngame", "new creature collected, notifyDataSet");
-
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "new creature won in battle",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-                mAdapter.add("hosebird");
-                mAdapter.notifyDataSetChanged();
+                mGridFragment.refreshFragment();
             }
         }
     }

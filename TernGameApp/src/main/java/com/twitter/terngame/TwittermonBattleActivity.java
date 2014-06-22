@@ -87,7 +87,6 @@ public class TwittermonBattleActivity extends Activity
 
     @Override
     public void onBackPressed() {
-        Log.d("terngame", "TwittermonBattleActivity onBackPressed, mEarnednewCreature is:" + Boolean.toString(mEarnedNewCreature));
         Intent output = new Intent();
         output.putExtra(TwittermonActivity.s_new_creature, mEarnedNewCreature);
         setResult(RESULT_OK, output);
@@ -96,13 +95,9 @@ public class TwittermonBattleActivity extends Activity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("terngame", "TwitterBattleActivity: onActivityResult RQ: " + Integer.toString(requestCode) +
-                " RC: " + Integer.toString(resultCode));
         if (requestCode == TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE &&
                 resultCode == RESULT_OK && data != null) {
-            Log.d("terngame", "TwitterBattleActivity RQ  and RC correct");
             mEarnedNewCreature = data.getBooleanExtra(s_new_creature, false);
-            Log.d("terngame", "TwitterBattleACtivity: mEarnedNewCreature is: " + Boolean.toString(mEarnedNewCreature));
         }
     }
 

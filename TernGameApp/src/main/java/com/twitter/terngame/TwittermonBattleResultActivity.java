@@ -112,7 +112,6 @@ public class TwittermonBattleResultActivity extends Activity
 
     @Override
     public void onBackPressed() {
-        Log.d("terngame", "TwittermonBattleResultActivity: in onBackPressed.  mEarnedCreature is: " + Boolean.toString(mEarnedNewCreature));
         Intent output = new Intent();
         output.putExtra(TwittermonBattleActivity.s_new_creature, mEarnedNewCreature);
         setResult(RESULT_OK, output);
