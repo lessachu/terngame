@@ -19,6 +19,8 @@ public class TwittermonBattleActivity extends Activity
         implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_creature = "creature";
+    public static final String s_new_creature = "new_creature";
+    public static final int NEW_CREATURE_REQUEST_CODE = 1;
 
     private Session mSession;
     private String mCreature;
@@ -33,6 +35,8 @@ public class TwittermonBattleActivity extends Activity
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
     private TwittermonDialogGridFragment mFragment;
+
+    private Boolean mEarnedNewCreature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,29 @@ public class TwittermonBattleActivity extends Activity
             throw new RuntimeException("fail", e);
         }
         mIntentFilters = new IntentFilter[]{ndef};
+
+        mEarnedNewCreature = false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("terngame", "TwittermonBattleActivity onBackPressed, mEarnednewCreature is:" + Boolean.toString(mEarnedNewCreature));
+        Intent output = new Intent();
+        output.putExtra(TwittermonActivity.s_new_creature, mEarnedNewCreature);
+        setResult(RESULT_OK, output);
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("terngame", "TwitterBattleActivity: onActivityResult RQ: " + Integer.toString(requestCode) +
+                " RC: " + Integer.toString(resultCode));
+        if (requestCode == TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE &&
+                resultCode == RESULT_OK && data != null) {
+            Log.d("terngame", "TwitterBattleActivity RQ  and RC correct");
+            mEarnedNewCreature = data.getBooleanExtra(s_new_creature, false);
+            Log.d("terngame", "TwitterBattleACtivity: mEarnedNewCreature is: " + Boolean.toString(mEarnedNewCreature));
+        }
     }
 
     public void onPause() {
@@ -143,7 +170,7 @@ public class TwittermonBattleActivity extends Activity
             Intent i = new Intent(this, TwittermonBattleResultActivity.class);
             i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
             i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
-            startActivity(i);
+            startActivityForResult(i, TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE);
         } else {
             Log.d("terngame", "action: " + intent.getAction());
         }

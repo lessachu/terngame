@@ -17,6 +17,7 @@ public class TwittermonBattleResultActivity extends Activity
 
     public static final String s_creature = "creature";
     public static final String s_oppCreature = "oppCreature";
+    public static final int NEW_CREATURE_REQUEST_CODE = 1;
 
     private Session mSession;
     private String mCreature;
@@ -27,6 +28,7 @@ public class TwittermonBattleResultActivity extends Activity
     private ImageView mOppImageView;
     private TextView mOppNameView;
     private Button mHistory;
+    private Boolean mEarnedNewCreature;
 
 
     @Override
@@ -90,15 +92,15 @@ public class TwittermonBattleResultActivity extends Activity
 
         if (!mSession.hasTwittermon(mOpponentCreature)) {
             mSession.collectTwittermon(mOpponentCreature);
-
+            mEarnedNewCreature = true;
             collectMsgView.setText(mOpponentCreature + " has been added to your collection!");
         } else {
             collectMsgView.setVisibility(View.GONE);
+            mEarnedNewCreature = false;
         }
     }
 
     @Override
-
     public void onClick(View view) {
         final int id = view.getId();
 
@@ -108,4 +110,12 @@ public class TwittermonBattleResultActivity extends Activity
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Log.d("terngame", "TwittermonBattleResultActivity: in onBackPressed.  mEarnedCreature is: " + Boolean.toString(mEarnedNewCreature));
+        Intent output = new Intent();
+        output.putExtra(TwittermonBattleActivity.s_new_creature, mEarnedNewCreature);
+        setResult(RESULT_OK, output);
+        super.onBackPressed();
+    }
 }

@@ -11,17 +11,13 @@
 * Dupe view needs styling
 * should probably obscure admin mode even more, like add some icon taps required to access
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
-* WTF number selector??
 * Admin mode puzzle data editor
 * definitely a race initializing mainactivity.  we may need the team loader listener after all.
 * add support for view recycling
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
-* add a confirmation dialog before you take a hint?
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* list view for collection activity
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
-* should probably encode the names on the RFC tag
 * make the empty view work aggin
 * add the check for NFC capability early in the app
 * style the grid view
@@ -29,9 +25,9 @@
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
-* add a pause to penalize wrong answers
 * update the collected grid when you collect a new creature
-
+* fix pause loading after you login
+* We shouldn't be crashing on return to app
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
