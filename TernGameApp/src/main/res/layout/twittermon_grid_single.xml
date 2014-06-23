@@ -9,8 +9,8 @@
         android:gravity="center">
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/twittermon_image"
             android:layout_gravity="center"/>
 
@@ -20,6 +20,7 @@
             android:id="@+id/twittermon_text"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="test"/>
+            android:text="test"
+            style="@style/twittermonNameTheme"/>
 
 </LinearLayout>

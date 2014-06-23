@@ -14,8 +14,8 @@
             android:layout_gravity="left">
 
         <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:id="@+id/twittermon_image"/>
 
         <TextView
@@ -24,7 +24,7 @@
                 android:id="@+id/name_title"
                 android:singleLine="false"
                 android:text="test"
-                style="statusTheme"
+                style="@style/twittermonNameTheme"
                 android:gravity="center_horizontal"/>
     </LinearLayout>
 
@@ -47,8 +47,8 @@
             android:layout_gravity="right">
 
         <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:id="@+id/opponent_image"
                 />
 
@@ -59,6 +59,6 @@
                 android:singleLine="false"
                 android:text="test"
                 android:gravity="center_horizontal"
-                style="statusTheme"/>
+                style="@style/twittermonNameTheme"/>
     </LinearLayout>
 </LinearLayout>

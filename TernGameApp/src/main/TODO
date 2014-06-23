@@ -25,9 +25,10 @@
 * add a default unknown opponent placeholder
 * style the battle bar
 * hints don't work on pre-kitkat
-* update the collected grid when you collect a new creature
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
+* add an unknown opponent image
+* add an error images
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -103,3 +104,4 @@ DONE:
 * add a prompt on the win page
 * add a stronger hint on the main page about what to do
 * add a visual count of the score in royale
+* update the collected grid when you collect a new creature

@@ -58,6 +58,13 @@
         <item name="android:textSize">38sp</item>
     </style>
 
+    <style name="twittermonNameTheme">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/event_title_color</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="instructionTheme">
         <item name="android:textStyle">italic</item>
         <item name="android:gravity">left</item>
