@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +42,13 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mRoyaleHelper = new TwittermonBattleRoyalHelper();
         mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
-        mNameView = (TextView) findViewById(R.id.name_title);
+        final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
+        mNameView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
 
-        mOppNameView = (TextView) findViewById(R.id.opponent_title);
-        mOppImageView = (ImageView) findViewById(R.id.opponent_image);
+        final RelativeLayout opponentLayout = (RelativeLayout) findViewById(R.id.opponent_layout);
+        mOppNameView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
+        mOppImageView = (ImageView) opponentLayout.findViewById(R.id.twittermon_image);
 
         mPromptView = (TextView) findViewById(R.id.prompt_text);
         mMatchView = (TextView) findViewById(R.id.match_counter_text);

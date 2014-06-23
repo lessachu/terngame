@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.twitter.terngame.util.NdefMessageParser;
@@ -53,10 +54,11 @@ public class TwittermonBattleActivity extends Activity
             mCreature = "error";
         }
 
-        mTextView = (TextView) findViewById(R.id.name_title);
+        final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
+        mTextView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
         mTextView.setText(mCreature);
 
-        mImageView = (ImageView) findViewById(R.id.twittermon_image);
+        mImageView = (ImageView) creatureLayout.findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
         mSelectButton = (Button) findViewById(R.id.select_button);
@@ -65,8 +67,9 @@ public class TwittermonBattleActivity extends Activity
         mFightButton = (Button) findViewById(R.id.fight_button);
         mFightButton.setOnClickListener(this);
 
-        mOpponentTextView = (TextView) findViewById(R.id.opponent_title);
-        mOpponentImageView = (ImageView) findViewById(R.id.opponent_image);
+        final RelativeLayout opponentLayout = (RelativeLayout) findViewById(R.id.opponent_layout);
+        mOpponentTextView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
+        mOpponentImageView = (ImageView) findViewById(R.id.twittermon_image);
 
         mAdapter = NfcAdapter.getDefaultAdapter(this);
 

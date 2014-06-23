@@ -6,27 +6,12 @@
               android:id="@+id/battle_bar_layout"
               android:gravity="center_horizontal">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <include
+            android:id="@+id/creature_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/creature_layout"
-            android:layout_gravity="left">
-
-        <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:id="@+id/twittermon_image"/>
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/name_title"
-                android:singleLine="false"
-                android:text="test"
-                style="@style/twittermonNameTheme"
-                android:gravity="center_horizontal"/>
-    </LinearLayout>
+            android:layout_gravity="left"
+            layout="@layout/twittermon_grid_single"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -39,26 +24,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
-    <LinearLayout
-            android:orientation="vertical"
+    <include
+            android:id="@+id/opponent_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/opponent_layout"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            layout="@layout/twittermon_grid_single"/>
 
-        <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:id="@+id/opponent_image"
-                />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/opponent_title"
-                android:singleLine="false"
-                android:text="test"
-                android:gravity="center_horizontal"
-                style="@style/twittermonNameTheme"/>
-    </LinearLayout>
 </LinearLayout>

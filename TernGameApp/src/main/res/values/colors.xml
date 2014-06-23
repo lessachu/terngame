@@ -4,5 +4,6 @@
     <color name="event_title_color">#28B1E7</color>
     <color name="black">#000000</color>
     <color name="puzzle_status_color">#22689B</color>
+    <color name="twittermon_name_color">#0099CC</color>
 
 </resources>

@@ -44,8 +44,8 @@ public class TwittermonCollectActivity extends Activity
         mCollectLayout = (LinearLayout) findViewById(R.id.collect_layout);
         mNotStartedLayout = (LinearLayout) findViewById(R.id.not_started_layout);
 
-        mCreatureImage = (ImageView) findViewById(R.id.creature_image);
-        mCreatureName = (TextView) findViewById(R.id.creature_name);
+        mCreatureImage = (ImageView) findViewById(R.id.twittermon_image);
+        mCreatureName = (TextView) findViewById(R.id.twittermon_text);
 
         mTrapCodeEdit = (EditText) findViewById(R.id.trap_code_edit);
         mEnterButton = (Button) findViewById(R.id.collect_button);

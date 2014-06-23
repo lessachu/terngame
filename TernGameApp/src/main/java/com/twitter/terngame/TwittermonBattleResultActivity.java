@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
@@ -72,17 +73,18 @@ public class TwittermonBattleResultActivity extends Activity
 
         mSession.logTwittermonBattle(mCreature, mOpponentCreature, result);
 
-        mNameView = (TextView) findViewById(R.id.name_title);
+        final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
+        mNameView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
         mNameView.setText(mCreature);
 
-        mImageView = (ImageView) findViewById(R.id.twittermon_image);
+        mImageView = (ImageView) creatureLayout.findViewById(R.id.twittermon_image);
         mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
-
-        mOppNameView = (TextView) findViewById(R.id.opponent_title);
+        final RelativeLayout opponentLayout = (RelativeLayout) findViewById(R.id.opponent_layout);
+        mOppNameView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
         mOppNameView.setText(mOpponentCreature);
 
-        mOppImageView = (ImageView) findViewById(R.id.opponent_image);
+        mOppImageView = (ImageView) opponentLayout.findViewById(R.id.twittermon_image);
         mOppImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
 
         mHistory = (Button) findViewById(R.id.battle_history);
