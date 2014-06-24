@@ -27,7 +27,7 @@
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
 * add an unknown opponent image
-* add an error images
+* check for bad scan any where we are scanning, add an error images
 * style trap, collect dupe and collect fail page
 
 DONE:

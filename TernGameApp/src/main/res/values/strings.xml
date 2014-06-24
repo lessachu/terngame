@@ -46,7 +46,7 @@
     <string name="no_hints">There are no hints available for this puzzle.</string>
     <string name="hint_prompt">NEW HINT AVAILABLE</string>
     <string name="notif_hint_title">New Hint Available</string>
-    <string name="twitter_collection_title">Select a Twittermon to Fight</string>
+    <string name="twitter_collection_title">Collected Twittermon</string>
     <string name="no_twittermon_yet">You don\'t have any Twittermon to fight with.</string>
     <string name="twittermon_dupe_title">You\'ve already collected this Twittermon.</string>
     <string name="collection_button_text">See your collection</string>

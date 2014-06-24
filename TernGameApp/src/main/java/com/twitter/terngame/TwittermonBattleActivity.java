@@ -69,7 +69,10 @@ public class TwittermonBattleActivity extends Activity
 
         final RelativeLayout opponentLayout = (RelativeLayout) findViewById(R.id.opponent_layout);
         mOpponentTextView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
-        mOpponentImageView = (ImageView) findViewById(R.id.twittermon_image);
+        mOpponentImageView = (ImageView) opponentLayout.findViewById(R.id.twittermon_image);
+
+        mOpponentTextView.setText("???");
+        mOpponentImageView.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
 
         mAdapter = NfcAdapter.getDefaultAdapter(this);
 
