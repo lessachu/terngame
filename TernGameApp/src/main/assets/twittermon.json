@@ -46,7 +46,7 @@
            "name" : "albatross",
            "code" : "pdffile",
            "type" : 1,
-           "image" : "twittermondefault"
+           "image" : "albatross"
         },
     {
        "name" : "condor",
@@ -70,7 +70,7 @@
        "name" : "anis",
        "code" : "pdffile",
        "type" : 1,
-       "image" : "twittermondefault"
+       "image" : "anis"
     },
      {
          "name" : "bananaquit",
@@ -82,7 +82,7 @@
            "name" : "ibis",
            "code" : "notifications",
            "type" :  3,
-           "image" : "twittermondefault"
+           "image" : "ibis"
         },
      {
          "name" : "clusterduck",
@@ -94,7 +94,7 @@
          "name" : "tweetypie",
          "code" : "notifications",
          "type" :  3,
-         "image" : "twittermondefault"
+         "image" : "tweetypie"
       },
    {
          "name" : "hosebird",
