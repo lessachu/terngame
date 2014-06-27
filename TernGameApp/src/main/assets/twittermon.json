@@ -13,62 +13,50 @@
          "image" : "gizmoduck"
       },
       {
-         "name" : "bluebird",
+         "name" : "lapwing",
          "code" : "meeting",
          "type" : 1,
-         "image" : "bluebird"
+         "image" : "drake"
       },
       {
-         "name" : "duckling",
-         "code" : "interview",
+         "name" : "albatross",
+         "code" : "meeting",
          "type" : 1,
-         "image" : "duckling"
+         "image" : "albatross"
       },
       {
-         "name" : "kookaburra",
+         "name" : "donald duck",
          "code" : "toner",
          "type" : 2,
          "image" : "kookaburra"
       },
       {
          "name" : "drake",
-         "code" : "pdffile",
+         "code" : "toner",
          "type" : 2,
          "image" : "drake"
       },
       {
          "name" : "harrier",
-         "code" : "pdffile",
+         "code" : "meeting",
          "type" : 1,
          "image" : "twittermondefault"
       },
-        {
-           "name" : "albatross",
-           "code" : "pdffile",
-           "type" : 1,
-           "image" : "albatross"
-        },
     {
        "name" : "condor",
-       "code" : "pdffile",
+       "code" : "meeting",
        "type" : 1,
        "image" : "twittermondefault"
     },
     {
        "name" : "turkey",
-       "code" : "pdffile",
-       "type" : 1,
-       "image" : "twittermondefault"
-    },
-    {
-       "name" : "lapwing",
-       "code" : "pdffile",
+       "code" : "meeting",
        "type" : 1,
        "image" : "twittermondefault"
     },
     {
        "name" : "anis",
-       "code" : "pdffile",
+       "code" : "meeting",
        "type" : 1,
        "image" : "anis"
     },
@@ -92,7 +80,7 @@
       },
    {
          "name" : "tweetypie",
-         "code" : "notifications",
+         "code" : "follows",
          "type" :  3,
          "image" : "tweetypie"
       },
@@ -103,8 +91,8 @@
          "image" : "twittermondefault"
       },
             {
-               "name" : "fulmar",
-               "code" : "pdffile",
+               "name" : "flappy bird",
+               "code" : "toner",
                "type" : 2,
                "image" : "twittermondefault"
             },

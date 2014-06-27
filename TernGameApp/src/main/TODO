@@ -19,7 +19,6 @@
 * I think the hintlistener is possibly not thread safe
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * make the empty view work aggin
-* add the check for NFC capability early in the app
 * style the grid view
 * add art
 * add a default unknown opponent placeholder
@@ -29,6 +28,11 @@
 * add an unknown opponent image
 * check for bad scan any where we are scanning, add an error images
 * style trap, collect dupe and collect fail page
+* make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
+* more pigeon error checking
+* make it clearer how tag scanning works?
+
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -107,3 +111,4 @@ DONE:
 * update the collected grid when you collect a new creature
 * style grid element
 * style the battle bar
+* add an NFC check earlier in the application, take them to settings if it is off.
