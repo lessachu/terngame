@@ -121,7 +121,6 @@ public class TwittermonCollectActivity extends Activity
                 mCollectLayout.setVisibility(View.GONE);
                 mNotStartedLayout.setVisibility(View.GONE);
                 mBadNFCLayout.setVisibility(View.VISIBLE);
-                // TODO set the return result, finish the activity and let the previous one show the dialog
             }
         }
     }

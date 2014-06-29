@@ -75,34 +75,10 @@
                 android:enabled="true"/>
     </LinearLayout>
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/bad_nfc_layout">
-
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/bad_nfc_text"
-                android:id="@+id/bad_nfc_text"
-                android:singleLine="false"
-                android:layout_gravity="center"
-                android:padding="12dp"
-                android:textSize="20sp"/>
-
-        <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="0dp"
-                android:background="?android:attr/dividerVertical"/>
-
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ok"
-                android:id="@+id/bad_read_ok"
-                style="?android:attr/buttonBarButtonStyle"
-                android:enabled="true"/>
-    </LinearLayout>
+    <include
+            android:id="@+id/bad_nfc_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            layout="@layout/bad_nfc_read"/>
 </LinearLayout>
