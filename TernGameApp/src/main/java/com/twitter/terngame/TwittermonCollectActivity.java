@@ -25,14 +25,17 @@ public class TwittermonCollectActivity extends Activity
 
     private String mTwittermonName;
 
+    // this is pretty hacky
     private LinearLayout mCollectLayout;
     private LinearLayout mNotStartedLayout;
+    private LinearLayout mBadNFCLayout;
 
     private ImageView mCreatureImage;
     private TextView mCreatureName;
     private EditText mTrapCodeEdit;
     private Button mEnterButton;
     private Button mNYSOkButton;
+    private Button mBadNFCButton;
 
     private Session mSession;
 
@@ -46,6 +49,7 @@ public class TwittermonCollectActivity extends Activity
 
         mCollectLayout = (LinearLayout) findViewById(R.id.collect_layout);
         mNotStartedLayout = (LinearLayout) findViewById(R.id.not_started_layout);
+        mBadNFCLayout = (LinearLayout) findViewById(R.id.bad_nfc_layout);
 
         mCreatureImage = (ImageView) findViewById(R.id.twittermon_image);
         mCreatureName = (TextView) findViewById(R.id.twittermon_text);
@@ -57,6 +61,9 @@ public class TwittermonCollectActivity extends Activity
 
         mNYSOkButton = (Button) findViewById(R.id.not_started_ok);
         mNYSOkButton.setOnClickListener(this);
+
+        mBadNFCButton = (Button) findViewById(R.id.bad_read_ok);
+        mBadNFCButton.setOnClickListener(this);
 
         mTrapCodeEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -102,12 +109,18 @@ public class TwittermonCollectActivity extends Activity
                     setTitle(R.string.collect_title);
                     mCollectLayout.setVisibility(View.VISIBLE);
                     mNotStartedLayout.setVisibility(View.GONE);
+                    mBadNFCLayout.setVisibility(View.GONE);
                 } else {
                     setTitle(R.string.too_soon_title);
                     mCollectLayout.setVisibility(View.GONE);
                     mNotStartedLayout.setVisibility(View.VISIBLE);
+                    mBadNFCLayout.setVisibility(View.GONE);
                 }
             } else {
+                setTitle(R.string.bad_nfc_title);
+                mCollectLayout.setVisibility(View.GONE);
+                mNotStartedLayout.setVisibility(View.GONE);
+                mBadNFCLayout.setVisibility(View.VISIBLE);
                 // TODO set the return result, finish the activity and let the previous one show the dialog
             }
         }
@@ -136,6 +149,8 @@ public class TwittermonCollectActivity extends Activity
             }
         } else if (id == R.id.not_started_ok) {
             // TODO - why is this causing a flash on dismiss?
+            this.finish();
+        } else if (id == R.id.bad_read_ok) {
             this.finish();
         }
     }

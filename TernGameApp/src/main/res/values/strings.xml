@@ -80,4 +80,6 @@
     <string name="twittermon_collect_prompt">Earn more Twittermon through head-to-head battles.</string>
     <string name="battle_royale_time_title">TIME REMAINING</string>
     <string name="ok">Ok</string>
+    <string name="bad_nfc_title">Tag read incomplete</string>
+    <string name="bad_nfc_text">The tag didn\'t read correctly. Try not to move it as much.</string>
 </resources>
