@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonBattleActivity extends Activity
@@ -36,6 +38,7 @@ public class TwittermonBattleActivity extends Activity
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
     private TwittermonDialogGridFragment mFragment;
+    private BadNFCReadDialogFragment mBadNFCFragment;
 
     private Boolean mEarnedNewCreature;
 
@@ -163,15 +166,23 @@ public class TwittermonBattleActivity extends Activity
             }
 
             byte[] payload = messages[0].getRecords()[0].getPayload();
-            mOpponentCreature = new String(payload); // TODO: actually parse this
+            String creature = new String(payload);
 
-            Log.d("terngame", "Battle with " + mCreature + " and " + mOpponentCreature);
-            setIntent(new Intent());
+            Drawable image = mSession.getTwittermonImage(creature);
+            if (image != TwittermonInfo.mDefaultPict) {
+                mOpponentCreature = creature;
 
-            Intent i = new Intent(this, TwittermonBattleResultActivity.class);
-            i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
-            i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
-            startActivityForResult(i, TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE);
+                Log.d("terngame", "Battle with " + mCreature + " and " + mOpponentCreature);
+                setIntent(new Intent());
+
+                Intent i = new Intent(this, TwittermonBattleResultActivity.class);
+                i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
+                i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
+                startActivityForResult(i, TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE);
+            } else {
+                mBadNFCFragment = BadNFCReadDialogFragment.newInstance();
+                mBadNFCFragment.show(getFragmentManager(), "dialog");
+            }
         } else {
             Log.d("terngame", "action: " + intent.getAction());
         }

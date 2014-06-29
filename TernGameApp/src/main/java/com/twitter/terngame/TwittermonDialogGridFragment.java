@@ -36,8 +36,6 @@ public class TwittermonDialogGridFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.twittermon_grid_fragment, container, false);
 
-        Log.d("terngame", "I'm in onCreatEview in the DialogGridFragment");
-
         final Activity activity = getActivity();
         if (activity != null) {
             final Context context = getActivity().getApplicationContext();

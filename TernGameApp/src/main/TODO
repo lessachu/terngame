@@ -27,6 +27,7 @@
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * more pigeon error checking
 * Why does the back activity flash when you dismiss the dialog?
+* hook up the ok button on the bad read dialog
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
