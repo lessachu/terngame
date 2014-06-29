@@ -19,7 +19,6 @@
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * make the empty view work aggin
 * add art
-* add a default unknown opponent placeholder
 * hints don't work on pre-kitkat
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
@@ -27,6 +26,7 @@
 * style trap, collect dupe and collect fail page
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * more pigeon error checking
+* Why does the back activity flash when you dismiss the dialog?
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -106,3 +106,4 @@ DONE:
 * style grid element
 * style the battle bar
 * add an NFC check earlier in the application, take them to settings if it is off.
+* style the collect activity as a dialog

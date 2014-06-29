@@ -56,7 +56,7 @@
     <string name="collect_title">Wild Twittermon found!</string>
     <string name="too_soon_title">Woah there tiger!</string>
     <string name="twittermon_not_started">Good instincts, but that\'s not going to work until you start the puzzle.</string>
-    <string name="trap_code_title">Enter trap code:</string>
+    <string name="trap_code_title">Enter trap code to collect:</string>
     <string name="collect_button">Catch \'em!</string>
     <string name="no_twittermon_hint">Tap on a tag to try and trap one.</string>
     <string name="battle_button_text">Battle History</string>
