@@ -7,7 +7,6 @@
 * Save file has to include a hash of the team name
 * patch up last updated logic
 * Deal better with malformed JSON
-* do I wnat to deal with muxing right now? - it's okay, you can just intercept on correct answers and pull the next puzzle info elsewhere
 * Dupe view needs styling
 * should probably obscure admin mode even more, like add some icon taps required to access
 * hrm, the use of isValidStart code to set the current puzzle is... problematic.
@@ -19,20 +18,15 @@
 * I think the hintlistener is possibly not thread safe
 * hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * make the empty view work aggin
-* style the grid view
 * add art
 * add a default unknown opponent placeholder
 * hints don't work on pre-kitkat
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
-* add an unknown opponent image
 * check for bad scan any where we are scanning, add an error images
 * style trap, collect dupe and collect fail page
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * more pigeon error checking
-* make it clearer how tag scanning works?
-
-
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes

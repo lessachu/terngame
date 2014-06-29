@@ -84,8 +84,10 @@
         <activity
                 android:name="com.twitter.terngame.TwittermonCollectActivity"
                 android:screenOrientation="portrait"
-                android:launchMode="singleTop">
-            <intent-filter>
+                android:launchMode="singleTop"
+                android:theme="@android:style/Theme.Holo.Light.Dialog"
+                android:excludeFromRecents="true">
+        <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
                 <data android:mimeType="application/com.twitter.terngame"/>
                 <category android:name="android.intent.category.DEFAULT"/>

@@ -45,13 +45,15 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public final static int[][] s_winChart =
             {{s_tie, s_lose, s_win}, {s_win, s_tie, s_lose}, {s_lose, s_win, s_tie}};
 
+    public static Drawable mDefaultPict;
+
     private ArrayList<String> mCollected;
     private ArrayList<BattleInfo> mHistory;
     private ArrayList<String> mCreatureList;
     private HashMap<String, CreatureInfo> mCreatureDict;
     private Context mContext;
     private JSONObject mData;
-    private Drawable mDefaultPict;
+
 
     public class CreatureInfo {
         public String mCode;

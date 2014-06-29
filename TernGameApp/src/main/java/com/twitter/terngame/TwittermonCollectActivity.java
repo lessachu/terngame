@@ -2,6 +2,7 @@ package com.twitter.terngame;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.twitter.terngame.data.PuzzleExtraInfo;
+import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonCollectActivity extends Activity
@@ -30,6 +32,7 @@ public class TwittermonCollectActivity extends Activity
     private TextView mCreatureName;
     private EditText mTrapCodeEdit;
     private Button mEnterButton;
+    private Button mNYSOkButton;
 
     private Session mSession;
 
@@ -51,6 +54,9 @@ public class TwittermonCollectActivity extends Activity
         mEnterButton = (Button) findViewById(R.id.collect_button);
         mEnterButton.setOnClickListener(this);
         mEnterButton.setEnabled(false);
+
+        mNYSOkButton = (Button) findViewById(R.id.not_started_ok);
+        mNYSOkButton.setOnClickListener(this);
 
         mTrapCodeEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,15 +81,6 @@ public class TwittermonCollectActivity extends Activity
 
         String curPuzzle = s.getCurrentPuzzleID();
 
-        if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
-
-            mCollectLayout.setVisibility(View.VISIBLE);
-            mNotStartedLayout.setVisibility(View.GONE);
-        } else {
-            mCollectLayout.setVisibility(View.GONE);
-            mNotStartedLayout.setVisibility(View.VISIBLE);
-        }
-
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             NdefMessage[] messages = NdefMessageParser.getNdefMessages(getIntent());
 
@@ -93,10 +90,26 @@ public class TwittermonCollectActivity extends Activity
             }
 
             byte[] payload = messages[0].getRecords()[0].getPayload();
-            mTwittermonName = new String(payload); // TODO: actually parse this
-            setIntent(new Intent());
-            mCreatureName.setText(mTwittermonName);
-            mCreatureImage.setImageDrawable(mSession.getTwittermonImage(mTwittermonName));
+            mTwittermonName = new String(payload);
+            Drawable image = mSession.getTwittermonImage(mTwittermonName);
+
+            if (image != TwittermonInfo.mDefaultPict) {
+                setIntent(new Intent());
+                mCreatureName.setText(mTwittermonName);
+                mCreatureImage.setImageDrawable(image);
+
+                if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
+                    setTitle(R.string.collect_title);
+                    mCollectLayout.setVisibility(View.VISIBLE);
+                    mNotStartedLayout.setVisibility(View.GONE);
+                } else {
+                    setTitle(R.string.too_soon_title);
+                    mCollectLayout.setVisibility(View.GONE);
+                    mNotStartedLayout.setVisibility(View.VISIBLE);
+                }
+            } else {
+                // TODO set the return result, finish the activity and let the previous one show the dialog
+            }
         }
     }
 
@@ -121,6 +134,9 @@ public class TwittermonCollectActivity extends Activity
                 Intent i = new Intent(this, TwittermonCollectFailActivity.class);
                 startActivity(i);
             }
+        } else if (id == R.id.not_started_ok) {
+            // TODO - why is this causing a flash on dismiss?
+            this.finish();
         }
     }
 
