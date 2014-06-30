@@ -54,7 +54,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
     private Context mContext;
     private JSONObject mData;
 
-
     public class CreatureInfo {
         public String mCode;
         public int mType;
@@ -82,6 +81,8 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mCreatureDict = new HashMap<String, CreatureInfo>();
         mCreatureList = new ArrayList<String>();
         mData = new JSONObject();
+
+        // hrm... I think this is not correct.
         mDefaultPict = mContext.getResources().getDrawable(R.drawable.rockdove);
     }
 

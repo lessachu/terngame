@@ -3,26 +3,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingTop="10dp">
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/twittermon_dupe_title"
-            />
-
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/twittermon_image"
-            android:layout_gravity="center_horizontal"
-            android:longClickable="true"/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="show the result of the action here"
+            android:id="@+id/collect_result_prompt"/>
 
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/collection_button_text"
-            android:id="@id/goto_collection_button"
+            android:text="@string/ok"
+            android:id="@+id/collect_result_ok"
             android:longClickable="true"/>
 </LinearLayout>

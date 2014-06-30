@@ -22,9 +22,10 @@
 * hints don't work on pre-kitkat
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
-* style trap, collect dupe and collect fail page
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
+* style the buttons on the collection result to look like dialog buttons
+* hook up the collect result dialog to the battle results
 
 
 DONE:
@@ -108,3 +109,4 @@ DONE:
 * style the collect activity as a dialog
 * hook up the ok button on the bad read dialog
 * more pigeon error checking
+* make the collection results a dialog

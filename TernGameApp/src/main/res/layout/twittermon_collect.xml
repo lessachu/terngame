@@ -82,4 +82,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             layout="@layout/bad_nfc_read"/>
+
+    <include
+            android:id="@+id/collect_result_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            layout="@layout/twittermon_collect_result"/>
 </LinearLayout>

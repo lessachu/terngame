@@ -48,11 +48,6 @@
     <string name="notif_hint_title">New Hint Available</string>
     <string name="twitter_collection_title">Collected Twittermon</string>
     <string name="no_twittermon_yet">You don\'t have any Twittermon to fight with.</string>
-    <string name="twittermon_dupe_title">You\'ve already collected this Twittermon.</string>
-    <string name="collection_button_text">See your collection</string>
-    <string name="twittermon_fail_title">WRONG! Looks like this Twittermon has flown the coop!</string>
-    <string name="collect_try_again_text">Try again?</string>
-    <string name="collect_success">New Twittermon collected!</string>
     <string name="collect_title">Wild Twittermon found!</string>
     <string name="too_soon_title">Woah there tiger!</string>
     <string name="twittermon_not_started">Good instincts, but that\'s not going to work until you start the puzzle.</string>
@@ -78,8 +73,11 @@
     <string name="royale_title_text">Battle Royale</string>
     <string name="royale_win_text">YOU WIN!</string>
     <string name="twittermon_collect_prompt">Earn more Twittermon through head-to-head battles.</string>
-    <string name="battle_royale_time_title">TIME REMAINING</string>
     <string name="ok">Ok</string>
     <string name="bad_nfc_title">Tag read incomplete</string>
     <string name="bad_nfc_text">The tag didn\'t read correctly. Try not to move it as much.</string>
+    <string name="collect_fail_title">Incorrect trap code</string>
+    <string name="collect_succeed_title">Success!</string>
+    <string name="collect_dupe_title">Duplicate Twittermon</string>
+
 </resources>
