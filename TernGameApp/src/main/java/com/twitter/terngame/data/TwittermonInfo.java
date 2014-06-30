@@ -45,6 +45,8 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public final static int[][] s_winChart =
             {{s_tie, s_lose, s_win}, {s_win, s_tie, s_lose}, {s_lose, s_win, s_tie}};
 
+    public final static int s_max_collect = 6;
+
     public static Drawable mDefaultPict;
 
     private ArrayList<String> mCollected;

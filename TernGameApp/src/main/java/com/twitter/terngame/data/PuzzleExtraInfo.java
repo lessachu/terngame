@@ -4,9 +4,6 @@ import android.content.Context;
 
 import org.json.JSONObject;
 
-/**
- * Created by jchong on 5/4/14.
- */
 public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
 
     // list of supported extra puzzles
@@ -37,6 +34,5 @@ public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
     public TwittermonInfo getTwittermonInfo() {
         return mTwittermonInfo;
     }
-
 
 }

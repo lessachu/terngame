@@ -16,9 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-/**
- * Created by jchong on 1/26/14.
- */
 public class LoginInfo implements JSONFileResultHandler {
 
     public static final String s_version = "version";
@@ -49,14 +46,11 @@ public class LoginInfo implements JSONFileResultHandler {
                     String password = teamObj.getString(s_teamPass);
                     mLoginInfo.put(teamName, password);
                 }
-
                 Log.d("terngame", mLoginInfo.toString());
             } catch (JSONException e) {
                 Log.e("terngame", "JsonException loading teamdata");
             }
         }
-
-
     }
 
     public void initialize(Context context, String dataFile) {
@@ -81,7 +75,6 @@ public class LoginInfo implements JSONFileResultHandler {
                     Toast.LENGTH_SHORT);
             toast.show();
             Log.e("terngame", "IOException");
-
         }
     }
 

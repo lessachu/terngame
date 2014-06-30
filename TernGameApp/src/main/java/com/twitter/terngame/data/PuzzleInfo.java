@@ -18,9 +18,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by jchong on 2/4/14.
- */
 public class PuzzleInfo implements JSONFileResultHandler {
 
     public static final String s_version = "version";
@@ -129,7 +126,6 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     Toast.LENGTH_SHORT);
             toast.show();
             Log.e("terngame", "IOException");
-
         }
     }
 
@@ -161,5 +157,4 @@ public class PuzzleInfo implements JSONFileResultHandler {
         }
         mHints.add(newHi);
     }
-
 }

@@ -11,9 +11,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/twitter_collection_title"
+            android:layout_gravity="left|center_vertical"
             android:id="@+id/twittermon_collection_title_text"
             android:layout_weight="0"
-            style="@style/statusTheme"/>
+            style="@style/textHeadingTheme"/>
 
     <fragment
             android:name="com.twitter.terngame.TwittermonDialogGridFragment"

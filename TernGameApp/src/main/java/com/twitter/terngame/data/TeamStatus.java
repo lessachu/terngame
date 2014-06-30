@@ -149,7 +149,6 @@ public class TeamStatus implements JSONFileResultHandler {
                             ps.mHintsTaken.add(hintArray.getString(k));
                         }
                     }
-
                     mPuzzles.put(ps.mID, ps);
                 }
             } catch (JSONException e) {
@@ -175,7 +174,6 @@ public class TeamStatus implements JSONFileResultHandler {
                     Toast.LENGTH_SHORT);
             toast.show();
             Log.e("jan", "No save file");
-
         }
     }
 
@@ -248,7 +246,6 @@ public class TeamStatus implements JSONFileResultHandler {
         } catch (JSONException e) {
             return false;
         }
-
         return true;
     }
 
@@ -476,7 +473,5 @@ public class TeamStatus implements JSONFileResultHandler {
                 toast.show();
             }
         }
-
     }
-
 }

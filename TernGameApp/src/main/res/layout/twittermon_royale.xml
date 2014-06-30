@@ -11,8 +11,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/royale_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            style="statusTheme"
-            android:gravity="center_horizontal"
+            style="@style/textHeadingTheme"
+            android:layout_gravity="left|center_vertical"
             android:text="@string/royale_title_text"/>
 
     <TextView
@@ -61,7 +61,6 @@
                 android:id="@+id/tie_button"
                 android:layout_weight="1"/>
     </LinearLayout>
-
 
 
 </LinearLayout>

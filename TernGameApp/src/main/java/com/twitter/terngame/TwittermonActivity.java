@@ -61,7 +61,6 @@ public class TwittermonActivity extends Activity
         mTitle = (TextView) findViewById(R.id.twittermon_collection_title_text);
         mCollectPrompt = (TextView) findViewById(R.id.collect_prompt);
         mNoTwittermonLayout = (LinearLayout) findViewById(R.id.empty_view);
-
     }
 
     @Override
@@ -80,7 +79,13 @@ public class TwittermonActivity extends Activity
             mNoTwittermonLayout.setVisibility(View.GONE);
             ft.show(mGridFragment);
             mTitle.setVisibility(View.VISIBLE);
-            mCollectPrompt.setVisibility(View.VISIBLE);
+
+            // only show the collect prompt if there are more to collect
+            if (mTwittermon.size() < TwittermonInfo.s_max_collect) {
+                mCollectPrompt.setVisibility(View.VISIBLE);
+            } else {
+                mCollectPrompt.setVisibility(View.GONE);
+            }
             mBattleButtons.setVisibility(View.VISIBLE);
         }
         ft.commit();

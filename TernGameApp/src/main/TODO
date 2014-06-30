@@ -24,9 +24,10 @@
 * We shouldn't be crashing on return to app
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
-* style the buttons on the collection result to look like dialog buttons
-* hook up the collect result dialog to the battle results
-
+* answer dialog still needs style
+* battle flow is awkward
+* color the names of the creatures in the dialogs?
+* style the battle activities better - better hinting
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -110,3 +111,6 @@ DONE:
 * hook up the ok button on the bad read dialog
 * more pigeon error checking
 * make the collection results a dialog
+* style the buttons on the collection result to look like dialog buttons
+* hook up the collect result dialog to the battle results
+* Hide collect hint when they've collected everything
