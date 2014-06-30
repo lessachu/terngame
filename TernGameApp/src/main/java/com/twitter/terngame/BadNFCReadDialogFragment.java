@@ -9,8 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-public class BadNFCReadDialogFragment extends DialogFragment {
+public class BadNFCReadDialogFragment extends DialogFragment
+        implements View.OnClickListener {
+
+    private Button mButton;
 
     static BadNFCReadDialogFragment newInstance() {
         return new BadNFCReadDialogFragment();
@@ -23,7 +27,8 @@ public class BadNFCReadDialogFragment extends DialogFragment {
         if (activity != null) {
             final Context context = getActivity().getApplicationContext();
 
-            // hook up the OK button
+            mButton = (Button) view.findViewById(R.id.bad_read_ok);
+            mButton.setOnClickListener(this);
         } else {
             Log.d("terngame", "Activity is null");
         }
@@ -38,5 +43,13 @@ public class BadNFCReadDialogFragment extends DialogFragment {
         return dialog;
     }
 
+    @Override
+    public void onClick(View view) {
+        final int id = view.getId();
+
+        if (id == R.id.bad_read_ok) {
+            dismiss();
+        }
+    }
 
 }
