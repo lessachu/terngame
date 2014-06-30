@@ -22,12 +22,10 @@
 * hints don't work on pre-kitkat
 * fix pause loading after you login
 * We shouldn't be crashing on return to app
-* check for bad scan any where we are scanning, add an error images
 * style trap, collect dupe and collect fail page
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
-* more pigeon error checking
 * Why does the back activity flash when you dismiss the dialog?
-* hook up the ok button on the bad read dialog
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -108,3 +106,5 @@ DONE:
 * style the battle bar
 * add an NFC check earlier in the application, take them to settings if it is off.
 * style the collect activity as a dialog
+* hook up the ok button on the bad read dialog
+* more pigeon error checking
