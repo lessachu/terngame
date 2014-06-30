@@ -37,10 +37,17 @@
                 android:singleLine="true"
                 android:id="@+id/trap_code_edit"/>
 
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="0dp"
+                android:background="?android:attr/dividerVertical"/>
+
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/collect_button"
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/collect_button"/>
 
     </LinearLayout>

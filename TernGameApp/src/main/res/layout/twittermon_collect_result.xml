@@ -3,22 +3,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingTop="10dp">
+              android:layout_height="match_parent">
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="12dp"
             android:text="show the result of the action here"
             android:id="@+id/collect_result_prompt"/>
+
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="0dp"
+            android:background="?android:attr/dividerVertical"/>
 
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/ok"
             android:id="@+id/collect_result_ok"
+            style="?android:attr/buttonBarButtonStyle"
             android:longClickable="true"/>
 </LinearLayout>
