@@ -103,6 +103,17 @@ public class TwittermonBattleResultActivity extends Activity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mEarnedNewCreature) {
+            CollectionResultDialogFragment dialogFragment =
+                    CollectionResultDialogFragment.newInstance(mOpponentCreature);
+            dialogFragment.show(getFragmentManager(), "dialog");
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         final int id = view.getId();
 
