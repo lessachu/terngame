@@ -30,6 +30,7 @@ public class TwittermonBattleActivity extends Activity
     private TextView mTitleText;
     private TextView mPromptText;
     private TextView mInstructionText;
+    private TextView mResultText;
     private TextView mCreatureTextView;
     private ImageView mCreatureImageView;
     private TextView mOpponentTextView;
@@ -61,7 +62,10 @@ public class TwittermonBattleActivity extends Activity
 
         mTitleText = (TextView) findViewById(R.id.battle_title);
         mPromptText = (TextView) findViewById(R.id.battle_prompt);
+        mPromptText.setText("You chose " + mCreature + ". Now select an opponent.");
         mInstructionText = (TextView) findViewById(R.id.battle_instruction);
+        mResultText = (TextView) findViewById(R.id.battle_result_text);
+        mResultText.setVisibility(View.GONE);
 
         final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
         mCreatureTextView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
@@ -195,12 +199,15 @@ public class TwittermonBattleActivity extends Activity
         switch (result) {
             case TwittermonInfo.s_win:
                 mPromptText.setText("You win!");
+                mResultText.setText(mCreature + " wins against " + mOpponentCreature);
                 break;
             case TwittermonInfo.s_tie:
                 mPromptText.setText("It's a tie!");
+                mResultText.setText(mCreature + " ties with " + mOpponentCreature);
                 break;
             case TwittermonInfo.s_lose:
                 mPromptText.setText("You lose!");
+                mResultText.setText(mCreature + " loses to " + mOpponentCreature);
                 break;
         }
 
@@ -222,11 +229,8 @@ public class TwittermonBattleActivity extends Activity
     public void hideBattleUX() {
         mTitleText.setText(R.string.battle_result_title);
         mSelectButton.setVisibility(View.GONE);
-        if (mEarnedNewCreature) {
-            mInstructionText.setText(mCreature + " has been added to your collection!");
-        } else {
-            mInstructionText.setVisibility(View.GONE);
-        }
+        mInstructionText.setVisibility(View.GONE);
+        mResultText.setVisibility(View.VISIBLE);
     }
 }
 

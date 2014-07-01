@@ -3,7 +3,6 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ public class CollectionResultDialogFragment extends DialogFragment
 
         final Activity activity = getActivity();
         if (activity != null) {
-            final Context context = getActivity().getApplicationContext();
+            getDialog().setTitle("New Twittermon collected");
 
             TextView prompt = (TextView) view.findViewById(R.id.collect_result_prompt);
             prompt.setText(mCreatureName + " has been added to your collection!");

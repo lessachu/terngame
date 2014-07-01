@@ -25,9 +25,9 @@
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
 * answer dialog still needs style
-* battle flow is awkward
 * color the names of the creatures in the dialogs?
 * style the battle activities better - better hinting
+* single opponent grid mode looks pretty crappy in dialog form
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -114,3 +114,4 @@ DONE:
 * style the buttons on the collection result to look like dialog buttons
 * hook up the collect result dialog to the battle results
 * Hide collect hint when they've collected everything
+* battle flow is awkward

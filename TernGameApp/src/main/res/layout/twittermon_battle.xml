@@ -18,7 +18,10 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Now select an opponent"
+            android:text="You chose ??.  Now select an opponent."
+            android:padding="10dp"
+            style="@style/statusTheme"
+            android:textStyle="normal"
             android:id="@+id/battle_prompt"/>
 
     <include layout="@layout/twittermon_battle_bar"/>
@@ -28,7 +31,16 @@
             android:layout_height="wrap_content"
             android:text="@string/battle_instructions"
             android:id="@+id/battle_instruction"
+            android:paddingTop="10dp"
             style="@style/instructionTheme"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/battle_result_text"
+            android:padding="10dp"
+            style="@style/statusTheme"
+            android:textStyle="normal"/>
 
     <Button
             android:layout_width="match_parent"
