@@ -14,7 +14,7 @@
             android:layout_gravity="left|center_vertical"
             android:id="@+id/twittermon_collection_title_text"
             android:layout_weight="0"
-            style="@style/textHeadingTheme"/>
+            style="@style/titleHeadingTheme"/>
 
     <fragment
             android:name="com.twitter.terngame.TwittermonDialogGridFragment"

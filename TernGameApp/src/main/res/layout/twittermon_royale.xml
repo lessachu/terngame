@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/royale_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            style="@style/textHeadingTheme"
+            style="@style/titleHeadingTheme"
             android:layout_gravity="left|center_vertical"
             android:text="@string/royale_title_text"/>
 
