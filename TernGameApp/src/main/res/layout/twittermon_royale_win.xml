@@ -8,22 +8,34 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/royale_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            style="@style/titleHeadingTheme"
+            android:layout_gravity="left|center_vertical"
+            android:text="@string/royale_title_text"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/royale_win_text"
             android:id="@+id/royale_win_title"
+            android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             style="@style/statusTheme"/>
 
     <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/twittermon_image"/>
+            android:layout_gravity="center"
+            android:id="@+id/twittermon_image"
+            android:src="@drawable/twittermondefault"/>
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Great job!  The answer to this puzzle is:"
             android:id="@+id/answer_prompt"
-            style="@style/textHeadingTheme"/>
+            style="@style/statusTheme"/>
 
     <TextView
             android:layout_width="fill_parent"
@@ -31,4 +43,5 @@
             android:text="turducken stew"
             android:id="@+id/answer_text"
             style="@style/puzzleStatusTheme"/>
+
 </LinearLayout>

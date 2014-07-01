@@ -70,7 +70,7 @@
     <string name="try_again_text">Try Again</string>
     <string name="finale_instructions">Correctly predict the outcome of five Twittermon battles in a row to get your final answer.</string>
     <string name="royale_title_text">Battle Royale</string>
-    <string name="royale_win_text">YOU WIN!</string>
+    <string name="royale_win_text">YOU WIN!\n5 of 5 battles predicted correctly.</string>
     <string name="twittermon_collect_prompt">Earn more Twittermon through head-to-head battles.</string>
     <string name="ok">Ok</string>
     <string name="bad_nfc_title">Tag read incomplete</string>

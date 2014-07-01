@@ -1,0 +1,35 @@
+{
+ "version" : 1,
+ "answer_list" : [
+     { "answer" : "hint",
+     "response" : "Hints are time-based, so you just need to wait for them.\n\nThe hints page will tell you when the next one unlocks.\n\nYou'll also receive a push notification when one unlocks."
+      },
+   { "answer" : "unfun",
+   "response" : "If you're not having fun any more, you can always submit the answer \"SKIP\" to go directly to the next clue.\n\n You can try that now or wait for the last hint to give you the answer."
+    },
+    {
+    "answer" : "tweet tweet",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+      "hints" : [
+          {
+           "time" :  30,
+           "id" : "practice1",
+           "text" : "Stumped about what to do?\n\nGood thing there are hints.\n\nGo ahead and submit the answer \"hint\".",
+           "cost" : 10
+          },
+          {
+           "time" :  60,
+           "id" : "practice2",
+           "text" : "Hooray! Another hint.\n\nHints will reveal more and more information over time.\n\nTry submitting the answer \"unfun\""
+          },
+          {
+           "time" : 90,
+           "id" : "practice3",
+           "text" : "The answer to the puzzle is \"tweet tweet\".",
+           "cost" : 10
+          }
+          ]
+}

@@ -1,8 +1,14 @@
 {
   "version" : 1,
-  "order":  [ "wombat", "banana", "twittermon", "andorra"],
+  "order":  [ "practice", "wombat", "banana", "twittermon", "andorra"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
+     {
+       "id" : "practice",
+       "name" : "Learning the ropes",
+       "answer_file" : "practice_answers.json",
+       "instruction" : "Complete the practice puzzle and learn how the app works."
+     },
      {
        "id" : "andorra",
        "name" : "orienteering",
