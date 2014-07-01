@@ -26,8 +26,8 @@
 * Why does the back activity flash when you dismiss the dialog?
 * answer dialog still needs style
 * color the names of the creatures in the dialogs?
-* style the battle activities better - better hinting
 * single opponent grid mode looks pretty crappy in dialog form
+* gizmoduck png has something in the top right corner
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -115,3 +115,4 @@ DONE:
 * hook up the collect result dialog to the battle results
 * Hide collect hint when they've collected everything
 * battle flow is awkward
+* style the battle activities better - better hinting

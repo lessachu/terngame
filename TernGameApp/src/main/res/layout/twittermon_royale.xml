@@ -21,7 +21,8 @@
             android:id="@+id/match_counter_text"
             android:gravity="center_horizontal"
             android:text="MATCH ##"
-            style="@style/textHeadingTheme"/>
+            style="@style/textHeadingTheme"
+            android:paddingBottom="10dp"/>
 
     <include layout="@layout/twittermon_battle_bar"/>
 
@@ -30,7 +31,9 @@
             android:layout_height="wrap_content"
             android:text="Does CREATURE win, lose or tie?"
             android:id="@+id/prompt_text"
-            android:paddingLeft="10dp"/>
+            style="@style/statusTheme"
+            android:textStyle="normal"
+            android:padding="10dp"/>
 
     <LinearLayout
             android:orientation="horizontal"

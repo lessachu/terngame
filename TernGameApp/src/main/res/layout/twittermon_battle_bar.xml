@@ -19,7 +19,7 @@
             android:id="@+id/vs_text"
             android:text="@string/versus"
             android:singleLine="false"
-            style="statusTheme"
+            style="@style/statusTheme"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>

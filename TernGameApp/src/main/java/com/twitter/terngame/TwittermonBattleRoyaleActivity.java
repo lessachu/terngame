@@ -95,7 +95,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
                     Toast.LENGTH_SHORT);
             toast.show();
 
-            if (numCorrect > mRoyaleHelper.s_total) {
+            if (numCorrect >= mRoyaleHelper.s_total) {
                 Intent i = new Intent(this, TwittermonBattleRoyaleWinActivity.class);
                 startActivity(i);
             } else {
@@ -118,7 +118,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
         mOppNameView.setText(mBattle.mOpponent);
         mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
-        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getCorrect()));
+        mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getCorrect() + 1));
 
         mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
     }
