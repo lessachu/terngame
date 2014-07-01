@@ -13,9 +13,13 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/battle_title"
             android:id="@+id/battle_title"
-            style="statusTheme"
-            android:phoneNumber="true"
-            android:gravity="center_horizontal"/>
+            style="@style/titleHeadingTheme"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Now select an opponent"
+            android:id="@+id/battle_prompt"/>
 
     <include layout="@layout/twittermon_battle_bar"/>
 
@@ -37,8 +41,8 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fight_button_text"
-            android:id="@+id/fight_button"
+            android:text="@string/battle_history"
+            android:id="@+id/battle_history_button"
             android:layout_gravity="center_horizontal"
             android:singleLine="true"/>
 

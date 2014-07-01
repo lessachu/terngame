@@ -12,7 +12,7 @@
             android:layout_gravity="left|center_vertical"
             android:id="@+id/battle_royale_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/finale_start_title"
+            android:text="@string/royale_title_text"
             style="@style/titleHeadingTheme"/>
 
     <TextView

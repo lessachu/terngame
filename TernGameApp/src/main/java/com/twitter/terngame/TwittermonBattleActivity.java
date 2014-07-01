@@ -22,18 +22,20 @@ public class TwittermonBattleActivity extends Activity
         implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_creature = "creature";
-    public static final String s_new_creature = "new_creature";
     public static final int NEW_CREATURE_REQUEST_CODE = 1;
 
     private Session mSession;
     private String mCreature;
     private String mOpponentCreature;
-    private TextView mTextView;
-    private ImageView mImageView;
+    private TextView mTitleText;
+    private TextView mPromptText;
+    private TextView mInstructionText;
+    private TextView mCreatureTextView;
+    private ImageView mCreatureImageView;
     private TextView mOpponentTextView;
     private ImageView mOpponentImageView;
     private Button mSelectButton;
-    private Button mFightButton;
+    private Button mBattleHistoryButton;
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
@@ -57,18 +59,22 @@ public class TwittermonBattleActivity extends Activity
             mCreature = "error";
         }
 
-        final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
-        mTextView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
-        mTextView.setText(mCreature);
+        mTitleText = (TextView) findViewById(R.id.battle_title);
+        mPromptText = (TextView) findViewById(R.id.battle_prompt);
+        mInstructionText = (TextView) findViewById(R.id.battle_instruction);
 
-        mImageView = (ImageView) creatureLayout.findViewById(R.id.twittermon_image);
-        mImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
+        final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
+        mCreatureTextView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
+        mCreatureTextView.setText(mCreature);
+
+        mCreatureImageView = (ImageView) creatureLayout.findViewById(R.id.twittermon_image);
+        mCreatureImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
         mSelectButton = (Button) findViewById(R.id.select_button);
         mSelectButton.setOnClickListener(this);
 
-        mFightButton = (Button) findViewById(R.id.fight_button);
-        mFightButton.setOnClickListener(this);
+        mBattleHistoryButton = (Button) findViewById(R.id.battle_history_button);
+        mBattleHistoryButton.setOnClickListener(this);
 
         final RelativeLayout opponentLayout = (RelativeLayout) findViewById(R.id.opponent_layout);
         mOpponentTextView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
@@ -102,14 +108,6 @@ public class TwittermonBattleActivity extends Activity
         super.onBackPressed();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE &&
-                resultCode == RESULT_OK && data != null) {
-            mEarnedNewCreature = data.getBooleanExtra(s_new_creature, false);
-        }
-    }
-
     public void onPause() {
         super.onPause();
         if (mAdapter != null) {
@@ -128,12 +126,9 @@ public class TwittermonBattleActivity extends Activity
         if (mOpponentCreature != null) {
             mOpponentTextView.setText(mOpponentCreature);
             mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
-            mFightButton.setVisibility(View.VISIBLE);
         } else {
             mOpponentTextView.setText("???");
-            // TODO: have a ???? image
 //            mOpponentImageView.setImageDrawable();
-            mFightButton.setVisibility(View.GONE);
         }
 
     }
@@ -145,13 +140,9 @@ public class TwittermonBattleActivity extends Activity
             mFragment = TwittermonDialogGridFragment.newInstance();
             mFragment.show(getFragmentManager(), "dialog");
             mFragment.setSelectionListener(this);
-        } else if (id == R.id.fight_button) {
-            if (mCreature != null && mOpponentCreature != null) {
-                Intent i = new Intent(this, TwittermonBattleResultActivity.class);
-                i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
-                i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
-                startActivity(i);
-            }
+        } else if (id == R.id.battle_history_button) {
+            Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
+            startActivity(i);
         }
     }
 
@@ -175,10 +166,7 @@ public class TwittermonBattleActivity extends Activity
                 Log.d("terngame", "Battle with " + mCreature + " and " + mOpponentCreature);
                 setIntent(new Intent());
 
-                Intent i = new Intent(this, TwittermonBattleResultActivity.class);
-                i.putExtra(TwittermonBattleResultActivity.s_creature, mCreature);
-                i.putExtra(TwittermonBattleResultActivity.s_oppCreature, mOpponentCreature);
-                startActivityForResult(i, TwittermonBattleResultActivity.NEW_CREATURE_REQUEST_CODE);
+                doBattle();
             } else {
                 mBadNFCFragment = BadNFCReadDialogFragment.newInstance();
                 mBadNFCFragment.show(getFragmentManager(), "dialog");
@@ -193,11 +181,51 @@ public class TwittermonBattleActivity extends Activity
         mOpponentTextView.setText(creature);
         mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(creature));
 
-        mFightButton.setVisibility(View.VISIBLE);
-
         if (mFragment != null) {
             mFragment.dismiss();
             mFragment = null;
+        }
+
+        doBattle();
+    }
+
+    public void doBattle() {
+
+        int result = mSession.battleTwittermon(mCreature, mOpponentCreature);
+        switch (result) {
+            case TwittermonInfo.s_win:
+                mPromptText.setText("You win!");
+                break;
+            case TwittermonInfo.s_tie:
+                mPromptText.setText("It's a tie!");
+                break;
+            case TwittermonInfo.s_lose:
+                mPromptText.setText("You lose!");
+                break;
+        }
+
+        mSession.logTwittermonBattle(mCreature, mOpponentCreature, result);
+
+        if (!mSession.hasTwittermon(mOpponentCreature)) {
+            mSession.collectTwittermon(mOpponentCreature);
+            mEarnedNewCreature = true;
+
+            CollectionResultDialogFragment dialogFragment =
+                    CollectionResultDialogFragment.newInstance(mOpponentCreature);
+            dialogFragment.show(getFragmentManager(), "dialog");
+        } else {
+            mEarnedNewCreature = false;
+        }
+        hideBattleUX();
+    }
+
+    public void hideBattleUX() {
+        mTitleText.setText(R.string.battle_result_title);
+        mSelectButton.setVisibility(View.GONE);
+        if (mEarnedNewCreature) {
+            mInstructionText.setText(mCreature + " has been added to your collection!");
+        } else {
+            mInstructionText.setVisibility(View.GONE);
         }
     }
 }

@@ -56,15 +56,14 @@
     <string name="no_twittermon_hint">Tap on a tag to try and trap one.</string>
     <string name="battle_button_text">Battle History</string>
     <string name="select_button">Battle a Twittermon You\'ve Already Collected</string>
-    <string name="battle_title">You\'ve chosen</string>
+    <string name="battle_title">Battle Mode</string>
+    <string name="battle_result_title">Battle Results</string>
     <string name="battle_instructions">Tap an opponent\'s tag to fight.</string>
     <string name="versus">vs.</string>
     <string name="battle_history">Past Twittermon Battles</string>
     <string name="opponent_grid_title">Pick an opponent</string>
-    <string name="fight_button_text">Fight!</string>
     <string name="finale_button_text">Battle Royale</string>
     <string name="finale_start_button_text">Start!</string>
-    <string name="finale_start_title">Battle Royale</string>
     <string name="win_button_text">Win</string>
     <string name="lose_button_text">Lose</string>
     <string name="tie_button_text">Tie</string>
@@ -79,5 +78,4 @@
     <string name="collect_fail_title">Incorrect trap code</string>
     <string name="collect_succeed_title">Success!</string>
     <string name="collect_dupe_title">Duplicate Twittermon</string>
-
 </resources>
