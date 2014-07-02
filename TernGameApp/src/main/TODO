@@ -29,8 +29,10 @@
 * gizmoduck png has something in the top right corner
 * shouldn't be able to start a new clue until the old one is done
 * show on the hint page how long until the next hint
-* hrm, after I clear the data, my hints are going to the wrong puzzle page
+* hrm, after I clear the data, my hints are going to the wrong puzzle page - oh I know why, we never
+  reset mPuzzleId in the puzzleActivity
 * make hints buzz the device
+ something is super buggy with hints
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes

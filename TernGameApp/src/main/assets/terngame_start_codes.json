@@ -1,6 +1,6 @@
 {
   "version" : 1,
-  "order":  [ "practice", "wombat", "banana", "twittermon", "andorra"],
+  "order":  [ "practice", "twittermon", "colors", "nantucket", "exponent", "selfie", "metropolis", "passport"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
@@ -9,36 +9,50 @@
        "answer_file" : "practice_answers.json",
        "instruction" : "Complete the practice puzzle and learn how the app works."
      },
+   {
+     "id" : "twittermon",
+    "name" : "Gotta catch 'em all!",
+    "answer_file" : "poke_answers.json",
+    "puzzle_button" : {
+          "button_text" : "Play!",
+          "button_mode": "twittermon",
+          "button_extra" : { "twittermon_file" : "twittermon.json",
+                              "collected" : []
+                            }
+          },
+    "instruction" : "Still in SF-11 Aviary? Good. Sit tight until Jan tells you what to do."
+    },
      {
-       "id" : "andorra",
-       "name" : "orienteering",
-       "answer_file" : "andorra_answers.json",
-       "instruction" : "Head up to SF-8 Bunting and see what you can find."
+       "id" : "colors",
+       "name" : "#hashflags",
+       "answer_file" : "hashflags_answers.json",
+       "instruction" : "Head to the Civic Center Plaza. Get the next clue from a staffer on the corner of Larkin and McAllister Streets. "
      },
      {
-       "id" : "wombat",
-       "name" : "God save the wombats",
-       "answer_file" : "wombat_answers.json",
-       "instruction" : "It's like you read my mind! Head to the ice cream shop on 501 Octavia Street, hand the woman your \
-                            monopoly money (that's $500 mono-bucks, yo!) and see what you get in return."
+       "id" : "nantucket",
+       "name" : "Limericks",
+       "answer_file" : "limerick_answers.json",
+       "instruction" : "Your next clue will be waiting at the SF Opera House Plaza, at the intersection of Franklin and Fulton Streets."
      },
-     { "id" : "banana",
-       "name" : "There's money in the banana stand.",
-       "answer_file" : "banana_answers.json",
-       "instruction" : "Oooh, I think you may find something interesting at the West entrance to the San Francisco Symphony Hall."
+      { "id" : "exponent",
+        "name" : "Second Power",
+        "answer_file" : "second_answers.json",
+        "instruction" : "Search for Carmen at Arlequin Cafe on 384 Hayes Street. Our sources say that she's been hanging out on their back patio (please be considerate of Arlequin staff and customers)."
+      },
+     { "id" : "selfie",
+       "name" : "Hieroglyphics Selfie Challenge",
+       "answer_file" : "selfie_answers.json",
+       "instruction" : "Hrm... looks like there's some suspicious activity going on at Smitten Ice Cream (corner of Octavia and Linden Streets). Go check it out!"
      },
-     {
-       "id" : "twittermon",
-      "name" : "Gotta catch 'em all!",
-      "answer_file" : "poke_answers.json",
-      "puzzle_button" : {
-            "button_text" : "Play!",
-            "button_mode": "twittermon",
-            "button_extra" : { "twittermon_file" : "twittermon.json",
-                                "collected" : []
-                              }
-            },
-      "instruction" : "Head to the commons and grab a map from the GC member there."
-      }
+    { "id" : "metropolis",
+        "name" : "Cities",
+        "answer_file" : "cities_answers.json",
+        "instruction" : "Carmen must have gotten hungry. She's been spotted at the donut shop by the Square building at 1455 Market Street."
+      },
+      { "id" : "passport",
+          "name" : "Trying it all together",
+          "answer_file" : "meta_answers.json",
+          "instruction" : "All our sources are saying that SF-7 Harrier is the Carmen's latest safe house. Go see what you can find!"
+       }
    ]
 }

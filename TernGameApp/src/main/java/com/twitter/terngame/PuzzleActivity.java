@@ -148,7 +148,6 @@ public class PuzzleActivity extends Activity
         mPuzzleTimer.setBase(SystemClock.elapsedRealtime() - timeElapsed);
     }
 
-    // hrm, should I be hiding the layout instead?
     public void setAnswerUIVisibility(int visibility) {
         mAnswerButton.setVisibility(visibility);
         mAnswerTitleTextView.setVisibility(visibility);

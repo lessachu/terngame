@@ -1,0 +1,20 @@
+{
+ "version" : 1,
+ "answer_list" : [
+     { "answer" : "north",
+     "response" : "Well, I guess France is to the north of Andorra."
+      },
+     {
+      "answer" : "south",
+      "response" : "That would be Spain. Which isn't the right answer either."
+      } ,
+    {
+   "answer" : "east",
+    "correct" : true,
+    "canonical" : true
+    },
+    {"answer" : "west",
+    "correct" : true
+    }
+    ]
+}
