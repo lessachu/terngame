@@ -201,9 +201,12 @@ public class PuzzleActivity extends Activity
 
         } else if (id == R.id.hint_button) {
             // if we go to the hint list activity, clear the hint notification prompt
-            mHintPrompt = false;
+            //mHintPrompt = false;
+            Intent i = getIntent();
+            i.putExtra(this.s_hintPrompt, false);
+            setIntent(i);
 
-            Intent i = new Intent(this, HintListActivity.class);
+            i = new Intent(this, HintListActivity.class);
             i.putExtra(HintListActivity.s_puzzleID, mPuzzleID);
             startActivity(i);
         } else if (id == R.id.guess_log_button) {
