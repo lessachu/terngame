@@ -19,6 +19,7 @@ import com.twitter.terngame.util.AnswerChecker;
 public class MainActivity extends Activity
         implements View.OnClickListener {
 
+    private Session mSession;
     private TextView mEventNameText;
     private EditText mStartCodeEditText;
     private Button mCurPuzzleButton;
@@ -27,22 +28,21 @@ public class MainActivity extends Activity
 
     private static String s_admin_mode = "start admin mode";
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.event_main);
-        Session s = Session.getInstance(this);
+        mSession = Session.getInstance(this);
 
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
-        final String eventName = s.getEventName();
+        final String eventName = mSession.getEventName();
         if (eventName != null) {
             mEventNameText.setText(eventName);
         }
 
         final TextView teamNameTextView = (TextView) findViewById(R.id.team_name_text);
-        teamNameTextView.setText(s.getTeamName());
+        teamNameTextView.setText(mSession.getTeamName());
 
         final Button goButton = (Button) findViewById(R.id.go_button);
         goButton.setOnClickListener(this);
@@ -60,7 +60,11 @@ public class MainActivity extends Activity
         mStartCodeEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable text) {
-                goButton.setEnabled(text.length() > 0);
+                if (mSession.puzzleStarted()) {
+                    goButton.setEnabled(text.toString().equalsIgnoreCase(s_admin_mode));
+                } else {
+                    goButton.setEnabled(text.length() > 0);
+                }
             }
 
             @Override

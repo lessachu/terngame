@@ -25,9 +25,10 @@
 * Why does the back activity flash when you dismiss the dialog?
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner
-* show on the hint page how long until the next hint
 * make hints buzz the device
- * remove cost display
+* show hints that are longer than 1 minute in minutes, rather than seconds
+* start code button disabled during puzzles unless the phrase is "start admin mode"
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -118,4 +119,5 @@ DONE:
 * style the battle activities better - better hinting
 * shouldn't be able to start a new clue until the old one is done
  * I think there's a concurrent modification issue if there are a lot of guesses and we solve the puzzle
-
+ * remove cost display
+* show on the hint page how long until the next hint
