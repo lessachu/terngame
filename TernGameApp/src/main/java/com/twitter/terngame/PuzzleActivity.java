@@ -45,16 +45,6 @@ public class PuzzleActivity extends Activity
 
         setContentView(R.layout.puzzle_activity);
 
-        Intent i = getIntent();
-        Bundle extras = i.getExtras();
-        mHintPrompt = false;
-        if (extras != null) {
-            mPuzzleID = extras.getString(s_puzzleID);
-            if (i.hasExtra(s_hintPrompt)) {
-                mHintPrompt = extras.getBoolean(s_hintPrompt);
-            }
-        }
-
         mPuzzleButton = (Button) findViewById(R.id.do_puzzle_button);
         mPuzzleButton.setOnClickListener(this);
 
@@ -93,6 +83,18 @@ public class PuzzleActivity extends Activity
     protected void onResume() {
         super.onResume();
 
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
+        mHintPrompt = false;
+        if (extras != null) {
+            mPuzzleID = extras.getString(s_puzzleID);
+            if (i.hasExtra(s_hintPrompt)) {
+                mHintPrompt = extras.getBoolean(s_hintPrompt);
+            }
+        }
+
+        // TODO - if we tap on an old notificaiton, what should happen
+
         // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
         final TextView puzzleName = (TextView) findViewById(R.id.puzzle_name_text);
@@ -124,6 +126,13 @@ public class PuzzleActivity extends Activity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        Session s = Session.getInstance(this);
+        s.unregisterHintListener(this);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
 
@@ -131,7 +140,6 @@ public class PuzzleActivity extends Activity
         if (!s.puzzleSkipped(mPuzzleID) && !s.puzzleSolved(mPuzzleID)) {
             mPuzzleTimer.stop();
         }
-        s.unregisterHintListener(this);
     }
 
     public void onHintReady(String puzzleID, String hintID) {

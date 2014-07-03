@@ -177,8 +177,14 @@ public class Session implements EventInfo.EventInfoListener {
     public boolean isValidStartCode(String start_code) {
         start_code = AnswerChecker.stripAnswer(start_code);
         PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(start_code);
+        return (pi != null);
+    }
 
-        if (pi != null) {
+    public void startPuzzle(String start_code) {
+        start_code = AnswerChecker.stripAnswer(start_code);
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(start_code);
+
+        if (pi != null && pi != mCurrentPuzzle) {
             if (mTeamStatus.startNewPuzzle(start_code)) {
                 mCurrentPuzzle = pi;
 
@@ -186,15 +192,14 @@ public class Session implements EventInfo.EventInfoListener {
                 int len = hintList.size();
                 for (int i = 0; i < len; i++) {
                     HintInfo hi = hintList.get(i);
+                    Log.d("terngame", "Adding hints for : " + start_code);
                     mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, i + 1,
                             hi.mID, hi.mTimeSecs));
 
                     // TODO: if we're returning to a puzzle, account for time passed
                 }
             }
-            return true;
         }
-        return false;
     }
 
     public String getCorrectAnswer(String puzzleID) {
@@ -213,10 +218,10 @@ public class Session implements EventInfo.EventInfoListener {
     public AnswerInfo guessAnswer(String answer) {
         answer = AnswerChecker.stripAnswer(answer);
 
-        Log.d("terngame", "Guessing : " + answer);
         AnswerInfo ai = mCurrentPuzzle.getAnswerInfo(answer);
         String puzzleID = mTeamStatus.getCurrentPuzzle();
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
+        Log.d("terngame", "Guessing : " + answer + " for puzzle: " + puzzleID);
 
         if (ai == null) {
             ai = new AnswerInfo();

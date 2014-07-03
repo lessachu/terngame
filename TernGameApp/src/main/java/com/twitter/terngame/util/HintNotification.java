@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.twitter.terngame.MainActivity;
 import com.twitter.terngame.PuzzleActivity;
 import com.twitter.terngame.R;
 import com.twitter.terngame.Session;
@@ -36,15 +34,10 @@ public class HintNotification extends BroadcastReceiver {
         intent.putExtra(PuzzleActivity.s_hintPrompt, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        Intent mainIntent = new Intent(context, MainActivity.class);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addNextIntent(mainIntent);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pIntent = stackBuilder.getPendingIntent(hintNum + 1, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(context, hintNum + 1, intent, PendingIntent.FLAG_ONE_SHOT);
 
         String subject = "Hint " + Integer.toString(hintNum) + " for " + puzzleName +
-                " is now available.";
+                " is now available. id=" + puzzleID;
 
         Notification n = new NotificationCompat.Builder(context)
                 .setContentTitle(context.getString(R.string.notif_hint_title))

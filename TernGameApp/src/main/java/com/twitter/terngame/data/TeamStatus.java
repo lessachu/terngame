@@ -338,6 +338,7 @@ public class TeamStatus implements JSONFileResultHandler {
             save();
             return true;
         }
+        Log.d("terngame", "We didn't actually start the puzzle " + puzzleID);
         return false; // we didn't actually start the puzzle.
     }
 

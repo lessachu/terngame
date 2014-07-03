@@ -109,13 +109,21 @@ public class MainActivity extends Activity
 
             if (startcode.equalsIgnoreCase(s_admin_mode)) {
                 startActivity(new Intent(this, AdminActivity.class));
-            } else if (s.isValidStartCode(startcode)) {
-                Intent i = new Intent(this, PuzzleActivity.class);
-                i.putExtra(PuzzleActivity.s_puzzleID, AnswerChecker.stripAnswer(startcode));
-                startActivity(i);
+            } else if (s.getCurrentPuzzleID() == null) {
+                if (s.isValidStartCode(startcode)) {
+                    s.startPuzzle(startcode);
+                    Intent i = new Intent(this, PuzzleActivity.class);
+                    i.putExtra(PuzzleActivity.s_puzzleID, AnswerChecker.stripAnswer(startcode));
+                    startActivity(i);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "That's not the start code that you're looking for.",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "That's not the start code that you're looking for.",
+                        "You'll need to finish your current puzzle first.",
                         Toast.LENGTH_SHORT);
                 toast.show();
             }

@@ -33,6 +33,7 @@
   reset mPuzzleId in the puzzleActivity
 * make hints buzz the device
  something is super buggy with hints
+ * remove cost display
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
