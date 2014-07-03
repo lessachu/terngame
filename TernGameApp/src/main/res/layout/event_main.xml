@@ -80,7 +80,6 @@
             android:layout_height="wrap_content"
             android:text="0 puzzles solved"
             android:id="@+id/event_status_button"
-            style="@style/StatusButtonTheme"
-            android:textSize="30sp"/>
+            style="@style/StatusButtonTheme"/>
 
 </LinearLayout>

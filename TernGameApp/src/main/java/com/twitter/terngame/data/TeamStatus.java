@@ -111,8 +111,6 @@ public class TeamStatus implements JSONFileResultHandler {
                 mNumSolved = mData.getInt(s_numSolved);
                 mNumSkipped = mData.getInt(s_numSkipped);
 
-                Log.d("terngame", "mNumSkipped read");
-
                 JSONArray ja = mData.getJSONArray(s_puzzles);
                 int len = ja.length();
 

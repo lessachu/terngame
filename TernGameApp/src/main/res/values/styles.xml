@@ -88,7 +88,7 @@
     <style name="ButtonTheme" parent="android:Theme.Holo.Light"/>
 
     <style name="StatusButtonTheme">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/status_btn_default_dark</item>
         <item name="android:minHeight">48dip</item>
         <item name="android:minWidth">64dip</item>
