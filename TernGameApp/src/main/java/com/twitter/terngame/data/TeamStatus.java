@@ -318,7 +318,7 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
     public boolean startNewPuzzle(String puzzleID) {
-        if (!mPuzzles.containsKey(puzzleID)) {
+        if (!mPuzzles.containsKey(puzzleID) && !puzzleID.equals(mCurrentPuzzle)) {
             PuzzleStatus ps = new PuzzleStatus();
             ps.mID = puzzleID;
             ps.mStartTime = SystemClock.elapsedRealtime();

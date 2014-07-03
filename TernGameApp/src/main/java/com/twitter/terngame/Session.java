@@ -35,7 +35,6 @@ public class Session implements EventInfo.EventInfoListener {
     private static Session sInstance = null;
     private Context mContext;
     private boolean mLoggedIn;
-    private PuzzleInfo mCurrentPuzzle;
     private ArrayList<PendingIntent> mPendingHints;
     private ArrayList<HintListener> mHintListeners;
 
@@ -48,7 +47,6 @@ public class Session implements EventInfo.EventInfoListener {
 
     private Session(Context context) {
         mContext = context;
-        mCurrentPuzzle = new PuzzleInfo();
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo(this);
         mLoginInfo = new LoginInfo();
@@ -184,10 +182,8 @@ public class Session implements EventInfo.EventInfoListener {
         start_code = AnswerChecker.stripAnswer(start_code);
         PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(start_code);
 
-        if (pi != null && pi != mCurrentPuzzle) {
+        if (pi != null) {
             if (mTeamStatus.startNewPuzzle(start_code)) {
-                mCurrentPuzzle = pi;
-
                 ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
                 int len = hintList.size();
                 for (int i = 0; i < len; i++) {
@@ -218,14 +214,11 @@ public class Session implements EventInfo.EventInfoListener {
     public AnswerInfo guessAnswer(String answer) {
         answer = AnswerChecker.stripAnswer(answer);
 
-        AnswerInfo ai = mCurrentPuzzle.getAnswerInfo(answer);
         String puzzleID = mTeamStatus.getCurrentPuzzle();
+        AnswerInfo ai = mStartCodeInfo.getPuzzleInfo(puzzleID).getAnswerInfo(answer);
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
-        Log.d("terngame", "Guessing : " + answer + " for puzzle: " + puzzleID);
-        Log.d("terngame", "mTeamStatus current puzzle name: " + mCurrentPuzzle.getName());
 
         if (ai == null) {
-            Log.d("terngame", "AnswerInfo returned by mCurrentPuzzle is null");
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
@@ -279,6 +272,10 @@ public class Session implements EventInfo.EventInfoListener {
 
     public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
         mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
+    }
+
+    public void setCurrentPuzzle() {
+
     }
 
     public void clearCurrentPuzzle() {

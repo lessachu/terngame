@@ -27,7 +27,7 @@ public class JSONFileReaderTask extends AsyncTask<InputStream, Void, JSONObject 
     protected JSONObject doInBackground(InputStream... in) {
         try {
             String dataString = FullFileReader.readFully(in[0], "UTF-8");
-            Log.d("terngame", dataString);
+            //        Log.d("terngame", dataString);
 
             mData = new JSONObject(dataString);
             return mData;
