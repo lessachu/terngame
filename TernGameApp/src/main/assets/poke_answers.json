@@ -18,8 +18,7 @@
               {
                "time" :  120,
                "id" : "twittermon1",
-               "text" : "These animals only eat peanuts and crackerjack.",
-               "cost" : 10
+               "text" : "These animals only eat peanuts and crackerjack."
               },
               {
                "time" :  240,
@@ -29,8 +28,7 @@
               {
                "time" : 600,
                "id" : "twittermon3",
-               "text" : "They're baseball teams.  Find the home city.",
-               "cost" : 10
+               "text" : "They're baseball teams.  Find the home city."
               }
               ]
 }

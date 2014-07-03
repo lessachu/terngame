@@ -42,6 +42,7 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
 
         HintInfo hi = mValues.get(position);
         final TextView hintTitle = (TextView) rowView.findViewById(R.id.hint_cost_text);
+        final TextView hintTimeText = (TextView) rowView.findViewById(R.id.hint_time_text);
 
         if (hi.mCost != 0) {
             hintTitle.setText("Cost: " + Integer.toString(hi.mCost));
@@ -56,16 +57,23 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
         hintButton.setTag(R.id.hint_num_key, position + 1);
 
         // only enable the hintButton if the elapsed time is greater than the hintTime
-        hintButton.setEnabled(mSession.puzzleSolved(mPuzzleID) ||
+        final long curTime = SystemClock.elapsedRealtime();
+        final long hintTime = mSession.getPuzzleStartTime(mPuzzleID) + (hi.mTimeSecs * 1000);
+        if (mSession.puzzleSolved(mPuzzleID) ||
                 mSession.puzzleSkipped(mPuzzleID) ||
-                SystemClock.elapsedRealtime() >
-                        mSession.getPuzzleStartTime(mPuzzleID) + (hi.mTimeSecs * 1000));
+                curTime > hintTime) {
+            hintButton.setEnabled(true);
+            hintTimeText.setVisibility(View.GONE);
+        } else {
+            hintButton.setEnabled(false);
+            hintTimeText.setText("available in " +
+                    Long.toString((hintTime - curTime) / 1000) + " seconds");
+        }
 
         return rowView;
     }
 
     public void onClick(View view) {
-        // TODO: show an "are you sure? prompt?
         HintInfo hi = (HintInfo) view.getTag(R.id.hint_info_key);
         Integer position = (Integer) view.getTag(R.id.hint_num_key);
 

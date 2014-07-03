@@ -17,8 +17,7 @@
           {
            "time" :  30,
            "id" : "practice1",
-           "text" : "Stumped about what to do?\n\nGood thing there are hints.\n\nGo ahead and submit the answer \"hint\".",
-           "cost" : 10
+           "text" : "Stumped about what to do?\n\nGood thing there are hints.\n\nGo ahead and submit the answer \"hint\"."
           },
           {
            "time" :  60,
@@ -28,8 +27,7 @@
           {
            "time" : 90,
            "id" : "practice3",
-           "text" : "The answer to the puzzle is \"tweet tweet\".",
-           "cost" : 10
+           "text" : "The answer to the puzzle is \"tweet tweet\"."
           }
           ]
 }

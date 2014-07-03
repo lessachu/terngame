@@ -1,20 +1,33 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "north",
-     "response" : "Well, I guess France is to the north of Andorra."
+     { "answer" : "denmark",
+     "response" : "Yes! That's one of the countries that Carmen's visited."
       },
      {
-      "answer" : "south",
-      "response" : "That would be Spain. Which isn't the right answer either."
+      "answer" : "germany",
+      "response" : "Yes! That's one of the countries that Carmen's visited."
+      } ,
+   {
+    "answer" : "china",
+    "response" : "Yes! That's one of the countries that Carmen's visited."
+    } ,
+     {
+      "answer" : "france",
+      "response" : "Yes! That's one of the countries that Carmen's visited."
       } ,
     {
-   "answer" : "east",
+     "answer" : "egypt",
+     "response" : "Yes! That's one of the countries that Carmen's visited."
+     } ,
+   {
+    "answer" : "haiti",
+    "response" : "Yes! That's one of the countries that Carmen's visited."
+    } ,
+    {
+   "answer" : "secret",
     "correct" : true,
     "canonical" : true
-    },
-    {"answer" : "west",
-    "correct" : true
     }
     ]
 }

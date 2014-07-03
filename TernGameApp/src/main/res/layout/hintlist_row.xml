@@ -18,4 +18,11 @@
             android:id="@+id/hint_cost_text"
             style="@style/hintTitleTheme"
             android:layout_gravity="center"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hint_time_text"
+            style="@style/hintTitleTheme"
+            android:layout_gravity="center"/>
 </LinearLayout>
