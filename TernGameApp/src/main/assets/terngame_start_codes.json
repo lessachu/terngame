@@ -1,6 +1,6 @@
 {
   "version" : 1,
-  "order":  [ "practice", "twittermon", "colors", "nantucket", "exponent", "selfie", "metropolis", "passport"],
+  "order":  [ "practice", "twittermon", "hashflags", "nantucket", "second", "selfie", "metropolis", "passport"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
@@ -23,7 +23,7 @@
     "instruction" : "Still in SF-11 Aviary? Good. Sit tight until Jan tells you what to do."
     },
      {
-       "id" : "colors",
+       "id" : "hashflags",
        "name" : "#hashflags",
        "answer_file" : "hashflags_answers.json",
        "instruction" : "Head to the Civic Center Plaza. Get the next clue from a staffer on the corner of Larkin and McAllister Streets. "
@@ -34,7 +34,7 @@
        "answer_file" : "limerick_answers.json",
        "instruction" : "Your next clue will be waiting at the SF Opera House Plaza, at the intersection of Franklin and Fulton Streets."
      },
-      { "id" : "exponent",
+      { "id" : "second",
         "name" : "Second Power",
         "answer_file" : "second_answers.json",
         "instruction" : "Search for Carmen at Arlequin Cafe on 384 Hayes Street. Our sources say that she's been hanging out on their back patio (please be considerate of Arlequin staff and customers)."
