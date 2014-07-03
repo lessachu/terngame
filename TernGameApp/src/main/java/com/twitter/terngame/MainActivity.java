@@ -25,6 +25,7 @@ public class MainActivity extends Activity
     private Button mCurPuzzleButton;
     private Button mSolvedStatusButton;
     private TextView mInstructionText;
+    private Button mGoButton;
 
     private static String s_admin_mode = "start admin mode";
 
@@ -44,9 +45,9 @@ public class MainActivity extends Activity
         final TextView teamNameTextView = (TextView) findViewById(R.id.team_name_text);
         teamNameTextView.setText(mSession.getTeamName());
 
-        final Button goButton = (Button) findViewById(R.id.go_button);
-        goButton.setOnClickListener(this);
-        goButton.setEnabled(false);
+        mGoButton = (Button) findViewById(R.id.go_button);
+        mGoButton.setOnClickListener(this);
+        mGoButton.setEnabled(false);
 
         mInstructionText = (TextView) findViewById(R.id.instruction_text);
 
@@ -61,9 +62,9 @@ public class MainActivity extends Activity
             @Override
             public void afterTextChanged(Editable text) {
                 if (mSession.puzzleStarted()) {
-                    goButton.setEnabled(text.toString().equalsIgnoreCase(s_admin_mode));
+                    mGoButton.setEnabled(text.toString().equalsIgnoreCase(s_admin_mode));
                 } else {
-                    goButton.setEnabled(text.length() > 0);
+                    mGoButton.setEnabled(text.length() > 0);
                 }
             }
 
@@ -98,8 +99,10 @@ public class MainActivity extends Activity
             // put the current puzzle name in there
             mCurPuzzleButton.setText(s.getPuzzleName(s.getCurrentPuzzleID()));
             mCurPuzzleButton.setVisibility(View.VISIBLE);
+            mGoButton.setEnabled(false);
         } else {
             mCurPuzzleButton.setVisibility(View.GONE);
+            mGoButton.setEnabled(true);
         }
     }
 
@@ -113,7 +116,7 @@ public class MainActivity extends Activity
 
             if (startcode.equalsIgnoreCase(s_admin_mode)) {
                 startActivity(new Intent(this, AdminActivity.class));
-            } else if (s.getCurrentPuzzleID() == null) {
+            } else {
                 if (s.isValidStartCode(startcode)) {
                     s.startPuzzle(startcode);
                     Intent i = new Intent(this, PuzzleActivity.class);
@@ -125,11 +128,6 @@ public class MainActivity extends Activity
                             Toast.LENGTH_SHORT);
                     toast.show();
                 }
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "You'll need to finish your current puzzle first.",
-                        Toast.LENGTH_SHORT);
-                toast.show();
             }
         } else if (id == R.id.current_puzzle_button) {
             if (s.puzzleStarted()) {
