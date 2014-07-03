@@ -1,20 +1,41 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "north",
-     "response" : "Well, I guess France is to the north of Andorra."
+     { "answer" : "gummybears",
+     "response" : "Spell it \"GUMMI\", please."
       },
      {
-      "answer" : "south",
-      "response" : "That would be Spain. Which isn't the right answer either."
+      "answer" : "gummi",
+      "response" : "Gummi what?"
+      },
+      {
+       "answer" : "gummy",
+       "response" : "Gummi what?"
+       } ,
+       {
+        "answer" : "bears",
+        "response" : "What kind of bears?"
+        },
+      {
+       "answer" : "gelatinousedibleursine",
+       "response" : "What candy does this describe?"
+       } ,
+      {
+       "answer" : "gelatinous",
+       "response" : "That's correct, but there's more to the message."
+       } ,
+      {
+       "answer" : "edible",
+       "response" : "That's correct, but there's more to the message."
+       } ,
+     {
+      "answer" : "ursine",
+      "response" : "Of or pertaining to bears."
       } ,
     {
-   "answer" : "east",
+   "answer" : "gummi bears",
     "correct" : true,
     "canonical" : true
-    },
-    {"answer" : "west",
-    "correct" : true
     }
     ]
 }

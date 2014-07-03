@@ -222,10 +222,10 @@ public class Session implements EventInfo.EventInfoListener {
         String puzzleID = mTeamStatus.getCurrentPuzzle();
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
         Log.d("terngame", "Guessing : " + answer + " for puzzle: " + puzzleID);
-        Log.d("terngame", "mTeamStatus curren tpuzzle name: " + mCurrentPuzzle.getName());
+        Log.d("terngame", "mTeamStatus current puzzle name: " + mCurrentPuzzle.getName());
 
         if (ai == null) {
-            Log.d("terngame", "AnserInfo returned by mCurrentPuzzle is null");
+            Log.d("terngame", "AnswerInfo returned by mCurrentPuzzle is null");
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;

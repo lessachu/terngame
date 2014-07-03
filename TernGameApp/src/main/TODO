@@ -16,7 +16,6 @@
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* hrm, we currently allow multiple start codes (like, for puzzles that aren't done yet).
 * make the empty view work aggin
 * add art
 * hints don't work on pre-kitkat
@@ -24,13 +23,12 @@
 * We shouldn't be crashing on return to app
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
-* answer dialog still needs style
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner
 * show on the hint page how long until the next hint
 * make hints buzz the device
- something is super buggy with hints
  * remove cost display
+ * I think there's a concurrent modification issue if there are a lot of guesses and we solve the puzzle
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
