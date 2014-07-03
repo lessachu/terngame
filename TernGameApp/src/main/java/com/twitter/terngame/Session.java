@@ -33,6 +33,11 @@ public class Session {
         public void onHintReady(String puzzleID, String hintID);
     }
 
+    public interface LoginLoadedListener {
+        public void onLoginLoaded();
+    }
+
+
     private static Session sInstance = null;
     private Context mContext;
     private boolean mLoggedIn;
@@ -45,6 +50,8 @@ public class Session {
     private StartCodeInfo mStartCodeInfo;
     private PuzzleExtraInfo mPuzzleExtraInfo;
 
+    private LoginLoadedListener mLoginLoadedListener;
+
 
     private Session(Context context) {
         mContext = context;
@@ -55,6 +62,7 @@ public class Session {
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
+        mLoginLoadedListener = null;
     }
 
     public static Session getInstance(Context context) {
@@ -62,6 +70,10 @@ public class Session {
             sInstance = new Session(context.getApplicationContext());
         }
         return sInstance;
+    }
+
+    public void setLoginLoadedListener(LoginLoadedListener lll) {
+        mLoginLoadedListener = lll;
     }
 
     public boolean isLoggedIn() {
@@ -266,7 +278,15 @@ public class Session {
         mEventInfo.initializeEvent(mContext, new JSONFileReaderTask.JSONFileReaderCompleteListener() {
             @Override
             public void onJSONFileReaderComplete() {
-                mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
+                mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName(),
+                        new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                            @Override
+                            public void onJSONFileReaderComplete() {
+                                if (mLoginLoadedListener != null) {
+                                    mLoginLoadedListener.onLoginLoaded();
+                                }
+                            }
+                        });
                 mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
             }
         });
@@ -274,10 +294,6 @@ public class Session {
 
     public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
         mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
-    }
-
-    public void setCurrentPuzzle() {
-
     }
 
     public void clearCurrentPuzzle() {

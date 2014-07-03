@@ -11,26 +11,31 @@ import android.widget.Toast;
 import com.twitter.terngame.util.EditTextWatcher;
 
 public class StartActivity extends Activity
-    implements View.OnClickListener {
+        implements View.OnClickListener, Session.LoginLoadedListener {
 
     private AppController mAppController;
     private Button mSignInButton;
     private EditText mTeamEditText;
     private EditText mPassEditText;
-    // these probably don't have to be member variables
     private EditTextWatcher mTeamTextWatcher;
     private EditTextWatcher mPassTextWatcher;
+
+    private boolean mDataLoaded;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDataLoaded = false;
         mAppController = AppController.getInstance(this);
 
-        if (Session.getInstance(this).isLoggedIn()) {
+        Session s = Session.getInstance(this);
+        if (s.isLoggedIn()) {
             goHome();
             return;
         }
+
+        s.setLoginLoadedListener(this);
 
         setContentView(R.layout.start);
 
@@ -51,15 +56,18 @@ public class StartActivity extends Activity
         mPassEditText.addTextChangedListener(mPassTextWatcher);
     }
 
+    @Override
+    public void onLoginLoaded() {
+        mTeamTextWatcher.setReady(true);
+        mPassTextWatcher.setReady(true);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         if (Session.getInstance(this).isLoggedIn()) {
             goHome();
         }
-
     }
 
     protected void goHome() {
@@ -82,7 +90,6 @@ public class StartActivity extends Activity
 
     public void onClick(View view) {
         final int id = view.getId();
-        // I actually don't think this check is needed
         if (id == R.id.sign_in) {
 
             if(Session.getInstance(this).login(mTeamEditText.getText().toString(),
@@ -91,7 +98,6 @@ public class StartActivity extends Activity
                                   .putExtra(Intent.EXTRA_INTENT,
                                   getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
             } else {
-                // show an error message toast
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "I'm sorry, but that name and password combination is invalid.",
                         Toast.LENGTH_LONG);

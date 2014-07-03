@@ -14,6 +14,7 @@ public class EditTextWatcher implements TextWatcher {
     private EditTextWatcher mSisterWatcher;
     private boolean mContainsText;
     private Button mButton;
+    private boolean mReady;
 
     public EditTextWatcher(EditText toWatch, Button button)
     {
@@ -21,17 +22,22 @@ public class EditTextWatcher implements TextWatcher {
         mSisterWatcher = null;
         mContainsText = false;
         mButton = button;
+        mReady = false;
     }
 
     public void setSisterWatcher(EditTextWatcher sister) {
         mSisterWatcher = sister;
     }
 
+    public void setReady(boolean ready) {
+        mReady = ready;
+    }
+
     @Override
     public void afterTextChanged(Editable text) {
         mContainsText = text.length() > 0;
 
-        if (mContainsText && mSisterWatcher != null && mSisterWatcher.mContainsText) {
+        if (mContainsText && mSisterWatcher != null && mSisterWatcher.mContainsText && mReady) {
             mButton.setEnabled(true);
         } else {
             mButton.setEnabled(false);

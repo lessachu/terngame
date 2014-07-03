@@ -53,12 +53,12 @@ public class LoginInfo implements JSONFileResultHandler {
         }
     }
 
-    public void initialize(Context context, String dataFile) {
+    public void initialize(Context context, String dataFile, JSONFileReaderTask.JSONFileReaderCompleteListener jrcl) {
         try {
 
             Log.d("terngame", "LoginInfo Datafile: " + dataFile);
             InputStream in = context.getAssets().open(dataFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jrcl);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {
