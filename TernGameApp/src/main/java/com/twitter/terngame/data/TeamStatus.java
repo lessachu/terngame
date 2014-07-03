@@ -52,7 +52,6 @@ public class TeamStatus implements JSONFileResultHandler {
     private static final String s_puzzExtra = "extra";
 
     private Context mContext;
-    private JSONObject mData;
 
     // data fields
     public String mTeamName;
@@ -75,7 +74,6 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
     public TeamStatus() {
-        mData = new JSONObject();
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
@@ -96,22 +94,21 @@ public class TeamStatus implements JSONFileResultHandler {
 
     // called by JSONFileReaderTask
     public void saveResult(JSONObject jo) {
-        mData = jo;
-        if (mData != null) {
+        if (jo != null) {
             try {
                 // should probably validate the info is for this team
-                assert (mData.getString(s_teamName).equals(mTeamName));
+                assert (jo.getString(s_teamName).equals(mTeamName));
                 // populate fields based on the data
-                if (mData.has(s_currentPuzzle)) {
-                    mCurrentPuzzle = mData.getString(s_currentPuzzle);
+                if (jo.has(s_currentPuzzle)) {
+                    mCurrentPuzzle = jo.getString(s_currentPuzzle);
                 }
-                if (mData.has(s_lastInstruction)) {
-                    mLastInstruction = mData.getString(s_lastInstruction);
+                if (jo.has(s_lastInstruction)) {
+                    mLastInstruction = jo.getString(s_lastInstruction);
                 }
-                mNumSolved = mData.getInt(s_numSolved);
-                mNumSkipped = mData.getInt(s_numSkipped);
+                mNumSolved = jo.getInt(s_numSolved);
+                mNumSkipped = jo.getInt(s_numSkipped);
 
-                JSONArray ja = mData.getJSONArray(s_puzzles);
+                JSONArray ja = jo.getJSONArray(s_puzzles);
                 int len = ja.length();
 
                 for (int i = 0; i < len; i++) {
@@ -177,19 +174,20 @@ public class TeamStatus implements JSONFileResultHandler {
 
     public void save() {
 
-        if (!updateJSONData()) {
+        JSONObject data = updateJSONData();
+        if (data == null) {
             Toast toast = Toast.makeText(mContext,
                     "I couldn't save your team progress. Continue at your own risk.",
                     Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
-        Log.d("terngame", mData.toString());
+        Log.d("terngame", data.toString());
         TeamDataSaverTask saverTask = new TeamDataSaverTask();
-        saverTask.execute(mData);
+        saverTask.execute(data);
     }
 
-    private boolean updateJSONData() {
+    private JSONObject updateJSONData() {
 
         JSONArray puzzleArray = new JSONArray();
 
@@ -224,27 +222,24 @@ public class TeamStatus implements JSONFileResultHandler {
                 puzzleArray.put(jo);
 
             } catch (JSONException e) {
-                return false;
+                return null;
             }
         }
 
-        if (mData == null) {
-            Log.e("terngame", "Hrm, the save file is corrupted.  Starting anew");
-            mData = new JSONObject();
-        }
+        JSONObject data = new JSONObject();
 
         try {
-            mData.put(s_puzzles, puzzleArray);
-            mData.put(s_teamName, mTeamName);
-            mData.put(s_numSolved, mNumSolved);
-            mData.put(s_numSkipped, mNumSkipped);
-            mData.put(s_currentPuzzle, mCurrentPuzzle);
-            mData.put(s_lastInstruction, mLastInstruction);
+            data.put(s_puzzles, puzzleArray);
+            data.put(s_teamName, mTeamName);
+            data.put(s_numSolved, mNumSolved);
+            data.put(s_numSkipped, mNumSkipped);
+            data.put(s_currentPuzzle, mCurrentPuzzle);
+            data.put(s_lastInstruction, mLastInstruction);
 
         } catch (JSONException e) {
-            return false;
+            return null;
         }
-        return true;
+        return data;
     }
 
     public String getTeamName() {

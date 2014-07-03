@@ -1,13 +1,13 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "ash",
-     "response" : "Now you're just making stuff up."
+     { "answer" : "toner",
+     "response" : "Try entering that as a trap code."
       },
      {
-      "answer" : "sparrow",
-      "response" : "That's a creature, not an answer."
-      } ,
+      "answer" : "meetings",
+      "response" : "Try entering that as a trap code."
+      },
     {
    "answer" : "turducken stew",
     "correct" : true,

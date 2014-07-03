@@ -9,7 +9,8 @@
             android:layout_height="wrap_content"
             android:text="@string/guess_label"
             android:id="@+id/guess_activity_label"
-            style="@style/textHeadingTheme"/>
+            style="@style/textHeadingTheme"
+            android:paddingTop="10dp"/>
 
     <TextView
             android:layout_width="fill_parent"
