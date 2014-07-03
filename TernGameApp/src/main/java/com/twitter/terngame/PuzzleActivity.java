@@ -93,7 +93,7 @@ public class PuzzleActivity extends Activity
             }
         }
 
-        // TODO - if we tap on an old notificaiton, what should happen
+        // TODO - if we tap on an old notification, what should happen
 
         // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
@@ -115,6 +115,8 @@ public class PuzzleActivity extends Activity
         } else {
             if (mHintPrompt) {
                 mStatusTextView.setText(getString(R.string.hint_prompt));
+            } else {
+                mStatusTextView.setText("");
             }
             setAnswerUIVisibility(View.VISIBLE);
             Log.d("terngame", "Start time as int: " + Integer.toString((int) s.getPuzzleStartTime(mPuzzleID)));
@@ -198,6 +200,9 @@ public class PuzzleActivity extends Activity
             }
 
         } else if (id == R.id.hint_button) {
+            // if we go to the hint list activity, clear the hint notification prompt
+            mHintPrompt = false;
+
             Intent i = new Intent(this, HintListActivity.class);
             i.putExtra(HintListActivity.s_puzzleID, mPuzzleID);
             startActivity(i);

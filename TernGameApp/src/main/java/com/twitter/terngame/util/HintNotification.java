@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.twitter.terngame.MainActivity;
 import com.twitter.terngame.PuzzleActivity;
 import com.twitter.terngame.R;
 import com.twitter.terngame.Session;
@@ -29,12 +31,18 @@ public class HintNotification extends BroadcastReceiver {
 
     public static void fireHintNotification(Context context, String puzzleID, String puzzleName,
             int hintNum) {
+
         Intent intent = new Intent(context, PuzzleActivity.class);
         intent.putExtra(PuzzleActivity.s_puzzleID, puzzleID);
         intent.putExtra(PuzzleActivity.s_hintPrompt, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pIntent = PendingIntent.getActivity(context, hintNum + 1, intent, PendingIntent.FLAG_ONE_SHOT);
+        Intent mainIntent = new Intent(context, MainActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntent(mainIntent);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pIntent = stackBuilder.getPendingIntent(mID, 0);
 
         String subject = "Hint " + Integer.toString(hintNum) + " for " + puzzleName +
                 " is now available. id=" + puzzleID;
