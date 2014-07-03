@@ -40,7 +40,7 @@
         "instruction" : "Search for Carmen at Arlequin Cafe on 384 Hayes Street. Our sources say that she's been hanging out on their back patio (please be considerate of Arlequin staff and customers)."
       },
      { "id" : "selfie",
-       "name" : "Hieroglyphics Selfie Challenge",
+       "name" : "Photo Scavenger Hunt",
        "answer_file" : "selfie_answers.json",
        "instruction" : "Hrm... looks like there's some suspicious activity going on at Smitten Ice Cream (corner of Octavia and Linden Streets). Go check it out!"
      },
