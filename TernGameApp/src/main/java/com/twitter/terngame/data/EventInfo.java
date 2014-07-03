@@ -19,10 +19,6 @@ import java.io.InputStream;
  */
 public class EventInfo implements JSONFileResultHandler {
 
-    public interface EventInfoListener {
-        public void onEventInfoLoadComplete();
-    }
-
     public static final String s_eventFile = "event.json";
 
     public static final String s_version = "version";
@@ -34,7 +30,6 @@ public class EventInfo implements JSONFileResultHandler {
     public static final String s_skipCode = "skip_code";
 
     private JSONObject mData;
-    private EventInfoListener mEIL;
 
     // data fields
     public int mVersion;
@@ -45,8 +40,7 @@ public class EventInfo implements JSONFileResultHandler {
     public String mDuplicateAnswerStr;
     public String mSkipCode;
 
-    public EventInfo(EventInfoListener eil) {
-        mEIL = eil;
+    public EventInfo() {
     }
 
     // called by JSONFileReaderTask
@@ -63,20 +57,17 @@ public class EventInfo implements JSONFileResultHandler {
                 mDuplicateAnswerStr = mData.getString(s_dupeStr);
                 mSkipCode = mData.getString(s_skipCode);
 
-                if (mEIL != null) {
-                    mEIL.onEventInfoLoadComplete();
-                }
             } catch (JSONException e) {
                 Log.e("terngame", "JsonException loading eventdata");
             }
         }
     }
 
-    public void initializeEvent(Context context) {
+    public void initializeEvent(Context context, JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
         try {
 
             InputStream in = context.getAssets().open(s_eventFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {

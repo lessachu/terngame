@@ -28,7 +28,6 @@
 * show on the hint page how long until the next hint
 * make hints buzz the device
  * remove cost display
- * I think there's a concurrent modification issue if there are a lot of guesses and we solve the puzzle
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -118,3 +117,5 @@ DONE:
 * battle flow is awkward
 * style the battle activities better - better hinting
 * shouldn't be able to start a new clue until the old one is done
+ * I think there's a concurrent modification issue if there are a lot of guesses and we solve the puzzle
+

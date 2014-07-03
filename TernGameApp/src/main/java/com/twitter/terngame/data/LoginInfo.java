@@ -58,7 +58,7 @@ public class LoginInfo implements JSONFileResultHandler {
 
             Log.d("terngame", "LoginInfo Datafile: " + dataFile);
             InputStream in = context.getAssets().open(dataFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {

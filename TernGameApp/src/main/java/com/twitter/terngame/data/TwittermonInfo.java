@@ -133,7 +133,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
             try {
 
                 InputStream in = mContext.getAssets().open(filename);
-                JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
+                JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
                 readerTask.execute(in);
 
             } catch (FileNotFoundException e) {

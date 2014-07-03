@@ -115,7 +115,7 @@ public class StartCodeInfo implements JSONFileResultHandler {
         try {
 
             InputStream in = context.getAssets().open(startCodeFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {

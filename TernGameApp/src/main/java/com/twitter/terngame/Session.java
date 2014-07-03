@@ -16,6 +16,7 @@ import com.twitter.terngame.data.TeamStatus;
 import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
+import com.twitter.terngame.util.JSONFileReaderTask;
 
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  * Created by jchong on 1/11/14.
  */
 
-public class Session implements EventInfo.EventInfoListener {
+public class Session {
 
     public interface HintListener {
         public void onHintReady(String puzzleID, String hintID);
@@ -48,7 +49,7 @@ public class Session implements EventInfo.EventInfoListener {
     private Session(Context context) {
         mContext = context;
         mTeamStatus = new TeamStatus();
-        mEventInfo = new EventInfo(this);
+        mEventInfo = new EventInfo();
         mLoginInfo = new LoginInfo();
         mPuzzleExtraInfo = new PuzzleExtraInfo(context);
         mStartCodeInfo = new StartCodeInfo(context);
@@ -262,12 +263,13 @@ public class Session implements EventInfo.EventInfoListener {
     }
 
     public void loadEventInformation() {
-        mEventInfo.initializeEvent(mContext);
-    }
-
-    public void onEventInfoLoadComplete() {
-        mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
-        mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
+        mEventInfo.initializeEvent(mContext, new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+            @Override
+            public void onJSONFileReaderComplete() {
+                mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName());
+                mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
+            }
+        });
     }
 
     public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {

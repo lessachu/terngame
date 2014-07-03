@@ -16,12 +16,19 @@ import java.io.InputStream;
 
 public class JSONFileReaderTask extends AsyncTask<InputStream, Void, JSONObject > {
 
+    public interface JSONFileReaderCompleteListener {
+        public void onJSONFileReaderComplete();
+    }
+
     private JSONObject mData;
     private JSONFileResultHandler mResultHandler;
+    private JSONFileReaderCompleteListener mCompleteListener;
 
-    public JSONFileReaderTask(JSONFileResultHandler resultHandler) {
+    public JSONFileReaderTask(JSONFileResultHandler resultHandler,
+            JSONFileReaderCompleteListener jFRCL) {
         mData = null;
         mResultHandler = resultHandler;
+        mCompleteListener = jFRCL;
     }
 
     protected JSONObject doInBackground(InputStream... in) {
@@ -44,5 +51,8 @@ public class JSONFileReaderTask extends AsyncTask<InputStream, Void, JSONObject 
 
     protected void onPostExecute(JSONObject jo) {
         mResultHandler.saveResult(jo);
+        if (mCompleteListener != null) {
+            mCompleteListener.onJSONFileReaderComplete();
+        }
     }
 }

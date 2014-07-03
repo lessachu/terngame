@@ -1,38 +1,13 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "wombat",
-     "response" : "Great guess!  But not a correct one.",
-      "hint_unlock" : "wombat1"
+     { "answer" : "nantucket",
+     "response" : "No, that's the start code.",
       },
-     {
-      "answer" : "wombatwombat",
-      "response" : "Now you're really cooking... keep going...",
-      "hint_unlock" : "wombat2"
-      } ,
     {
-   "answer" : "wombatwombatwombat",
+   "answer" : "rice wine",
     "correct" : true,
     "canonical" : true
-    }
-    ],
-    "hints" : [
-    {
-     "time" :  10,
-     "id" : "wombat1",
-     "text" : "hrm, I hear Jan likes marsupials.",
-     "cost" : 10
-    },
-    {
-     "time" :  20,
-     "id" : "wombat2",
-     "text" : "Repetition is the key to success."
-    },
-    {
-     "time" :  60,
-     "id" : "wombat3",
-     "text" : "No seriously.  By repetition, I mean 3.",
-     "cost" : 10
     }
     ]
 }

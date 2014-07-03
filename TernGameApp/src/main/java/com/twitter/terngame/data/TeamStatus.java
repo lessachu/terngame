@@ -160,7 +160,7 @@ public class TeamStatus implements JSONFileResultHandler {
             Log.d("terngame", "reading in team status");
             File f = new File(context.getFilesDir(), s_saveFile);
             InputStream in = new BufferedInputStream(new FileInputStream(f));
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {
