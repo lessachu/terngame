@@ -23,54 +23,15 @@
             android:layout_gravity="center"
             style="@style/eventTitleTheme"/>
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-        <TextView
-                style="@style/textHeadingTheme"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/time_title"
-                android:id="@+id/textView"
-                android:singleLine="false"
-                android:layout_gravity="center"
-                android:gravity="center_vertical|center_horizontal"
-                android:textSize="30dp"
-                />
-
-        <Chronometer
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/puzzle_chronometer"
-                android:layout_gravity="center"
-                android:textSize="70sp"
-                android:layout_weight="0"
-                android:password="false"
-                android:gravity="center"/>
-
-    </LinearLayout>
-
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="start puzzle!"
-            android:id="@+id/do_puzzle_button"
-            style="@style/StatusButtonTheme"
-            android:layout_weight="1"
-            android:paddingBottom="8dp"/>
-
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/status_text"
             style="@style/statusTheme"
             android:layout_gravity="center"
+            android:text="solved"
             android:gravity="center_vertical|center_horizontal"/>
+
 
     <TextView
             android:layout_width="fill_parent"
@@ -128,5 +89,47 @@
                 style="@style/ButtonTheme"
                 android:layout_weight="1"/>
     </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+        <TextView
+                style="@style/textHeadingTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_title"
+                android:id="@+id/textView"
+                android:singleLine="false"
+                android:layout_gravity="center"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="30dp"
+                />
+
+        <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/puzzle_chronometer"
+                android:layout_gravity="center"
+                android:textSize="70sp"
+                android:layout_weight="0"
+                android:password="false"
+                android:gravity="center"/>
+
+    </LinearLayout>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="start puzzle!"
+            android:id="@+id/do_puzzle_button"
+            style="@style/StatusButtonTheme"
+            android:layout_weight="1"
+            android:paddingBottom="8dp"/>
+
 
 </LinearLayout>

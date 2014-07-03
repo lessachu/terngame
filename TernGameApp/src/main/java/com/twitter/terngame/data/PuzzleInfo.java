@@ -129,6 +129,10 @@ public class PuzzleInfo implements JSONFileResultHandler {
         }
     }
 
+    public String getName() {
+        return mName;
+    }
+
     public AnswerInfo getAnswerInfo(String answer) {
         return mAnswers.get(answer);
     }
