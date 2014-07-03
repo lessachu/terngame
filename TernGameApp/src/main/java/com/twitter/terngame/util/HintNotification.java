@@ -8,6 +8,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -45,7 +46,7 @@ public class HintNotification extends BroadcastReceiver {
         PendingIntent pIntent = stackBuilder.getPendingIntent(mID, 0);
 
         String subject = "Hint " + Integer.toString(hintNum) + " for " + puzzleName +
-                " is now available. id=" + puzzleID;
+                " is now available.";
 
         Notification n = new NotificationCompat.Builder(context)
                 .setContentTitle(context.getString(R.string.notif_hint_title))
@@ -91,8 +92,14 @@ public class HintNotification extends BroadcastReceiver {
         PendingIntent pi = PendingIntent.getBroadcast(context, hintNumber, intent, 0);
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
-                timeSecs * 1000, pi);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() +
+                    timeSecs * 1000, pi);
+        } else {
+            am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
+                    timeSecs * 1000, pi);
+        }
+
 
         Log.d("terngame", "alarm set for hint " + Integer.toString(hintNumber) + " for " + puzzleID +
                 " at " + Long.toString(timeSecs) + " secs");
