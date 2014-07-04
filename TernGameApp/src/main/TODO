@@ -25,7 +25,6 @@
 * Why does the back activity flash when you dismiss the dialog?
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner
-* make hints buzz the device
 * show hints that are longer than 1 minute in minutes, rather than seconds
 * disable the Battle Royale button unless they've collected all six
 
@@ -122,3 +121,4 @@ DONE:
  * remove cost display
 * show on the hint page how long until the next hint
 * start code button disabled during puzzles unless the phrase is "start admin mode"
+* make hints buzz the device

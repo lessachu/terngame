@@ -49,6 +49,7 @@ public class HintNotification extends BroadcastReceiver {
                 " is now available.";
 
         Notification n = new NotificationCompat.Builder(context)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000})
                 .setContentTitle(context.getString(R.string.notif_hint_title))
                 .setContentText(subject).setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pIntent).build();
