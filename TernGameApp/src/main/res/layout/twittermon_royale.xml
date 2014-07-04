@@ -110,4 +110,38 @@
                 style="@style/puzzleStatusTheme"/>
 
     </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:id="@+id/start_layout">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sorry, better luck next time."
+                android:id="@+id/battle_royale_result"
+                style="@style/statusTheme"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finale_instructions"
+                android:id="@+id/battle_royale_instructions"
+                android:textAlignment="center"
+                style="@style/instructionTheme"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finale_start_button_text"
+                android:id="@+id/start_finale"
+                style="@style/ButtonTheme"/>
+
+    </LinearLayout>
+
 </LinearLayout>

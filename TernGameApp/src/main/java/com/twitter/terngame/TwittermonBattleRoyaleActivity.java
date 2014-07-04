@@ -1,7 +1,6 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +17,12 @@ import com.twitter.terngame.util.TwittermonBattleRoyalHelper;
 public class TwittermonBattleRoyaleActivity extends Activity
         implements View.OnClickListener {
 
-    public static final int RESULT_REQUEST_CODE = 1;
-
     private Session mSession;
+    //start layout
+    private Button mStart;
+    private TextView mResultView;
+
+    // match layout
     private ImageView mImageView;
     private TextView mNameView;
     private ImageView mOppImageView;
@@ -32,6 +34,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private Button mTie;
     private TwittermonBattleRoyalHelper mRoyaleHelper;
     private TwittermonInfo.BattleInfo mBattle;
+    private LinearLayout mStartLayout;
     private LinearLayout mMatchLayout;
     private LinearLayout mWinLayout;
 
@@ -45,9 +48,19 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mRoyaleHelper = new TwittermonBattleRoyalHelper();
         mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
+        mStartLayout = (LinearLayout) findViewById(R.id.start_layout);
         mMatchLayout = (LinearLayout) findViewById(R.id.match_layout);
         mWinLayout = (LinearLayout) findViewById(R.id.win_layout);
 
+        // start layout
+        mResultView = (TextView) findViewById(R.id.battle_royale_result);
+        mResultView.setVisibility(View.GONE);
+
+        mStart = (Button) findViewById(R.id.start_finale);
+        mStart.setOnClickListener(this);
+
+
+        // match layout
         final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
         mNameView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
         mImageView = (ImageView) findViewById(R.id.twittermon_image);
@@ -68,7 +81,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mTie = (Button) findViewById(R.id.tie_button);
         mTie.setOnClickListener(this);
 
-        showMatchUX();
+        showStartUX();
         gotoNextBattle();
     }
 
@@ -77,6 +90,9 @@ public class TwittermonBattleRoyaleActivity extends Activity
         final int id = view.getId();
 
         switch (id) {
+            case R.id.start_finale:
+                showMatchUX();
+                break;
             case R.id.win_button:
                 logResult(mBattle.mResult == TwittermonInfo.s_win);
                 break;
@@ -108,12 +124,19 @@ public class TwittermonBattleRoyaleActivity extends Activity
                 gotoNextBattle();
             }
         } else {
-            Intent output = new Intent();
-            output.putExtra(TwittermonBattleRoyaleStartActivity.s_correct, mRoyaleHelper.getCorrect());
-            setResult(RESULT_OK, output);
-            finish();
+            setResultUX(mRoyaleHelper.getCorrect());
+            showStartUX();
         }
     }
+
+    public void setResultUX(int numCorrect) {
+        if (numCorrect < TwittermonBattleRoyalHelper.s_total) {
+            String text = "INCORRECT. TRY AGAIN.";
+            mResultView.setText(text);
+            mResultView.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private void gotoNextBattle() {
         mBattle = mRoyaleHelper.getMatchup();
@@ -129,12 +152,20 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
     }
 
+    private void showStartUX() {
+        mStartLayout.setVisibility(View.VISIBLE);
+        mMatchLayout.setVisibility(View.GONE);
+        mWinLayout.setVisibility(View.GONE);
+    }
+
     private void showMatchUX() {
+        mStartLayout.setVisibility(View.GONE);
         mMatchLayout.setVisibility(View.VISIBLE);
         mWinLayout.setVisibility(View.GONE);
     }
 
     private void showWinUX() {
+        mStartLayout.setVisibility(View.GONE);
         mMatchLayout.setVisibility(View.GONE);
         mWinLayout.setVisibility(View.VISIBLE);
     }

@@ -22,7 +22,7 @@ public class TwittermonActivity extends Activity
         implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_new_creature = "new_creature";
-    public static final int s_total_to_collect = 1;
+    public static final int s_total_to_collect = 6;
 
     private ArrayList<String> mTwittermon;
 
@@ -117,7 +117,7 @@ public class TwittermonActivity extends Activity
                 AlertDialog dialog = alertDialogBuilder.create();
                 dialog.show();
             } else {
-                Intent i = new Intent(this, TwittermonBattleRoyaleStartActivity.class);
+                Intent i = new Intent(this, TwittermonBattleRoyaleActivity.class);
                 startActivity(i);
             }
         }
