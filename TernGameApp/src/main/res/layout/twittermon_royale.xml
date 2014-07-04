@@ -15,55 +15,99 @@
             android:layout_gravity="left|center_vertical"
             android:text="@string/royale_title_text"/>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/match_counter_text"
-            android:gravity="center_horizontal"
-            android:text="MATCH ##"
-            style="@style/textHeadingTheme"
-            android:paddingBottom="10dp"/>
-
-    <include layout="@layout/twittermon_battle_bar"/>
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Does CREATURE win, lose or tie?"
-            android:id="@+id/prompt_text"
-            style="@style/statusTheme"
-            android:textStyle="normal"
-            android:padding="10dp"/>
-
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:id="@+id/button_bar"
-            style="@style/ButtonTheme">
+            android:id="@+id/match_layout">
 
-        <Button
-                android:layout_width="wrap_content"
+        <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/win_button_text"
-                android:id="@+id/win_button"
-                android:layout_weight="1"/>
+                android:id="@+id/match_counter_text"
+                android:gravity="center_horizontal"
+                android:text="MATCH ##"
+                style="@style/textHeadingTheme"
+                android:paddingBottom="10dp"/>
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lose_button_text"
-                android:id="@+id/lose_button"
-                android:layout_weight="1"/>
+        <include layout="@layout/twittermon_battle_bar"/>
 
-        <Button
-                android:layout_width="wrap_content"
+        <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tie_button_text"
-                android:id="@+id/tie_button"
-                android:layout_weight="1"/>
+                android:text="Does CREATURE win, lose or tie?"
+                android:id="@+id/prompt_text"
+                style="@style/statusTheme"
+                android:textStyle="normal"
+                android:padding="10dp"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/button_bar"
+                style="@style/ButtonTheme">
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/win_button_text"
+                    android:id="@+id/win_button"
+                    android:layout_weight="1"/>
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lose_button_text"
+                    android:id="@+id/lose_button"
+                    android:layout_weight="1"/>
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tie_button_text"
+                    android:id="@+id/tie_button"
+                    android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/win_layout">>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/royale_win_text"
+                android:id="@+id/royale_win_title"
+                android:padding="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                style="@style/statusTheme"/>
+
+        <ImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/twittermon_image"
+                android:src="@drawable/twittermondefault"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Great job!  The answer to this puzzle is:"
+                android:id="@+id/answer_prompt"
+                style="@style/statusTheme"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="cheese danish"
+                android:id="@+id/answer_text"
+                style="@style/puzzleStatusTheme"/>
+
+    </LinearLayout>
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,8 @@ public class TwittermonBattleRoyaleActivity extends Activity
     private Button mTie;
     private TwittermonBattleRoyalHelper mRoyaleHelper;
     private TwittermonInfo.BattleInfo mBattle;
+    private LinearLayout mMatchLayout;
+    private LinearLayout mWinLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class TwittermonBattleRoyaleActivity extends Activity
 
         mRoyaleHelper = new TwittermonBattleRoyalHelper();
         mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
+
+        mMatchLayout = (LinearLayout) findViewById(R.id.match_layout);
+        mWinLayout = (LinearLayout) findViewById(R.id.win_layout);
 
         final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
         mNameView = (TextView) creatureLayout.findViewById(R.id.twittermon_text);
@@ -62,6 +68,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mTie = (Button) findViewById(R.id.tie_button);
         mTie.setOnClickListener(this);
 
+        showMatchUX();
         gotoNextBattle();
     }
 
@@ -96,8 +103,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
             toast.show();
 
             if (numCorrect >= mRoyaleHelper.s_total) {
-                Intent i = new Intent(this, TwittermonBattleRoyaleWinActivity.class);
-                startActivity(i);
+                showWinUX();
             } else {
                 gotoNextBattle();
             }
@@ -121,5 +127,15 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getCorrect() + 1));
 
         mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
+    }
+
+    private void showMatchUX() {
+        mMatchLayout.setVisibility(View.VISIBLE);
+        mWinLayout.setVisibility(View.GONE);
+    }
+
+    private void showWinUX() {
+        mMatchLayout.setVisibility(View.GONE);
+        mWinLayout.setVisibility(View.VISIBLE);
     }
 }
