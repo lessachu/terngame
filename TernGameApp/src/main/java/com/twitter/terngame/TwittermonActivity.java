@@ -1,9 +1,11 @@
 package com.twitter.terngame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,7 @@ public class TwittermonActivity extends Activity
         implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_new_creature = "new_creature";
+    public static final int s_total_to_collect = 6;
 
     private ArrayList<String> mTwittermon;
 
@@ -100,8 +103,23 @@ public class TwittermonActivity extends Activity
             Intent i = new Intent(this, TwittermonBattleHistoryActivity.class);
             startActivity(i);
         } else if (id == R.id.battle_finale) {
-            Intent i = new Intent(this, TwittermonBattleRoyaleStartActivity.class);
-            startActivity(i);
+
+            if (mTwittermon.size() < s_total_to_collect) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Come back later");
+                alertDialogBuilder.setMessage("You need to collect all six Twittermon before you can enter the Battle Royale!")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog dialog = alertDialogBuilder.create();
+                dialog.show();
+            } else {
+                Intent i = new Intent(this, TwittermonBattleRoyaleStartActivity.class);
+                startActivity(i);
+            }
         }
     }
 

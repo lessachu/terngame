@@ -50,7 +50,7 @@
         "instruction" : "Carmen must have gotten hungry. She's been spotted at the donut shop by the Square building at 1455 Market Street."
       },
       { "id" : "passport",
-          "name" : "Trying it all together",
+          "name" : "Tying it all together",
           "answer_file" : "meta_answers.json",
           "instruction" : "All our sources are saying that SF-7 Harrier is the Carmen's latest safe house. Go see what you can find!"
        }

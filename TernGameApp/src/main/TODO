@@ -27,7 +27,7 @@
 * gizmoduck png has something in the top right corner
 * make hints buzz the device
 * show hints that are longer than 1 minute in minutes, rather than seconds
-* start code button disabled during puzzles unless the phrase is "start admin mode"
+* disable the Battle Royale button unless they've collected all six
 
 
 DONE:
@@ -121,3 +121,4 @@ DONE:
  * I think there's a concurrent modification issue if there are a lot of guesses and we solve the puzzle
  * remove cost display
 * show on the hint page how long until the next hint
+* start code button disabled during puzzles unless the phrase is "start admin mode"

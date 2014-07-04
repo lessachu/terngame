@@ -228,6 +228,8 @@ public class Session {
         answer = AnswerChecker.stripAnswer(answer);
 
         String puzzleID = mTeamStatus.getCurrentPuzzle();
+
+        // NPE here after the app goes out of memory
         AnswerInfo ai = mStartCodeInfo.getPuzzleInfo(puzzleID).getAnswerInfo(answer);
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
 
