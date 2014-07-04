@@ -170,6 +170,8 @@ public class PuzzleActivity extends Activity
         Session s = Session.getInstance(this);
         if (id == R.id.answer_button) {
             String guess = mAnswerEditText.getText().toString();
+            mAnswerEditText.setText("");
+
             if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s.getSkipCode())) {
                 String answer = s.getCorrectAnswer(mPuzzleID);
                 String response = s.skipPuzzle(mPuzzleID);

@@ -113,6 +113,7 @@ public class MainActivity extends Activity
 
         if (id == R.id.go_button) {
             final String startcode = mStartCodeEditText.getText().toString();
+            mStartCodeEditText.setText("");
 
             if (startcode.equalsIgnoreCase(s_admin_mode)) {
                 startActivity(new Intent(this, AdminActivity.class));
