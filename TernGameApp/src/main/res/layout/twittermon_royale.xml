@@ -100,6 +100,8 @@
                 android:layout_height="wrap_content"
                 android:text="Great job!  The answer to this puzzle is:"
                 android:id="@+id/answer_prompt"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 style="@style/statusTheme"/>
 
         <TextView
@@ -109,6 +111,12 @@
                 android:id="@+id/answer_text"
                 style="@style/puzzleStatusTheme"/>
 
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Play again (just for fun)"
+                android:id="@+id/play_again"
+                style="@style/ButtonTheme"/>
     </LinearLayout>
 
     <LinearLayout
@@ -140,6 +148,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/finale_start_button_text"
                 android:id="@+id/start_finale"
+                style="@style/ButtonTheme"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Just show me the answer again"
+                android:id="@+id/show_answer"
                 style="@style/ButtonTheme"/>
 
     </LinearLayout>

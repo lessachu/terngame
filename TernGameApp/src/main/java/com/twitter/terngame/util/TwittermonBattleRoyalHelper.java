@@ -14,7 +14,6 @@ import java.util.HashSet;
 public class TwittermonBattleRoyalHelper implements Parcelable {
 
     public final static int s_total = 5;
-    public final static int s_total_time = 90;
 
     private HashSet<String> mBattles;
     private int mCorrect;
@@ -78,10 +77,6 @@ public class TwittermonBattleRoyalHelper implements Parcelable {
 
     public int getCorrect() {
         return mCorrect;
-    }
-
-    public int getTotal() {
-        return mBattles.size();
     }
 
     public void clearData() {

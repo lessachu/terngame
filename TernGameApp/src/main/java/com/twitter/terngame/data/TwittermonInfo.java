@@ -25,6 +25,7 @@ import java.util.HashMap;
  */
 public class TwittermonInfo implements JSONFileResultHandler {
 
+    public static final String s_royale = "royale_complete";
     public static final String s_collected = "collected";
     public static final String s_history = "history";
     public static final String s_creatureInfo = "creature_info";
@@ -55,6 +56,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
     private HashMap<String, CreatureInfo> mCreatureDict;
     private Context mContext;
     private JSONObject mData;
+    private boolean mRoyaleComplete;
 
     public class CreatureInfo {
         public String mCode;
@@ -83,6 +85,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mCreatureDict = new HashMap<String, CreatureInfo>();
         mCreatureList = new ArrayList<String>();
         mData = new JSONObject();
+        mRoyaleComplete = false;
 
         // hrm... I think this is not correct.
         mDefaultPict = mContext.getResources().getDrawable(R.drawable.rockdove);
@@ -176,13 +179,17 @@ public class TwittermonInfo implements JSONFileResultHandler {
                             ba.getString(s_opponent), ba.getInt(s_result));
                     mHistory.add(bi);
                 }
+
+                if (mData.has(s_royale)) {
+                    mRoyaleComplete = mData.getBoolean(s_royale);
+                }
             } catch (JSONException e) {
                 Log.e("terngame", "JSONException reading in Twittermon status");
             }
         }
     }
 
-    private boolean updateJSONData() {
+    private synchronized JSONObject updateJSONData() {
 
         JSONArray creatureArray = new JSONArray();
 
@@ -200,19 +207,17 @@ public class TwittermonInfo implements JSONFileResultHandler {
             battleArray.put(battle);
         }
 
-        if (mData == null) {
-            Log.e("terngame", "Hrm, the save data is corrupted.  Starting anew");
-            mData = new JSONObject();
-        }
+        JSONObject jo = new JSONObject();
 
         try {
-            mData.put(s_collected, creatureArray);
-            mData.put(s_history, battleArray);
+            jo.put(s_collected, creatureArray);
+            jo.put(s_history, battleArray);
+            jo.put(s_royale, mRoyaleComplete);
 
         } catch (JSONException e) {
-            return false;
+            return null;
         }
-        return true;
+        return jo;
     }
 
     public Drawable getCreatureDrawable(String creature) {
@@ -226,8 +231,10 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public void addNewCreature(String creature) {
         mCollected.add(creature);
-        updateJSONData();
-        Session.getInstance(mContext).updateExtra("twittermon", mData);
+        JSONObject jo = updateJSONData();
+        if (jo != null) {
+            Session.getInstance(mContext).updateExtra("twittermon", jo);
+        }
     }
 
     public boolean verifyTrapCode(String creature, String code) {
@@ -282,8 +289,22 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public void logBattle(String creature1, String creature2, int result) {
         BattleInfo bi = new BattleInfo(creature1, creature2, result);
         mHistory.add(bi);
-        updateJSONData();
-        Session.getInstance(mContext).updateExtra("twittermon", mData);
+        JSONObject jo = updateJSONData();
+        if (jo != null) {
+            Session.getInstance(mContext).updateExtra("twittermon", jo);
+        }
+    }
+
+    public void royaleComplete() {
+        mRoyaleComplete = true;
+        JSONObject jo = updateJSONData();
+        if (jo != null) {
+            Session.getInstance(mContext).updateExtra("twittermon", jo);
+        }
+    }
+
+    public boolean isRoyaleComplete() {
+        return mRoyaleComplete;
     }
 
     public ArrayList<String> getCollectedList() {

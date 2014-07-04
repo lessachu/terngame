@@ -341,6 +341,14 @@ public class Session {
         mPuzzleExtraInfo.getTwittermonInfo().logBattle(us, them, result);
     }
 
+    public void logTwittermonRoyaleComplete() {
+        mPuzzleExtraInfo.getTwittermonInfo().royaleComplete();
+    }
+
+    public boolean isTwittermonRoyaleComplete() {
+        return mPuzzleExtraInfo.getTwittermonInfo().isRoyaleComplete();
+    }
+
     public ArrayList<TwittermonInfo.BattleInfo> getBattleList() {
         return mPuzzleExtraInfo.getTwittermonInfo().getBattleList();
     }

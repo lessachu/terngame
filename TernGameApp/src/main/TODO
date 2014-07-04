@@ -26,7 +26,9 @@
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner
 * show hints that are longer than 1 minute in minutes, rather than seconds
-* disable the Battle Royale button unless they've collected all six
+* show win ux if you've already won in the Royale activity
+* clear the submit a guess edit text and the start code edit text after you submit
+* when we come back to an activity, after a long time, something is sad.  saveinstancestate?
 
 
 DONE:
@@ -122,3 +124,4 @@ DONE:
 * show on the hint page how long until the next hint
 * start code button disabled during puzzles unless the phrase is "start admin mode"
 * make hints buzz the device
+* disable the Battle Royale button unless they've collected all six

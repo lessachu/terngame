@@ -21,6 +21,7 @@ public class TwittermonBattleRoyaleActivity extends Activity
     //start layout
     private Button mStart;
     private TextView mResultView;
+    private Button mShowAnswer;
 
     // match layout
     private ImageView mImageView;
@@ -59,6 +60,8 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mStart = (Button) findViewById(R.id.start_finale);
         mStart.setOnClickListener(this);
 
+        mShowAnswer = (Button) findViewById(R.id.show_answer);
+        mShowAnswer.setOnClickListener(this);
 
         // match layout
         final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
@@ -81,8 +84,15 @@ public class TwittermonBattleRoyaleActivity extends Activity
         mTie = (Button) findViewById(R.id.tie_button);
         mTie.setOnClickListener(this);
 
-        showStartUX();
-        gotoNextBattle();
+        // win layout
+        final Button playAgain = (Button) findViewById(R.id.play_again);
+        playAgain.setOnClickListener(this);
+
+        if (mSession.isTwittermonRoyaleComplete()) {
+            showWinUX();
+        } else {
+            showStartUX();
+        }
     }
 
     @Override
@@ -90,8 +100,11 @@ public class TwittermonBattleRoyaleActivity extends Activity
         final int id = view.getId();
 
         switch (id) {
+            case R.id.play_again:
+                mRoyaleHelper.clearData();  // deliberate fall through here
             case R.id.start_finale:
                 showMatchUX();
+                gotoNextBattle();
                 break;
             case R.id.win_button:
                 logResult(mBattle.mResult == TwittermonInfo.s_win);
@@ -101,6 +114,9 @@ public class TwittermonBattleRoyaleActivity extends Activity
                 break;
             case R.id.tie_button:
                 logResult(mBattle.mResult == TwittermonInfo.s_tie);
+                break;
+            case R.id.show_answer:
+                showWinUX();
                 break;
         }
     }
@@ -119,12 +135,14 @@ public class TwittermonBattleRoyaleActivity extends Activity
             toast.show();
 
             if (numCorrect >= mRoyaleHelper.s_total) {
+                mSession.logTwittermonRoyaleComplete();
                 showWinUX();
             } else {
                 gotoNextBattle();
             }
         } else {
             setResultUX(mRoyaleHelper.getCorrect());
+            mRoyaleHelper.clearData();
             showStartUX();
         }
     }
@@ -153,6 +171,12 @@ public class TwittermonBattleRoyaleActivity extends Activity
     }
 
     private void showStartUX() {
+        if (mSession.isTwittermonRoyaleComplete()) {
+            mShowAnswer.setVisibility(View.VISIBLE);
+        } else {
+            mShowAnswer.setVisibility(View.GONE);
+        }
+
         mStartLayout.setVisibility(View.VISIBLE);
         mMatchLayout.setVisibility(View.GONE);
         mWinLayout.setVisibility(View.GONE);
