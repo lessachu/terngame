@@ -22,7 +22,7 @@ public class GuessActivity extends Activity
     private TextView mGuessLabelText;
     private TextView mGuessText;
     private TextView mResponseText;
-    private TextView mDuplicateText;
+    private TextView mStatusText;
     private Button mShareButton;
 
     @Override
@@ -33,7 +33,7 @@ public class GuessActivity extends Activity
         mGuessLabelText = (TextView) findViewById(R.id.guess_activity_label);
         mGuessText = (TextView) findViewById(R.id.guess_word_text);
         mResponseText = (TextView) findViewById(R.id.guess_result_text);
-        mDuplicateText = (TextView) findViewById(R.id.duplicate_text);
+        mStatusText = (TextView) findViewById(R.id.status_text);
         mShareButton = (Button) findViewById(R.id.share_button);
 
         mShareButton.setOnClickListener(this);
@@ -61,12 +61,14 @@ public class GuessActivity extends Activity
             mResponseText.setText(response);
 
             if (duplicate != null) {
-                mDuplicateText.setText(duplicate);
+                mStatusText.setText(duplicate);
             }
         }
 
         if (!guess_correct) {
             mShareButton.setVisibility(View.GONE);
+        } else {
+            mStatusText.setText("CORRECT!");
         }
     }
 
