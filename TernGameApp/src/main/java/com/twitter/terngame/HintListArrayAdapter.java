@@ -66,8 +66,15 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
             hintTimeText.setVisibility(View.GONE);
         } else {
             hintButton.setEnabled(false);
-            hintTimeText.setText("available in " +
-                    Long.toString((hintTime - curTime) / 1000) + " seconds");
+            final long secsToHint = (hintTime - curTime) / 1000;
+            if (secsToHint > 60) {
+                final long minsToHint = secsToHint / 60;
+                hintTimeText.setText("available in " +
+                        Long.toString(minsToHint) + " minute" + ((minsToHint > 1) ? "s" : ""));
+            } else {
+                hintTimeText.setText("available in " +
+                        Long.toString((secsToHint)) + " seconds");
+            }
         }
 
         return rowView;
