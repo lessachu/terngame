@@ -94,7 +94,7 @@ public class HintNotification extends BroadcastReceiver {
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            am.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() +
+            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
                     timeSecs * 1000, pi);
         } else {
             am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
