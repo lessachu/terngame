@@ -24,7 +24,6 @@ import com.twitter.terngame.Session;
  */
 public class HintNotification extends BroadcastReceiver {
 
-    private static int mID = 0;
     public static final String s_puzzleID = "puzzleID";
     public static final String s_hintNum = "hintNum";
     public static final String s_hintID = "hintID";
@@ -33,9 +32,10 @@ public class HintNotification extends BroadcastReceiver {
     public static int fireHintNotification(Context context, String puzzleID, String puzzleName,
             int hintNum) {
 
+        int requestCode = (int) System.currentTimeMillis();
         Intent intent = new Intent(context, PuzzleActivity.class);
         intent.putExtra(PuzzleActivity.s_puzzleID, puzzleID);
-        intent.putExtra(PuzzleActivity.s_hintPrompt, true);
+        intent.putExtra(PuzzleActivity.s_hintPrompt, requestCode);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         Intent mainIntent = new Intent(context, MainActivity.class);
@@ -43,7 +43,7 @@ public class HintNotification extends BroadcastReceiver {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntent(mainIntent);
         stackBuilder.addNextIntent(intent);
-        PendingIntent pIntent = stackBuilder.getPendingIntent(mID, 0);
+        PendingIntent pIntent = stackBuilder.getPendingIntent(requestCode, 0);
 
         String subject = "Hint " + Integer.toString(hintNum) + " for " + puzzleName +
                 " is now available.";
@@ -56,10 +56,9 @@ public class HintNotification extends BroadcastReceiver {
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        // hide the notification after its selected
         n.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(mID, n);
-        return mID++;
+        notificationManager.notify(requestCode, n);
+        return requestCode;
     }
 
     @Override

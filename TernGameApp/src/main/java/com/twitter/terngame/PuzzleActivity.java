@@ -86,14 +86,17 @@ public class PuzzleActivity extends Activity
         Intent i = getIntent();
         Bundle extras = i.getExtras();
         mHintPrompt = false;
+        int hintID = -1;
         if (extras != null) {
             mPuzzleID = extras.getString(s_puzzleID);
             if (i.hasExtra(s_hintPrompt)) {
-                mHintPrompt = extras.getBoolean(s_hintPrompt);
+                // this way because I was having trouble with pending intents caching intents
+                hintID = extras.getInt(s_hintPrompt);
+                if (hintID != -1) {
+                    mHintPrompt = true;
+                }
             }
         }
-
-        // TODO - if we tap on an old notification, what should happen
 
         // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
