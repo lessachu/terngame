@@ -86,19 +86,13 @@ public class PuzzleActivity extends Activity
         Intent i = getIntent();
         Bundle extras = i.getExtras();
         mHintPrompt = false;
-        int hintID = -1;
         if (extras != null) {
             mPuzzleID = extras.getString(s_puzzleID);
             if (i.hasExtra(s_hintPrompt)) {
-                // this way because I was having trouble with pending intents caching intents
-                hintID = extras.getInt(s_hintPrompt);
-                if (hintID != -1) {
-                    mHintPrompt = true;
-                }
+                mHintPrompt = extras.getBoolean(s_hintPrompt);
             }
         }
 
-        // goes here because we come back to this Activity a lot
         Session s = Session.getInstance(this);
         final TextView puzzleName = (TextView) findViewById(R.id.puzzle_name_text);
         puzzleName.setText(s.getPuzzleName(mPuzzleID));

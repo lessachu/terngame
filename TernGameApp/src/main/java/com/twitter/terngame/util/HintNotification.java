@@ -35,7 +35,7 @@ public class HintNotification extends BroadcastReceiver {
         int requestCode = (int) System.currentTimeMillis();
         Intent intent = new Intent(context, PuzzleActivity.class);
         intent.putExtra(PuzzleActivity.s_puzzleID, puzzleID);
-        intent.putExtra(PuzzleActivity.s_hintPrompt, requestCode);
+        intent.putExtra(PuzzleActivity.s_hintPrompt, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         Intent mainIntent = new Intent(context, MainActivity.class);
@@ -90,7 +90,7 @@ public class HintNotification extends BroadcastReceiver {
         intent.putExtra(s_hintNum, hintNumber);
         intent.putExtra(s_hintID, hintID);
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, hintNumber, intent, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, 0);
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {

@@ -21,7 +21,7 @@
 * gizmoduck png has something in the top right corner
 * fix pause loading after you login
 *** when we come back to an activity, after a long time, something is sad.  saveinstancestate?
-*** hints don't work on pre-kitkat
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -121,7 +121,7 @@ DONE:
 * show hints that are longer than 1 minute in minutes, rather than seconds
 * clear the submit a guess edit text and the start code edit text after you submit
 * clear old notifications after you solve a clue or take the hint in question.
-
+* hints don't work on pre-kitkat
 
 
 
