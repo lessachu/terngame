@@ -7,6 +7,7 @@ public class HintInfo {
     public long mTimeSecs;
     public String mText;
     public String mID;
+    public int mNotificationID;
     public int mCost;
     public boolean mUsed;
 }

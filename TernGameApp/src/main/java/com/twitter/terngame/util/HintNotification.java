@@ -30,7 +30,7 @@ public class HintNotification extends BroadcastReceiver {
     public static final String s_hintID = "hintID";
     public static final String HINT_INTENT = "com.twitter.terngame.SEND_HINT";
 
-    public static void fireHintNotification(Context context, String puzzleID, String puzzleName,
+    public static int fireHintNotification(Context context, String puzzleID, String puzzleName,
             int hintNum) {
 
         Intent intent = new Intent(context, PuzzleActivity.class);
@@ -58,7 +58,8 @@ public class HintNotification extends BroadcastReceiver {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // hide the notification after its selected
         n.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(mID++, n);
+        notificationManager.notify(mID, n);
+        return mID++;
     }
 
     @Override
@@ -76,8 +77,8 @@ public class HintNotification extends BroadcastReceiver {
         }
 
         if (puzzleID != null && hintNumber != 0) {
-            fireHintNotification(context, puzzleID, s.getPuzzleName(puzzleID), hintNumber);
-            s.hintReady(puzzleID, hintID);
+            int notifyID = fireHintNotification(context, puzzleID, s.getPuzzleName(puzzleID), hintNumber);
+            s.hintReady(puzzleID, hintID, notifyID);
         } else {
             Log.d("terngame", "Invalid puzzleID/hint number specified");
         }
@@ -115,5 +116,13 @@ public class HintNotification extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancelAll();
+    }
+
+    public static void cancelHint(Context context, int notifID) {
+        if (notifID != -1) {
+            NotificationManager notificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.cancel(notifID);
+        }
     }
 }

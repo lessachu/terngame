@@ -41,7 +41,7 @@ public class HintListActivity extends ListActivity
         mSession.unregisterHintListener(this);
     }
 
-    public void onHintReady(String puzzleID, String hintID) {
+    public void onHintReady(String puzzleID, String hintID, int notifID) {
         mAdapter.notifyDataSetChanged();
     }
 

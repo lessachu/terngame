@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class Session {
 
     public interface HintListener {
-        public void onHintReady(String puzzleID, String hintID);
+        public void onHintReady(String puzzleID, String hintID, int notificationID);
     }
 
     public interface LoginLoadedListener {
@@ -263,17 +263,23 @@ public class Session {
         mHintListeners.remove(hl);
     }
 
-    public void hintReady(String puzzleID, String hintID) {
+    public void hintReady(String puzzleID, String hintID, int notificationID) {
+        // register the notification with the session
         // remove event from pending intent array
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
+        pi.registerHintNotification(hintID, notificationID);
+
         for (HintListener hl : mHintListeners) {
             if (hl != null) {
-                hl.onHintReady(puzzleID, hintID);
+                hl.onHintReady(puzzleID, hintID, notificationID);
             }
         }
     }
 
     public void hintTaken(String puzzleID, String hintID) {
         mTeamStatus.markHintTaken(puzzleID, hintID);
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
+        HintNotification.cancelHint(mContext, pi.getHintNotificationID(hintID));
     }
 
     public void loadEventInformation() {

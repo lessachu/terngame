@@ -92,6 +92,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
                         HintInfo hi = new HintInfo();
                         hi.mTimeSecs = ho.getLong(s_hintTime);
                         hi.mID = ho.getString(s_hintID);
+                        hi.mNotificationID = -1;
                         hi.mText = ho.getString(s_hintText);
                         if (ho.has(s_hintCost)) {
                             hi.mCost = ho.getInt(s_hintCost);
@@ -160,5 +161,22 @@ public class PuzzleInfo implements JSONFileResultHandler {
             }
         }
         mHints.add(newHi);
+    }
+
+    public void registerHintNotification(String hintID, int notificationID) {
+        for (HintInfo hint : mHints) {
+            if (hint.mID.equals(hintID)) {
+                hint.mNotificationID = notificationID;
+            }
+        }
+    }
+
+    public int getHintNotificationID(String hintID) {
+        for (HintInfo hint : mHints) {
+            if (hint.mID.equals(hintID)) {
+                return hint.mNotificationID;
+            }
+        }
+        return -1;
     }
 }
