@@ -20,7 +20,12 @@ import java.util.ArrayList;
 public class AdminActivity extends Activity
         implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    static private String s_none = "None";
+
     public PendingIntent mPI;
+    private Button mClearOneButton;
+    private Spinner mPuzzleSpinner;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,47 +38,45 @@ public class AdminActivity extends Activity
         Button clearAllButton = (Button) findViewById(R.id.admin_clear_all_button);
         clearAllButton.setOnClickListener(this);
 
+        mClearOneButton = (Button) findViewById(R.id.admin_clear_one_button);
+        mClearOneButton.setOnClickListener(this);
+
         Button testNotificationButton = (Button) findViewById(R.id.test_notification_button);
         testNotificationButton.setOnClickListener(this);
 
         Button cancelNotificationButton = (Button) findViewById(R.id.cancel_hints_button);
         cancelNotificationButton.setOnClickListener(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
+        mPuzzleSpinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         ArrayList<String> puzzles = s.getPuzzleList();
-        final String none = getString(R.string.None);
-        puzzles.add(none);
+        puzzles.add(s_none);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, puzzles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        mPuzzleSpinner.setAdapter(adapter);
 
         final String curPuzzle = s.getCurrentPuzzleID();
         int selectionPos;
         if (curPuzzle != null) {
             selectionPos = adapter.getPosition(curPuzzle);
+            mClearOneButton.setEnabled(true);
         } else {
-            selectionPos = adapter.getPosition(none);
+            selectionPos = adapter.getPosition(s_none);
+            mClearOneButton.setEnabled(false);
         }
 
-        spinner.setSelection(selectionPos);
-        spinner.setOnItemSelectedListener(this);
-
-        // TODO: populate the current puzzle spinner
-        // TODO: hook up the puzzle and skip count number selectors
-        // TODO: add UX to edit puzzle data
+        mPuzzleSpinner.setSelection(selectionPos);
+        mPuzzleSpinner.setOnItemSelectedListener(this);
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
             int pos, long id) {
         String selection = (String) parent.getItemAtPosition(pos);
-        final String none = getString(R.string.None);
 
-        Session s = Session.getInstance(this);
-        if (selection != null && selection.equals(none)) {
-            s.clearCurrentPuzzle();
+        if (selection != null && !selection.equals(s_none)) {
+            mClearOneButton.setEnabled(true);
         } else {
-            s.isValidStartCode(selection);
+            mClearOneButton.setEnabled(false);
         }
     }
 
@@ -93,6 +96,16 @@ public class AdminActivity extends Activity
                     Toast.LENGTH_SHORT);
             toast.show();
 
+        } else if (id == R.id.admin_clear_one_button) {
+            String puzzleID = (String) mPuzzleSpinner.getSelectedItem();
+
+            if (puzzleID != null && !puzzleID.equals(s_none)) {
+                s.clearPuzzleData(puzzleID);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Puzzle data wiped for " + puzzleID + ".",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
         } else if (id == R.id.test_notification_button) {
             mPI = HintNotification.scheduleHint(this, "wombat", 1, "hintID", 15);
             Toast toast = Toast.makeText(getApplicationContext(),

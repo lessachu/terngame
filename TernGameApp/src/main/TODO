@@ -22,7 +22,6 @@
 * fix pause loading after you login
 *** when we come back to an activity, after a long time, something is sad.  saveinstancestate?
 
-
 DONE:
 * Make the start layout auto-adjust to different screen sizes
 * Style for event title

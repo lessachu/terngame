@@ -29,6 +29,13 @@
             android:layout_gravity="left|center_vertical"
             style="@style/textHeadingTheme"/>
 
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_clear_one_button"
+            android:id="@+id/admin_clear_one_button"
+            android:layout_gravity="left|center_vertical"/>
+
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

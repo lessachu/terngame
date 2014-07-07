@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.twitter.terngame.util.AnswerChecker;
 
 /**
- * Created by jchong on 1/12/14.
+ * created by jchong on 1/12/14.
  */
 public class MainActivity extends Activity
         implements View.OnClickListener {

@@ -142,7 +142,6 @@ public class PuzzleActivity extends Activity
     }
 
     public void onHintReady(String puzzleID, String hintID, int notificationID) {
-        // TODO: consider when this should go away
         mStatusTextView.setText(getString(R.string.hint_prompt));
     }
 

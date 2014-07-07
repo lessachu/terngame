@@ -27,7 +27,13 @@ public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
         }
     }
 
-    public void clearPuzzleExtraInfo() {
+    public void clearPuzzleExtraInfo(String puzzleId) {
+        if (puzzleId.equals(s_twittermon)) {
+            mTwittermonInfo.clearSavedData();
+        }
+    }
+
+    public void clearAllPuzzleExtraInfo() {
         mTwittermonInfo.clearSavedData();
     }
 

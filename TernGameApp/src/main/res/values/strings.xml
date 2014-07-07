@@ -28,6 +28,7 @@
     <string name="share_chooser_title">Share via...</string>
     <string name="admin_clear_button">Clear All Data</string>
     <string name="admin_mode_title">ADMIN MODE (Use at your own risk):</string>
+    <string name="admin_clear_one_button">Clear this puzzle</string>
     <string name="current_puzzle_text">Current Puzzle:</string>
     <string name="num_solved_text">Puzzles Solved:</string>
     <string name="num_skipped_text">Puzzles Skipped</string>

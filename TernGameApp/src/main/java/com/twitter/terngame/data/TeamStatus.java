@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -40,8 +39,6 @@ public class TeamStatus implements JSONFileResultHandler {
     private static final String s_puzzles = "puzzles";
     private static final String s_currentPuzzle = "curPuzzle";
     private static final String s_lastInstruction = "lastInstruction";
-    private static final String s_eventName = "eventName";
-    private static final String s_lastUpdate = "lastUpdate";
     private static final String s_puzzleID = "id";
     private static final String s_puzzStart = "startTime";
     private static final String s_puzzEnd = "endTime";
@@ -60,7 +57,6 @@ public class TeamStatus implements JSONFileResultHandler {
     public int mNumSolved;
     public int mNumSkipped;
     public HashMap<String, PuzzleStatus> mPuzzles;
-    public Date mLastUpdate;
 
     public class PuzzleStatus {
         public String mID;
@@ -77,9 +73,33 @@ public class TeamStatus implements JSONFileResultHandler {
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
-    public void clearCurrentPuzzle() {
-        mCurrentPuzzle = null;
-        save();
+    public void clearPuzzleData(String puzzleID) {
+        Log.d("terngame", "Clearing puzzle data for: " + puzzleID);
+        // we don't bother trying to patch the last instruction
+        if (mPuzzles.containsKey(puzzleID)) {
+            Log.d("terngame", "Removing " + puzzleID + " from mPuzzles (" + mPuzzles.size() + ")");
+            PuzzleStatus ps = mPuzzles.get(puzzleID);
+            mPuzzles.remove(puzzleID);
+            Log.d("terngame", "Removing " + puzzleID + " from mPuzzles (" + mPuzzles.size() + ")");
+
+            if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
+                Log.d("terngame", "nulling out currentpuzzle");
+                mCurrentPuzzle = null;
+            }
+
+            if (ps.mSkipped) {
+                Log.d("terngame", "decrementing numSkipped");
+                mNumSkipped--;
+            }
+
+            if (ps.mSolved) {
+                Log.d("terngame", "decrementing numSolved");
+                mNumSolved--;
+
+            }
+            save();
+        }
+
     }
 
     public void clearData() {
@@ -88,7 +108,6 @@ public class TeamStatus implements JSONFileResultHandler {
         mNumSolved = 0;
         mNumSkipped = 0;
         mPuzzles.clear();
-        updateTimeStamp();
         save();
     }
 
@@ -327,7 +346,6 @@ public class TeamStatus implements JSONFileResultHandler {
 
             mPuzzles.put(puzzleID, ps);
             mCurrentPuzzle = puzzleID;
-            updateTimeStamp();
             save();
             return true;
         }
@@ -344,7 +362,6 @@ public class TeamStatus implements JSONFileResultHandler {
             isDupe = isDuplicate(guess, ps.mGuesses);
             if (!isDupe) {
                 ps.mGuesses.add(guess);
-                updateTimeStamp();
                 save();
             }
         } else {
@@ -362,7 +379,6 @@ public class TeamStatus implements JSONFileResultHandler {
                 mNumSolved++;
                 mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;
-                updateTimeStamp();
                 save();
                 return true;
             } else {
@@ -383,7 +399,6 @@ public class TeamStatus implements JSONFileResultHandler {
                 mNumSkipped++;
                 mLastInstruction = lastInstruction;
                 mCurrentPuzzle = null;
-                updateTimeStamp();
                 save();
                 return true;
             }
@@ -399,7 +414,6 @@ public class TeamStatus implements JSONFileResultHandler {
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 if (!ps.mHintsTaken.contains(hintID)) {
                     ps.mHintsTaken.add(hintID);
-                    updateTimeStamp();
                     save();
                 }
             }
@@ -411,16 +425,11 @@ public class TeamStatus implements JSONFileResultHandler {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null && !ps.mSolved && !ps.mSkipped) {
                 ps.mExtra = newExtra;
-                updateTimeStamp();
                 save();
             }
         } else {
             Log.d("terngame", "Trying to update extra for non-current puzzle");
         }
-    }
-
-    private void updateTimeStamp() {
-        mLastUpdate = new Date();
     }
 
     private boolean isDuplicate(String guess, ArrayList<String> al) {

@@ -230,7 +230,8 @@ public class Session {
         String puzzleID = mTeamStatus.getCurrentPuzzle();
 
         // NPE here after the app goes out of memory
-        AnswerInfo ai = mStartCodeInfo.getPuzzleInfo(puzzleID).getAnswerInfo(answer);
+        PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
+        AnswerInfo ai = pi.getAnswerInfo(answer);
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
 
         if (ai == null) {
@@ -283,18 +284,24 @@ public class Session {
     }
 
     public void loadEventInformation() {
+        Log.d("terngame", "Initializing event info start");
         mEventInfo.initializeEvent(mContext, new JSONFileReaderTask.JSONFileReaderCompleteListener() {
             @Override
             public void onJSONFileReaderComplete() {
+                Log.d("terngame", "Initializing event info end")
+                ;
+                Log.d("terngame", "Initializing login info startxs");
                 mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName(),
                         new JSONFileReaderTask.JSONFileReaderCompleteListener() {
                             @Override
                             public void onJSONFileReaderComplete() {
+                                Log.d("terngame", "Initializing login info end");
                                 if (mLoginLoadedListener != null) {
                                     mLoginLoadedListener.onLoginLoaded();
                                 }
                             }
                         });
+                Log.d("terngame", "Initializing start code info start");
                 mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
             }
         });
@@ -304,13 +311,24 @@ public class Session {
         mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
     }
 
-    public void clearCurrentPuzzle() {
-        mTeamStatus.clearCurrentPuzzle();
+    public void clearPuzzleData(String puzzleID) {
+        Log.d("terngame", "in Session clear puzzle data");
+        // if it's the current puzzle, clear hint notifications
+
+        String curPuzzle = mTeamStatus.getCurrentPuzzle();
+        if (curPuzzle != null && curPuzzle.equals(puzzleID)) {
+            Log.d("terngame", "clearing notifications for " + puzzleID);
+            clearHintNotifications();
+        }
+
+        // if it has an extra, clear the puzzle extra info
+        mPuzzleExtraInfo.clearPuzzleExtraInfo(puzzleID);
+        mTeamStatus.clearPuzzleData(puzzleID);
     }
 
     public void clearTeamData() {
         mTeamStatus.clearData();
-        mPuzzleExtraInfo.clearPuzzleExtraInfo();
+        mPuzzleExtraInfo.clearAllPuzzleExtraInfo();
         clearHintNotifications();
     }
 
