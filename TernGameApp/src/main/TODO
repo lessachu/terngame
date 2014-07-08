@@ -21,6 +21,7 @@
 * gizmoduck png has something in the top right corner
 * fix pause loading after you login
 *** when we come back to an activity, after a long time, something is sad.  saveinstancestate?
+* support multiple start codes for a particular puzzle
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
