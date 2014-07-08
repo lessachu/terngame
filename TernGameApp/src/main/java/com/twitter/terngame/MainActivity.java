@@ -102,7 +102,7 @@ public class MainActivity extends Activity
             mGoButton.setEnabled(false);
         } else {
             mCurPuzzleButton.setVisibility(View.GONE);
-            mGoButton.setEnabled(true);
+            mGoButton.setEnabled(mStartCodeEditText.getText().length() > 0);
         }
     }
 
