@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +16,8 @@ import java.util.ArrayList;
 /**
  * Created by jchong on 2/11/14.
  */
-public class AdminActivity extends Activity
-        implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AdminActivity extends BaseActivity
+implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     static private String s_none = "None";
 
@@ -33,8 +32,6 @@ public class AdminActivity extends Activity
 
         setContentView(R.layout.admin_activity);
 
-        Session s = Session.getInstance(this);
-
         Button clearAllButton = (Button) findViewById(R.id.admin_clear_all_button);
         clearAllButton.setOnClickListener(this);
 
@@ -48,14 +45,20 @@ public class AdminActivity extends Activity
         cancelNotificationButton.setOnClickListener(this);
 
         mPuzzleSpinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
-        ArrayList<String> puzzles = s.getPuzzleList();
+        mPuzzleSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void showUX() {
+        super.showUX();
+        ArrayList<String> puzzles = mSession.getPuzzleList();
         puzzles.add(s_none);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, puzzles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPuzzleSpinner.setAdapter(adapter);
 
-        final String curPuzzle = s.getCurrentPuzzleID();
+        final String curPuzzle = mSession.getCurrentPuzzleID();
         int selectionPos;
         if (curPuzzle != null) {
             selectionPos = adapter.getPosition(curPuzzle);
@@ -66,8 +69,8 @@ public class AdminActivity extends Activity
         }
 
         mPuzzleSpinner.setSelection(selectionPos);
-        mPuzzleSpinner.setOnItemSelectedListener(this);
     }
+
 
     public void onItemSelected(AdapterView<?> parent, View view,
             int pos, long id) {
@@ -87,10 +90,9 @@ public class AdminActivity extends Activity
     public void onClick(View view) {
         final int id = view.getId();
 
-        Session s = Session.getInstance(this);
         if (id == R.id.admin_clear_all_button) {
             // TODO: show an "are you sure? prompt?
-            s.clearTeamData();
+            mSession.clearTeamData();
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Team data wiped.",
                     Toast.LENGTH_SHORT);
@@ -100,7 +102,7 @@ public class AdminActivity extends Activity
             String puzzleID = (String) mPuzzleSpinner.getSelectedItem();
 
             if (puzzleID != null && !puzzleID.equals(s_none)) {
-                s.clearPuzzleData(puzzleID);
+                mSession.clearPuzzleData(puzzleID);
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Puzzle data wiped for " + puzzleID + ".",
                         Toast.LENGTH_SHORT);

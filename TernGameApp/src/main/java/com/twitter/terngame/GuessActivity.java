@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +8,8 @@ import android.widget.TextView;
 
 import com.twitter.terngame.util.ShareStatus;
 
-public class GuessActivity extends Activity
-        implements View.OnClickListener {
+public class GuessActivity extends BaseActivity
+implements View.OnClickListener {
 
     // intent keys
     public static final String s_is_skip = "is_skip";
@@ -37,7 +36,11 @@ public class GuessActivity extends Activity
         mShareButton = (Button) findViewById(R.id.share_button);
 
         mShareButton.setOnClickListener(this);
+    }
 
+    @Override
+    public void showUX() {
+        super.showUX();
         Bundle extras = getIntent().getExtras();
         boolean skip = false;
         String value = null;
@@ -76,9 +79,8 @@ public class GuessActivity extends Activity
 
     public void onClick(View view) {
         final int id = view.getId();
-        Session s = Session.getInstance(this);
         if (id == R.id.share_button) {
-            Intent shareIntent = ShareStatus.getGameStatusIntent(s);
+            Intent shareIntent = ShareStatus.getGameStatusIntent(mSession);
             startActivity(Intent.createChooser(shareIntent,
                     this.getString(R.string.share_chooser_title)));
         }
