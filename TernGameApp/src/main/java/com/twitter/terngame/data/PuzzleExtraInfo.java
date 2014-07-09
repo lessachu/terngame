@@ -2,6 +2,8 @@ package com.twitter.terngame.data;
 
 import android.content.Context;
 
+import com.twitter.terngame.util.JSONFileReaderTask;
+
 import org.json.JSONObject;
 
 public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
@@ -15,9 +17,10 @@ public class PuzzleExtraInfo implements TwittermonPuzzleInfo {
         mTwittermonInfo = new TwittermonInfo(context);
     }
 
-    public void initializePuzzleExtra(String puzzleId, JSONObject puzzleJSON) {
+    public void initializePuzzleExtra(String puzzleId, JSONObject puzzleJSON,
+            JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
         if (puzzleId.equals(s_twittermon)) {
-            mTwittermonInfo.initialize(puzzleJSON);
+            mTwittermonInfo.initialize(puzzleJSON, jfrcl);
         }
     }
 

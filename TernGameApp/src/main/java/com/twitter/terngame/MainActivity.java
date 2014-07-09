@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,15 +19,18 @@ import com.twitter.terngame.util.AnswerChecker;
  * created by jchong on 1/12/14.
  */
 public class MainActivity extends Activity
-        implements View.OnClickListener {
+        implements View.OnClickListener, Session.DataLoadedListener {
 
     private Session mSession;
     private TextView mEventNameText;
+    private TextView mTeamNameText;
     private EditText mStartCodeEditText;
     private Button mCurPuzzleButton;
     private Button mSolvedStatusButton;
     private TextView mInstructionText;
     private Button mGoButton;
+    private LinearLayout mContent;
+    private LinearLayout mLoadingLayout;
 
     private static String s_admin_mode = "start admin mode";
 
@@ -33,17 +38,15 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d("terngame", "Main activity on create callsed");
+
         setContentView(R.layout.event_main);
         mSession = Session.getInstance(this);
 
+        mContent = (LinearLayout) findViewById(R.id.main_content);
+        mLoadingLayout = (LinearLayout) findViewById(R.id.loading_layout);
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
-        final String eventName = mSession.getEventName();
-        if (eventName != null) {
-            mEventNameText.setText(eventName);
-        }
-
-        final TextView teamNameTextView = (TextView) findViewById(R.id.team_name_text);
-        teamNameTextView.setText(mSession.getTeamName());
+        mTeamNameText = (TextView) findViewById(R.id.team_name_text);
 
         mGoButton = (Button) findViewById(R.id.go_button);
         mGoButton.setOnClickListener(this);
@@ -81,12 +84,30 @@ public class MainActivity extends Activity
     @Override
     public void onResume() {
         super.onResume();
-        Session s = Session.getInstance(this);
 
-        mInstructionText.setText(s.getCurrentInstruction());
+        Log.d("terngame", "MainActivity OnResume called");
+        if (mSession.isDataLoaded(this)) {
+            showUX();
+        } else {
+            mLoadingLayout.setVisibility(View.VISIBLE);
+            mContent.setVisibility(View.GONE);
+        }
+    }
 
-        int numSolved = s.getPuzzlesSolved();
-        int numSkipped = s.getPuzzlesSkipped();
+    public void showUX() {
+        Log.d("terngame", "showUX");
+        mLoadingLayout.setVisibility(View.GONE);
+        mContent.setVisibility(View.VISIBLE);
+
+        final String eventName = mSession.getEventName();
+        if (eventName != null) {
+            mEventNameText.setText(eventName);
+        }
+        mTeamNameText.setText(mSession.getTeamName());
+        mInstructionText.setText(mSession.getCurrentInstruction());
+
+        int numSolved = mSession.getPuzzlesSolved();
+        int numSkipped = mSession.getPuzzlesSkipped();
         String statusString = Integer.toString(numSolved) + " puzzle" +
                 (numSolved == 1 ? "" : "s") + " solved";
         if (numSkipped > 0) {
@@ -95,9 +116,9 @@ public class MainActivity extends Activity
         }
         mSolvedStatusButton.setText(statusString);
 
-        if (s.puzzleStarted()) {
+        if (mSession.puzzleStarted()) {
             // put the current puzzle name in there
-            mCurPuzzleButton.setText(s.getPuzzleName(s.getCurrentPuzzleID()));
+            mCurPuzzleButton.setText(mSession.getPuzzleName(mSession.getCurrentPuzzleID()));
             mCurPuzzleButton.setVisibility(View.VISIBLE);
             mGoButton.setEnabled(false);
         } else {
@@ -109,8 +130,6 @@ public class MainActivity extends Activity
     public void onClick(View view) {
         final int id = view.getId();
 
-        Session s = Session.getInstance(this);
-
         if (id == R.id.go_button) {
             final String startcode = mStartCodeEditText.getText().toString();
             mStartCodeEditText.setText("");
@@ -118,8 +137,8 @@ public class MainActivity extends Activity
             if (startcode.equalsIgnoreCase(s_admin_mode)) {
                 startActivity(new Intent(this, AdminActivity.class));
             } else {
-                if (s.isValidStartCode(startcode)) {
-                    s.startPuzzle(startcode);
+                if (mSession.isValidStartCode(startcode)) {
+                    mSession.startPuzzle(startcode);
                     Intent i = new Intent(this, PuzzleActivity.class);
                     i.putExtra(PuzzleActivity.s_puzzleID, AnswerChecker.stripAnswer(startcode));
                     startActivity(i);
@@ -131,9 +150,9 @@ public class MainActivity extends Activity
                 }
             }
         } else if (id == R.id.current_puzzle_button) {
-            if (s.puzzleStarted()) {
+            if (mSession.puzzleStarted()) {
                 Intent i = new Intent(this, PuzzleActivity.class);
-                i.putExtra(PuzzleActivity.s_puzzleID, s.getCurrentPuzzleID());
+                i.putExtra(PuzzleActivity.s_puzzleID, mSession.getCurrentPuzzleID());
                 startActivity(i);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
@@ -146,6 +165,11 @@ public class MainActivity extends Activity
             // construct a list of puzzle items
             startActivity(i);
         }
+    }
+
+    public void onDataLoaded() {
+        Log.d("terngame", "MainActivity in onDataLoaded, restoring normal UX");
+        showUX();
     }
 
 }

@@ -13,7 +13,6 @@ import com.twitter.terngame.util.EditTextWatcher;
 public class StartActivity extends Activity
         implements View.OnClickListener, Session.LoginLoadedListener {
 
-    private AppController mAppController;
     private Button mSignInButton;
     private EditText mTeamEditText;
     private EditText mPassEditText;
@@ -27,7 +26,6 @@ public class StartActivity extends Activity
         super.onCreate(savedInstanceState);
 
         mDataLoaded = false;
-        mAppController = AppController.getInstance(this);
 
         Session s = Session.getInstance(this);
         if (s.isLoggedIn()) {
@@ -92,11 +90,11 @@ public class StartActivity extends Activity
         final int id = view.getId();
         if (id == R.id.sign_in) {
 
-            if(Session.getInstance(this).login(mTeamEditText.getText().toString(),
+            if (Session.getInstance(this).login(mTeamEditText.getText().toString(),
                     mPassEditText.getText().toString())) {
-                    startActivity(new Intent(this, MainActivity.class)
-                                  .putExtra(Intent.EXTRA_INTENT,
-                                  getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
+                startActivity(new Intent(this, MainActivity.class)
+                        .putExtra(Intent.EXTRA_INTENT,
+                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "I'm sorry, but that name and password combination is invalid.",

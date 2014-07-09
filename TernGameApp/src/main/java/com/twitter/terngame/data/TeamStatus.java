@@ -171,7 +171,8 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void initializeTeam(Context context, String teamName) {
+    public void initializeTeam(Context context, String teamName,
+            JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
         mTeamName = teamName;
         mContext = context;
         // if there is a savefile present, load from that
@@ -179,7 +180,7 @@ public class TeamStatus implements JSONFileResultHandler {
             Log.d("terngame", "reading in team status");
             File f = new File(context.getFilesDir(), s_saveFile);
             InputStream in = new BufferedInputStream(new FileInputStream(f));
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {

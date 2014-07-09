@@ -37,12 +37,23 @@ public class Session {
         public void onLoginLoaded();
     }
 
+    public interface DataLoadedListener {
+        public void onDataLoaded();
+    }
 
     private static Session sInstance = null;
     private Context mContext;
+
     private boolean mLoggedIn;
+    private boolean mEventDataLoaded;
+    private boolean mLoginDataLoaded;
+    private boolean mStartCodeDataLoaded;
+    private boolean mPuzzleExtraInfoLoaded;
+    private boolean mTeamDataLoaded;
+
     private ArrayList<PendingIntent> mPendingHints;
     private ArrayList<HintListener> mHintListeners;
+    private ArrayList<DataLoadedListener> mDataListeners;
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
@@ -52,9 +63,13 @@ public class Session {
 
     private LoginLoadedListener mLoginLoadedListener;
 
-
     private Session(Context context) {
         mContext = context;
+        mLoggedIn = false;
+        mEventDataLoaded = false;
+        mLoginDataLoaded = false;
+        mStartCodeDataLoaded = false;
+        mPuzzleExtraInfoLoaded = false;
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo();
         mLoginInfo = new LoginInfo();
@@ -62,18 +77,56 @@ public class Session {
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
+        mDataListeners = new ArrayList<DataLoadedListener>();
         mLoginLoadedListener = null;
     }
 
-    public static Session getInstance(Context context) {
+    public static synchronized Session getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new Session(context.getApplicationContext());
+            sInstance.loadEventInformation();
         }
         return sInstance;
     }
 
     public void setLoginLoadedListener(LoginLoadedListener lll) {
         mLoginLoadedListener = lll;
+    }
+
+    public boolean isDataLoaded(DataLoadedListener dll) {
+
+        Log.d("terngame", "isDataLoaded?");
+        Log.d("terngame", "mLoggedIn: " + mLoggedIn + "EventData: " + mEventDataLoaded + " LoginData: " + mLoginDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
+                " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
+        // check if all data is loaded
+        if (isLoggedIn() && mEventDataLoaded && mLoginDataLoaded && mStartCodeDataLoaded
+                && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
+            Log.d("terngame", "isDataLoaded?  Yes it is!");
+            return true;
+        }
+
+        if (dll != null) {
+            Log.d("terngame", "Adding listener");
+            mDataListeners.add(dll);
+        }
+        return false;
+    }
+
+    private void checkDataLoadComplete() {
+        Log.d("terngame", "Checking if data load is complete!");
+
+        Log.d("terngame", "mLoggedIn: " + mLoggedIn + "EventData: " + mEventDataLoaded + " LoginData: " + mLoginDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
+                " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
+
+        if (isLoggedIn() && mEventDataLoaded && mLoginDataLoaded && mStartCodeDataLoaded
+                && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
+
+            Log.d("terngame", "Yay all the data is loaded!");
+            for (DataLoadedListener dl : mDataListeners) {
+                Log.d("terngame", "Calling on data loaded");
+                dl.onDataLoaded();
+            }
+        }
     }
 
     public boolean isLoggedIn() {
@@ -174,11 +227,18 @@ public class Session {
     }
 
     public boolean login(String teamName, String password) {
-        mLoggedIn = true;
 
         if (mLoginInfo.isValidLogin(teamName, password)) {
+            mLoggedIn = true;
             // load team information if there is any
-            mTeamStatus.initializeTeam(mContext, teamName);
+            mTeamStatus.initializeTeam(mContext, teamName,
+                    new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                        @Override
+                        public void onJSONFileReaderComplete() {
+                            mTeamDataLoaded = true;
+                            checkDataLoadComplete();
+                        }
+                    });
             return true;
         }
 
@@ -288,27 +348,42 @@ public class Session {
         mEventInfo.initializeEvent(mContext, new JSONFileReaderTask.JSONFileReaderCompleteListener() {
             @Override
             public void onJSONFileReaderComplete() {
-                Log.d("terngame", "Initializing event info end")
-                ;
-                Log.d("terngame", "Initializing login info startxs");
+                mEventDataLoaded = true;
                 mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName(),
                         new JSONFileReaderTask.JSONFileReaderCompleteListener() {
                             @Override
                             public void onJSONFileReaderComplete() {
+                                mLoginDataLoaded = true;
                                 Log.d("terngame", "Initializing login info end");
                                 if (mLoginLoadedListener != null) {
                                     mLoginLoadedListener.onLoginLoaded();
                                 }
+                                checkDataLoadComplete();
                             }
                         });
                 Log.d("terngame", "Initializing start code info start");
-                mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName());
+                mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName(),
+                        new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                            @Override
+                            public void onJSONFileReaderComplete() {
+                                mStartCodeDataLoaded = true;
+                                checkDataLoadComplete();
+                            }
+                        });
             }
         });
     }
 
     public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
-        mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON);
+        // add callback for puzzleExtraInfo here.
+        mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON,
+                new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                    @Override
+                    public void onJSONFileReaderComplete() {
+                        mPuzzleExtraInfoLoaded = true;
+                        checkDataLoadComplete();
+                    }
+                });
     }
 
     public void clearPuzzleData(String puzzleID) {

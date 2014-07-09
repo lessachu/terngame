@@ -121,7 +121,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         }
     }
 
-    public void initialize(JSONObject jo) {
+    public void initialize(JSONObject jo, JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
 
         String filename = null;
         if (jo != null) {
@@ -136,7 +136,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
             try {
 
                 InputStream in = mContext.getAssets().open(filename);
-                JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
+                JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
                 readerTask.execute(in);
 
             } catch (FileNotFoundException e) {

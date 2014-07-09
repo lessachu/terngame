@@ -111,11 +111,12 @@ public class StartCodeInfo implements JSONFileResultHandler {
         }
     }
 
-    public void initialize(Context context, String startCodeFile) {
+    public void initialize(Context context, String startCodeFile,
+            JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
         try {
 
             InputStream in = context.getAssets().open(startCodeFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {

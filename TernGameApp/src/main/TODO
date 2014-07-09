@@ -22,6 +22,8 @@
 * fix pause loading after you login
 *** when we come back to an activity, after a long time, something is sad.  saveinstancestate?
 * support multiple start codes for a particular puzzle
+* get rid of the signin screen
+* finishing fixing the crash - save the login data in saveinstancestate for now
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
