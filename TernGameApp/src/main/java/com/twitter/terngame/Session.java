@@ -241,9 +241,22 @@ public class Session {
                     });
             return true;
         }
-
         return false;
     }
+
+    public void restoreLogin(String teamName) {
+        mLoggedIn = true;
+        // load team information if there is any
+        mTeamStatus.initializeTeam(mContext, teamName,
+                new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                    @Override
+                    public void onJSONFileReaderComplete() {
+                        mTeamDataLoaded = true;
+                        checkDataLoadComplete();
+                    }
+                });
+    }
+
 
     public boolean isValidStartCode(String start_code) {
         start_code = AnswerChecker.stripAnswer(start_code);

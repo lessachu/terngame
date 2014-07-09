@@ -33,6 +33,8 @@ public class MainActivity extends Activity
     private LinearLayout mLoadingLayout;
 
     private static String s_admin_mode = "start admin mode";
+    private static final String s_teamname = "teamname";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,11 @@ public class MainActivity extends Activity
 
         setContentView(R.layout.event_main);
         mSession = Session.getInstance(this);
+
+        if (savedInstanceState != null) {
+            String teamname = savedInstanceState.getString(s_teamname);
+            mSession.restoreLogin(teamname);
+        }
 
         mContent = (LinearLayout) findViewById(R.id.main_content);
         mLoadingLayout = (LinearLayout) findViewById(R.id.loading_layout);
@@ -165,6 +172,12 @@ public class MainActivity extends Activity
             // construct a list of puzzle items
             startActivity(i);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(s_teamname, mSession.getTeamName());
     }
 
     public void onDataLoaded() {
