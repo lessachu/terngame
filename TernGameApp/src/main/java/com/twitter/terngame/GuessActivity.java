@@ -62,6 +62,8 @@ public class GuessActivity extends Activity
 
             if (duplicate != null) {
                 mStatusText.setText(duplicate);
+            } else {
+                mStatusText.setText("");
             }
         }
 

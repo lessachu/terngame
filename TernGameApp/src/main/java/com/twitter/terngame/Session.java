@@ -311,6 +311,7 @@ public class Session {
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
+            Log.d("terngame", "Guess: " + answer + " is wrong");
         }
 
         ai.mDuplicate = isDupe;

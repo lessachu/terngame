@@ -79,4 +79,8 @@
     <string name="collect_fail_title">Incorrect trap code</string>
     <string name="collect_succeed_title">Success!</string>
     <string name="collect_dupe_title">Duplicate Twittermon</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +16,9 @@ import com.twitter.terngame.util.AnswerChecker;
 /**
  * created by jchong on 1/12/14.
  */
-public class MainActivity extends Activity
-        implements View.OnClickListener, Session.DataLoadedListener {
+public class MainActivity extends BaseActivity
+        implements View.OnClickListener {
 
-    private Session mSession;
     private TextView mEventNameText;
     private TextView mTeamNameText;
     private EditText mStartCodeEditText;
@@ -29,29 +26,17 @@ public class MainActivity extends Activity
     private Button mSolvedStatusButton;
     private TextView mInstructionText;
     private Button mGoButton;
-    private LinearLayout mContent;
-    private LinearLayout mLoadingLayout;
 
     private static String s_admin_mode = "start admin mode";
-    private static final String s_teamname = "teamname";
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.event_main);
+
         Log.d("terngame", "Main activity on create callsed");
 
-        setContentView(R.layout.event_main);
-        mSession = Session.getInstance(this);
-
-        if (savedInstanceState != null) {
-            String teamname = savedInstanceState.getString(s_teamname);
-            mSession.restoreLogin(teamname);
-        }
-
-        mContent = (LinearLayout) findViewById(R.id.main_content);
-        mLoadingLayout = (LinearLayout) findViewById(R.id.loading_layout);
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
         mTeamNameText = (TextView) findViewById(R.id.team_name_text);
 
@@ -88,23 +73,11 @@ public class MainActivity extends Activity
         });
     }
 
+
     @Override
-    public void onResume() {
-        super.onResume();
-
-        Log.d("terngame", "MainActivity OnResume called");
-        if (mSession.isDataLoaded(this)) {
-            showUX();
-        } else {
-            mLoadingLayout.setVisibility(View.VISIBLE);
-            mContent.setVisibility(View.GONE);
-        }
-    }
-
     public void showUX() {
-        Log.d("terngame", "showUX");
-        mLoadingLayout.setVisibility(View.GONE);
-        mContent.setVisibility(View.VISIBLE);
+        super.showUX();
+        Log.d("terngame", "MainActivity showUX");
 
         final String eventName = mSession.getEventName();
         if (eventName != null) {
@@ -173,16 +146,4 @@ public class MainActivity extends Activity
             startActivity(i);
         }
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(s_teamname, mSession.getTeamName());
-    }
-
-    public void onDataLoaded() {
-        Log.d("terngame", "MainActivity in onDataLoaded, restoring normal UX");
-        showUX();
-    }
-
 }
