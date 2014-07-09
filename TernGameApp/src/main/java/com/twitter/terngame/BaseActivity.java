@@ -24,7 +24,6 @@ public abstract class BaseActivity extends Activity
             String teamname = savedInstanceState.getString(s_teamname);
             mSession.restoreLogin(teamname);
         }
-
         Log.d("terngame", "BaseActivity onCreate");
     }
 

@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,8 +22,8 @@ import com.twitter.terngame.util.AnswerChecker;
 
 import java.util.ArrayList;
 
-public class PuzzleActivity extends Activity
-        implements View.OnClickListener, Session.HintListener {
+public class PuzzleActivity extends BaseActivity
+implements View.OnClickListener, Session.HintListener {
 
     // Intent keys
     public static final String s_puzzleID = "puzzleID";
@@ -80,9 +79,15 @@ public class PuzzleActivity extends Activity
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
+        mSession.registerHintListener(this);
+    }
+
+    @Override
+    public void showUX() {
+        super.showUX();
         Intent i = getIntent();
         Bundle extras = i.getExtras();
         mHintPrompt = false;
@@ -93,21 +98,20 @@ public class PuzzleActivity extends Activity
             }
         }
 
-        Session s = Session.getInstance(this);
         final TextView puzzleName = (TextView) findViewById(R.id.puzzle_name_text);
-        puzzleName.setText(s.getPuzzleName(mPuzzleID));
+        puzzleName.setText(mSession.getPuzzleName(mPuzzleID));
 
-        if (s.showPuzzleButton(mPuzzleID)) {
-            mPuzzleButton.setText(s.getPuzzleButtonText(mPuzzleID));
+        if (mSession.showPuzzleButton(mPuzzleID)) {
+            mPuzzleButton.setText(mSession.getPuzzleButtonText(mPuzzleID));
             mPuzzleButton.setVisibility(View.VISIBLE);
         } else {
             mPuzzleButton.setVisibility(View.GONE);
         }
 
         mStatusTextView = (TextView) findViewById(R.id.status_text);
-        if (s.puzzleSkipped(mPuzzleID)) {
+        if (mSession.puzzleSkipped(mPuzzleID)) {
             setCompletedPuzzleUI(getString(R.string.skipped_text));
-        } else if (s.puzzleSolved(mPuzzleID)) {
+        } else if (mSession.puzzleSolved(mPuzzleID)) {
             setCompletedPuzzleUI(getString(R.string.solved_text));
         } else {
             if (mHintPrompt) {
@@ -116,12 +120,10 @@ public class PuzzleActivity extends Activity
                 mStatusTextView.setText("");
             }
             setAnswerUIVisibility(View.VISIBLE);
-            Log.d("terngame", "Start time as int: " + Integer.toString((int) s.getPuzzleStartTime(mPuzzleID)));
-            mPuzzleTimer.setBase(s.getPuzzleStartTime(mPuzzleID));
+            Log.d("terngame", "Start time as int: " + Integer.toString((int) mSession.getPuzzleStartTime(mPuzzleID)));
+            mPuzzleTimer.setBase(mSession.getPuzzleStartTime(mPuzzleID));
             mPuzzleTimer.start();
         }
-
-        s.registerHintListener(this);
     }
 
     @Override
@@ -134,9 +136,7 @@ public class PuzzleActivity extends Activity
     @Override
     protected void onStop() {
         super.onStop();
-
-        Session s = Session.getInstance(this);
-        if (!s.puzzleSkipped(mPuzzleID) && !s.puzzleSolved(mPuzzleID)) {
+        if (!mSession.puzzleSkipped(mPuzzleID) && !mSession.puzzleSolved(mPuzzleID)) {
             mPuzzleTimer.stop();
         }
     }
@@ -146,11 +146,10 @@ public class PuzzleActivity extends Activity
     }
 
     public void setCompletedPuzzleUI(String status_text) {
-        Session s = Session.getInstance(this);
         mStatusTextView.setText(status_text);
         setAnswerUIVisibility(View.GONE);
 
-        long timeElapsed = s.getPuzzleEndTime(mPuzzleID) - s.getPuzzleStartTime(mPuzzleID);
+        long timeElapsed = mSession.getPuzzleEndTime(mPuzzleID) - mSession.getPuzzleStartTime(mPuzzleID);
         mPuzzleTimer.setBase(SystemClock.elapsedRealtime() - timeElapsed);
     }
 
@@ -163,14 +162,13 @@ public class PuzzleActivity extends Activity
     public void onClick(View view) {
         final int id = view.getId();
 
-        Session s = Session.getInstance(this);
         if (id == R.id.answer_button) {
             String guess = mAnswerEditText.getText().toString();
             mAnswerEditText.setText("");
 
-            if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(s.getSkipCode())) {
-                String answer = s.getCorrectAnswer(mPuzzleID);
-                String response = s.skipPuzzle(mPuzzleID);
+            if (AnswerChecker.stripAnswer(guess).equalsIgnoreCase(mSession.getSkipCode())) {
+                String answer = mSession.getCorrectAnswer(mPuzzleID);
+                String response = mSession.skipPuzzle(mPuzzleID);
                 mPuzzleTimer.stop();
 
                 Intent i = new Intent(this, GuessActivity.class);
@@ -182,12 +180,12 @@ public class PuzzleActivity extends Activity
 
             } else {
                 // register a guess
-                AnswerInfo ai = s.guessAnswer(guess);
+                AnswerInfo ai = mSession.guessAnswer(guess);
                 Intent i = new Intent(this, GuessActivity.class);
                 i.putExtra(GuessActivity.s_guess_word, guess);
                 i.putExtra(GuessActivity.s_response, ai.mResponse);
                 if (ai.mDuplicate) {
-                    i.putExtra(GuessActivity.s_duplicate, s.getDuplicateAnswerString());
+                    i.putExtra(GuessActivity.s_duplicate, mSession.getDuplicateAnswerString());
                 }
                 i.putExtra(GuessActivity.s_correct, ai.mCorrect);
 
@@ -208,7 +206,7 @@ public class PuzzleActivity extends Activity
             i.putExtra(HintListActivity.s_puzzleID, mPuzzleID);
             startActivity(i);
         } else if (id == R.id.guess_log_button) {
-            ArrayList<String> guesses = s.getGuesses(mPuzzleID);
+            ArrayList<String> guesses = mSession.getGuesses(mPuzzleID);
 
             if (guesses != null) {
                 Intent i = new Intent(this, GuessLogActivity.class);
