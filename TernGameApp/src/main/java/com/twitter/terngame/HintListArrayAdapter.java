@@ -23,14 +23,12 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
     private final Context mContext;
     private final Session mSession;
     private final String mPuzzleID;
-    private final ArrayList<HintInfo> mValues;
 
     public HintListArrayAdapter(Context context, String puzzleID, ArrayList<HintInfo> values) {
         super(context, R.layout.hintlist_row, values);
         mContext = context;
         mSession = Session.getInstance(context);
         mPuzzleID = puzzleID;
-        mValues = values;
     }
 
     // TODO: try adding support for view recycling
@@ -40,7 +38,7 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.hintlist_row, parent, false);
 
-        HintInfo hi = mValues.get(position);
+        HintInfo hi = getItem(position);
         final TextView hintTitle = (TextView) rowView.findViewById(R.id.hint_cost_text);
         final TextView hintTimeText = (TextView) rowView.findViewById(R.id.hint_time_text);
 

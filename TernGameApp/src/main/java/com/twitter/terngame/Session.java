@@ -187,6 +187,7 @@ public class Session {
     }
 
     public ArrayList<HintInfo> getHintStatus(String puzzleID) {
+        Log.d("terngame", "Session getHintStatus for " + puzzleID);
         return mStartCodeInfo.getHintList(puzzleID);
     }
 

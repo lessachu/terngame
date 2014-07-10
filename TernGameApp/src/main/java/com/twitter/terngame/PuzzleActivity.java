@@ -142,6 +142,7 @@ implements View.OnClickListener, Session.HintListener {
     }
 
     public void onHintReady(String puzzleID, String hintID, int notificationID) {
+        // crashes here if you hit a push notification during loading
         mStatusTextView.setText(getString(R.string.hint_prompt));
     }
 

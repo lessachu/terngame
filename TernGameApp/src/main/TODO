@@ -24,6 +24,8 @@
 * support multiple start codes for a particular puzzle
 * get rid of the signin screen
 * finishing fixing the crash - save the login data in saveinstancestate for now
+* you can still crash something by hitting a push notification while loading.
+
 
 DONE:
 * Make the start layout auto-adjust to different screen sizes
@@ -124,6 +126,7 @@ DONE:
 * clear the submit a guess edit text and the start code edit text after you submit
 * clear old notifications after you solve a clue or take the hint in question.
 * hints don't work on pre-kitkat
+* DOH, puzzleinfo intialization is not tracked.
 
 
 

@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StartCodeInfo implements JSONFileResultHandler {
+public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.JSONFileReaderCompleteListener {
 
     public static final String s_version = "version";
     public static final String s_startCodeArray = "start_codes";
@@ -41,12 +41,60 @@ public class StartCodeInfo implements JSONFileResultHandler {
     private HashMap<String, PuzzleInfo> mStartCodes;
     private HashMap<String, String> mNextInstruction;
     private ArrayList<String> mPuzzleOrder;
+    private ArrayList<PuzzleInfoReaderComplete> mPuzzleDataLoaders;
+    private boolean mStartCodesLoaded;
+    private JSONFileReaderTask.JSONFileReaderCompleteListener mJfrcl;
 
     public StartCodeInfo(Context context) {
         mContext = context;
         mStartCodes = new HashMap<String, PuzzleInfo>();
         mNextInstruction = new HashMap<String, String>();
         mPuzzleOrder = new ArrayList<String>();
+        mPuzzleDataLoaders = new ArrayList<PuzzleInfoReaderComplete>();
+        mStartCodesLoaded = false;
+        mJfrcl = null;
+    }
+
+    public class PuzzleInfoReaderComplete implements JSONFileReaderTask.JSONFileReaderCompleteListener {
+        private String mTag;
+        public boolean mComplete;
+
+        public PuzzleInfoReaderComplete(String tag) {
+            mTag = tag;
+            mComplete = false;
+        }
+
+        public String getTag() {
+            return mTag;
+        }
+
+        public void onJSONFileReaderComplete() {
+            mComplete = true;
+
+            checkPuzzleDataReadComplete();
+            // check the tag and report that the tag is complete to the larger array of tags
+            // check if all tags are complete
+            Log.d("terngame", "PuzzleInfoReader " + mTag + " is complete!");
+        }
+    }
+
+    public synchronized void checkPuzzleDataReadComplete() {
+        for (PuzzleInfoReaderComplete pirc : mPuzzleDataLoaders) {
+            if (!pirc.mComplete) {
+                Log.d("terngame", pirc.getTag() + " is not initialized yet");
+                return;
+            }
+        }
+
+        if (mStartCodesLoaded) {
+            Log.d("terngame", "All puzzles initialized!");
+            mPuzzleDataLoaders.clear();
+            if (mJfrcl != null) {
+                mJfrcl.onJSONFileReaderComplete();
+            }
+        } else {
+            Log.d("terngame", "puzzles initialized, but start codes are not done yet");
+        }
     }
 
     // called by JSONFileReaderTask
@@ -113,10 +161,13 @@ public class StartCodeInfo implements JSONFileResultHandler {
 
     public void initialize(Context context, String startCodeFile,
             JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
+        // intercept this, so we can wait for all the puzzle loads to be done too.
+        mJfrcl = jfrcl;
+
         try {
 
             InputStream in = context.getAssets().open(startCodeFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, this);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {
@@ -134,6 +185,11 @@ public class StartCodeInfo implements JSONFileResultHandler {
             toast.show();
             Log.e("terngame", "IOException");
         }
+    }
+
+    public void onJSONFileReaderComplete() {
+        mStartCodesLoaded = true;
+        checkPuzzleDataReadComplete();
     }
 
     public String getNextInstruction(String startCode) {
@@ -169,7 +225,9 @@ public class StartCodeInfo implements JSONFileResultHandler {
         for (String code : mStartCodes.keySet()) {
             // walk through the array and pull in the answer set
             PuzzleInfo pi = mStartCodes.get(code);
-            pi.initialize(mContext);
+            PuzzleInfoReaderComplete pirc = new PuzzleInfoReaderComplete(code);
+            mPuzzleDataLoaders.add(pirc);
+            pi.initialize(mContext, pirc);
         }
     }
 
@@ -178,9 +236,14 @@ public class StartCodeInfo implements JSONFileResultHandler {
     }
 
     public ArrayList<HintInfo> getHintList(String puzzleID) {
+        Log.d("terngame", "StartCodeInfo getHintList " + puzzleID);
         PuzzleInfo pi = mStartCodes.get(puzzleID);
+
         if (pi != null) {
+            Log.d("terngame", "StartCodeInfo pi is not null" + pi.toString());
             return pi.getHintCopy();
+        } else {
+            Log.d("terngame", "StartCodeInfo pi is null");
         }
         return null;
     }

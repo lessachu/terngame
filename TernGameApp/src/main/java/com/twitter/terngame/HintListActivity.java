@@ -1,20 +1,19 @@
 package com.twitter.terngame;
 
-import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.twitter.terngame.data.HintInfo;
 
 import java.util.ArrayList;
 
 
-public class HintListActivity extends ListActivity
-        implements Session.HintListener {
+public class HintListActivity extends BaseListActivity
+implements Session.HintListener {
     public static final String s_puzzleID = "puzzleID";  // intent key
 
     private String mPuzzleID;
     private HintListArrayAdapter mAdapter;
-    private Session mSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +25,24 @@ public class HintListActivity extends ListActivity
             mPuzzleID = extras.getString(s_puzzleID);
         }
 
-        mSession = Session.getInstance(this);
-        ArrayList<HintInfo> hintArray = mSession.getHintStatus(mPuzzleID);
+        ArrayList<HintInfo> hintArray = new ArrayList<HintInfo>();
 
         mAdapter = new HintListArrayAdapter(this, mPuzzleID, hintArray);
         setListAdapter(mAdapter);
-
         mSession.registerHintListener(this);
+    }
+
+    public void showUX() {
+        super.showUX();
+
+        mAdapter.clear();
+        ArrayList<HintInfo> hintArray = mSession.getHintStatus(mPuzzleID);
+        for (HintInfo hi : hintArray) {
+            mAdapter.add(hi);
+        }
+
+        Log.d("terngame", "ShowUX: hint count: " + mSession.getHintStatus(mPuzzleID).size());
+        Log.d("terngame", "ShowUX: puzzleID: " + mPuzzleID);
     }
 
     @Override

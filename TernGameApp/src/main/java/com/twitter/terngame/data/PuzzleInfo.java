@@ -106,11 +106,11 @@ public class PuzzleInfo implements JSONFileResultHandler {
         }
     }
 
-    public void initialize(Context context) {
+    public void initialize(Context context, JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
         try {
 
             InputStream in = context.getAssets().open(mAnswerFile);
-            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, null);
+            JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
             readerTask.execute(in);
 
         } catch (FileNotFoundException e) {
