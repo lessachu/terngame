@@ -17,6 +17,13 @@ import com.twitter.terngame.util.TwittermonBattleRoyalHelper;
 public class TwittermonBattleRoyaleActivity extends BaseActivity
         implements View.OnClickListener {
 
+    private final static String s_royale_helper = "royale_helper";
+    private final static String s_creature = "creature";
+    private final static String s_opponent = "opponent";
+    private final static String s_result = "result";
+    private final static String s_state = "state";
+    private final static String s_result_prompt = "result_prompt";
+
     //start layout
     private Button mStart;
     private TextView mResultView;
@@ -38,13 +45,36 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
     private LinearLayout mMatchLayout;
     private LinearLayout mWinLayout;
 
+    // state of the UX
+    private int mState;
+    private boolean mLoading;  // ugh, I hate that I did this
+    private final static int s_start = 0;
+    private final static int s_battle = 1;
+    private final static int s_won = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.twittermon_royale);
 
-        mRoyaleHelper = new TwittermonBattleRoyalHelper();
+        mBattle = new TwittermonInfo.BattleInfo(null, null, 0);
+        String resultViewText = "";
+
+        if (savedInstanceState != null) {
+            mRoyaleHelper = savedInstanceState.getParcelable(s_royale_helper);
+            mState = savedInstanceState.getInt(s_state);
+            mBattle.mCreature = savedInstanceState.getString(s_creature);
+            mBattle.mOpponent = savedInstanceState.getString(s_opponent);
+            mBattle.mResult = savedInstanceState.getInt(s_result);
+            resultViewText = savedInstanceState.getString(s_result_prompt);
+
+            mLoading = true;
+        } else {
+            mRoyaleHelper = new TwittermonBattleRoyalHelper();
+            mState = s_start;
+            mLoading = false;
+        }
 
         mStartLayout = (LinearLayout) findViewById(R.id.start_layout);
         mMatchLayout = (LinearLayout) findViewById(R.id.match_layout);
@@ -53,6 +83,7 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
         // start layout
         mResultView = (TextView) findViewById(R.id.battle_royale_result);
         mResultView.setVisibility(View.GONE);
+        mResultView.setText(resultViewText);
 
         mStart = (Button) findViewById(R.id.start_finale);
         mStart.setOnClickListener(this);
@@ -84,6 +115,18 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
         // win layout
         final Button playAgain = (Button) findViewById(R.id.play_again);
         playAgain.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(s_royale_helper, mRoyaleHelper);
+        outState.putInt(s_state, mState);
+        outState.putString(s_creature, mBattle.mCreature);
+        outState.putString(s_opponent, mBattle.mOpponent);
+        outState.putInt(s_result, mBattle.mResult);
+        outState.putString(s_result_prompt, mResultView.getText().toString());
     }
 
     @Override
@@ -94,10 +137,20 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
         TwittermonInfo ti = pei.getTwittermonInfo();
         mRoyaleHelper.setTwittermonInfo(ti);
 
-        if (mSession.isTwittermonRoyaleComplete()) {
-            showWinUX();
-        } else {
-            showStartUX();
+        switch (mState) {
+            case s_start:
+                showStartUX();
+                break;
+            case s_battle:
+                if (mLoading) {
+                    gotoNextBattle(mBattle);
+                    mLoading = false;
+                }
+                showMatchUX();
+                break;
+            case s_won:
+                showWinUX();
+                break;
         }
     }
 
@@ -110,7 +163,7 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
                 mRoyaleHelper.clearData();  // deliberate fall through here
             case R.id.start_finale:
                 showMatchUX();
-                gotoNextBattle();
+                gotoNextBattle(null);
                 break;
             case R.id.win_button:
                 logResult(mBattle.mResult == TwittermonInfo.s_win);
@@ -144,7 +197,7 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
                 mSession.logTwittermonRoyaleComplete();
                 showWinUX();
             } else {
-                gotoNextBattle();
+                gotoNextBattle(null);
             }
         } else {
             setResultUX(mRoyaleHelper.getCorrect());
@@ -162,21 +215,25 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
     }
 
 
-    private void gotoNextBattle() {
-        mBattle = mRoyaleHelper.getMatchup();
-        Log.d("terngame", "BattleRoyaleActivity between: " + mBattle.mCreature + " and " + mBattle.mOpponent);
+    private void gotoNextBattle(TwittermonInfo.BattleInfo battle) {
 
-        mNameView.setText(mBattle.mCreature);
-        mImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mCreature));
+        if (battle == null) {
+            mBattle = battle = mRoyaleHelper.getMatchup();
+        }
+        Log.d("terngame", "BattleRoyaleActivity between: " + battle.mCreature + " and " + battle.mOpponent);
 
-        mOppNameView.setText(mBattle.mOpponent);
-        mOppImageView.setImageDrawable(mSession.getTwittermonImage(mBattle.mOpponent));
+        mNameView.setText(battle.mCreature);
+        mImageView.setImageDrawable(mSession.getTwittermonImage(battle.mCreature));
+
+        mOppNameView.setText(battle.mOpponent);
+        mOppImageView.setImageDrawable(mSession.getTwittermonImage(battle.mOpponent));
         mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getCorrect() + 1));
 
-        mPromptView.setText("Did " + mBattle.mCreature + " win, lose, or tie?");
+        mPromptView.setText("Did " + battle.mCreature + " win, lose, or tie?");
     }
 
     private void showStartUX() {
+        mState = s_start;
         if (mSession.isTwittermonRoyaleComplete()) {
             mShowAnswer.setVisibility(View.VISIBLE);
         } else {
@@ -189,12 +246,14 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
     }
 
     private void showMatchUX() {
+        mState = s_battle;
         mStartLayout.setVisibility(View.GONE);
         mMatchLayout.setVisibility(View.VISIBLE);
         mWinLayout.setVisibility(View.GONE);
     }
 
     private void showWinUX() {
+        mState = s_won;
         mStartLayout.setVisibility(View.GONE);
         mMatchLayout.setVisibility(View.GONE);
         mWinLayout.setVisibility(View.VISIBLE);

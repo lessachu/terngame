@@ -64,7 +64,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         public Drawable mPict;
     }
 
-    public class BattleInfo {
+    public static class BattleInfo {
 
         public BattleInfo(String creature, String opponent, int result) {
             mCreature = creature;

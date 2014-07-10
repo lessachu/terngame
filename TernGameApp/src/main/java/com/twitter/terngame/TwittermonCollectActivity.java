@@ -20,6 +20,7 @@ import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
+// This is only shown as a dialog, so no real reason to move it to BaseActivity
 public class TwittermonCollectActivity extends Activity
         implements View.OnClickListener {
 
@@ -30,7 +31,6 @@ public class TwittermonCollectActivity extends Activity
     private String mTwittermonName;
     private Drawable mTwittermonImage;
 
-    // this is pretty hacky
     private LinearLayout mCollectLayout;
     private LinearLayout mNotStartedLayout;
     private LinearLayout mBadNFCLayout;

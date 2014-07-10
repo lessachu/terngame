@@ -7,25 +7,20 @@
 * Deal better with malformed JSON
 * should probably obscure admin mode even more, like add some icon taps required to access
 * Admin mode puzzle data editor
-* definitely a race initializing mainactivity.  we may need the team loader listener after all.
-* add support for view recycling
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
 * make the empty view work aggin
 * add art
-* We shouldn't be crashing on return to app
 * make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner
-* fix pause loading after you login
-*** when we come back to an activity, after a long time, something is sad.  saveinstancestate?
 * support multiple start codes for a particular puzzle
 * get rid of the signin screen
-* finishing fixing the crash - save the login data in saveinstancestate for now
 * you can still crash something by hitting a push notification while loading.
-* BattleRoyale doesn't save state.  This probbaly doesn't matter
+* battle royale result prompt doesn't quite restore correctly, but it's low value and I should
+really work on something else
 
 
 DONE:
@@ -128,6 +123,9 @@ DONE:
 * clear old notifications after you solve a clue or take the hint in question.
 * hints don't work on pre-kitkat
 * DOH, puzzleinfo intialization is not tracked.
+* fix crash if the process is killed by Android and you come back to the app.  This also fixes the race
+condition when loading startActivity.  Show a loading screen UI instead.
+* battle royale now correctly (for the most part) restores state. this was so not worth it.
 
 
 
