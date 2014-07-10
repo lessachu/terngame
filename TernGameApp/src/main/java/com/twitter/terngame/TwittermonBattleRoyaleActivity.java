@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.TwittermonBattleRoyalHelper;
 
-public class TwittermonBattleRoyaleActivity extends Activity
+public class TwittermonBattleRoyaleActivity extends BaseActivity
         implements View.OnClickListener {
 
-    private Session mSession;
     //start layout
     private Button mStart;
     private TextView mResultView;
@@ -44,10 +43,8 @@ public class TwittermonBattleRoyaleActivity extends Activity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.twittermon_royale);
-        mSession = Session.getInstance(this);
 
         mRoyaleHelper = new TwittermonBattleRoyalHelper();
-        mRoyaleHelper.setTwittermonInfo(mSession.getPuzzleExtraInfo().getTwittermonInfo());
 
         mStartLayout = (LinearLayout) findViewById(R.id.start_layout);
         mMatchLayout = (LinearLayout) findViewById(R.id.match_layout);
@@ -87,6 +84,15 @@ public class TwittermonBattleRoyaleActivity extends Activity
         // win layout
         final Button playAgain = (Button) findViewById(R.id.play_again);
         playAgain.setOnClickListener(this);
+    }
+
+    @Override
+    public void showUX() {
+        super.showUX();
+
+        PuzzleExtraInfo pei = mSession.getPuzzleExtraInfo();
+        TwittermonInfo ti = pei.getTwittermonInfo();
+        mRoyaleHelper.setTwittermonInfo(ti);
 
         if (mSession.isTwittermonRoyaleComplete()) {
             showWinUX();

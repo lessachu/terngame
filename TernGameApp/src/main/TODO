@@ -25,6 +25,7 @@
 * get rid of the signin screen
 * finishing fixing the crash - save the login data in saveinstancestate for now
 * you can still crash something by hitting a push notification while loading.
+* BattleRoyale doesn't save state.  This probbaly doesn't matter
 
 
 DONE:

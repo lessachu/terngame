@@ -5,57 +5,66 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:textAlignment="center"
+              android:id="@+id/parent"
               android:gravity="center_horizontal">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/battle_title"
-            android:id="@+id/battle_title"
-            style="@style/titleHeadingTheme"/>
+    <include layout="@layout/loading"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You chose ??.  Now select an opponent."
-            android:padding="10dp"
-            style="@style/statusTheme"
-            android:textStyle="normal"
-            android:id="@+id/battle_prompt"/>
-
-    <include layout="@layout/twittermon_battle_bar"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/battle_instructions"
-            android:id="@+id/battle_instruction"
-            android:paddingTop="10dp"
-            style="@style/instructionTheme"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/battle_result_text"
-            android:padding="10dp"
-            style="@style/statusTheme"
-            android:textStyle="normal"/>
-
-    <Button
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/select_button"
-            android:id="@+id/select_button"
-            style="@style/ButtonTheme"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/main_content">
 
-    <Button
-            style="@style/ButtonTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/battle_history"
-            android:id="@+id/battle_history_button"
-            android:layout_gravity="center_horizontal"
-            android:singleLine="true"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/battle_title"
+                android:id="@+id/battle_title"
+                style="@style/titleHeadingTheme"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You chose ??.  Now select an opponent."
+                android:padding="10dp"
+                style="@style/statusTheme"
+                android:textStyle="normal"
+                android:id="@+id/battle_prompt"/>
+
+        <include layout="@layout/twittermon_battle_bar"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/battle_instructions"
+                android:id="@+id/battle_instruction"
+                android:paddingTop="10dp"
+                style="@style/instructionTheme"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/battle_result_text"
+                android:padding="10dp"
+                style="@style/statusTheme"
+                android:textStyle="normal"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_button"
+                android:id="@+id/select_button"
+                style="@style/ButtonTheme"/>
+
+        <Button
+                style="@style/ButtonTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/battle_history"
+                android:id="@+id/battle_history_button"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"/>
+    </LinearLayout>
 </LinearLayout>

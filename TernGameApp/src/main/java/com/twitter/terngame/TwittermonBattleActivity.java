@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,13 +17,16 @@ import android.widget.TextView;
 import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
-public class TwittermonBattleActivity extends Activity
-        implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
+public class TwittermonBattleActivity extends BaseActivity
+implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_creature = "creature";
     public static final int NEW_CREATURE_REQUEST_CODE = 1;
+    private static final String s_state = "battle_state";
+    private static final String s_opponent = "opponent";
+    private static final String s_prompt = "prompt_text";
+    private static final String s_result = "result_text";
 
-    private Session mSession;
     private String mCreature;
     private String mOpponentCreature;
     private TextView mTitleText;
@@ -43,7 +45,8 @@ public class TwittermonBattleActivity extends Activity
     private TwittermonDialogGridFragment mFragment;
     private BadNFCReadDialogFragment mBadNFCFragment;
 
-    private Boolean mEarnedNewCreature;
+    private boolean mEarnedNewCreature;
+    private boolean mBattleComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,15 @@ public class TwittermonBattleActivity extends Activity
 
         setContentView(R.layout.twittermon_battle);
 
-        mSession = Session.getInstance(this);
+        String promptText = "";
+        String resultText = "";
+
+        if (savedInstanceState != null) {
+            mBattleComplete = savedInstanceState.getBoolean(s_state);
+            mOpponentCreature = savedInstanceState.getString(s_opponent);
+            promptText = savedInstanceState.getString(s_prompt);
+            resultText = savedInstanceState.getString(s_result);
+        }
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -62,9 +73,14 @@ public class TwittermonBattleActivity extends Activity
 
         mTitleText = (TextView) findViewById(R.id.battle_title);
         mPromptText = (TextView) findViewById(R.id.battle_prompt);
-        mPromptText.setText("You chose " + mCreature + ". Now select an opponent.");
+        if (promptText.length() > 0) {
+            mPromptText.setText(promptText);
+        } else {
+            mPromptText.setText("You chose " + mCreature + ". Now select an opponent.");
+        }
         mInstructionText = (TextView) findViewById(R.id.battle_instruction);
         mResultText = (TextView) findViewById(R.id.battle_result_text);
+        mResultText.setText(resultText);
         mResultText.setVisibility(View.GONE);
 
         final RelativeLayout creatureLayout = (RelativeLayout) findViewById(R.id.creature_layout);
@@ -72,7 +88,6 @@ public class TwittermonBattleActivity extends Activity
         mCreatureTextView.setText(mCreature);
 
         mCreatureImageView = (ImageView) creatureLayout.findViewById(R.id.twittermon_image);
-        mCreatureImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
 
         mSelectButton = (Button) findViewById(R.id.select_button);
         mSelectButton.setOnClickListener(this);
@@ -84,7 +99,11 @@ public class TwittermonBattleActivity extends Activity
         mOpponentTextView = (TextView) opponentLayout.findViewById(R.id.twittermon_text);
         mOpponentImageView = (ImageView) opponentLayout.findViewById(R.id.twittermon_image);
 
-        mOpponentTextView.setText("???");
+        if (mOpponentCreature != null && mOpponentCreature.length() > 0) {
+            mOpponentTextView.setText(mOpponentCreature);
+        } else {
+            mOpponentTextView.setText("???");
+        }
         mOpponentImageView.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
 
         mAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -105,6 +124,18 @@ public class TwittermonBattleActivity extends Activity
     }
 
     @Override
+    public void showUX() {
+        super.showUX();
+        mCreatureImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
+        if (mOpponentCreature != null && mOpponentCreature.length() > 0) {
+            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
+        }
+        if (mBattleComplete) {
+            hideBattleUX();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         Intent output = new Intent();
         output.putExtra(TwittermonActivity.s_new_creature, mEarnedNewCreature);
@@ -112,6 +143,7 @@ public class TwittermonBattleActivity extends Activity
         super.onBackPressed();
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         if (mAdapter != null) {
@@ -120,22 +152,24 @@ public class TwittermonBattleActivity extends Activity
         }
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         if (mAdapter != null) {
             Log.d("terngame", "Enable Foreground Dispatch");
             mAdapter.enableForegroundDispatch(this, mPendingIntent, mIntentFilters, null);
         }
-
-        if (mOpponentCreature != null) {
-            mOpponentTextView.setText(mOpponentCreature);
-            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
-        } else {
-            mOpponentTextView.setText("???");
-//            mOpponentImageView.setImageDrawable();
-        }
-
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(s_state, mBattleComplete);
+        outState.putString(s_opponent, mOpponentCreature);
+        outState.putString(s_prompt, mPromptText.getText().toString());
+        outState.putString(s_result, mResultText.getText().toString());
+    }
+
 
     public void onClick(View view) {
         final int id = view.getId();
@@ -211,6 +245,7 @@ public class TwittermonBattleActivity extends Activity
                 break;
         }
 
+        mBattleComplete = true;
         mSession.logTwittermonBattle(mCreature, mOpponentCreature, result);
 
         if (!mSession.hasTwittermon(mOpponentCreature)) {

@@ -30,6 +30,10 @@ public class TwittermonBattleRoyalHelper implements Parcelable {
     }
 
     public TwittermonInfo.BattleInfo getMatchup() {
+
+        if (mTwittermonInfo == null) {
+            return null;
+        }
         // generate a match that doesn't include what the user has against themselves
         // and no repeat match ups.
         TwittermonInfo.BattleInfo bi = null;
