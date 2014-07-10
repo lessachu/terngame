@@ -12,8 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
             android:id="@+id/main_content">
 
         <TextView
@@ -55,9 +53,9 @@
 
         <Button
                 android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Test a Hint Notification"
-                    android:id="@+id/test_notification_button"/>
+                android:layout_height="wrap_content"
+                android:text="Test a Hint Notification"
+                android:id="@+id/test_notification_button"/>
 
         <Button
                 android:layout_width="match_parent"

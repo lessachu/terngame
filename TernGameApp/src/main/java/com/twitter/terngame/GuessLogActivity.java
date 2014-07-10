@@ -7,6 +7,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+// This doesn't actually need to be moved over the ListActivity, since it doesn't interact
+// with any data from Session.  It displays the intent data that was passed in.
 
 public class GuessLogActivity extends ListActivity {
 

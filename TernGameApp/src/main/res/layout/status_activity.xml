@@ -3,32 +3,40 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               tools:context=".StatusActivity"
+              android:id="@+id/parent"
               android:orientation="vertical">
 
+    <include layout="@layout/loading"/>
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/status_title_text"
-            android:layout_gravity="left|center_vertical"
-            style="@style/titleHeadingTheme"
-            android:id="@+id/status_title"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/main_content">
 
-    <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@android:id/list"
-            android:layout_gravity="right|center_vertical"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/status_title_text"
+                android:layout_gravity="left|center_vertical"
+                style="@style/titleHeadingTheme"
+                android:id="@+id/status_title"/>
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/no_puzzles"
-            android:id="@android:id/empty"
-            android:layout_gravity="left|center_vertical"
-            style="@style/instructionTheme"
-            android:padding="12dp"/>
+        <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@android:id/list"
+                android:layout_gravity="right|center_vertical"/>
 
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/no_puzzles"
+                android:id="@android:id/empty"
+                android:layout_gravity="left|center_vertical"
+                style="@style/instructionTheme"
+                android:padding="12dp"/>
+    </LinearLayout>
 </LinearLayout>

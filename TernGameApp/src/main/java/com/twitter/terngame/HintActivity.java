@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+// This doesn't have to be migrated to BaseActivity because it doesn't interact with the
+// Session data at all.
+
 public class HintActivity extends Activity {
 
     // intent keys

@@ -19,13 +19,11 @@ import java.util.ArrayList;
 public class StatusArrayAdapter extends ArrayAdapter<TeamStatus.PuzzleStatus> {
     private final Context mContext;
     private final Session mSession;
-    private final ArrayList<TeamStatus.PuzzleStatus> mValues;
 
     public StatusArrayAdapter(Context context, ArrayList<TeamStatus.PuzzleStatus> values) {
         super(context, R.layout.status_row, values);
         mContext = context;
         mSession = Session.getInstance(context);
-        mValues = values;
     }
 
     // TODO: try adding support for view recycling
@@ -35,7 +33,7 @@ public class StatusArrayAdapter extends ArrayAdapter<TeamStatus.PuzzleStatus> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.status_row, parent, false);
 
-        TeamStatus.PuzzleStatus ps = mValues.get(position);
+        TeamStatus.PuzzleStatus ps = getItem(position);
 
         final TextView nameText = (TextView) rowView.findViewById(R.id.puzzle_name_text);
         nameText.setText(mSession.getPuzzleName(ps.mID));
