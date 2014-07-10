@@ -4,81 +4,90 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/parent">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/twitter_collection_title"
-            android:layout_gravity="left|center_vertical"
-            android:id="@+id/twittermon_collection_title_text"
-            android:layout_weight="0"
-            style="@style/titleHeadingTheme"/>
+    <include layout="@layout/loading"/>
 
-    <fragment
-            android:name="com.twitter.terngame.TwittermonDialogGridFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/twittermon_grid"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:stackFromBottom="false"
-            />
-
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/twittermon_collect_prompt"
-            android:id="@+id/collect_prompt"
-            android:gravity="center"
-            style="@style/instructionTheme"/>
-
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0"
-            android:id="@+id/battle_buttons"
-            android:orientation="vertical">
-
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/battle_button_text"
-                android:id="@+id/battle_history"/>
-
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/finale_button_text"
-                android:id="@+id/battle_finale"/>
-    </LinearLayout>
-
-    <LinearLayout
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/empty_view"
-            android:focusableInTouchMode="false">
+            android:id="@+id/main_content">
 
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/no_twittermon_yet"
-                android:id="@+id/no_twittermon_text"
-                android:longClickable="false"
-                style="@style/statusTheme"/>
+                android:text="@string/twitter_collection_title"
+                android:layout_gravity="left|center_vertical"
+                android:id="@+id/twittermon_collection_title_text"
+                android:layout_weight="0"
+                style="@style/titleHeadingTheme"/>
 
-        <TextView
+        <fragment
+                android:name="com.twitter.terngame.TwittermonDialogGridFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/no_twittermon_hint"
-                android:id="@+id/no_twittermon_hunt_text"
-                style="@style/instructionTheme"
-                android:padding="10dp"/>
+                android:id="@+id/twittermon_grid"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:stackFromBottom="false"
+                />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/twittermon_collect_prompt"
+                android:id="@+id/collect_prompt"
+                android:gravity="center"
+                style="@style/instructionTheme"/>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:id="@+id/battle_buttons"
+                android:orientation="vertical">
+
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/battle_button_text"
+                    android:id="@+id/battle_history"/>
+
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/finale_button_text"
+                    android:id="@+id/battle_finale"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/empty_view"
+                android:focusableInTouchMode="false">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/no_twittermon_yet"
+                    android:id="@+id/no_twittermon_text"
+                    android:longClickable="false"
+                    style="@style/statusTheme"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/no_twittermon_hint"
+                    android:id="@+id/no_twittermon_hunt_text"
+                    style="@style/instructionTheme"
+                    android:padding="10dp"/>
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
