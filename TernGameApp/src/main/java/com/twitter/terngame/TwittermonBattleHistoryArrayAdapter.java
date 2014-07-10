@@ -19,12 +19,10 @@ import java.util.ArrayList;
  */
 public class TwittermonBattleHistoryArrayAdapter extends ArrayAdapter<TwittermonInfo.BattleInfo> {
     private final Context mContext;
-    private final ArrayList<TwittermonInfo.BattleInfo> mValues;
 
     public TwittermonBattleHistoryArrayAdapter(Context context, ArrayList<TwittermonInfo.BattleInfo> values) {
         super(context, R.layout.twittermon_battle_row, values);
         mContext = context;
-        mValues = values;
     }
 
     // TODO: try adding support for view recycling
@@ -34,7 +32,7 @@ public class TwittermonBattleHistoryArrayAdapter extends ArrayAdapter<Twittermon
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.twittermon_battle_row, parent, false);
 
-        TwittermonInfo.BattleInfo bi = mValues.get(position);
+        TwittermonInfo.BattleInfo bi = getItem(position);
 
         final int result = bi.mResult;
         String resultText = "";
