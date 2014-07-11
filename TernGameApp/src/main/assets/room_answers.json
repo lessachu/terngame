@@ -1,0 +1,37 @@
+{
+ "version" : 1,
+ "answer_list" : [
+     { "answer" : "toner",
+     "response" : "Try entering that as a trap code."
+      },
+      { "answer" : "data",
+     "response" : "Try entering that as a trap code."
+      },
+     {
+      "answer" : "meeting",
+      "response" : "Try entering that as a trap code."
+      },
+    {
+    "answer" : "borat",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+          "hints" : [
+              {
+               "time" :  120,
+               "id" : "twittermon1",
+               "text" : "These extremely competitive animals can be found on the gridiron in each of their homes."
+              },
+              {
+               "time" :  240,
+               "id" : "twittermon2",
+               "text" : "The dolphin lives in Miami."
+              },
+              {
+               "time" : 600,
+               "id" : "twittermon3",
+               "text" : "They're football teams.  Find the home city."
+              }
+              ]
+}

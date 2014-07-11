@@ -1,4 +1,3 @@
-* investigate actually putting the login info as account info in Android
 * team name display field shrinks if content exceeds line?
 * make the instruction view open up a new display on tap
 * padding around the logo icon is fucked up
@@ -10,9 +9,7 @@
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
 * sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* make the empty view work aggin
 * add art
-* make the printers more obvious - foghorn leghorn, captain falcon, donald duck, flappy bird
 * Why does the back activity flash when you dismiss the dialog?
 * single opponent grid mode looks pretty crappy in dialog form
 * gizmoduck png has something in the top right corner

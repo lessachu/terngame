@@ -29,6 +29,8 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
     public static final String s_instruction = "instruction";
     public static final String s_end_party = "end_party";
     public static final String s_order = "order";
+    public static final String s_canonical = "canonical";
+    public static final String s_aliases = "aliases";
     public static final String s_puzzleButton = "puzzle_button";
     public static final String s_puzzleButtonText = "button_text";
     public static final String s_puzzleButtonMode = "button_mode";
@@ -133,23 +135,25 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
 
                 final JSONArray puzzleOrder = mData.getJSONArray(s_order);
                 len = puzzleOrder.length();
-                for (int i = 0; i < len - 1; i++) {
-                    String puzzleID = puzzleOrder.getString(i);
-                    mPuzzleOrder.add(AnswerChecker.stripAnswer(puzzleID));
+                for (int i = 0; i < len; i++) {
+                    String instruction = endPartyLocation;
+                    if (i < len - 1) {
+                        String next = getPuzzleIDAt(puzzleOrder, i + 1);
+                        PuzzleInfo pi = mStartCodes.get(next);
+                        if (pi != null) {
+                            instruction = pi.mInstruction;
+                        } else {
+                            Log.d("terngame", "next: " + next + " puzzle not found");
+                        }
+                    }
 
-                    String next = puzzleOrder.getString(i + 1);
-                    PuzzleInfo pi = mStartCodes.get(next);
-                    if (pi != null) {
-                        mNextInstruction.put(puzzleID, pi.mInstruction);
-                    } else {
-                        Log.e("terngame", "Invalid puzzleID " + next + " in event order array.");
+                    ArrayList<String> puzzles = getPuzzleAliasesAt(puzzleOrder, i);
+                    for (String puzzleName : puzzles) {
+                        Log.d("terngame", "Adding " + puzzleName + " with instruction: " + instruction);
+                        mPuzzleOrder.add(puzzleName);
+                        mNextInstruction.put(puzzleName, instruction);
                     }
                 }
-
-                String lastPuzzle = puzzleOrder.getString(len - 1);
-                mPuzzleOrder.add(AnswerChecker.stripAnswer(lastPuzzle));
-                mNextInstruction.put(lastPuzzle, endPartyLocation);
-                Log.d("terngame", "NextInstruction: " + mNextInstruction.toString());
                 initializeAnswers();
 
             } catch (JSONException e) {
@@ -157,6 +161,31 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
                 e.printStackTrace();
             }
         }
+    }
+
+    String getPuzzleIDAt(JSONArray ja, int index)
+            throws JSONException {
+        JSONObject jo = ja.optJSONObject(index);
+        if (jo != null) {
+            return jo.getString(s_canonical);
+        }
+        return ja.getString(index);
+    }
+
+    ArrayList<String> getPuzzleAliasesAt(JSONArray ja, int index)
+            throws JSONException {
+        ArrayList<String> puzzles = new ArrayList<String>();
+
+        JSONObject jo = ja.optJSONObject(index);
+        if (jo != null) {
+            JSONArray puzzArray = jo.getJSONArray(s_aliases);
+            for (int i = 0; i < puzzArray.length(); i++) {
+                puzzles.add(puzzArray.getString(i));
+            }
+        } else {
+            puzzles.add(ja.getString(index));
+        }
+        return puzzles;
     }
 
     public void initialize(Context context, String startCodeFile,
