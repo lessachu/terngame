@@ -1,6 +1,6 @@
 {
   "version" : 1,
-  "order":  [ "practice", { "canonical": "twittermon", "aliases" : ["twittermon", "collection"]}, "nantucket", "hashflags", "second", "metropolis", "selfie", "passport"],
+  "order":  [ "practice", { "canonical": "twittermon", "aliases" : ["twittermon", "collectible"]}, "nantucket", "hashflags", "second", "metropolis", "selfie", "passport"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
@@ -23,7 +23,7 @@
     "instruction" : "Still in SF-11 Aviary? Good. Sit tight until Jan tells you what to do."
     },
    {
-     "id" : "collection",
+     "id" : "collectible",
     "name" : "Gotta catch 'em all!",
     "answer_file" : "room_answers.json",
     "puzzle_button" : {

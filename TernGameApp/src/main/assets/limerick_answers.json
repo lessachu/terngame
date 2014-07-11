@@ -1,13 +1,71 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "nantucket",
+     {
+     "answer" : "nantucket",
      "response" : "No, that\'s the start code."
       },
-        {
-       "answer" : "rice wine",
-        "correct" : true,
-        "canonical" : true
-        }
-    ]
+    {
+    "answer" : "dublin",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "buildin",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "crook",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "cork",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "waterford",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "afterword",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "donegal",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "goldeneagle",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "linklayer",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "killarney",
+    "response" : "That's correct, but not the final answer."
+    },
+    {
+    "answer" : "rice wine",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+    "hints" : [
+      {
+       "time" :  600,
+       "id" : "limerick1",
+       "text" : "To confirm any of the missing words in the limericks, submit the word as an answer."
+      },
+      {
+       "time" :  900,
+       "id" : "limerick2",
+       "text" : "One of the words in each limerick is the name of a city in Ireland."
+      },
+      {
+       "time" : 1200,
+       "id" : "limerick3",
+       "text" : "Use the mechanism associated with each limerick (e.g., LETTERBANK) to derive the two words. For example, the city in the first limerick is DUBLIN which is a letter bank for BUILDIN'."
+      }
+      ]
 }
