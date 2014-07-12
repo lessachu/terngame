@@ -12,21 +12,6 @@ event.json
    "skip_code" : "I'm not having fun anymore."
  }
 
- terngame_teams.json - username and pass - probably should be replaced by a server call
-{
-   "version" : 1,
-   "teams" : [
-      {
-        "name" : "jantest",
-        "password" : "janpass"
-      },
-      {
-        "name" : "team2",
-        "password" : "team2"
-      }
-    ]
- }
-
  terngame_start_codes.json
 {
   "version" : 1,

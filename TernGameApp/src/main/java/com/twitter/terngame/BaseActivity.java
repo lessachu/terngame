@@ -18,13 +18,8 @@ public abstract class BaseActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mSession = Session.getInstance(this);
-        if (savedInstanceState != null) {
-            String teamname = savedInstanceState.getString(s_teamname);
-            mSession.restoreLogin(teamname);
-        }
         Log.d("terngame", "BaseActivity onCreate");
+        mSession = Session.getInstance(this);
     }
 
     @Override
@@ -42,12 +37,13 @@ public abstract class BaseActivity extends Activity
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(s_teamname, mSession.getTeamName());
-    }
+    /*  @Override
+      public void onSaveInstanceState(Bundle outState) {
+          super.onSaveInstanceState(outState);
+          outState.putString(s_teamname, mSession.getTeamName());
+      }
 
+  */
     public void showLoadingScreen() {
         Log.d("terngame", "BaseActivity showLoadingScreen");
         mLoadingLayout.setVisibility(View.VISIBLE);

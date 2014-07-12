@@ -40,27 +40,6 @@
             android:singleLine="true"
             android:layout_gravity="center"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/password_field"
-            android:id="@+id/textView2"
-            android:textColor="@color/event_title_color"
-            android:textStyle="bold"
-            android:paddingLeft="12dp"
-            style="@style/textHeadingTheme"
-            android:layout_gravity="left|center_vertical"/>
-
-    <EditText
-            style="@style/textEditTheme"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/password_edit"
-            android:singleLine="true"
-            android:password="true"
-            android:layout_gravity="left|center_vertical"/>
-
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

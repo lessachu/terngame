@@ -23,7 +23,6 @@ public class EventInfo implements JSONFileResultHandler {
 
     public static final String s_version = "version";
     public static final String s_eventName = "name";
-    public static final String s_teamFile = "team_file";
     public static final String s_codeFile = "code_file";
     public static final String s_wrongStr = "wrong_str";
     public static final String s_dupeStr = "dupe_str";
@@ -34,7 +33,6 @@ public class EventInfo implements JSONFileResultHandler {
     // data fields
     public int mVersion;
     public String mEventName;
-    public String mTeamFileName;
     public String mStartCodeFileName;
     public String mWrongAnswerStr;
     public String mDuplicateAnswerStr;
@@ -51,7 +49,6 @@ public class EventInfo implements JSONFileResultHandler {
             try {
                 mVersion = mData.getInt(s_version);
                 mEventName = mData.getString(s_eventName);
-                mTeamFileName = mData.getString(s_teamFile);
                 mStartCodeFileName = mData.getString(s_codeFile);
                 mWrongAnswerStr = mData.getString(s_wrongStr);
                 mDuplicateAnswerStr = mData.getString(s_dupeStr);
@@ -94,10 +91,6 @@ public class EventInfo implements JSONFileResultHandler {
 
     public String getEventName() {
         return mEventName;
-    }
-
-    public String getTeamFileName() {
-        return mTeamFileName;
     }
 
     public String getStartCodeFileName() {

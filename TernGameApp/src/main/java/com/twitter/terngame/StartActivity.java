@@ -3,67 +3,60 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.twitter.terngame.util.EditTextWatcher;
 
 public class StartActivity extends Activity
-        implements View.OnClickListener, Session.LoginLoadedListener {
+        implements View.OnClickListener {
 
     private Button mSignInButton;
     private EditText mTeamEditText;
-    private EditText mPassEditText;
-    private EditTextWatcher mTeamTextWatcher;
-    private EditTextWatcher mPassTextWatcher;
-
-    private boolean mDataLoaded;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDataLoaded = false;
-
         Session s = Session.getInstance(this);
-        if (s.isLoggedIn()) {
+        if (s.getTeamName().length() != 0) {
             goHome();
             return;
         }
 
-        s.setLoginLoadedListener(this);
-
         setContentView(R.layout.start);
 
         mTeamEditText = (EditText) findViewById(R.id.team_name_edit);
-        mPassEditText = (EditText) findViewById(R.id.password_edit);
 
         mSignInButton = (Button) findViewById(R.id.sign_in);
         mSignInButton.setOnClickListener(this);
         mSignInButton.setEnabled(false);
 
-        mTeamTextWatcher = new EditTextWatcher(mTeamEditText, mSignInButton);
-        mPassTextWatcher = new EditTextWatcher(mPassEditText, mSignInButton);
+        mTeamEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable text) {
+                if (text.length() > 0) {
+                    mSignInButton.setEnabled(true);
+                } else {
+                    mSignInButton.setEnabled(false);
+                }
+            }
 
-        mTeamTextWatcher.setSisterWatcher(mPassTextWatcher);
-        mPassTextWatcher.setSisterWatcher(mTeamTextWatcher);
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-        mTeamEditText.addTextChangedListener(mTeamTextWatcher);
-        mPassEditText.addTextChangedListener(mPassTextWatcher);
-    }
-
-    @Override
-    public void onLoginLoaded() {
-        mTeamTextWatcher.setReady(true);
-        mPassTextWatcher.setReady(true);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (Session.getInstance(this).isLoggedIn()) {
+        if (Session.getInstance(this).getTeamName().length() != 0) {
             goHome();
         }
     }
@@ -89,19 +82,10 @@ public class StartActivity extends Activity
     public void onClick(View view) {
         final int id = view.getId();
         if (id == R.id.sign_in) {
-
-            if (Session.getInstance(this).login(mTeamEditText.getText().toString(),
-                    mPassEditText.getText().toString())) {
-                startActivity(new Intent(this, MainActivity.class)
-                        .putExtra(Intent.EXTRA_INTENT,
-                                getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "I'm sorry, but that name and password combination is invalid.",
-                        Toast.LENGTH_LONG);
-                toast.show();
-            }
-
+            Session.getInstance(this).login(mTeamEditText.getText().toString());
+            startActivity(new Intent(this, MainActivity.class)
+                    .putExtra(Intent.EXTRA_INTENT,
+                            getIntent().getParcelableExtra(Intent.EXTRA_INTENT)));
         }
     }
 

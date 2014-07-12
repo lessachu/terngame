@@ -8,7 +8,6 @@ import android.util.Log;
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
 import com.twitter.terngame.data.HintInfo;
-import com.twitter.terngame.data.LoginInfo;
 import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
@@ -33,10 +32,6 @@ public class Session {
         public void onHintReady(String puzzleID, String hintID, int notificationID);
     }
 
-    public interface LoginLoadedListener {
-        public void onLoginLoaded();
-    }
-
     public interface DataLoadedListener {
         public void onDataLoaded();
     }
@@ -44,9 +39,7 @@ public class Session {
     private static Session sInstance = null;
     private Context mContext;
 
-    private boolean mLoggedIn;
     private boolean mEventDataLoaded;
-    private boolean mLoginDataLoaded;
     private boolean mStartCodeDataLoaded;
     private boolean mPuzzleExtraInfoLoaded;
     private boolean mTeamDataLoaded;
@@ -57,28 +50,21 @@ public class Session {
 
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
-    private LoginInfo mLoginInfo;
     private StartCodeInfo mStartCodeInfo;
     private PuzzleExtraInfo mPuzzleExtraInfo;
 
-    private LoginLoadedListener mLoginLoadedListener;
-
     private Session(Context context) {
         mContext = context;
-        mLoggedIn = false;
         mEventDataLoaded = false;
-        mLoginDataLoaded = false;
         mStartCodeDataLoaded = false;
         mPuzzleExtraInfoLoaded = false;
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo();
-        mLoginInfo = new LoginInfo();
         mPuzzleExtraInfo = new PuzzleExtraInfo(context);
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
         mDataListeners = new ArrayList<DataLoadedListener>();
-        mLoginLoadedListener = null;
     }
 
     public static synchronized Session getInstance(Context context) {
@@ -89,17 +75,13 @@ public class Session {
         return sInstance;
     }
 
-    public void setLoginLoadedListener(LoginLoadedListener lll) {
-        mLoginLoadedListener = lll;
-    }
-
     public boolean isDataLoaded(DataLoadedListener dll) {
 
         Log.d("terngame", "isDataLoaded?");
-        Log.d("terngame", "mLoggedIn: " + mLoggedIn + "EventData: " + mEventDataLoaded + " LoginData: " + mLoginDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
+        Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
                 " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
         // check if all data is loaded
-        if (isLoggedIn() && mEventDataLoaded && mLoginDataLoaded && mStartCodeDataLoaded
+        if (mEventDataLoaded && mStartCodeDataLoaded
                 && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
             Log.d("terngame", "isDataLoaded?  Yes it is!");
             return true;
@@ -115,10 +97,10 @@ public class Session {
     private void checkDataLoadComplete() {
         Log.d("terngame", "Checking if data load is complete!");
 
-        Log.d("terngame", "mLoggedIn: " + mLoggedIn + "EventData: " + mEventDataLoaded + " LoginData: " + mLoginDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
+        Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
                 " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
 
-        if (isLoggedIn() && mEventDataLoaded && mLoginDataLoaded && mStartCodeDataLoaded
+        if (mEventDataLoaded && mStartCodeDataLoaded
                 && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
 
             Log.d("terngame", "Yay all the data is loaded!");
@@ -127,10 +109,6 @@ public class Session {
                 dl.onDataLoaded();
             }
         }
-    }
-
-    public boolean isLoggedIn() {
-        return mLoggedIn;
     }
 
     public String getEventName() {
@@ -227,39 +205,10 @@ public class Session {
         return mStartCodeInfo.getPuzzleList();
     }
 
-    public boolean login(String teamName, String password) {
-
-        if (mLoginInfo.isValidLogin(teamName, password)) {
-            mLoggedIn = true;
-            // load team information if there is any
-            mTeamStatus.initializeTeam(mContext, teamName,
-                    new JSONFileReaderTask.JSONFileReaderCompleteListener() {
-                        @Override
-                        public void onJSONFileReaderComplete() {
-                            mTeamDataLoaded = true;
-                            checkDataLoadComplete();
-                        }
-                    });
-            return true;
-        }
-        return false;
+    public boolean login(String teamName) {
+        mTeamStatus.setTeamName(teamName);
+        return true;
     }
-
-    public void restoreLogin(String teamName) {
-        if (!mLoggedIn) {
-            mLoggedIn = true;
-            // load team information if there is any
-            mTeamStatus.initializeTeam(mContext, teamName,
-                    new JSONFileReaderTask.JSONFileReaderCompleteListener() {
-                        @Override
-                        public void onJSONFileReaderComplete() {
-                            mTeamDataLoaded = true;
-                            checkDataLoadComplete();
-                        }
-                    });
-        }
-    }
-
 
     public boolean isValidStartCode(String start_code) {
         start_code = AnswerChecker.stripAnswer(start_code);
@@ -279,7 +228,7 @@ public class Session {
                     HintInfo hi = hintList.get(i);
                     Log.d("terngame", "Adding hints for : " + start_code);
                     mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, pi.mName,
-                            i + 1, hi.mID, getTeamName(), hi.mTimeSecs));
+                            i + 1, hi.mID, hi.mTimeSecs));
 
                     // TODO: if we're returning to a puzzle, account for time passed
                 }
@@ -366,24 +315,21 @@ public class Session {
             @Override
             public void onJSONFileReaderComplete() {
                 mEventDataLoaded = true;
-                mLoginInfo.initialize(mContext, mEventInfo.getTeamFileName(),
-                        new JSONFileReaderTask.JSONFileReaderCompleteListener() {
-                            @Override
-                            public void onJSONFileReaderComplete() {
-                                mLoginDataLoaded = true;
-                                Log.d("terngame", "Initializing login info end");
-                                if (mLoginLoadedListener != null) {
-                                    mLoginLoadedListener.onLoginLoaded();
-                                }
-                                checkDataLoadComplete();
-                            }
-                        });
                 Log.d("terngame", "Initializing start code info start");
                 mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName(),
                         new JSONFileReaderTask.JSONFileReaderCompleteListener() {
                             @Override
                             public void onJSONFileReaderComplete() {
                                 mStartCodeDataLoaded = true;
+                                checkDataLoadComplete();
+                            }
+                        });
+                Log.d("terngame", "Initializing team data");
+                mTeamStatus.initializeTeam(mContext,
+                        new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                            @Override
+                            public void onJSONFileReaderComplete() {
+                                mTeamDataLoaded = true;
                                 checkDataLoadComplete();
                             }
                         });

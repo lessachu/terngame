@@ -82,7 +82,6 @@ public class HintNotification extends BroadcastReceiver
         String puzzleName = null;
         int hintNumber = 0;
         String hintID = null;
-        String teamName = null;
 
         Session s = Session.getInstance(context);
         Bundle extras = intent.getExtras();
@@ -91,7 +90,6 @@ public class HintNotification extends BroadcastReceiver
             puzzleName = extras.getString(s_puzzleName);
             hintNumber = extras.getInt(s_hintNum);
             hintID = extras.getString(s_hintID);
-            teamName = extras.getString(s_teamName);
         }
 
         if (puzzleID != null && hintNumber != 0) {
@@ -99,7 +97,6 @@ public class HintNotification extends BroadcastReceiver
                 int notifyID = fireHintNotification(context, puzzleID, puzzleName, hintNumber);
                 s.hintReady(puzzleID, hintID, notifyID);
             } else {
-                s.restoreLogin(teamName);
                 NotificationInfo ni = new NotificationInfo();
                 ni.mContext = context;
                 ni.mPuzzleID = puzzleID;
@@ -123,13 +120,12 @@ public class HintNotification extends BroadcastReceiver
     }
 
     public static PendingIntent scheduleHint(Context context, String puzzleID, String puzzleName, int hintNumber,
-            String hintID, String teamName, long timeSecs) {
+            String hintID, long timeSecs) {
         Intent intent = new Intent(HINT_INTENT);
         intent.putExtra(s_puzzleID, puzzleID);
         intent.putExtra(s_hintNum, hintNumber);
         intent.putExtra(s_puzzleName, puzzleName);
         intent.putExtra(s_hintID, hintID);
-        intent.putExtra(s_teamName, teamName);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, 0);
 

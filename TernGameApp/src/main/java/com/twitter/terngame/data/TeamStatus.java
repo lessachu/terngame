@@ -29,8 +29,6 @@ import java.util.HashMap;
  * Created by jchong on 1/16/14.
  */
 public class TeamStatus implements JSONFileResultHandler {
-    // TODO: savefile should incorporate a hash of the team name
-    // else you'll overwrite another team's progress just by logging into their app
 
     public static final String s_saveFile = "teamStatus.json";
     private static final String s_teamName = "teamName";
@@ -70,6 +68,7 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
     public TeamStatus() {
+        mTeamName = null;
         mPuzzles = new HashMap<String, PuzzleStatus>();
     }
 
@@ -171,9 +170,8 @@ public class TeamStatus implements JSONFileResultHandler {
         }
     }
 
-    public void initializeTeam(Context context, String teamName,
+    public void initializeTeam(Context context,
             JSONFileReaderTask.JSONFileReaderCompleteListener jfrcl) {
-        mTeamName = teamName;
         mContext = context;
         // if there is a savefile present, load from that
         try {
@@ -189,6 +187,7 @@ public class TeamStatus implements JSONFileResultHandler {
                     Toast.LENGTH_SHORT);
             toast.show();
             Log.e("jan", "No save file");
+            jfrcl.onJSONFileReaderComplete();
         }
     }
 
@@ -260,6 +259,10 @@ public class TeamStatus implements JSONFileResultHandler {
             return null;
         }
         return data;
+    }
+
+    public void setTeamName(String teamName) {
+        mTeamName = teamName;
     }
 
     public String getTeamName() {
