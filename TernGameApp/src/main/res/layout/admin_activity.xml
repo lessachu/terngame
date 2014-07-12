@@ -51,16 +51,5 @@
                 android:id="@+id/current_puzzle_spinner"
                 android:layout_gravity="left|center_vertical"/>
 
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Test a Hint Notification"
-                android:id="@+id/test_notification_button"/>
-
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel a Hint Notification"
-                android:id="@+id/cancel_hints_button"/>
     </LinearLayout>
 </LinearLayout>

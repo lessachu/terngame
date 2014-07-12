@@ -19,15 +19,30 @@ import com.twitter.terngame.PuzzleActivity;
 import com.twitter.terngame.R;
 import com.twitter.terngame.Session;
 
+import java.util.ArrayList;
+
 /**
  * Created by jchong on 2/18/14.
  */
-public class HintNotification extends BroadcastReceiver {
+public class HintNotification extends BroadcastReceiver
+        implements Session.DataLoadedListener {
 
     public static final String s_puzzleID = "puzzleID";
+    public static final String s_puzzleName = "puzzleName";
     public static final String s_hintNum = "hintNum";
     public static final String s_hintID = "hintID";
+    public static final String s_teamName = "teamName";
     public static final String HINT_INTENT = "com.twitter.terngame.SEND_HINT";
+
+    private static ArrayList<NotificationInfo> mNotifications = new ArrayList<NotificationInfo>();
+
+    public class NotificationInfo {
+        public String mPuzzleID;
+        public String mPuzzleName;
+        public String mHintID;
+        public int mHintNum;
+        Context mContext;
+    }
 
     public static int fireHintNotification(Context context, String puzzleID, String puzzleName,
             int hintNum) {
@@ -64,31 +79,57 @@ public class HintNotification extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String puzzleID = null;
+        String puzzleName = null;
         int hintNumber = 0;
         String hintID = null;
+        String teamName = null;
 
         Session s = Session.getInstance(context);
         Bundle extras = intent.getExtras();
         if (extras != null) {
             puzzleID = extras.getString(s_puzzleID);
+            puzzleName = extras.getString(s_puzzleName);
             hintNumber = extras.getInt(s_hintNum);
             hintID = extras.getString(s_hintID);
+            teamName = extras.getString(s_teamName);
         }
 
         if (puzzleID != null && hintNumber != 0) {
-            int notifyID = fireHintNotification(context, puzzleID, s.getPuzzleName(puzzleID), hintNumber);
-            s.hintReady(puzzleID, hintID, notifyID);
+            if (s.isDataLoaded(this)) {
+                int notifyID = fireHintNotification(context, puzzleID, puzzleName, hintNumber);
+                s.hintReady(puzzleID, hintID, notifyID);
+            } else {
+                s.restoreLogin(teamName);
+                NotificationInfo ni = new NotificationInfo();
+                ni.mContext = context;
+                ni.mPuzzleID = puzzleID;
+                ni.mPuzzleName = puzzleName;
+                ni.mHintNum = hintNumber;
+                ni.mHintID = hintID;
+                mNotifications.add(ni);
+            }
         } else {
             Log.d("terngame", "Invalid puzzleID/hint number specified");
         }
     }
 
-    public static PendingIntent scheduleHint(Context context, String puzzleID, int hintNumber,
-            String hintID, long timeSecs) {
+    public void onDataLoaded() {
+        for (NotificationInfo ni : mNotifications) {
+            Session s = Session.getInstance(ni.mContext);
+            int notifyID = fireHintNotification(ni.mContext, ni.mPuzzleID, ni.mPuzzleName, ni.mHintNum);
+            s.hintReady(ni.mPuzzleID, ni.mHintID, notifyID);
+        }
+        mNotifications.clear();
+    }
+
+    public static PendingIntent scheduleHint(Context context, String puzzleID, String puzzleName, int hintNumber,
+            String hintID, String teamName, long timeSecs) {
         Intent intent = new Intent(HINT_INTENT);
         intent.putExtra(s_puzzleID, puzzleID);
         intent.putExtra(s_hintNum, hintNumber);
+        intent.putExtra(s_puzzleName, puzzleName);
         intent.putExtra(s_hintID, hintID);
+        intent.putExtra(s_teamName, teamName);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, (int) System.currentTimeMillis(), intent, 0);
 
@@ -100,7 +141,6 @@ public class HintNotification extends BroadcastReceiver {
             am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
                     timeSecs * 1000, pi);
         }
-
 
         Log.d("terngame", "alarm set for hint " + Integer.toString(hintNumber) + " for " + puzzleID +
                 " at " + Long.toString(timeSecs) + " secs");

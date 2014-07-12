@@ -1,6 +1,5 @@
 package com.twitter.terngame;
 
-import android.app.PendingIntent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,19 +8,16 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.twitter.terngame.util.HintNotification;
-
 import java.util.ArrayList;
 
 /**
  * Created by jchong on 2/11/14.
  */
 public class AdminActivity extends BaseActivity
-implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+        implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     static private String s_none = "None";
 
-    public PendingIntent mPI;
     private Button mClearOneButton;
     private Spinner mPuzzleSpinner;
 
@@ -37,12 +33,6 @@ implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
         mClearOneButton = (Button) findViewById(R.id.admin_clear_one_button);
         mClearOneButton.setOnClickListener(this);
-
-        Button testNotificationButton = (Button) findViewById(R.id.test_notification_button);
-        testNotificationButton.setOnClickListener(this);
-
-        Button cancelNotificationButton = (Button) findViewById(R.id.cancel_hints_button);
-        cancelNotificationButton.setOnClickListener(this);
 
         mPuzzleSpinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         mPuzzleSpinner.setOnItemSelectedListener(this);
@@ -108,15 +98,6 @@ implements View.OnClickListener, AdapterView.OnItemSelectedListener {
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
-        } else if (id == R.id.test_notification_button) {
-            mPI = HintNotification.scheduleHint(this, "wombat", 1, "hintID", 15);
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Launching hint notification in 15 seconds.",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-
-        } else if (id == R.id.cancel_hints_button) {
-            HintNotification.cancelHintAlarms(this, mPI);
         }
     }
 }

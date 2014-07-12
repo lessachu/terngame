@@ -246,16 +246,18 @@ public class Session {
     }
 
     public void restoreLogin(String teamName) {
-        mLoggedIn = true;
-        // load team information if there is any
-        mTeamStatus.initializeTeam(mContext, teamName,
-                new JSONFileReaderTask.JSONFileReaderCompleteListener() {
-                    @Override
-                    public void onJSONFileReaderComplete() {
-                        mTeamDataLoaded = true;
-                        checkDataLoadComplete();
-                    }
-                });
+        if (!mLoggedIn) {
+            mLoggedIn = true;
+            // load team information if there is any
+            mTeamStatus.initializeTeam(mContext, teamName,
+                    new JSONFileReaderTask.JSONFileReaderCompleteListener() {
+                        @Override
+                        public void onJSONFileReaderComplete() {
+                            mTeamDataLoaded = true;
+                            checkDataLoadComplete();
+                        }
+                    });
+        }
     }
 
 
@@ -276,8 +278,8 @@ public class Session {
                 for (int i = 0; i < len; i++) {
                     HintInfo hi = hintList.get(i);
                     Log.d("terngame", "Adding hints for : " + start_code);
-                    mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, i + 1,
-                            hi.mID, hi.mTimeSecs));
+                    mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, pi.mName,
+                            i + 1, hi.mID, getTeamName(), hi.mTimeSecs));
 
                     // TODO: if we're returning to a puzzle, account for time passed
                 }

@@ -17,21 +17,31 @@
     "canonical" : true
     }
     ],
-          "hints" : [
-              {
-               "time" :  120,
-               "id" : "twittermon1",
-               "text" : "These extremely competitive animals can be found on the gridiron in each of their homes."
-              },
-              {
-               "time" :  240,
-               "id" : "twittermon2",
-               "text" : "The dolphin lives in Miami."
-              },
-              {
-               "time" : 600,
-               "id" : "twittermon3",
-               "text" : "They're football teams.  Find the home city."
-              }
-              ]
-}
+    "hints" : [
+    {
+    "time" :  120,
+    "id" : "twittermon1",
+    "text" : "These extremely competitive animals can be found on the gridiron in each of their homes."
+    },
+    {
+    "time" :  240,
+    "id" : "twittermon2",
+    "text" : "The dolphin lives in Miami."
+    },
+    {
+    "time" : 600,
+    "id" : "twittermon3",
+    "text" : "They're football teams.  Find the home city."
+    },
+     {
+      "time" : 1200,
+      "id" : "twittermon4",
+      "text" : "Some of the Twittermon can be grouped together.  What do lapwing and anis have in common?"
+     },
+     {
+      "time" : 3600,
+      "id" : "twittermon5",
+      "text" : "Services defeat Printers.  Printers defeat Rooms.  Rooms defeat Services."
+     }
+    ]
+    }

@@ -6,6 +6,7 @@ package com.twitter.terngame.data;
 public class HintInfo {
     public long mTimeSecs;
     public String mText;
+    public String mPuzzleName;
     public String mID;
     public int mNotificationID;
     public int mCost;
