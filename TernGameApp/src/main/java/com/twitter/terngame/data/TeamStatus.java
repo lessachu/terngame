@@ -114,8 +114,9 @@ public class TeamStatus implements JSONFileResultHandler {
     public void saveResult(JSONObject jo) {
         if (jo != null) {
             try {
-                // should probably validate the info is for this team
-                assert (jo.getString(s_teamName).equals(mTeamName));
+                if (jo.has(s_teamName)) {
+                    mTeamName = jo.getString(s_teamName);
+                }
                 // populate fields based on the data
                 if (jo.has(s_currentPuzzle)) {
                     mCurrentPuzzle = jo.getString(s_currentPuzzle);
