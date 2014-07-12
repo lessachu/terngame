@@ -3,7 +3,6 @@ package com.twitter.terngame;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ public class BadNFCReadDialogFragment extends DialogFragment
 
         final Activity activity = getActivity();
         if (activity != null) {
-            final Context context = getActivity().getApplicationContext();
-
             mButton = (Button) view.findViewById(R.id.bad_read_ok);
             mButton.setOnClickListener(this);
         } else {

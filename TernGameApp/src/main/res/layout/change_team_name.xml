@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/change_team_name">
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:id="@+id/team_name_edit"
+            style="@style/textEditTheme"
+            android:singleLine="true"
+            android:layout_gravity="center"
+            android:hint="Team Name"/>
+
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="0dp"
+            android:background="?android:attr/dividerVertical"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:id="@+id/bad_read_ok"
+            style="?android:attr/buttonBarButtonStyle"
+            android:enabled="true"/>
+
+</LinearLayout>

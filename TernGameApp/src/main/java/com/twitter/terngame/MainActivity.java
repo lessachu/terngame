@@ -17,7 +17,8 @@ import com.twitter.terngame.util.AnswerChecker;
  * created by jchong on 1/12/14.
  */
 public class MainActivity extends BaseActivity
-        implements View.OnClickListener {
+        implements View.OnClickListener,
+        ChangeTeamNameDialogFragment.TeamNameChangeListener {
 
     private TextView mEventNameText;
     private TextView mTeamNameText;
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity
 
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
         mTeamNameText = (TextView) findViewById(R.id.team_name_text);
+        mTeamNameText.setOnClickListener(this);
 
         mGoButton = (Button) findViewById(R.id.go_button);
         mGoButton.setOnClickListener(this);
@@ -107,6 +109,11 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    public void onNewTeamName(String teamName) {
+        mSession.login(teamName);
+        mTeamNameText.setText(teamName);
+    }
+
     public void onClick(View view) {
         final int id = view.getId();
 
@@ -144,6 +151,8 @@ public class MainActivity extends BaseActivity
             Intent i = new Intent(this, StatusActivity.class);
             // construct a list of puzzle items
             startActivity(i);
+        } else if (id == R.id.team_name_text) {
+            ChangeTeamNameDialogFragment.newInstance().show(getFragmentManager(), "dialog");
         }
     }
 }
