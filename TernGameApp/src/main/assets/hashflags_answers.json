@@ -7,6 +7,9 @@
     { "answer" : "gummibears",
     "response" : "Singular, please."
     },
+    { "answer" : "gummybear",
+    "response" : "Spell it \"GUMMI\", please."
+    },
     {
     "answer" : "gummi",
     "response" : "Gummi what?"
@@ -40,7 +43,7 @@
     "response" : "Of or pertaining to bears."
     } ,
     {
-    "answer" : "gummi bears",
+    "answer" : "gummi bear",
     "correct" : true,
     "canonical" : true
     }

@@ -13,6 +13,10 @@
     "response" : "Try entering that as a trap code."
     },
     {
+    "answer" : "twittermon",
+    "response" : "No, that\'s the start code."
+    },
+    {
    "answer" : "borat",
     "correct" : true,
     "canonical" : true
@@ -20,17 +24,17 @@
     ],
     "hints" : [
       {
-       "time" :  120,
+       "time" :  300,
        "id" : "twittermon1",
        "text" : "These animals only eat peanuts and crackerjack."
       },
       {
-       "time" :  240,
+       "time" :  480,
        "id" : "twittermon2",
        "text" : "The oriole lives in Baltimore."
       },
       {
-       "time" : 600,
+       "time" : 720,
        "id" : "twittermon3",
        "text" : "They're baseball teams.  Find the home city."
       },

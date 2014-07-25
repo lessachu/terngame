@@ -45,7 +45,7 @@
        "id" : "nantucket",
        "name" : "Limericks",
        "answer_file" : "limerick_answers.json",
-       "instruction" : "Head to the Civic Center Plaza. Get the next clue from a staffer on the corner of Larkin and McAllister Streets."
+       "instruction" : "Head to the Civic Center Plaza. Get the next clue from a staffer on the corner of Larkin and McAllister Streets.\n\nThis would be a good time to start the Safari Selfie Challenge."
      },
       { "id" : "second",
         "name" : "Second Power",
@@ -60,7 +60,7 @@
     { "id" : "metropolis",
         "name" : "Cities",
         "answer_file" : "cities_answers.json",
-        "instruction" : "Carmen must have gotten hungry. She's been spotted at the donut shop by the Square building at 1455 Market Street."
+        "instruction" : "Even the most seasoned detectives need to take a snack break. Head over to Happy Donuts beside 1455 Market St for the next clue!"
       },
       { "id" : "passport",
           "name" : "Tying it all together",

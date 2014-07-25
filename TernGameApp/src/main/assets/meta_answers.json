@@ -55,15 +55,20 @@
     }
     ],
     "hints" : [
+        {
+         "time" :  900,
+         "id" : "meta0",
+         "text" : "The puzzle answers and associated passports should point you to countries."
+        },
       {
-       "time" :  1500,
+       "time" :  1200,
        "id" : "meta1",
        "text" : "Our crime records reveal that Carmen was originally jailed for BANK robbery.  That tidbit might be helpful."
       },
       {
-       "time" :  1800,
+       "time" :  2100,
        "id" : "meta2",
-       "text" : "The only data you need to solve this puzzle are Carmen's passports.  The puzzle answers might be helpful, but aren't strictly necessary."
+       "text" : "The countries that each passport belongs to are: Kazakhstan, South Korea, Germany, France, Mongolia, and Tanzania."
       },
         {
         "time" : 2700,
