@@ -20,7 +20,7 @@
                               "collected" : []
                             }
           },
-    "instruction" : "Still in SF-11 Aviary? Good. Sit tight until Jan tells you what to do."
+    "instruction" : "Still in SF-10 Aviary? Good. Sit tight until Jan tells you what to do."
     },
    {
      "id" : "collectible",
@@ -33,7 +33,7 @@
                               "collected" : []
                             }
           },
-    "instruction" : "Still in SF-11 Aviary? Good. Sit tight until Jan tells you what to do."
+    "instruction" : "Still in SF-10 Aviary? Good. Sit tight until Jan tells you what to do."
     },
      {
        "id" : "hashflags",
@@ -55,7 +55,7 @@
      { "id" : "selfie",
        "name" : "Photo Scavenger Hunt",
        "answer_file" : "selfie_answers.json",
-       "instruction" : "We need to decide on a site for this clue!"
+       "instruction" : "Meet your next contact in the alleyway park formerly known as Stevenson Street (behind TwitterHQ). The entrance is on 10th, between Market and Mission. Be prepared to show us the results of your the Safari Selfie Challenge!"
      },
     { "id" : "metropolis",
         "name" : "Cities",

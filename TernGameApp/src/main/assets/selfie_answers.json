@@ -2,9 +2,26 @@
  "version" : 1,
  "answer_list" : [
     {
-   "answer" : "pyramidal",
+   "answer" : "kilimanjaro",
     "correct" : true,
     "canonical" : true
     }
-    ]
+    ],
+     "hints" : [
+       {
+        "time" :  300,
+        "id" : "selfie1",
+        "text" : "The Asian Art Museum entrance and the plaza to the south have lions and deer."
+       },
+       {
+        "time" :  600,
+        "id" : "selfie2",
+        "text" : "African Outlet has cowrie shell decorations. The USPS has eagles."
+       },
+       {
+        "time" : 900,
+        "id" : "selfie3",
+        "text" : "Need help filling in blanks? http://nutrimatic.org/ is pretty good."
+       }
+       ]
 }

@@ -1,41 +1,65 @@
 {
  "version" : 1,
  "answer_list" : [
-     { "answer" : "gummybears",
-     "response" : "Spell it \"GUMMI\", please."
-      },
-     {
-      "answer" : "gummi",
-      "response" : "Gummi what?"
-      },
-      {
-       "answer" : "gummy",
-       "response" : "Gummi what?"
-       } ,
-       {
-        "answer" : "bears",
-        "response" : "What kind of bears?"
-        },
-      {
-       "answer" : "gelatinousedibleursine",
-       "response" : "What candy does this describe?"
-       } ,
-      {
-       "answer" : "gelatinous",
-       "response" : "That's correct, but there's more to the message."
-       } ,
-      {
-       "answer" : "edible",
-       "response" : "That's correct, but there's more to the message."
-       } ,
-     {
-      "answer" : "ursine",
-      "response" : "Of or pertaining to bears."
-      } ,
+    { "answer" : "gummybears",
+    "response" : "Spell it \"GUMMI\", please."
+    },
+    { "answer" : "gummibears",
+    "response" : "Singular, please."
+    },
     {
-   "answer" : "gummi bears",
+    "answer" : "gummi",
+    "response" : "Gummi what?"
+    },
+    {
+    "answer" : "gummy",
+    "response" : "Gummi what?"
+    } ,
+    {
+    "answer" : "bears",
+    "response" : "What kind of bear?"
+    },
+    {
+     "answer" : "bear",
+     "response" : "What kind of bear?"
+     },
+    {
+    "answer" : "gelatinousedibleursine",
+    "response" : "What candy does this describe?"
+    } ,
+    {
+    "answer" : "gelatinous",
+    "response" : "That's correct, but there's more to the message."
+    } ,
+    {
+    "answer" : "edible",
+    "response" : "That's correct, but there's more to the message."
+    } ,
+    {
+    "answer" : "ursine",
+    "response" : "Of or pertaining to bears."
+    } ,
+    {
+    "answer" : "gummi bears",
     "correct" : true,
     "canonical" : true
     }
-    ]
+    ],
+    "hints" : [
+      {
+       "time" :  300,
+       "id" : "hashflag1",
+       "text" : "Some pieces of these flags have been used to make a message."
+      },
+      {
+       "time" :  600,
+       "id" : "hashflag2",
+       "text" : "For example, the rightmost letter of the Brazilian flag represents the rightmost letter of #BRA, A."
+      },
+      {
+       "time" : 900,
+       "id" : "hashflag3",
+       "text" : "The last word is URSINE."
+      }
+      ]
 }

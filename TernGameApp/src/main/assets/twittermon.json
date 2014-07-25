@@ -40,25 +40,19 @@
          "name" : "harrier",
          "code" : "meeting",
          "type" : 1,
-         "image" : "twittermondefault"
+         "image" : "harrier"
       },
     {
        "name" : "condor",
        "code" : "meeting",
        "type" : 1,
-       "image" : "twittermondefault"
+       "image" : "condor"
     },
     {
        "name" : "foghorn leghorn",
        "code" : "toner",
        "type" : 2,
        "image" : "foghorn"
-    },
-    {
-       "name" : "turkey",
-       "code" : "meeting",
-       "type" : 1,
-       "image" : "twittermondefault"
     },
     {
        "name" : "anis",
@@ -70,7 +64,7 @@
          "name" : "bananaquit",
          "code" : "userids",
          "type" :  3,
-         "image" : "twittermondefault"
+         "image" : "bananaquit"
       },
        {
            "name" : "ibis",
@@ -82,10 +76,10 @@
          "name" : "clusterduck",
          "code" : "notifications",
          "type" :  3,
-         "image" : "twittermondefault"
+         "image" : "clusterduck"
       },
    {
-         "name" : "tweetypie",
+         "name" : "tweety pie",
          "code" : "follows",
          "type" :  3,
          "image" : "tweetypie"
@@ -94,7 +88,7 @@
          "name" : "hosebird",
          "code" : "notifications",
          "type" :  3,
-         "image" : "twittermondefault"
+         "image" : "hosebird"
       }
 
     ]

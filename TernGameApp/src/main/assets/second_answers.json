@@ -137,5 +137,22 @@
     "correct" : true,
     "canonical" : true
     }
-    ]
+    ],
+    "hints" : [
+      {
+       "time" :  300,
+       "id" : "second1",
+       "text" : "All the \"clue\" answers have something in common."
+      },
+      {
+       "time" :  900,
+       "id" : "second2",
+       "text" : "Each \"clue\" answer has SQUARE in it. Eg., SQUARETAIL eat jellyfish."
+      },
+      {
+       "time" : 1200,
+       "id" : "second3",
+       "text" : "The circled letters in each cluster of answers spell the name of a major city's square."
+      }
+      ]
 }
