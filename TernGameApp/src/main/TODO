@@ -1,26 +1,24 @@
-* team name display field shrinks if content exceeds line?
 * make the instruction view open up a new display on tap
 * padding around the logo icon is fucked up
-* Save file has to include a hash of the team name
 * patch up last updated logic
 * Deal better with malformed JSON
 * should probably obscure admin mode even more, like add some icon taps required to access
-* Admin mode puzzle data editor
 * Fix start time bug - blarg, currentTimeMillis vs elapsedRealTime
-* sometimes a second MainActivity sneaks into the backstack: this is due to how I have start activity working.
 * I think the hintlistener is possibly not thread safe
-* add art
 * Why does the back activity flash when you dismiss the dialog?
-* single opponent grid mode looks pretty crappy in dialog form
-* gizmoduck png has something in the top right corner
-* support multiple start codes for a particular puzzle
-* get rid of the signin screen
 * you can still crash something by hitting a push notification while loading.
 * battle royale result prompt doesn't quite restore correctly, but it's low value and I should
 really work on something else
+* maybe add a turn off hints mode
+* in landscape mode the instruction view isn't visible.
+* clear initial hints in twittermon, if they've collected a twittermon
+* only allow them to collect one twittermon?
 
 
 DONE:
+* add art
+* support multiple start codes for a particular puzzle
+* get rid of the signin screen
 * Make the start layout auto-adjust to different screen sizes
 * Style for event title
 * get rid of that top bar

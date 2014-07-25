@@ -110,9 +110,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
                     mCreatureDict.put(co.getString(s_creatureName), ci);
                     mCreatureList.add(co.getString(s_creatureName));
 
-                    Log.d("terngame", "Adding entry for " + co.getString(s_creatureName) + " : " +
-                            ci.mCode);
-
                 }
             } catch (JSONException e) {
                 Log.e("terngame", "JSONException reading in Twittermon info");
@@ -222,7 +219,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public Drawable getCreatureDrawable(String creature) {
         if (mCreatureDict.containsKey(creature)) {
-            Log.d("terngame", "looking up image for " + creature);
             return mCreatureDict.get(creature).mPict;
         } else {
             return mDefaultPict;
@@ -239,7 +235,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public boolean verifyTrapCode(String creature, String code) {
         if (mCreatureDict.containsKey(creature)) {
-//            Log.d("terngame", "real code is: " + mCreatureDict.get(creature).mCode);
             return mCreatureDict.get(creature).mCode.equalsIgnoreCase(code);
         }
         return false;
@@ -270,7 +265,6 @@ public class TwittermonInfo implements JSONFileResultHandler {
     }
 
     public int battle(String creature1, String creature2) {
-        Log.d("terngame", "battle: " + creature1 + " and " + creature2);
 
         CreatureInfo ci1 = mCreatureDict.get(creature1);
         CreatureInfo ci2 = mCreatureDict.get(creature2);

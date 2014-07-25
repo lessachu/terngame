@@ -46,7 +46,7 @@ public class LoginInfo implements JSONFileResultHandler {
                     String password = teamObj.getString(s_teamPass);
                     mLoginInfo.put(teamName, password);
                 }
-                Log.d("terngame", mLoginInfo.toString());
+                //   Log.d("terngame", mLoginInfo.toString());
             } catch (JSONException e) {
                 Log.e("terngame", "JsonException loading teamdata");
             }
@@ -56,7 +56,7 @@ public class LoginInfo implements JSONFileResultHandler {
     public void initialize(Context context, String dataFile, JSONFileReaderTask.JSONFileReaderCompleteListener jrcl) {
         try {
 
-            Log.d("terngame", "LoginInfo Datafile: " + dataFile);
+//            Log.d("terngame", "LoginInfo Datafile: " + dataFile);
             InputStream in = context.getAssets().open(dataFile);
             JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jrcl);
             readerTask.execute(in);

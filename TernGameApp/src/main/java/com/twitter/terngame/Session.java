@@ -76,26 +76,21 @@ public class Session {
     }
 
     public boolean isDataLoaded(DataLoadedListener dll) {
-
-        Log.d("terngame", "isDataLoaded?");
         Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
                 " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
         // check if all data is loaded
         if (mEventDataLoaded && mStartCodeDataLoaded
                 && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
-            Log.d("terngame", "isDataLoaded?  Yes it is!");
             return true;
         }
 
         if (dll != null) {
-            Log.d("terngame", "Adding listener");
             mDataListeners.add(dll);
         }
         return false;
     }
 
     private void checkDataLoadComplete() {
-        Log.d("terngame", "Checking if data load is complete!");
 
         Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
                 " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
@@ -103,9 +98,7 @@ public class Session {
         if (mEventDataLoaded && mStartCodeDataLoaded
                 && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
 
-            Log.d("terngame", "Yay all the data is loaded!");
             for (DataLoadedListener dl : mDataListeners) {
-                Log.d("terngame", "Calling on data loaded");
                 dl.onDataLoaded();
             }
         }
@@ -165,7 +158,6 @@ public class Session {
     }
 
     public ArrayList<HintInfo> getHintStatus(String puzzleID) {
-        Log.d("terngame", "Session getHintStatus for " + puzzleID);
         return mStartCodeInfo.getHintList(puzzleID);
     }
 
@@ -226,7 +218,6 @@ public class Session {
                 int len = hintList.size();
                 for (int i = 0; i < len; i++) {
                     HintInfo hi = hintList.get(i);
-                    Log.d("terngame", "Adding hints for : " + start_code);
                     mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, pi.mName,
                             i + 1, hi.mID, hi.mTimeSecs));
 
@@ -263,7 +254,6 @@ public class Session {
             ai = new AnswerInfo();
             ai.mResponse = mEventInfo.getWrongAnswerString();
             ai.mCorrect = false;
-            Log.d("terngame", "Guess: " + answer + " is wrong");
         }
 
         ai.mDuplicate = isDupe;
@@ -310,12 +300,10 @@ public class Session {
     }
 
     public void loadEventInformation() {
-        Log.d("terngame", "Initializing event info start");
         mEventInfo.initializeEvent(mContext, new JSONFileReaderTask.JSONFileReaderCompleteListener() {
             @Override
             public void onJSONFileReaderComplete() {
                 mEventDataLoaded = true;
-                Log.d("terngame", "Initializing start code info start");
                 mStartCodeInfo.initialize(mContext, mEventInfo.getStartCodeFileName(),
                         new JSONFileReaderTask.JSONFileReaderCompleteListener() {
                             @Override
@@ -324,7 +312,6 @@ public class Session {
                                 checkDataLoadComplete();
                             }
                         });
-                Log.d("terngame", "Initializing team data");
                 mTeamStatus.initializeTeam(mContext,
                         new JSONFileReaderTask.JSONFileReaderCompleteListener() {
                             @Override
@@ -350,12 +337,10 @@ public class Session {
     }
 
     public void clearPuzzleData(String puzzleID) {
-        Log.d("terngame", "in Session clear puzzle data");
         // if it's the current puzzle, clear hint notifications
 
         String curPuzzle = mTeamStatus.getCurrentPuzzle();
         if (curPuzzle != null && curPuzzle.equals(puzzleID)) {
-            Log.d("terngame", "clearing notifications for " + puzzleID);
             clearHintNotifications();
         }
 

@@ -149,7 +149,7 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
 
                     ArrayList<String> puzzles = getPuzzleAliasesAt(puzzleOrder, i);
                     for (String puzzleName : puzzles) {
-                        Log.d("terngame", "Adding " + puzzleName + " with instruction: " + instruction);
+                        //       Log.d("terngame", "Adding " + puzzleName + " with instruction: " + instruction);
                         mPuzzleOrder.add(puzzleName);
                         mNextInstruction.put(puzzleName, instruction);
                     }

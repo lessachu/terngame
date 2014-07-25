@@ -73,26 +73,20 @@ public class TeamStatus implements JSONFileResultHandler {
     }
 
     public void clearPuzzleData(String puzzleID) {
-        Log.d("terngame", "Clearing puzzle data for: " + puzzleID);
         // we don't bother trying to patch the last instruction
         if (mPuzzles.containsKey(puzzleID)) {
-            Log.d("terngame", "Removing " + puzzleID + " from mPuzzles (" + mPuzzles.size() + ")");
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             mPuzzles.remove(puzzleID);
-            Log.d("terngame", "Removing " + puzzleID + " from mPuzzles (" + mPuzzles.size() + ")");
 
             if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
-                Log.d("terngame", "nulling out currentpuzzle");
                 mCurrentPuzzle = null;
             }
 
             if (ps.mSkipped) {
-                Log.d("terngame", "decrementing numSkipped");
                 mNumSkipped--;
             }
 
             if (ps.mSolved) {
-                Log.d("terngame", "decrementing numSolved");
                 mNumSolved--;
 
             }
@@ -176,7 +170,6 @@ public class TeamStatus implements JSONFileResultHandler {
         mContext = context;
         // if there is a savefile present, load from that
         try {
-            Log.d("terngame", "reading in team status");
             File f = new File(context.getFilesDir(), s_saveFile);
             InputStream in = new BufferedInputStream(new FileInputStream(f));
             JSONFileReaderTask readerTask = new JSONFileReaderTask(this, jfrcl);
@@ -187,7 +180,6 @@ public class TeamStatus implements JSONFileResultHandler {
                     "No save file exists!",
                     Toast.LENGTH_SHORT);
             toast.show();
-            Log.e("jan", "No save file");
             jfrcl.onJSONFileReaderComplete();
         }
     }
@@ -202,7 +194,7 @@ public class TeamStatus implements JSONFileResultHandler {
             toast.show();
             return;
         }
-        Log.d("terngame", data.toString());
+//        Log.d("terngame", data.toString());
         TeamDataSaverTask saverTask = new TeamDataSaverTask();
         saverTask.execute(data);
     }
@@ -278,7 +270,7 @@ public class TeamStatus implements JSONFileResultHandler {
         if (puzzleID != null) {
             PuzzleStatus ps = mPuzzles.get(puzzleID);
             if (ps != null) {
-                Log.d("terngame", "StartTime: " + Long.toString(ps.mStartTime));
+//                Log.d("terngame", "StartTime: " + Long.toString(ps.mStartTime));
                 return ps.mStartTime;
             }
         }

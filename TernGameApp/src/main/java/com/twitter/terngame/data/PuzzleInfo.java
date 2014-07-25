@@ -78,7 +78,7 @@ public class PuzzleInfo implements JSONFileResultHandler {
                     if (ao.has(s_canonical)) {
                         mCanonicalAnswer = answer;
                     }
-                    Log.d("terngame", "answer: " + answer + ai.mResponse);
+                    //          Log.d("terngame", "answer: " + answer + ai.mResponse);
                     answer = AnswerChecker.stripAnswer(answer);
                     mAnswers.put(answer, ai);
                 }

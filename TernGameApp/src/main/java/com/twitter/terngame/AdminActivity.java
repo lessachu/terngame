@@ -81,7 +81,6 @@ public class AdminActivity extends BaseActivity
         final int id = view.getId();
 
         if (id == R.id.admin_clear_all_button) {
-            // TODO: show an "are you sure? prompt?
             mSession.clearTeamData();
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Team data wiped.",

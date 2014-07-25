@@ -1,7 +1,6 @@
 package com.twitter.terngame;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.twitter.terngame.data.HintInfo;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class HintListActivity extends BaseListActivity
-implements Session.HintListener {
+        implements Session.HintListener {
     public static final String s_puzzleID = "puzzleID";  // intent key
 
     private String mPuzzleID;
@@ -40,9 +39,6 @@ implements Session.HintListener {
         for (HintInfo hi : hintArray) {
             mAdapter.add(hi);
         }
-
-        Log.d("terngame", "ShowUX: hint count: " + mSession.getHintStatus(mPuzzleID).size());
-        Log.d("terngame", "ShowUX: puzzleID: " + mPuzzleID);
     }
 
     @Override

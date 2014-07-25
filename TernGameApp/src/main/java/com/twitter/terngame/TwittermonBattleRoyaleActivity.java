@@ -1,7 +1,6 @@
 package com.twitter.terngame;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -220,7 +219,6 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
         if (battle == null) {
             mBattle = battle = mRoyaleHelper.getMatchup();
         }
-        Log.d("terngame", "BattleRoyaleActivity between: " + battle.mCreature + " and " + battle.mOpponent);
 
         mNameView.setText(battle.mCreature);
         mImageView.setImageDrawable(mSession.getTwittermonImage(battle.mCreature));

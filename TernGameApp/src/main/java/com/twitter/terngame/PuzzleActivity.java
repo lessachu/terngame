@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -23,7 +22,7 @@ import com.twitter.terngame.util.AnswerChecker;
 import java.util.ArrayList;
 
 public class PuzzleActivity extends BaseActivity
-implements View.OnClickListener, Session.HintListener {
+        implements View.OnClickListener, Session.HintListener {
 
     // Intent keys
     public static final String s_puzzleID = "puzzleID";
@@ -120,7 +119,6 @@ implements View.OnClickListener, Session.HintListener {
                 mStatusTextView.setText("");
             }
             setAnswerUIVisibility(View.VISIBLE);
-            Log.d("terngame", "Start time as int: " + Integer.toString((int) mSession.getPuzzleStartTime(mPuzzleID)));
             mPuzzleTimer.setBase(mSession.getPuzzleStartTime(mPuzzleID));
             mPuzzleTimer.start();
         }

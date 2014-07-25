@@ -3,7 +3,6 @@ package com.twitter.terngame;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,6 @@ public class HintListArrayAdapter extends ArrayAdapter<HintInfo>
         HintInfo hi = (HintInfo) view.getTag(R.id.hint_info_key);
         Integer position = (Integer) view.getTag(R.id.hint_num_key);
 
-        Log.d("terngame", "Taking hint " + hi.mID + " for puzzle: " + mPuzzleID);
         mSession.hintTaken(mPuzzleID, hi.mID);
 
         Intent i = new Intent(mContext, HintActivity.class);

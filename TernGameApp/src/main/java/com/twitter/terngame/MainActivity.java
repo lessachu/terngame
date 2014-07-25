@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,8 +34,6 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.event_main);
-
-        Log.d("terngame", "Main activity on create callsed");
 
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
         mTeamNameText = (TextView) findViewById(R.id.team_name_text);
@@ -79,7 +76,6 @@ public class MainActivity extends BaseActivity
     @Override
     public void showUX() {
         super.showUX();
-        Log.d("terngame", "MainActivity showUX");
 
         final String eventName = mSession.getEventName();
         if (eventName != null) {

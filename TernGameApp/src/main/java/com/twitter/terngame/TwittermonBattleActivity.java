@@ -18,7 +18,7 @@ import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.NdefMessageParser;
 
 public class TwittermonBattleActivity extends BaseActivity
-implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
+        implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_creature = "creature";
     public static final int NEW_CREATURE_REQUEST_CODE = 1;
@@ -147,7 +147,6 @@ implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSele
     public void onPause() {
         super.onPause();
         if (mAdapter != null) {
-            Log.d("terngame", "Disable Foreground Dispatch");
             mAdapter.disableForegroundDispatch(this);
         }
     }
@@ -156,7 +155,6 @@ implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSele
     public void onResume() {
         super.onResume();
         if (mAdapter != null) {
-            Log.d("terngame", "Enable Foreground Dispatch");
             mAdapter.enableForegroundDispatch(this, mPendingIntent, mIntentFilters, null);
         }
     }
