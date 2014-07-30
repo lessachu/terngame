@@ -431,9 +431,7 @@ public class TeamStatus implements JSONFileResultHandler {
 
     private boolean isDuplicate(String guess, ArrayList<String> al) {
         for (String s : al) {
-            Log.d("terngame", "Comparing " + s + " to " + guess);
             if (s.equals(guess)) {
-                Log.d("terngame", "Dupe!");
                 return true;
             }
         }

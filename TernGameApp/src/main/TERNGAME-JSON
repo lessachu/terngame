@@ -76,7 +76,7 @@ twittermon.json  // contents of the button_extra field
       {
        "answer" : "wombatwombat",
        "response" : "Now you're really cooking... keep going...",
-       "hint_unlock" : "wombat3"
+       "hint_unlock" : "wombat3"   // entering this answer unlocks all hints up to wombat3 (by time)
        } ,
      {
     "answer" : "wombatwombatwombat",  // correct answers don't have a response

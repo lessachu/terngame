@@ -392,6 +392,9 @@ public class Session {
 
     public void collectTwittermon(String creature) {
         mPuzzleExtraInfo.getTwittermonInfo().addNewCreature(creature);
+
+        //TODO: HARDCODED GOODNESS.
+        unlockHints("twittermon3", getCurrentPuzzleID());
     }
 
     // returns s_win, s_lose or s_tie

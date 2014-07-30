@@ -27,7 +27,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You chose ??.  Now select an opponent."
+                android:text="You chose ??.  Now pick an opponent."
                 android:padding="10dp"
                 style="@style/statusTheme"
                 android:textStyle="normal"
@@ -41,7 +41,6 @@
                 android:text="@string/battle_instructions"
                 android:id="@+id/battle_instruction"
                 android:paddingTop="10dp"
-                android:paddingLeft="10dp"
                 style="@style/instructionTheme"/>
 
         <TextView
