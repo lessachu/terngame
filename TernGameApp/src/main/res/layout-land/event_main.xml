@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/parent">
+
+    <include layout="@layout/loading"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:id="@+id/main_content">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/start_code"
+                android:id="@+id/textView"
+                style="@style/textHeadingTheme"/>
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_code_edit"
+                style="@style/textEditTheme"
+                android:linksClickable="true"
+                android:singleLine="true"/>
+
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/start_code_button"
+                android:id="@+id/go_button"/>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction_header"
+                android:id="@+id/instruction_header"
+                style="@style/textHeadingTheme"
+                android:autoText="false"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                android:id="@+id/instruction_text"
+                style="@style/instructionTheme"
+                android:singleLine="false"
+                android:paddingBottom="12dp"
+                android:layout_weight="1"/>
+
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="current puzzle"
+                android:id="@+id/current_puzzle_button"
+                style="@style/StatusButtonTheme"/>
+
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="0 puzzles solved"
+                android:id="@+id/event_status_button"
+                style="@style/StatusButtonTheme"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -37,7 +37,9 @@ public class MainActivity extends BaseActivity
 
         mEventNameText = (TextView) findViewById(R.id.event_name_text);
         mTeamNameText = (TextView) findViewById(R.id.team_name_text);
-        mTeamNameText.setOnClickListener(this);
+        if (mTeamNameText != null) {
+            mTeamNameText.setOnClickListener(this);
+        }
 
         mGoButton = (Button) findViewById(R.id.go_button);
         mGoButton.setOnClickListener(this);
@@ -78,10 +80,12 @@ public class MainActivity extends BaseActivity
         super.showUX();
 
         final String eventName = mSession.getEventName();
-        if (eventName != null) {
+        if (eventName != null && mEventNameText != null) {
             mEventNameText.setText(eventName);
         }
-        mTeamNameText.setText(mSession.getTeamName());
+        if (mTeamNameText != null) {
+            mTeamNameText.setText(mSession.getTeamName());
+        }
         mInstructionText.setText(mSession.getCurrentInstruction());
 
         int numSolved = mSession.getPuzzlesSolved();
@@ -107,7 +111,9 @@ public class MainActivity extends BaseActivity
 
     public void onNewTeamName(String teamName) {
         mSession.login(teamName);
-        mTeamNameText.setText(teamName);
+        if (mTeamNameText != null) {
+            mTeamNameText.setText(teamName);
+        }
     }
 
     public void onClick(View view) {
