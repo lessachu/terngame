@@ -75,7 +75,8 @@ twittermon.json  // contents of the button_extra field
        },
       {
        "answer" : "wombatwombat",
-       "response" : "Now you're really cooking... keep going..."
+       "response" : "Now you're really cooking... keep going...",
+       "hint_unlock" : "wombat3"
        } ,
      {
     "answer" : "wombatwombatwombat",  // correct answers don't have a response
@@ -98,7 +99,7 @@ twittermon.json  // contents of the button_extra field
          {
           "time" :  60,
           "id" : "wombat3",
-          "text" : "No seriously.  By repetition, I mena 3.",
+          "text" : "No seriously.  By repetition, I mean 3.",
           "cost" : 10
          }
          ]

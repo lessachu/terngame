@@ -265,16 +265,19 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
     }
 
     public ArrayList<HintInfo> getHintList(String puzzleID) {
-        Log.d("terngame", "StartCodeInfo getHintList " + puzzleID);
         PuzzleInfo pi = mStartCodes.get(puzzleID);
 
         if (pi != null) {
-            Log.d("terngame", "StartCodeInfo pi is not null" + pi.toString());
             return pi.getHintCopy();
-        } else {
-            Log.d("terngame", "StartCodeInfo pi is null");
         }
         return null;
+    }
+
+    public void unlockHints(String hintID, String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+        if (pi != null) {
+            pi.unlockHints(hintID);
+        }
     }
 
     public JSONObject getExtra(String puzzleID) {

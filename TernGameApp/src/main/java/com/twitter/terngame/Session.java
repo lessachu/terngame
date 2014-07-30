@@ -214,15 +214,7 @@ public class Session {
 
         if (pi != null) {
             if (mTeamStatus.startNewPuzzle(start_code)) {
-                ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
-                int len = hintList.size();
-                for (int i = 0; i < len; i++) {
-                    HintInfo hi = hintList.get(i);
-                    mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, pi.mName,
-                            i + 1, hi.mID, hi.mTimeSecs));
-
-                    // TODO: if we're returning to a puzzle, account for time passed
-                }
+                startHintNotifications(start_code);
             }
         }
     }
@@ -245,7 +237,6 @@ public class Session {
 
         String puzzleID = mTeamStatus.getCurrentPuzzle();
 
-        // NPE here after the app goes out of memory
         PuzzleInfo pi = mStartCodeInfo.getPuzzleInfo(puzzleID);
         AnswerInfo ai = pi.getAnswerInfo(answer);
         boolean isDupe = mTeamStatus.addGuess(puzzleID, answer);
@@ -263,8 +254,18 @@ public class Session {
             if (mTeamStatus.solvePuzzle(puzzleID, ai.mResponse)) {
                 clearHintNotifications();
             }
+        } else {
+            if (ai.mHintUnlock != null && ai.mHintUnlock.length() > 0) {
+                unlockHints(ai.mHintUnlock, puzzleID);
+            }
         }
         return ai;
+    }
+
+    public void unlockHints(String hintID, String puzzleID) {
+        mStartCodeInfo.unlockHints(hintID, puzzleID);
+        clearHintNotifications();
+        startHintNotifications(puzzleID);
     }
 
     public void updateExtra(String puzzleID, JSONObject newExtra) {
@@ -353,6 +354,20 @@ public class Session {
         mTeamStatus.clearData();
         mPuzzleExtraInfo.clearAllPuzzleExtraInfo();
         clearHintNotifications();
+    }
+
+    public void startHintNotifications(String start_code) {
+        ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
+        String puzzleName = mStartCodeInfo.getPuzzleName(start_code);
+        int len = hintList.size();
+        for (int i = 0; i < len; i++) {
+            HintInfo hi = hintList.get(i);
+            if (hi.mTimeSecs != 0) {
+                mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, puzzleName,
+                        i + 1, hi.mID, hi.mTimeSecs));
+            }
+        }
+
     }
 
     public void clearHintNotifications() {

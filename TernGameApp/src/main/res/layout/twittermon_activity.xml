@@ -25,6 +25,14 @@
                 android:layout_weight="0"
                 style="@style/titleHeadingTheme"/>
 
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/twittermon_collect_prompt"
+                android:id="@+id/collect_prompt"
+                android:gravity="center"
+                style="@style/instructionTheme"/>
+
         <fragment
                 android:name="com.twitter.terngame.TwittermonDialogGridFragment"
                 android:layout_width="fill_parent"
@@ -34,14 +42,6 @@
                 android:layout_weight="1"
                 android:stackFromBottom="false"
                 />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/twittermon_collect_prompt"
-                android:id="@+id/collect_prompt"
-                android:gravity="center"
-                style="@style/instructionTheme"/>
 
         <LinearLayout
                 android:layout_width="fill_parent"

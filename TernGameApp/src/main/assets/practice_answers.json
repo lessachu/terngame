@@ -5,7 +5,8 @@
      "response" : "Hints are time-based, so you just need to wait for them.\n\nThe hints page will tell you when the next one unlocks.\n\nYou'll also receive a push notification when one unlocks."
       },
    { "answer" : "unfun",
-   "response" : "If you're not having fun any more, you can always submit the answer \"SKIP\" to go directly to the next clue.\n\nYou can try that now or wait for the last hint to give you the answer."
+   "response" : "If you're not having fun any more, you can always submit the answer \"SKIP\" to go directly to the next clue.\n\nYou can try that now or check the last hint to find the answer.",
+   "hint_unlock" : "practice3"
     },
     {
     "answer" : "tweet tweet",
@@ -25,7 +26,7 @@
            "text" : "Hooray! Another hint.\n\nHints will reveal more and more information over time.\n\nTry submitting the answer \"unfun\""
           },
           {
-           "time" : 90,
+           "time" : 120,
            "id" : "practice3",
            "text" : "The answer to the puzzle is \"tweet tweet\"."
           }

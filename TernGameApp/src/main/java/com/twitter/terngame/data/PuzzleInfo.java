@@ -163,6 +163,22 @@ public class PuzzleInfo implements JSONFileResultHandler {
         mHints.add(newHi);
     }
 
+    public void unlockHints(String hintID) {
+        boolean unlock = false;
+        int size = mHints.size();
+        for (int i = size - 1; i >= 0; i--) {
+            HintInfo hi = mHints.get(i);
+            if (hintID.equals(hi.mID)) {
+                unlock = true;
+            }
+
+            if (unlock) {
+                hi.mTimeSecs = 0;
+                mHints.set(i, hi);
+            }
+        }
+    }
+
     public void registerHintNotification(String hintID, int notificationID) {
         for (HintInfo hint : mHints) {
             if (hint.mID.equals(hintID)) {
