@@ -65,7 +65,7 @@
       { "id" : "passport",
           "name" : "Tying it all together",
           "answer_file" : "meta_answers.json",
-          "instruction" : "All our sources are saying that SF-7 Harrier is the Carmen's latest safe house. Go see what you can find!"
+          "instruction" : "We're getting closer! Follow Carmen's trail to the 9th Floor Commons to get to the root of her dastardly plot."
        }
    ]
 }

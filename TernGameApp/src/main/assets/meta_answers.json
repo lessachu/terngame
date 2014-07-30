@@ -63,21 +63,16 @@
       {
        "time" :  1200,
        "id" : "meta1",
-       "text" : "Our crime records reveal that Carmen was originally jailed for BANK robbery.  That tidbit might be helpful."
-      },
-      {
-       "time" :  2100,
-       "id" : "meta2",
        "text" : "The countries that each passport belongs to are: Kazakhstan, South Korea, Germany, France, Mongolia, and Tanzania."
       },
         {
-        "time" : 2700,
-        "id" : "meta3",
+        "time" : 2100,
+        "id" : "meta2",
         "text" : "Carmen's aliases are a letterbank for the passport's issuing country and what else?"
         },
        {
-       "time" : 3600,
-       "id" : "meta4",
+       "time" : 2700,
+       "id" : "meta3",
        "text" : "Each of Carmen's aliases are a letterbank for the passport country and currency. Take the first letter of each country's currency and read in puzzle order."
        }
       ]
