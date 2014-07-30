@@ -1,5 +1,4 @@
 * make the instruction view open up a new display on tap
-* padding around the logo icon is fucked up
 * patch up last updated logic
 * Deal better with malformed JSON
 * should probably obscure admin mode even more, like add some icon taps required to access
@@ -11,8 +10,8 @@
 really work on something else
 * only allow them to collect one twittermon?
 
-
 DONE:
+* padding around the logo icon is fucked up
 * maybe add a turn off hints mode
 * clear initial hints in twittermon, if they've collected a twittermon
 * in landscape mode the instruction view isn't visible.
