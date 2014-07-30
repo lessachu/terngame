@@ -51,5 +51,12 @@
                 android:id="@+id/current_puzzle_spinner"
                 android:layout_gravity="left|center_vertical"/>
 
+        <CheckBox
+                android:id="@+id/notificationCheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Push Notifications"
+                android:checked="true"
+                android:onClick="onCheckboxClicked"/>
     </LinearLayout>
 </LinearLayout>

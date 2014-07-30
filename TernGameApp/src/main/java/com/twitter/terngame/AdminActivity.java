@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class AdminActivity extends BaseActivity
 
     private Button mClearOneButton;
     private Spinner mPuzzleSpinner;
+    private CheckBox mNotificationsCheck;
 
 
     @Override
@@ -36,6 +38,8 @@ public class AdminActivity extends BaseActivity
 
         mPuzzleSpinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         mPuzzleSpinner.setOnItemSelectedListener(this);
+
+        mNotificationsCheck = (CheckBox) findViewById(R.id.notificationCheck);
     }
 
     @Override
@@ -59,6 +63,8 @@ public class AdminActivity extends BaseActivity
         }
 
         mPuzzleSpinner.setSelection(selectionPos);
+
+        mNotificationsCheck.setChecked(mSession.getNotificationState());
     }
 
 
@@ -97,6 +103,14 @@ public class AdminActivity extends BaseActivity
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
+        }
+    }
+
+    public void onCheckboxClicked(View view) {
+        if (((CheckBox) view).isChecked()) {
+            mSession.enableNotifications(true);
+        } else {
+            mSession.enableNotifications(false);
         }
     }
 }

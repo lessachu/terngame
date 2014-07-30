@@ -3,6 +3,7 @@ package com.twitter.terngame;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.twitter.terngame.data.AnswerInfo;
@@ -43,6 +44,7 @@ public class Session {
     private boolean mStartCodeDataLoaded;
     private boolean mPuzzleExtraInfoLoaded;
     private boolean mTeamDataLoaded;
+    private boolean mNotifications;
 
     private ArrayList<PendingIntent> mPendingHints;
     private ArrayList<HintListener> mHintListeners;
@@ -65,6 +67,7 @@ public class Session {
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
         mDataListeners = new ArrayList<DataLoadedListener>();
+        mNotifications = true;
     }
 
     public static synchronized Session getInstance(Context context) {
@@ -357,17 +360,22 @@ public class Session {
     }
 
     public void startHintNotifications(String start_code) {
-        ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
-        String puzzleName = mStartCodeInfo.getPuzzleName(start_code);
-        int len = hintList.size();
-        for (int i = 0; i < len; i++) {
-            HintInfo hi = hintList.get(i);
-            if (hi.mTimeSecs != 0) {
-                mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, puzzleName,
-                        i + 1, hi.mID, hi.mTimeSecs));
+        if (mNotifications) {
+            ArrayList<HintInfo> hintList = mStartCodeInfo.getHintList(start_code);
+            String puzzleName = mStartCodeInfo.getPuzzleName(start_code);
+            int len = hintList.size();
+            for (int i = 0; i < len; i++) {
+                HintInfo hi = hintList.get(i);
+                long elapsedMillis = SystemClock.elapsedRealtime() - getPuzzleStartTime(start_code);
+                if (hi.mTimeSecs != 0 &&
+                        elapsedMillis < hi.mTimeSecs * 1000) {
+                    long secsLeft = ((hi.mTimeSecs * 1000) - elapsedMillis) / 1000;
+                    Log.d("terngame", "secsLeft: " + secsLeft);
+                    mPendingHints.add(HintNotification.scheduleHint(mContext, start_code, puzzleName,
+                            i + 1, hi.mID, secsLeft));
+                }
             }
         }
-
     }
 
     public void clearHintNotifications() {
@@ -375,6 +383,20 @@ public class Session {
             HintNotification.cancelHintAlarms(mContext, pi);
         }
         mPendingHints.clear();
+    }
+
+    public void enableNotifications(boolean state) {
+        if (state) {
+            mNotifications = true;
+            startHintNotifications(getCurrentPuzzleID());
+        } else {
+            clearHintNotifications();
+            mNotifications = false;
+        }
+    }
+
+    public boolean getNotificationState() {
+        return mNotifications;
     }
 
     // Twittermon stuff
