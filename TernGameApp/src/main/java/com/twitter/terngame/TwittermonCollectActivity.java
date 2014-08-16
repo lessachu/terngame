@@ -28,6 +28,9 @@ public class TwittermonCollectActivity extends Activity
     public final static int s_show_fail = 2;
     public final static int s_show_dupe = 3;
 
+    private final static String s_name = "TwittermonName";
+    private final static String s_title = "Title";
+
     private String mTwittermonName;
     private Drawable mTwittermonImage;
 
@@ -127,6 +130,22 @@ public class TwittermonCollectActivity extends Activity
                 showBadReadUX();
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(s_name, mTwittermonName);
+        outState.putString(s_title, getTitle().toString());
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle inState) {
+        super.onRestoreInstanceState(inState);
+        mTwittermonName = inState.getString(s_name);
+        mCreatureName.setText(mTwittermonName);
+        setTitle(inState.getString(s_title));
     }
 
     public void onClick(View view) {

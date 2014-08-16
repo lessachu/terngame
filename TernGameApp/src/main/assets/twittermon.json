@@ -80,7 +80,7 @@
       },
    {
          "name" : "tweety pie",
-         "code" : "follows",
+         "code" : "data",
          "type" :  3,
          "image" : "tweetypie"
       },

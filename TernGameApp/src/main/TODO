@@ -9,6 +9,8 @@
 * battle royale result prompt doesn't quite restore correctly, but it's low value and I should
 really work on something else
 * only allow them to collect one twittermon?
+* support rotation
+* encode the assets on disk
 
 DONE:
 * padding around the logo icon is fucked up

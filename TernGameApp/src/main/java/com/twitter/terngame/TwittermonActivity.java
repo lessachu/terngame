@@ -19,10 +19,10 @@ import java.util.ArrayList;
 ;
 
 public class TwittermonActivity extends BaseActivity
-implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
+        implements View.OnClickListener, TwittermonDialogGridFragment.TwittermonGridSelectionListener {
 
     public static final String s_new_creature = "new_creature";
-    public static final int s_total_to_collect = 6;
+    public static final int s_total_to_collect = 1;
 
     private ArrayList<String> mTwittermon;
 
