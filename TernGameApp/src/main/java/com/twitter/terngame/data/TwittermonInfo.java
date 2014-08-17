@@ -1,7 +1,6 @@
 package com.twitter.terngame.data;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -48,7 +47,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
 
     public final static int s_max_collect = 6;
 
-    public static Drawable mDefaultPict;
+    public static int mDefaultPict;
 
     private ArrayList<String> mCollected;
     private ArrayList<BattleInfo> mHistory;
@@ -61,7 +60,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
     public class CreatureInfo {
         public String mCode;
         public int mType;
-        public Drawable mPict;
+        public int mPict;
     }
 
     public static class BattleInfo {
@@ -87,8 +86,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         mData = new JSONObject();
         mRoyaleComplete = false;
 
-        // hrm... I think this is not correct.
-        mDefaultPict = mContext.getResources().getDrawable(R.drawable.rockdove);
+        mDefaultPict = R.drawable.rockdove;
     }
 
     public void saveResult(JSONObject jo) {
@@ -104,9 +102,9 @@ public class TwittermonInfo implements JSONFileResultHandler {
                     ci.mType = co.getInt(s_creatureType);
 
                     String drawableFileName = co.getString(s_creaturePict);
-                    int resourceID = mContext.getResources().getIdentifier(drawableFileName, "drawable",
+                    ci.mPict = mContext.getResources().getIdentifier(drawableFileName, "drawable",
                             mContext.getPackageName());
-                    ci.mPict = mContext.getResources().getDrawable(resourceID);
+//                    ci.mPict = mContext.getResources().getDrawable(resourceID);
                     mCreatureDict.put(co.getString(s_creatureName), ci);
                     mCreatureList.add(co.getString(s_creatureName));
 
@@ -217,7 +215,7 @@ public class TwittermonInfo implements JSONFileResultHandler {
         return jo;
     }
 
-    public Drawable getCreatureDrawable(String creature) {
+    public int getCreatureResource(String creature) {
         if (mCreatureDict.containsKey(creature)) {
             return mCreatureDict.get(creature).mPict;
         } else {

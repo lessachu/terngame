@@ -43,7 +43,7 @@ public class TwittermonArrayAdapter extends ArrayAdapter<String> {
         nameText.setText(name);
 
         final ImageView image = (ImageView) gridView.findViewById(R.id.twittermon_image);
-        image.setImageDrawable(mSession.getTwittermonImage(name));
+        image.setImageResource(mSession.getTwittermonImage(name));
 
         if (mClickListener != null) {
             gridView.setOnClickListener(mClickListener);

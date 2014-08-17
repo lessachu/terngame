@@ -2,7 +2,6 @@ package com.twitter.terngame;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -30,9 +29,10 @@ public class TwittermonCollectActivity extends Activity
 
     private final static String s_name = "TwittermonName";
     private final static String s_title = "Title";
+    private final static String s_image = "TwittermonImage";
 
     private String mTwittermonName;
-    private Drawable mTwittermonImage;
+    private int mTwittermonImage;
 
     private LinearLayout mCollectLayout;
     private LinearLayout mNotStartedLayout;
@@ -119,7 +119,7 @@ public class TwittermonCollectActivity extends Activity
             if (mTwittermonImage != TwittermonInfo.mDefaultPict) {
                 setIntent(new Intent());
                 mCreatureName.setText(mTwittermonName);
-                mCreatureImage.setImageDrawable(mTwittermonImage);
+                mCreatureImage.setImageResource(mTwittermonImage);
 
                 if (curPuzzle != null && curPuzzle.equals(PuzzleExtraInfo.s_twittermon)) {
                     showCollectUX();
@@ -137,6 +137,7 @@ public class TwittermonCollectActivity extends Activity
         super.onSaveInstanceState(outState);
         outState.putString(s_name, mTwittermonName);
         outState.putString(s_title, getTitle().toString());
+        outState.putInt(s_image, mTwittermonImage);
 
     }
 
@@ -146,6 +147,8 @@ public class TwittermonCollectActivity extends Activity
         mTwittermonName = inState.getString(s_name);
         mCreatureName.setText(mTwittermonName);
         setTitle(inState.getString(s_title));
+        mTwittermonImage = inState.getInt(s_image);
+        mCreatureImage.setImageResource(mTwittermonImage);
     }
 
     public void onClick(View view) {

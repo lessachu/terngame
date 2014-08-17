@@ -221,10 +221,10 @@ public class TwittermonBattleRoyaleActivity extends BaseActivity
         }
 
         mNameView.setText(battle.mCreature);
-        mImageView.setImageDrawable(mSession.getTwittermonImage(battle.mCreature));
+        mImageView.setImageResource(mSession.getTwittermonImage(battle.mCreature));
 
         mOppNameView.setText(battle.mOpponent);
-        mOppImageView.setImageDrawable(mSession.getTwittermonImage(battle.mOpponent));
+        mOppImageView.setImageResource(mSession.getTwittermonImage(battle.mOpponent));
         mMatchView.setText("MATCH " + Integer.toString(mRoyaleHelper.getCorrect() + 1));
 
         mPromptView.setText("Did " + battle.mCreature + " win, lose, or tie?");

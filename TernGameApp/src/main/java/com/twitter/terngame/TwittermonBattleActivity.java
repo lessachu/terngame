@@ -3,7 +3,6 @@ package com.twitter.terngame;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Drawable;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -126,9 +125,9 @@ public class TwittermonBattleActivity extends BaseActivity
     @Override
     public void showUX() {
         super.showUX();
-        mCreatureImageView.setImageDrawable(mSession.getTwittermonImage(mCreature));
+        mCreatureImageView.setImageResource(mSession.getTwittermonImage(mCreature));
         if (mOpponentCreature != null && mOpponentCreature.length() > 0) {
-            mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(mOpponentCreature));
+            mOpponentImageView.setImageResource(mSession.getTwittermonImage(mOpponentCreature));
         }
         if (mBattleComplete) {
             hideBattleUX();
@@ -195,7 +194,7 @@ public class TwittermonBattleActivity extends BaseActivity
             byte[] payload = messages[0].getRecords()[0].getPayload();
             String creature = new String(payload);
 
-            Drawable image = mSession.getTwittermonImage(creature);
+            int image = mSession.getTwittermonImage(creature);
             if (image != TwittermonInfo.mDefaultPict) {
                 mOpponentCreature = creature;
 
@@ -215,7 +214,7 @@ public class TwittermonBattleActivity extends BaseActivity
     public void onTwittermonGridSelection(String creature) {
         mOpponentCreature = creature;
         mOpponentTextView.setText(creature);
-        mOpponentImageView.setImageDrawable(mSession.getTwittermonImage(creature));
+        mOpponentImageView.setImageResource(mSession.getTwittermonImage(creature));
 
         if (mFragment != null) {
             mFragment.dismiss();

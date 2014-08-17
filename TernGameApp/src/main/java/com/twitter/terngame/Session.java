@@ -2,7 +2,6 @@ package com.twitter.terngame;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -400,8 +399,8 @@ public class Session {
     }
 
     // Twittermon stuff
-    public Drawable getTwittermonImage(String creature) {
-        return mPuzzleExtraInfo.getTwittermonInfo().getCreatureDrawable(creature);
+    public int getTwittermonImage(String creature) {
+        return mPuzzleExtraInfo.getTwittermonInfo().getCreatureResource(creature);
     }
 
     public boolean hasTwittermon(String creature) {
