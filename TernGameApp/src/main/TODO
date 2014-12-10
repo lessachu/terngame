@@ -1,3 +1,8 @@
+* replace data storage with SQL backend
+* add some sounds for when you solve and guess and stuff
+* support for map coords of next location
+* better admin view for reviewing the puzzle data
+* redesign the app's look and feel
 * make the instruction view open up a new display on tap
 * patch up last updated logic
 * Deal better with malformed JSON
@@ -13,6 +18,7 @@ really work on something else
 * encode the assets on disk
 
 DONE:
+* integrate fabric
 * padding around the logo icon is fucked up
 * maybe add a turn off hints mode
 * clear initial hints in twittermon, if they've collected a twittermon
