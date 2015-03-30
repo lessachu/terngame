@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+            >
+    <include layout="@layout/loading"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/main_content"
+        android:stretchColumns="1">
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/puzzle_name_text"
+                style="@style/textHeadingTheme"
+                android:text="test lasjdlsakjdlaksjd lasjd lkajlkaj dljalskdjaslkdj a"
+                android:layout_span="2"
+                android:layout_column="0"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/startcode_row"
+            style="@style/statusRowTheme">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/start_code"
+                android:id="@+id/textView"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_code_text"
+                android:text="what"
+                android:layout_weight="1"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/puzzle_status_row"
+            style="@style/statusRowTheme">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction"
+                android:id="@+id/textView6"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_text"
+                android:layout_weight="1"/>
+    </TableRow>
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/answer_row"
+            style="@style/statusRowTheme">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/answer"
+                android:id="@+id/textView3"
+                android:layout_weight="1"/>
+
+    </TableRow>
+
+       <ListView
+        style="@style/statusRowTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/answer_list"/>
+
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/guess_row"
+            style="@style/statusRowTheme">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/partials"
+                android:id="@+id/textView4"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/guess_text"
+                android:layout_weight="1"/>
+    </TableRow>
+
+
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/partial_list"
+                style="@style/statusRowTheme"/>
+
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/hint_row"
+            style="@style/statusRowTheme">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/num_hints"
+                android:id="@+id/textView5"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/hint_text"
+                android:layout_weight="1"/>
+    </TableRow>
+
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hint_list"
+                style="@style/statusRowTheme"/>
+
+
+</TableLayout>
+</LinearLayout>

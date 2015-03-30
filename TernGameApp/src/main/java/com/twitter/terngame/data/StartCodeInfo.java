@@ -237,6 +237,17 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
         return "";
     }
 
+
+    public String getInstruction(String startCode) {
+
+        PuzzleInfo pi = mStartCodes.get(startCode);
+        if (pi != null) {
+           return pi.mInstruction;
+
+        }
+        return "";
+    }
+
     public boolean showPuzzleButton(String startCode) {
         PuzzleInfo pi = mStartCodes.get(startCode);
         return (pi != null && pi.mPuzzleButton != null);

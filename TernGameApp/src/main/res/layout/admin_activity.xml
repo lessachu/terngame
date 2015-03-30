@@ -51,6 +51,13 @@
                 android:id="@+id/current_puzzle_spinner"
                 android:layout_gravity="left|center_vertical"/>
 
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_event_data"
+            android:id="@+id/show_event_data"
+            android:layout_gravity="left|center_vertical"/>
+
         <CheckBox
                 android:id="@+id/notificationCheck"
                 android:layout_width="match_parent"

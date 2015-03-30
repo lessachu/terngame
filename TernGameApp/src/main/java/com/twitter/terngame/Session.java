@@ -179,6 +179,10 @@ public class Session {
         return instruction;
     }
 
+    public String getInstruction(String puzzleID) {
+        return mStartCodeInfo.getInstruction(puzzleID);
+    }
+
     public ArrayList<String> getGuesses(String puzzleID) {
         return mTeamStatus.getGuesses(puzzleID);
     }

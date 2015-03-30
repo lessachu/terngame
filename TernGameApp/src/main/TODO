@@ -1,4 +1,5 @@
 * replace data storage with SQL backend
+* listview in admin mode to make it easier to double check data
 * add some sounds for when you solve and guess and stuff
 * support for map coords of next location
 * better admin view for reviewing the puzzle data

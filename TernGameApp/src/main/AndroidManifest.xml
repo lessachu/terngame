@@ -48,6 +48,8 @@
                 android:name="com.twitter.terngame.PuzzleActivity"
                 android:launchMode="singleTop">
         </activity>
+        <activity
+            android:name="com.twitter.terngame.AdminDataActivity"></activity>
         <activity android:name="com.twitter.terngame.GuessActivity">
         </activity>
         <activity android:name="com.twitter.terngame.GuessLogActivity">
@@ -89,12 +91,6 @@
         <activity
                 android:name="com.twitter.terngame.TwittermonBattleRoyaleActivity"
                 android:launchMode="singleTop">
-        </activity>
-        <activity
-                android:name="com.twitter.terngame.BaseActivity"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:label="@string/title_activity_base"
-                android:theme="@style/FullscreenTheme">
         </activity>
         <meta-data android:name="com.crashlytics.ApiKey" android:value="060629362bf0d9735460c4bcca7d789bf25ca35d"/>
     </application>

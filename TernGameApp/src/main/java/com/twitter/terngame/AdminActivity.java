@@ -1,5 +1,6 @@
 package com.twitter.terngame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ public class AdminActivity extends BaseActivity
     static private String s_none = "None";
 
     private Button mClearOneButton;
+    private Button mShowPuzzleDataButton;
     private Spinner mPuzzleSpinner;
     private CheckBox mNotificationsCheck;
 
@@ -35,6 +37,9 @@ public class AdminActivity extends BaseActivity
 
         mClearOneButton = (Button) findViewById(R.id.admin_clear_one_button);
         mClearOneButton.setOnClickListener(this);
+
+        mShowPuzzleDataButton = (Button) findViewById(R.id.show_event_data);
+        mShowPuzzleDataButton.setOnClickListener(this);
 
         mPuzzleSpinner = (Spinner) findViewById(R.id.current_puzzle_spinner);
         mPuzzleSpinner.setOnItemSelectedListener(this);
@@ -57,9 +62,11 @@ public class AdminActivity extends BaseActivity
         if (curPuzzle != null) {
             selectionPos = adapter.getPosition(curPuzzle);
             mClearOneButton.setEnabled(true);
+            mShowPuzzleDataButton.setEnabled(true);
         } else {
             selectionPos = adapter.getPosition(s_none);
             mClearOneButton.setEnabled(false);
+            mShowPuzzleDataButton.setEnabled(false);
         }
 
         mPuzzleSpinner.setSelection(selectionPos);
@@ -74,8 +81,10 @@ public class AdminActivity extends BaseActivity
 
         if (selection != null && !selection.equals(s_none)) {
             mClearOneButton.setEnabled(true);
+            mShowPuzzleDataButton.setEnabled(true);
         } else {
             mClearOneButton.setEnabled(false);
+            mShowPuzzleDataButton.setEnabled(false);
         }
     }
 
@@ -102,6 +111,14 @@ public class AdminActivity extends BaseActivity
                         "Puzzle data wiped for " + puzzleID + ".",
                         Toast.LENGTH_SHORT);
                 toast.show();
+            }
+        } else if (id == R.id.show_event_data) {
+            String puzzleID = (String) mPuzzleSpinner.getSelectedItem();
+
+            if (puzzleID != null && !puzzleID.equals(s_none)) {
+                Intent i = new Intent(this, AdminDataActivity.class);
+                i.putExtra(AdminDataActivity.s_puzzleID, puzzleID);
+                startActivity(i);
             }
         }
     }

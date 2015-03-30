@@ -34,6 +34,8 @@
     <string name="None">None</string>
     <string name="solved_text">SOLVED</string>
     <string name="skipped_text">SKIPPED</string>
+    <string name="instruction">INSTRUCTION</string>
+    <string name="partials">PARTIALS</string>
     <string name="in_progress_text">IN PROGRESS</string>
     <string name="default_instructions">Solve puzzles. Earn glory.</string>
     <string name="no_puzzles">You haven\'t started any puzzles yet.</string>
@@ -79,6 +81,7 @@
     <string name="collect_succeed_title">Success!</string>
     <string name="collect_dupe_title">Duplicate Twittermon</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="show_event_data">Show Event Data</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
