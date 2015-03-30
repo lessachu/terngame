@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -304,6 +305,23 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
                  res.add(hp);
              }
             return res;
+        }
+        return null;
+    }
+
+    // this only returns canonical answers
+    public ArrayList<Pair<String,String>> getAnswerListAsPair(String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+        if (pi != null) {
+            return pi.getAnswerList();
+        }
+        return null;
+    }
+
+    public ArrayList<Pair<String,String>> getPartialListAsPair(String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+        if (pi != null) {
+            return pi.getPartialList();
         }
         return null;
     }

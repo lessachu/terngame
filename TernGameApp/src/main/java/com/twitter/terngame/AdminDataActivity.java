@@ -50,17 +50,11 @@ public class AdminDataActivity extends BaseActivity {
             mStartCode.setText(puzzleID);
             mInstruction.setText(session.getInstruction(puzzleID));
 
-            ArrayList<Pair<String,String>> answerList = new ArrayList<Pair<String,String>>();
-            answerList.add(new Pair<String,String>("answer", "response"));
-            answerList.add(new Pair<String,String>("answer2", "a much longer response that takes a lot of space"));
-
+            ArrayList<Pair<String,String>> answerList = session.getAnswers(puzzleID);
             AdminAnswerArrayAdapter answers = new AdminAnswerArrayAdapter(this, answerList);
             mAnswerListView.setAdapter(answers);
 
-            ArrayList<Pair<String,String>> partialList = new ArrayList<Pair<String,String>>();
-            partialList.add(new Pair<String,String>("partial1", "response"));
-            partialList.add(new Pair<String,String>("partial2", "a much longer response that takes a lot of space"));
-
+            ArrayList<Pair<String,String>> partialList = session.getPartials(puzzleID);
             AdminAnswerArrayAdapter partials = new AdminAnswerArrayAdapter(this, partialList);
             mPartialListView.setAdapter(partials);
 

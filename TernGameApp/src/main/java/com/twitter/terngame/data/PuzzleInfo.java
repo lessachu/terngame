@@ -2,6 +2,7 @@ package com.twitter.terngame.data;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import com.twitter.terngame.util.AnswerChecker;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class PuzzleInfo implements JSONFileResultHandler {
 
@@ -128,6 +130,34 @@ public class PuzzleInfo implements JSONFileResultHandler {
             toast.show();
             Log.e("terngame", "IOException");
         }
+    }
+
+    public ArrayList<Pair<String,String>> getAnswerList() {
+        ArrayList<Pair<String,String>> al = new ArrayList<>();
+
+        Set<String> keys = mAnswers.keySet();
+        for(String key : keys) {
+            AnswerInfo ai = mAnswers.get(key);
+            if(ai.mCorrect) {
+                Pair<String, String> p = new Pair<>(key,ai.mResponse);
+                al.add(p);
+            }
+        }
+        return al;
+    }
+
+    public ArrayList<Pair<String,String>> getPartialList() {
+        ArrayList<Pair<String,String>> al = new ArrayList<>();
+
+        Set<String> keys = mAnswers.keySet();
+        for(String key : keys) {
+            AnswerInfo ai = mAnswers.get(key);
+            if(!ai.mCorrect) {
+                Pair<String, String> p = new Pair<>(key, ai.mResponse);
+                al.add(p);
+            }
+        }
+        return al;
     }
 
     public String getName() {

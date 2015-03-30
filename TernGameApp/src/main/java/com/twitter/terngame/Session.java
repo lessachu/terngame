@@ -192,6 +192,14 @@ public class Session {
         return mStartCodeInfo.getHintListAsPair(puzzleID);
     }
 
+    public ArrayList<Pair<String,String>> getAnswers(String puzzleID) {
+        return mStartCodeInfo.getAnswerListAsPair(puzzleID);
+    }
+
+    public ArrayList<Pair<String,String>> getPartials(String puzzleID) {
+        return mStartCodeInfo.getPartialListAsPair(puzzleID);
+    }
+
     public PuzzleExtraInfo getPuzzleExtraInfo() {
         return mPuzzleExtraInfo;
     }
