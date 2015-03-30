@@ -2,6 +2,7 @@ package com.twitter.terngame.data;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import com.twitter.terngame.Session;
@@ -280,6 +281,29 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
 
         if (pi != null) {
             return pi.getHintCopy();
+        }
+        return null;
+    }
+
+    // yes, I'm aware that this is terrible
+    public ArrayList<Pair<String,String>> getHintListAsPair(String puzzleID) {
+        PuzzleInfo pi = mStartCodes.get(puzzleID);
+
+        if (pi != null) {
+             ArrayList<Pair<String,String>> res = new ArrayList<>();
+
+             for(HintInfo hi : pi.mHints ) {
+                 String time_str = String.valueOf(hi.mTimeSecs) + "s";
+                 if (hi.mTimeSecs > 60) {
+                     time_str = String.valueOf(hi.mTimeSecs/60) + "m";
+                     if(hi.mTimeSecs%60>0) {
+                         time_str += String.valueOf(hi.mTimeSecs % 60) + "s";
+                     }
+                 }
+                 Pair<String,String> hp = new Pair<>(time_str,hi.mText);
+                 res.add(hp);
+             }
+            return res;
         }
         return null;
     }

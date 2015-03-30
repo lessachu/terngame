@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.Pair;
 
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
@@ -185,6 +186,10 @@ public class Session {
 
     public ArrayList<String> getGuesses(String puzzleID) {
         return mTeamStatus.getGuesses(puzzleID);
+    }
+
+    public ArrayList<Pair<String,String>> getHints(String puzzleID) {
+        return mStartCodeInfo.getHintListAsPair(puzzleID);
     }
 
     public PuzzleExtraInfo getPuzzleExtraInfo() {

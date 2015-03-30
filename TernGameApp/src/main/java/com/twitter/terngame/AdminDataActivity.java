@@ -65,9 +65,7 @@ public class AdminDataActivity extends BaseActivity {
             mPartialListView.setAdapter(partials);
 
 
-            ArrayList<Pair<String,String>> hintList = new ArrayList<Pair<String,String>>();
-            hintList.add(new Pair<String,String>("hint1", "press the green button"));
-            hintList.add(new Pair<String,String>("hint2", "just kidding, press the red button. no, wait, maybe it's the yellow one."));
+            ArrayList<Pair<String,String>> hintList = session.getHints(puzzleID);
 
             AdminAnswerArrayAdapter hints = new AdminAnswerArrayAdapter(this, hintList);
             mHintListView.setAdapter(hints);
