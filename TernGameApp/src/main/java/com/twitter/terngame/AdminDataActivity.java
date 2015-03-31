@@ -14,12 +14,7 @@ import java.util.ArrayList;
 public class AdminDataActivity extends BaseActivity {
 
     public static final String s_puzzleID = "puzzleID";
-    private TextView mInstruction;
-    private TextView mStartCode;
-    private TextView mPuzzleName;
-    private ListView mAnswerListView;
-    private ListView mPartialListView;
-    private ListView mHintListView;
+    private ListView mAnswerDataListView;
 
 
     @Override
@@ -27,12 +22,7 @@ public class AdminDataActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_data_activity);
 
-        mPuzzleName = (TextView) findViewById(R.id.puzzle_name_text);
-        mInstruction = (TextView) findViewById(R.id.status_text);
-        mStartCode = (TextView) findViewById(R.id.start_code_text);
-        mAnswerListView = (ListView) findViewById(R.id.answer_list);
-        mPartialListView = (ListView) findViewById(R.id.partial_list);
-        mHintListView = (ListView) findViewById(R.id.hint_list);
+        mAnswerDataListView= (ListView) findViewById(R.id.data_list);
     }
 
     public void showUX() {
@@ -46,24 +36,20 @@ public class AdminDataActivity extends BaseActivity {
 
         if (puzzleID != null) {
             Session session = Session.getInstance(this);
-            mPuzzleName.setText(session.getPuzzleName(puzzleID));
-            mStartCode.setText(puzzleID);
-            mInstruction.setText(session.getInstruction(puzzleID));
 
-            ArrayList<Pair<String,String>> answerList = session.getAnswers(puzzleID);
-            AdminAnswerArrayAdapter answers = new AdminAnswerArrayAdapter(this, answerList);
-            mAnswerListView.setAdapter(answers);
+            ArrayList<Pair<String,String>> fullList = new ArrayList<>();
+            fullList.add(new Pair<String,String>(session.getPuzzleName(puzzleID),null));
+            fullList.add(new Pair<>("START CODE:",puzzleID));
+            fullList.add(new Pair<>("INSTRUCTION:",session.getInstruction(puzzleID)));
+            fullList.add(new Pair<String,String>("ANSWERS", null));
+            fullList.addAll(session.getAnswers(puzzleID));
+            fullList.add(new Pair<String,String>("PARTIALS",null));
+            fullList.addAll(session.getPartials(puzzleID));
+            fullList.add(new Pair<String,String>("HINTS", null));
+            fullList.addAll(session.getHints(puzzleID));
 
-            ArrayList<Pair<String,String>> partialList = session.getPartials(puzzleID);
-            AdminAnswerArrayAdapter partials = new AdminAnswerArrayAdapter(this, partialList);
-            mPartialListView.setAdapter(partials);
-
-
-            ArrayList<Pair<String,String>> hintList = session.getHints(puzzleID);
-
-            AdminAnswerArrayAdapter hints = new AdminAnswerArrayAdapter(this, hintList);
-            mHintListView.setAdapter(hints);
-
+            AdminAnswerArrayAdapter answers = new AdminAnswerArrayAdapter(this, fullList);
+            mAnswerDataListView.setAdapter(answers);
         }
     }
 

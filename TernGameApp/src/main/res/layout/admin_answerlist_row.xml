@@ -10,6 +10,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/answer_word_text"
+            android:layout_marginLeft="16dp"
             android:text="answer"
             android:layout_weight="1"/>
 
@@ -17,6 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/answer_response_text"
+            android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:text="a really really long response that takes up a lot of space response"/>
 </LinearLayout>
