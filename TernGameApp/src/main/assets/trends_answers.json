@@ -1,0 +1,67 @@
+{
+ "version" : 1,
+ "answer_list" : [
+   {
+     "answer" : "spartans",
+     "response" : "Close... we're going by the year the game was played."
+   },
+     {
+    "answer" : "cardinal",
+    "response" : "Yes! The Stanford Cardinal won the Rose Bowl in 2013 (Go Cardinal!)."
+    },
+    {
+    "answer" : "hawks",
+    "response" : "Yes! The St. Louis Hawks won the NBA Championship in 1958."
+    },
+   {
+     "answer" : "hawk",
+     "response" : "Yes! The St. Louis Hawks won the NBA Championship in 1958."
+   },
+    {
+    "answer" : "albatross",
+    "response" : "Yes!  That's the 1971 Harness Horse of the Year."
+    },
+   {
+     "answer" : "turkey",
+     "response" : "Yes!  Turkey won the Nobel Prize for Literature in 2006 and the Eurovision song contest in 2003."
+   },
+   {
+     "answer" : "eagles",
+     "response" : "Yes!  The Eagles won the Grammy for Record of the Year in 1978."
+   },
+   {
+     "answer" : "eagle",
+     "response" : "Yes!  The Eagles won the Grammy for Record of the Year in 1978."
+   },
+   {
+     "answer" : "robin",
+     "response" : "Yes!  Robin Williams won the Academy Award for Best Supporting Actor in 1998."
+   },
+   {
+     "answer" : "james",
+     "response" : "Close.. but we're going by the year of the Awards ceremony."
+   },
+    {
+   "answer" : "chatter",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+     "hints" : [
+          {
+           "time" :  120,
+           "id" : "trends1",
+           "text" : "All of the missing entries have something in common."
+          },
+          {
+           "time" :  600,
+           "id" : "trends2",
+           "text" : "All of the missing entries are bird names."
+          },
+          {
+           "time" : 900,
+           "id" : "trends3",
+           "text" : "Trend categories from top to bottom are: sports, sports, sports, books, music, music, movies"
+          }
+          ]
+}

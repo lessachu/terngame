@@ -1,0 +1,60 @@
+{
+ "version" : 1,
+ "answer_list" : [
+    { "answer" : "jointhepack",
+    "response" : "Sure sounds like something a recruiter at Zynga might say."
+    },
+    { "answer" : "jointheflock",
+    "response" : "Yep, that's Twitter's recruiting slogan."
+    },
+    { "answer" : "jointhepride",
+    "response" : "Sure sounds like something a recruiter at ING might say."
+    },
+    {
+    "answer" : "jointhecrash",
+    "response" : "Sure sounds like something a recruiter at Ecko Unltd might say."
+    },
+    {
+    "answer" : "jointheschool",
+    "response" : "Sure sounds like something a recruiter at bitly might say."
+    } ,
+    {
+    "answer" : "jointheostentation",
+    "response" : "Sure sounds like something a recruiter at NBC might say."
+    },
+    {
+     "answer" : "jointheparliament",
+     "response" : "Sure sounds like something a recruiter at Duolingo might say."
+     },
+    {
+    "answer" : "jointhegathering",
+    "response" : "Sure sounds like something a recruiter at American Airlines might say."
+    } ,
+    {
+    "answer" : "jointhecolony",
+    "response" : "Sure sounds like something a recruiter at Bacardi might say."
+    } ,
+    {
+    "answer" : "poison ivy",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+    "hints" : [
+      {
+       "time" :  300,
+       "id" : "recruiting1",
+       "text" : "As you know, Twitter's recruiting slogan is #jointheflock"
+      },
+      {
+       "time" :  600,
+       "id" : "recruiting2",
+       "text" : "Twitter uses #jointheflock because our logo is a..."
+      },
+      {
+       "time" : 900,
+       "id" : "recruiting3",
+       "text" : "The answer is two words."
+      }
+      ]
+}

@@ -1,0 +1,37 @@
+{
+ "version" : 1,
+ "answer_list" : [
+    {
+   "answer" : "movable promulgator",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+    "hints" : [
+      {
+       "time" :  60,
+       "id" : "wtf1",
+       "text" : "You can work on WTF part 1 and part 2 independently, but you'll need both parts to get the final answer.  The final answer on this puzzle is a somewhat awkward two word phrase."
+      },
+      {
+       "time" :  300,
+       "id" : "wtf2",
+       "text" : "For WTF part 2, some of the words/phrases go in the grid backwards."
+      },
+      {
+       "time" : 480,
+       "id" : "wtf3",
+       "text" : "The logic puzzles don't form a cohesive picture, just a pattern of boxes in white, grey and blue.  It should kind of familiar, however."
+      },
+      {
+       "time" : 1200,
+       "id" : "wtf4",
+       "text" : "Feel free to check the answers on the logic puzzles with the site staffers.  On part 2, yellow means the square contains a vowel, blue means the square contains a consonant."
+      },
+      {
+       "time" : 3600,
+       "id" : "wtf5",
+       "text" : "Match the logic puzzle grids from part 1 to the grid in part 2, the dark blue squares should give you path through the grid with a message that starts with \"THE ANSWER IS\" "
+      }
+      ]
+}

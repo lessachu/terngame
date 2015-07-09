@@ -9,11 +9,9 @@ import android.util.Pair;
 import com.twitter.terngame.data.AnswerInfo;
 import com.twitter.terngame.data.EventInfo;
 import com.twitter.terngame.data.HintInfo;
-import com.twitter.terngame.data.PuzzleExtraInfo;
 import com.twitter.terngame.data.PuzzleInfo;
 import com.twitter.terngame.data.StartCodeInfo;
 import com.twitter.terngame.data.TeamStatus;
-import com.twitter.terngame.data.TwittermonInfo;
 import com.twitter.terngame.util.AnswerChecker;
 import com.twitter.terngame.util.HintNotification;
 import com.twitter.terngame.util.JSONFileReaderTask;
@@ -53,7 +51,6 @@ public class Session {
     private TeamStatus mTeamStatus;   // static?
     private EventInfo mEventInfo;
     private StartCodeInfo mStartCodeInfo;
-    private PuzzleExtraInfo mPuzzleExtraInfo;
 
     private Session(Context context) {
         mContext = context;
@@ -62,7 +59,6 @@ public class Session {
         mPuzzleExtraInfoLoaded = false;
         mTeamStatus = new TeamStatus();
         mEventInfo = new EventInfo();
-        mPuzzleExtraInfo = new PuzzleExtraInfo(context);
         mStartCodeInfo = new StartCodeInfo(context);
         mPendingHints = new ArrayList<PendingIntent>();
         mHintListeners = new ArrayList<HintListener>();
@@ -80,10 +76,10 @@ public class Session {
 
     public boolean isDataLoaded(DataLoadedListener dll) {
         Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
-                " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
+                  " mTeamData: " + mTeamDataLoaded);
         // check if all data is loaded
         if (mEventDataLoaded && mStartCodeDataLoaded
-                && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
+                 && mTeamDataLoaded) {
             return true;
         }
 
@@ -96,10 +92,9 @@ public class Session {
     private void checkDataLoadComplete() {
 
         Log.d("terngame", "EventData: " + mEventDataLoaded + " mStartCode: " + mStartCodeDataLoaded +
-                " mPUzzleExtra: " + mPuzzleExtraInfoLoaded + " mTeamData: " + mTeamDataLoaded);
+               " mTeamData: " + mTeamDataLoaded);
 
-        if (mEventDataLoaded && mStartCodeDataLoaded
-                && mPuzzleExtraInfoLoaded && mTeamDataLoaded) {
+        if (mEventDataLoaded && mStartCodeDataLoaded && mTeamDataLoaded) {
 
             for (DataLoadedListener dl : mDataListeners) {
                 dl.onDataLoaded();
@@ -200,10 +195,6 @@ public class Session {
         return mStartCodeInfo.getPartialListAsPair(puzzleID);
     }
 
-    public PuzzleExtraInfo getPuzzleExtraInfo() {
-        return mPuzzleExtraInfo;
-    }
-
     public long getPuzzleStartTime(String puzzleID) {
         return mTeamStatus.getStartTime(puzzleID);
     }
@@ -287,10 +278,6 @@ public class Session {
         startHintNotifications(puzzleID);
     }
 
-    public void updateExtra(String puzzleID, JSONObject newExtra) {
-        mTeamStatus.updateExtra(puzzleID, newExtra);
-    }
-
     // TODO: consider how to make this thread safe
     public void registerHintListener(HintListener hl) {
         mHintListeners.add(hl);
@@ -344,18 +331,6 @@ public class Session {
         });
     }
 
-    public void initializePuzzleExtra(String puzzleId, JSONObject puzzleExtraJSON) {
-        // add callback for puzzleExtraInfo here.
-        mPuzzleExtraInfo.initializePuzzleExtra(puzzleId, puzzleExtraJSON,
-                new JSONFileReaderTask.JSONFileReaderCompleteListener() {
-                    @Override
-                    public void onJSONFileReaderComplete() {
-                        mPuzzleExtraInfoLoaded = true;
-                        checkDataLoadComplete();
-                    }
-                });
-    }
-
     public void clearPuzzleData(String puzzleID) {
         // if it's the current puzzle, clear hint notifications
 
@@ -364,14 +339,11 @@ public class Session {
             clearHintNotifications();
         }
 
-        // if it has an extra, clear the puzzle extra info
-        mPuzzleExtraInfo.clearPuzzleExtraInfo(puzzleID);
         mTeamStatus.clearPuzzleData(puzzleID);
     }
 
     public void clearTeamData() {
         mTeamStatus.clearData();
-        mPuzzleExtraInfo.clearAllPuzzleExtraInfo();
         clearHintNotifications();
     }
 
@@ -413,46 +385,5 @@ public class Session {
 
     public boolean getNotificationState() {
         return mNotifications;
-    }
-
-    // Twittermon stuff
-    public int getTwittermonImage(String creature) {
-        return mPuzzleExtraInfo.getTwittermonInfo().getCreatureResource(creature);
-    }
-
-    public boolean hasTwittermon(String creature) {
-        return mPuzzleExtraInfo.getTwittermonInfo().hasCreature(creature);
-    }
-
-    public boolean verifyTwittermonTrapCode(String creature, String code) {
-        return mPuzzleExtraInfo.getTwittermonInfo().verifyTrapCode(creature, code);
-    }
-
-    public void collectTwittermon(String creature) {
-        mPuzzleExtraInfo.getTwittermonInfo().addNewCreature(creature);
-
-        //TODO: HARDCODED GOODNESS.
-        unlockHints("twittermon3", getCurrentPuzzleID());
-    }
-
-    // returns s_win, s_lose or s_tie
-    public int battleTwittermon(String us, String them) {
-        return mPuzzleExtraInfo.getTwittermonInfo().battle(us, them);
-    }
-
-    public void logTwittermonBattle(String us, String them, int result) {
-        mPuzzleExtraInfo.getTwittermonInfo().logBattle(us, them, result);
-    }
-
-    public void logTwittermonRoyaleComplete() {
-        mPuzzleExtraInfo.getTwittermonInfo().royaleComplete();
-    }
-
-    public boolean isTwittermonRoyaleComplete() {
-        return mPuzzleExtraInfo.getTwittermonInfo().isRoyaleComplete();
-    }
-
-    public ArrayList<TwittermonInfo.BattleInfo> getBattleList() {
-        return mPuzzleExtraInfo.getTwittermonInfo().getBattleList();
     }
 }

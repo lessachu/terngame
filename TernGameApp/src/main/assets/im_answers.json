@@ -1,0 +1,27 @@
+{
+ "version" : 1,
+ "answer_list" : [
+    {
+    "answer" : "jazz",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+    "hints" : [
+      {
+       "time" :  60,
+       "id" : "im1",
+       "text" : "Your message text should be a single word, no special characters or numbers."
+      },
+      {
+       "time" :  900,
+       "id" : "im2",
+       "text" : "Try the message, \"blazer\"."
+      },
+      {
+       "time" : 1200,
+       "id" : "im3",
+       "text" : "You can have the message recipient explain a rule of your choice."
+      }
+      ]
+}

@@ -2,7 +2,7 @@
  "version" : 1,
  "answer_list" : [
     {
-   "answer" : "kilimanjaro",
+   "answer" : "viewfinder",
     "correct" : true,
     "canonical" : true
     }
@@ -11,16 +11,11 @@
        {
         "time" :  300,
         "id" : "selfie1",
-        "text" : "The Asian Art Museum entrance and the plaza to the south have lions and deer."
+        "text" : "All of the categories on the page also apply to the answer word."
        },
        {
-        "time" :  600,
+        "time" : 600,
         "id" : "selfie2",
-        "text" : "African Outlet has cowrie shell decorations. The USPS has eagles."
-       },
-       {
-        "time" : 900,
-        "id" : "selfie3",
         "text" : "Need help filling in blanks? http://nutrimatic.org/ is pretty good."
        }
        ]

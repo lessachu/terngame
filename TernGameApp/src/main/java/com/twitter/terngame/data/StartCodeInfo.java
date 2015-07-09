@@ -33,10 +33,6 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
     public static final String s_order = "order";
     public static final String s_canonical = "canonical";
     public static final String s_aliases = "aliases";
-    public static final String s_puzzleButton = "puzzle_button";
-    public static final String s_puzzleButtonText = "button_text";
-    public static final String s_puzzleButtonMode = "button_mode";
-    public static final String s_puzzleButtonExtra = "button_extra";
 
     private JSONObject mData;
 
@@ -123,15 +119,6 @@ public class StartCodeInfo implements JSONFileResultHandler, JSONFileReaderTask.
                     String code = po.getString(s_startCode);
                     code = AnswerChecker.stripAnswer(code);
 
-                    if (po.has(s_puzzleButton)) {
-                        JSONObject puzzleButton = po.getJSONObject(s_puzzleButton);
-                        pi.mPuzzleButtonText = puzzleButton.getString(s_puzzleButtonText);
-                        pi.mPuzzleButton = puzzleButton.getString(s_puzzleButtonMode);
-                        if (puzzleButton.has(s_puzzleButtonExtra)) {
-                            Session s = Session.getInstance(mContext);
-                            s.initializePuzzleExtra(code, puzzleButton.getJSONObject(s_puzzleButtonExtra));
-                        }
-                    }
                     mStartCodes.put(code, pi);
                 }
 

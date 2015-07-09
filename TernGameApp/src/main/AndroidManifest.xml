@@ -8,7 +8,6 @@
             android:minSdkVersion="9"
             android:targetSdkVersion="19"/>
 
-    <uses-permission android:name="android.permission.NFC"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -62,36 +61,7 @@
         </activity>
         <activity android:name="com.twitter.terngame.HintActivity">
         </activity>
-        <activity
-                android:name="com.twitter.terngame.TwittermonActivity"
-                android:launchMode="singleTop">
-        </activity>
-        <activity
-                android:name="com.twitter.terngame.TwittermonCollectActivity"
-                android:excludeFromRecents="true"
-                android:launchMode="singleTop"
-                android:theme="@android:style/Theme.Holo.Light.Dialog"
-                android:windowAnimationStyle="@android:style/Animation.Dialog">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
-                <data android:mimeType="application/com.twitter.terngame"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.twitter.terngame.TwittermonBattleActivity"
-                android:launchMode="singleTop">
-        </activity>
-        <activity
-                android:name="com.twitter.terngame.TwittermonBattleHistoryActivity"
-                android:launchMode="singleTop">
-        </activity>
-        <activity
-                android:name="com.twitter.terngame.TwittermonBattleRoyaleActivity"
-                android:launchMode="singleTop">
-        </activity>
         <meta-data android:name="com.crashlytics.ApiKey" android:value="060629362bf0d9735460c4bcca7d789bf25ca35d"/>
     </application>
 

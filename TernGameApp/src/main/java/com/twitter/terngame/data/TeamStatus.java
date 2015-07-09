@@ -44,7 +44,6 @@ public class TeamStatus implements JSONFileResultHandler {
     private static final String s_puzzSkipped = "skipped";
     private static final String s_puzzGuesses = "guesses";
     private static final String s_puzzHints = "hintsTaken";
-    private static final String s_puzzExtra = "extra";
 
     private Context mContext;
 
@@ -62,7 +61,6 @@ public class TeamStatus implements JSONFileResultHandler {
         public long mEndTime;
         public boolean mSolved;
         public boolean mSkipped;
-        public JSONObject mExtra;
         public ArrayList<String> mGuesses;
         public ArrayList<String> mHintsTaken;
     }
@@ -133,13 +131,6 @@ public class TeamStatus implements JSONFileResultHandler {
                     ps.mStartTime = po.getLong(s_puzzStart);
                     if (po.has(s_puzzEnd)) {
                         ps.mEndTime = po.getLong(s_puzzEnd);
-                    }
-
-                    if (po.has(s_puzzExtra)) {
-                        Session s = Session.getInstance(mContext);
-                        PuzzleExtraInfo pei = s.getPuzzleExtraInfo();
-                        ps.mExtra = po.getJSONObject(s_puzzExtra);
-                        pei.initializePuzzleStatus(ps.mID, ps.mExtra);
                     }
 
                     JSONArray guessArray = po.getJSONArray(s_puzzGuesses);
@@ -227,9 +218,6 @@ public class TeamStatus implements JSONFileResultHandler {
                     jo.put(s_puzzHints, hintArray);
                 }
 
-                if (ps.mExtra != null) {
-                    jo.put(s_puzzExtra, ps.mExtra);
-                }
 
                 puzzleArray.put(jo);
 
@@ -414,18 +402,6 @@ public class TeamStatus implements JSONFileResultHandler {
                     save();
                 }
             }
-        }
-    }
-
-    public void updateExtra(String puzzleID, JSONObject newExtra) {
-        if (mCurrentPuzzle != null && mCurrentPuzzle.equals(puzzleID)) {
-            PuzzleStatus ps = mPuzzles.get(puzzleID);
-            if (ps != null && !ps.mSolved && !ps.mSkipped) {
-                ps.mExtra = newExtra;
-                save();
-            }
-        } else {
-            Log.d("terngame", "Trying to update extra for non-current puzzle");
         }
     }
 

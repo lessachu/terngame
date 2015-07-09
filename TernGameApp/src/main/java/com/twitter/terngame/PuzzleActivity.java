@@ -212,61 +212,6 @@ public class PuzzleActivity extends BaseActivity
                 i.putExtra(GuessLogActivity.s_guess_key, guesses);
                 startActivity(i);
             }
-        } else if (id == R.id.do_puzzle_button) {
-            NfcManager manager = (NfcManager) this.getSystemService(Context.NFC_SERVICE);
-            NfcAdapter adapter = manager.getDefaultAdapter();
-            if (adapter != null) {
-                if (!adapter.isEnabled()) {
-                    showNFCSettingsDialog();
-                } else {
-                    Intent i = new Intent(this, TwittermonActivity.class);
-                    startActivity(i);
-                }
-            } else {
-                showNoNFCDialog();
-            }
         }
     }
-
-    public void showNFCSettingsDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-        alertDialogBuilder.setTitle("NFC is turned off");
-        alertDialogBuilder
-                .setMessage("You'll need to enable NFC to complete this puzzle.")
-                .setCancelable(false)
-                .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if (android.os.Build.VERSION.SDK_INT >= 16) {
-                            startActivity(new Intent(android.provider.Settings.ACTION_NFC_SETTINGS));
-                        } else {
-                            startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
-                        }
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
-    void showNoNFCDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-        alertDialogBuilder.setTitle("Your phone doesn't support NFC");
-        alertDialogBuilder
-                .setMessage("You'll need an NFC-enabled phone to complete this puzzle.")
-                .setCancelable(false)
-                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
 }

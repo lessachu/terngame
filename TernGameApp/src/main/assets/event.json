@@ -1,6 +1,6 @@
 {
    "version" : 1,
-   "name" : "#terngame 2014",
+   "name" : "#terngame15",
    "code_file" : "terngame_start_codes.json",
    "wrong_str" : "That phrase is meaningless to me.",
    "dupe_str"  : "You've already guessed this.",

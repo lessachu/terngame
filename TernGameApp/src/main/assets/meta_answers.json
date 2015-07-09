@@ -1,55 +1,40 @@
 {
  "version" : 1,
  "answer_list" : [
-    { "answer" : "kazahkstan",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
     {
-    "answer" : "south korea",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "korea",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "germany",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "france",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "mongolia",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "tanzania",
-    "response" : "Yes! That's one of the countries that Carmen visited."
-    },
-    {
-    "answer" : "tenge",
+    "answer" : "periscope",
     "response" : "You're on the right track."
     },
     {
-    "answer" : "won",
+    "answer" : "fabric",
     "response" : "You're on the right track."
     },
     {
-    "answer" : "euro",
+    "answer" : "#music",
     "response" : "You're on the right track."
     },
     {
-    "answer" : "togrog",
+    "answer" : "music",
     "response" : "You're on the right track."
     },
     {
-    "answer" : "shilling",
+    "answer" : "vine",
     "response" : "You're on the right track."
     },
+   {
+     "answer" : "mopub",
+     "response" : "You're on the right track."
+   },
+   {
+     "answer" : "mobilepublisher",
+     "response" : "Turns out mopub stands for mobile publisher. Who knew?"
+   },
+   {
+     "answer" : "twitter",
+     "response" : "You're on the right track."
+   },
     {
-    "answer" : "tweets",
+    "answer" : "mirror",
     "correct" : true,
     "canonical" : true
     }
@@ -58,22 +43,8 @@
         {
          "time" :  900,
          "id" : "meta0",
-         "text" : "The puzzle answers and associated passports should point you to countries."
-        },
-      {
-       "time" :  1200,
-       "id" : "meta1",
-       "text" : "The countries that each passport belongs to are: Kazakhstan, South Korea, Germany, France, Mongolia, and Tanzania."
-      },
-        {
-        "time" : 2100,
-        "id" : "meta2",
-        "text" : "Carmen's aliases are a letterbank for the passport's issuing country and what else?"
-        },
-       {
-       "time" : 2700,
-       "id" : "meta3",
-       "text" : "Each of Carmen's aliases are a letterbank for the passport country and currency. Take the first letter of each country's currency and read in puzzle order."
-       }
+         "text" : "How would you relate all of these answers to Twitter?"
+      }
+
       ]
 }

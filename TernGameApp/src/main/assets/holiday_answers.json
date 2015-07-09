@@ -1,0 +1,17 @@
+{
+ "version" : 1,
+ "answer_list" : [
+    {
+    "answer" : "polyester",
+    "correct" : true,
+    "canonical" : true
+    }
+    ],
+    "hints" : [
+    {
+    "time" :  300,
+    "id" : "holiday1",
+    "text" : "Top puzzle is a sudoku. You should be able to derive a way to order everything."
+    }
+    ]
+    }

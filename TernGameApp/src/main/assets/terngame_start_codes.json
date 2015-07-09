@@ -1,6 +1,6 @@
 {
   "version" : 1,
-  "order":  [ "practice", { "canonical": "twittermon", "aliases" : ["twittermon", "collectible"]}, "nantucket", "hashflags", "second", "metropolis", "selfie", "passport"],
+  "order":  [ "practice", "timewarp", "hired", "transmission", "acronym", "signage", "calendar", "return"],
   "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
   "start_codes" : [
      {
@@ -10,62 +10,42 @@
        "instruction" : "Complete the practice puzzle and learn how the app works."
      },
    {
-     "id" : "twittermon",
-    "name" : "Gotta catch 'em all!",
-    "answer_file" : "printer_answers.json",
-    "puzzle_button" : {
-          "button_text" : "Play!",
-          "button_mode": "twittermon",
-          "button_extra" : { "twittermon_file" : "twittermon.json",
-                              "collected" : []
-                            }
-          },
-    "instruction" : "Still in SF-10 Aviary? Good. Sit tight until Jan tells you what to do."
-    },
-   {
-     "id" : "collectible",
-    "name" : "Gotta catch 'em all!",
-    "answer_file" : "room_answers.json",
-    "puzzle_button" : {
-          "button_text" : "Play!",
-          "button_mode": "twittermon",
-          "button_extra" : { "twittermon_file" : "twittermon.json",
-                              "collected" : []
-                            }
-          },
+     "id" : "timewarp",
+    "name" : "Historical Trends",
+    "answer_file" : "trends_answers.json",
     "instruction" : "Still in SF-10 Aviary? Good. Sit tight until Jan tells you what to do."
     },
      {
-       "id" : "hashflags",
-       "name" : "#hashflags",
-       "answer_file" : "hashflags_answers.json",
-       "instruction" : "Search for Carmen at Arlequin Cafe on 384 Hayes Street. Our sources say that she's been hanging out on their back patio (please be considerate of Arlequin staff and customers)."
+       "id" : "hired",
+       "name" : "Recruiting Slogan",
+       "answer_file" : "recruiting_answers.json",
+       "instruction" : "Collect your next clue at Chantal Guillon at 1309 Howard Street, between 9th and 10th Street (not the one in Hayes Valley)."
      },
      {
-       "id" : "nantucket",
-       "name" : "Limericks",
-       "answer_file" : "limerick_answers.json",
-       "instruction" : "Head to the Civic Center Plaza. Get the next clue from a staffer on the corner of Larkin and McAllister Streets.\n\nThis would be a good time to start the Safari Selfie Challenge."
+       "id" : "transmission",
+       "name" : "Indirect Messages",
+       "answer_file" : "im_answers.json",
+       "instruction" : "Head to the SoMa StrEat Food Park at 428 11th Street (behind Costco) and get your next clue from the staffer at the Bus."
      },
-      { "id" : "second",
-        "name" : "Second Power",
-        "answer_file" : "second_answers.json",
-        "instruction" : "Hrm... looks like there's some suspicious activity going on at Smitten Ice Cream (corner of Octavia and Linden Streets). Go check it out!"
+      { "id" : "acronym",
+        "name" : "WTF",
+        "answer_file" : "wtf_answers.json",
+        "instruction" : "Just up street, you'll find your next clue at DNA Pizza on the corner of 11th and Harrison."
       },
-     { "id" : "selfie",
-       "name" : "Photo Scavenger Hunt",
+     { "id" : "signage",
+       "name" : "Text-to-Photo Scavenger Hunt",
        "answer_file" : "selfie_answers.json",
-       "instruction" : "Meet your next contact in the alleyway park formerly known as Stevenson Street (behind TwitterHQ). The entrance is on 10th, between Market and Mission. Be prepared to show us the results of your the Safari Selfie Challenge!"
+       "instruction" : "Hope you've been snapping photos along the way!  Next stop is at Sextant Coffee at 1415 Folsom (between 11th and 10th) where you'll submit your text selfies."
      },
-    { "id" : "metropolis",
-        "name" : "Cities",
-        "answer_file" : "cities_answers.json",
-        "instruction" : "Even the most seasoned detectives need to take a snack break. Head over to Happy Donuts beside 1455 Market St for the next clue!"
+    { "id" : "calendar",
+        "name" : "Holiday Schedule",
+        "answer_file" : "holiday_answers.json",
+        "instruction" : "Find your next clue in the new building, in the SFTenth 9th floor commons."
       },
-      { "id" : "passport",
-          "name" : "Tying it all together",
+      { "id" : "return",
+          "name" : "Putting it all together",
           "answer_file" : "meta_answers.json",
-          "instruction" : "We're getting closer! Follow Carmen's trail to the 9th Floor Commons to get to the root of her dastardly plot."
+          "instruction" : "Almost done! Get your final clue at the SFMarket 5th floor lodge."
        }
    ]
 }
