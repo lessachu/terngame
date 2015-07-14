@@ -2,6 +2,42 @@
  "version" : 1,
  "answer_list" : [
     {
+       "answer" : "879265431",
+       "response" : "Those are the correct numbers for the top row."
+    },
+    {
+       "answer" : "412398765",
+       "response" : "Those are the correct numbers for the second row."
+    },
+    {
+       "answer" : "653174982",
+       "response" : "Those are the correct numbers for the third row."
+    },
+    {
+       "answer" : "341982657",
+       "response" : "Those are the correct numbers for the fourth row."
+    },
+    {
+       "answer" : "297653148",
+       "response" : "Those are the correct numbers for the fifth row."
+    },
+    {
+       "answer" : "568741329",
+       "response" : "Those are the correct numbers for the sixth row."
+    },
+    {
+       "answer" : "186539274",
+       "response" : "Those are the correct numbers for the seventh row."
+    },
+    {
+       "answer" : "935427816",
+       "response" : "Those are the correct numbers for the eighth row."
+    },
+    {
+       "answer" : "724816593",
+       "response" : "Those are the correct numbers for the eighth row."
+    },
+    {
     "answer" : "polyester",
     "correct" : true,
     "canonical" : true
@@ -9,9 +45,24 @@
     ],
     "hints" : [
     {
-    "time" :  300,
+    "time" :  180,
     "id" : "holiday1",
-    "text" : "Top puzzle is a sudoku. You should be able to derive a way to order everything."
-    }
+    "text" : "The top puzzle is a sudoku. You should be able to derive a way to order everything."
+    },
+       {
+          "time" :  480,
+          "id" : "holiday2",
+          "text" : "You can check your answers for each row in the sudoku by entering all the numbers into the app (ex: \"123456789\")."
+       },
+       {
+          "time" :  600,
+          "id" : "holiday3",
+          "text" : "Only ONE number in the grid is important."
+       },
+      {
+        "time" :  900,
+        "id" : "holiday4",
+        "text" : "Overlay the grids and take all the letters under the number one."
+      }
     ]
     }

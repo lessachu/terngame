@@ -1,8 +1,7 @@
+* get rid of landscape mode
 * replace data storage with SQL backend
-* listview in admin mode to make it easier to double check data
 * add some sounds for when you solve and guess and stuff
 * support for map coords of next location
-* better admin view for reviewing the puzzle data
 * redesign the app's look and feel
 * make the instruction view open up a new display on tap
 * patch up last updated logic
@@ -12,13 +11,10 @@
 * I think the hintlistener is possibly not thread safe
 * Why does the back activity flash when you dismiss the dialog?
 * you can still crash something by hitting a push notification while loading.
-* battle royale result prompt doesn't quite restore correctly, but it's low value and I should
-really work on something else
-* only allow them to collect one twittermon?
-* support rotation
 * encode the assets on disk
 
 DONE:
+* listview in admin mode to make it easier to double check data
 * integrate fabric
 * padding around the logo icon is fucked up
 * maybe add a turn off hints mode

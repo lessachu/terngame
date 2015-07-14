@@ -4,36 +4,63 @@
     { "answer" : "jointhepack",
     "response" : "Sure sounds like something a recruiter at Zynga might say."
     },
+    { "answer" : "pack",
+     "response" : "Yes! #jointhepack sounds like something a recruiter at Zynga might say."
+    },
     { "answer" : "jointheflock",
     "response" : "Yep, that's Twitter's recruiting slogan."
     },
+    { "answer" : "flock",
+     "response" : "Yes! #jointheflock is something a Twitter recruiter would say."
+    },
     { "answer" : "jointhepride",
     "response" : "Sure sounds like something a recruiter at ING might say."
+    },
+    { "answer" : "pride",
+     "response" : "Yes! #jointhepride sounds like something a recruiter at ING might say."
     },
     {
     "answer" : "jointhecrash",
     "response" : "Sure sounds like something a recruiter at Ecko Unltd might say."
     },
+    { "answer" : "crash",
+     "response" : "Yes! #jointhecrash sounds like something a recruiter at Ecko Unltd might say."
+    },
     {
-    "answer" : "jointheschool",
-    "response" : "Sure sounds like something a recruiter at bitly might say."
-    } ,
+    "answer" : "jointhefloat",
+    "response" : "Sure sounds like something a recruiter at Lacoste might say."
+    },
+    { "answer" : "float",
+     "response" : "Yes! #jointhefloat sounds like something a recruiter at Lacoste might say."
+    },
     {
     "answer" : "jointheostentation",
     "response" : "Sure sounds like something a recruiter at NBC might say."
+    },
+    { "answer" : "ostentation",
+     "response" : "Yes! #jointheostentation sounds like something a recruiter at NBC might say."
     },
     {
      "answer" : "jointheparliament",
      "response" : "Sure sounds like something a recruiter at Duolingo might say."
      },
+    { "answer" : "parliament",
+     "response" : "Yes! #jointhesparliament sounds like something a recruiter at Duolingo might say."
+    },
     {
     "answer" : "jointhegathering",
     "response" : "Sure sounds like something a recruiter at American Airlines might say."
-    } ,
+    },
+    { "answer" : "gathering",
+     "response" : "Yes! #jointhegathering sounds like something a recruiter at American Airlines might say."
+    },
     {
     "answer" : "jointhecolony",
     "response" : "Sure sounds like something a recruiter at Bacardi might say."
-    } ,
+    },
+    { "answer" : "colony",
+     "response" : "Yes! #jointhecolony sounds like something a recruiter at Bacardi might say."
+    },
     {
     "answer" : "poison ivy",
     "correct" : true,
