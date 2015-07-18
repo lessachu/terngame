@@ -51,7 +51,7 @@
           {
            "time" :  120,
            "id" : "trends1",
-           "text" : "All of the missing entries have something in common."
+           "text" : "All of the missing entries have something in common. Some of the blanks are intentionally unshaded."
           },
           {
            "time" :  600,
@@ -61,7 +61,12 @@
           {
            "time" : 900,
            "id" : "trends3",
-           "text" : "Trend categories from top to bottom are: sports, sports, sports, books, music, music, movies"
-          }
-          ]
+           "text" : "Trend categories from top to bottom are: sports, sports, sports, books, music, music, movies. The trend for row three will become rapidly apparent if you search for all the horse names at once. "
+          },
+       {
+         "time" : 1200,
+         "id" : "trends4",
+         "text" : "Ask the staffer for any trend and he/she will identify it for you."
+       }
+     ]
 }

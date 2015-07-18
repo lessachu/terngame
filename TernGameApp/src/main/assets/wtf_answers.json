@@ -1,7 +1,167 @@
 {
  "version" : 1,
  "answer_list" : [
-    {
+   {
+     "answer" : "9993883399922",
+     "response" : "Correct. Those are the correct values for row 1 of the Filomino."
+   },
+   {
+     "answer" : "9993883999944",
+     "response" : "Correct. Those are the correct values for row 2 of the Filomino."
+   },
+   {
+     "answer" : "9993883999944",
+     "response" : "Correct. Those are the correct values for row 3 of the Filomino."
+   },
+   {
+     "answer" : "77101010101010102555",
+     "response" : "Correct. Those are the correct values for row 4 of the Filomino."
+   },
+   {
+     "answer" : "3777771010102522",
+     "response" : "Correct. Those are the correct values for row 5 of the Filomino."
+   },
+   {
+     "answer" : "3388888888333",
+     "response" : "Correct. Those are the correct values for row 6 of the Filomino."
+   },
+   {
+     "answer" : "7710101010101055555",
+     "response" : "Correct. Those are the correct values for row 7 of the Filomino."
+   },
+   {
+     "answer" : "7577777101033366",
+     "response" : "Correct. Those are the correct values for row 9 of the Filomino."
+   },
+   {
+     "answer" : "53444101072261",
+     "response" : "Correct. Those are the correct values for row 10 of the Filomino."
+   },
+   {
+     "answer" : "5377772273363",
+     "response" : "Correct. Those are the correct values for row 11 of the Filomino."
+   },
+   {
+     "answer" : "5372335577363",
+     "response" : "Correct. Those are the correct values for row 12 of the Filomino."
+   },
+   {
+     "answer" : "5772355577763",
+     "response" : "Correct. Those are the correct values for row 13 of the Filomino."
+   },
+   {
+     "answer" : "GWWWWGWWWWGWG",
+     "response" : "Correct. Those are the correct values for row 2 of the Inverse Akari."
+   },
+   {
+     "answer" : "GGGWWGWWWWWWG",
+     "response" : "Correct. Those are the correct values for row 3 of the Inverse Akari."
+   },
+   {
+     "answer" : "WWWWWWWWWWWWW",
+     "response" : "Correct. Those are the correct values for rows 4, 6, 8, 9, 11, 12 and 13 of the Inverse Akari."
+   },
+   {
+     "answer" : "GGGGGWWWWWWWW",
+     "response" : "Correct. Those are the correct values for rows 5 and 7 of the Inverse Akari."
+   },
+   {
+     "answer" : "GGGGGGWWWWWWW",
+     "response" : "Correct. Those are the correct values for row 10 of the Inverse Akari."
+   },
+   {
+     "answer" : "GGGGGGGGGGWB",
+     "response" : "Correct. Those are the correct values for row 1 of the Nonogram."
+   },
+   {
+     "answer" : "WWWWWGWWGBBB",
+     "response" : "Correct. Those are the correct values for row 2 of the Nonogram."
+   },
+   {
+     "answer" : "GGBBGBWGBGBG",
+     "response" : "Correct. Those are the correct values for row 3 of the Nonogram."
+   },
+   {
+     "answer" : "GBGWBGBBGGGG",
+     "response" : "Correct. Those are the correct values for row 4 of the Nonogram."
+   },
+   {
+     "answer" : "BGWWGGWGGGGG",
+     "response" : "Correct. Those are the correct values for rows 5 and 6 of the Nonogram."
+   },
+   {
+     "answer" : "BGGWGGWGGGGG",
+     "response" : "Correct. Those are the correct values for rows 7 and 8 of the Nonogram."
+   },
+   {
+     "answer" : "GGGGGGGGGGGG",
+     "response" : "Correct. Those are the correct values for row 9 of the Nonogram."
+   },
+   {
+     "answer" : "WGGWGWWGGGWG",
+     "response" : "Correct. Those are the correct values for row 10 of the Nonogram."
+   },
+   {
+     "answer" : "WGGWGWWGWGWG",
+     "response" : "Correct. Those are the correct values for row 11 of the Nonogram."
+   },
+   {
+     "answer" : "WGGWGWWWWGWG",
+     "response" : "Correct. Those are the correct values for row 12 of the Nonogram."
+   },
+   {
+     "answer" : "TNNTNTTTNNMT",
+     "response" : "Correct. Those are the correct values for row 1 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTNTTTTMTT",
+     "response" : "Correct. Those are the correct values for row 2 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTNTTTMTTT",
+     "response" : "Correct. Those are the correct values for row 3 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTNMMMNNNN",
+     "response" : "Correct. Those are the correct values for row 4 of Minesweeper+."
+   },
+   {
+     "answer" : "TNTTMTTTTTTT",
+     "response" : "Correct. Those are the correct values for row 5 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTNMMMNNNN",
+     "response" : "Correct. Those are the correct values for row 6 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTTTTMTTTT",
+     "response" : "Correct. Those are the correct values for row 7 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTTTTMTTNN",
+     "response" : "Correct. Those are the correct values for row 9 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTTTMTTTTT",
+     "response" : "Correct. Those are the correct values for row 10 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTNMTTTTTT",
+     "response" : "Correct. Those are the correct values for row 11 of Minesweeper+."
+   },
+   {
+     "answer" : "TNNTMTTTTTTT",
+     "response" : "Correct. Those are the correct values for row 11 of Minesweeper+."
+   },
+   {
+     "answer" : "TMMMNNNNNNNN",
+     "response" : "Correct. Those are the correct values for row 12 of Minesweeper+."
+   },
+   {
+     "answer" : "MTMTTTTNNNNN",
+     "response" : "Correct. Those are the correct values for row 13 of Minesweeper+."
+   },
+   {
    "answer" : "movable promulgator",
     "correct" : true,
     "canonical" : true
@@ -11,27 +171,22 @@
       {
        "time" :  60,
        "id" : "wtf1",
-       "text" : "You can work on WTF part 1 and part 2 independently, but you'll need both parts to get the final answer.  The final answer on this puzzle is a somewhat awkward two word phrase."
+       "text" : "You can work on WTF part 1 and part 2 independently, but you'll need both parts to get the final answer. If you've never seen these logic puzzles before, checkout nikoli.com."
       },
       {
-       "time" :  300,
+       "time" : 300,
        "id" : "wtf2",
-       "text" : "For WTF part 2, some of the words/phrases go in the grid backwards."
+       "text" : "The logic puzzles don't form a cohesive picture, just a pattern of boxes in white, grey and blue.  It should look kind of familiar, however.  You can verify any row in any logic puzzle by entering it into the app, by digit for the Filomino, by color (G, W or B) for the Nonogram and the Inverse Akari and by fill (M, T or N) for Minesweeper+."
       },
       {
-       "time" : 480,
+       "time" : 4800,
        "id" : "wtf3",
-       "text" : "The logic puzzles don't form a cohesive picture, just a pattern of boxes in white, grey and blue.  It should kind of familiar, however."
-      },
-      {
-       "time" : 1200,
-       "id" : "wtf4",
-       "text" : "Feel free to check the answers on the logic puzzles with the site staffers.  On part 2, yellow means the square contains a vowel, blue means the square contains a consonant."
+       "text" : "WTF: What the F*(&, the phrases are in alphabetic order."
       },
       {
        "time" : 3600,
        "id" : "wtf5",
-       "text" : "Match the logic puzzle grids from part 1 to the grid in part 2, the dark blue squares should give you path through the grid with a message that starts with \"THE ANSWER IS\" "
+       "text" : "Match the logic puzzle grids from Who To Follow to the grid in What the F*(&, the dark blue squares should give you path through the grid with a message that starts with \"THE ANSWER IS\" "
       }
       ]
 }

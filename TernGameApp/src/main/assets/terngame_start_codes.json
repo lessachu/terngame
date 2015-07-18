@@ -1,7 +1,7 @@
 {
   "version" : 1,
   "order":  [ "practice", "timewarp", "hired", "transmission", "acronym", "signage", "calendar", "return"],
-  "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SF-7 Harrier!",
+  "end_party" : "WOOHOO! Come celebrate a successful #terngame 2014 in SFMarket-8 Anis!",
   "start_codes" : [
      {
        "id" : "practice",
@@ -13,7 +13,7 @@
      "id" : "timewarp",
     "name" : "Historical Trends",
     "answer_file" : "trends_answers.json",
-    "instruction" : "Still in SF-10 Aviary? Good. Sit tight until Jan tells you what to do."
+    "instruction" : "Still in SFMarket-10 Aviary? Good. Sit tight until Jan tells you what to do."
     },
      {
        "id" : "hired",
@@ -25,7 +25,7 @@
        "id" : "transmission",
        "name" : "Indirect Messages",
        "answer_file" : "im_answers.json",
-       "instruction" : "Head to the SoMa StrEat Food Park at 428 11th Street (behind Costco) and get your next clue from the staffer at the Bus."
+       "instruction" : "Head to the SoMa StrEat Food Park at 428 11th Street (behind Costco) and get your next clue from the staffer."
      },
       { "id" : "acronym",
         "name" : "WTF",
@@ -35,12 +35,12 @@
      { "id" : "signage",
        "name" : "Text-to-Photo Scavenger Hunt",
        "answer_file" : "selfie_answers.json",
-       "instruction" : "Hope you've been snapping photos along the way!  Next stop is at Sextant Coffee at 1415 Folsom (between 11th and 10th) where you'll submit your text selfies."
+       "instruction" : "Hope you've been snapping photos along the way!  Next stop is the back patio at Sextant Coffee at 1415 Folsom (between 11th and 10th) where you'll submit your text selfies."
      },
     { "id" : "calendar",
         "name" : "Holiday Schedule",
         "answer_file" : "holiday_answers.json",
-        "instruction" : "Find your next clue in the new building, in the SFTenth 9th floor commons."
+        "instruction" : "Find your next clue in the new building, at the Stevenson Alley fire pit between SFMarket and SFTenth."
       },
       { "id" : "return",
           "name" : "Putting it all together",
