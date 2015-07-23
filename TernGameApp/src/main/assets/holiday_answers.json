@@ -50,18 +50,23 @@
     "text" : "The top puzzle is a sudoku. You should be able to derive a way to order everything."
     },
        {
-          "time" :  480,
+          "time" :  300,
           "id" : "holiday2",
           "text" : "You can check your answers for each row in the sudoku by entering all the numbers into the app (ex: \"123456789\")."
        },
        {
-          "time" :  600,
+          "time" :  480,
           "id" : "holiday3",
+          "text" : "What did your true love get you for christmas?  Mine got me a huge pile of presents."
+       },
+       {
+          "time" :  600,
+          "id" : "holiday4",
           "text" : "Only ONE number in the grid is important. Just ONE.  Not two.  Not three.  ONE."
        },
       {
         "time" :  900,
-        "id" : "holiday4",
+        "id" : "holiday5",
         "text" : "Overlay the grids and take all the letters under the number one."
       }
     ]

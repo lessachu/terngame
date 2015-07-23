@@ -9,6 +9,10 @@
     "answer" : "cardinal",
     "response" : "Yes! The Stanford Cardinal won the Rose Bowl in 2013 (Go Cardinal!)."
     },
+   {
+     "answer" : "cardinals",
+     "response" : "Close, but it's the Stanford Cardinal, not the Stanford Cardinals."
+   },
     {
     "answer" : "hawks",
     "response" : "Yes! The St. Louis Hawks won the NBA Championship in 1958."
